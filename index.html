@@ -823,28 +823,9 @@ try{!function(){
   var logoTaps=0;
   var easterEgg=false;
   var particles=[];
-  var eggPhase=0; // 0=normal, 1=exploding, 2=showing text
+  var eggPhase=0; // 0=normal, 1=explode out, 2=assemble, 3=hold, 4=fade back
   var eggTimer=0;
-  var eggAlpha=0;
-  
-  // Get letter positions for MBEX
-  function getLetterData(){
-    cx.font='900 52px Montserrat';
-    var text='MBEX';
-    var spacing=-4;
-    var letters=[];
-    var widths=[];
-    var total=0;
-    for(var i=0;i<4;i++){var w=cx.measureText(text[i]).width;widths.push(w);total+=w+spacing}
-    total-=spacing;
-    var sx=W/2-total/2;
-    for(var i=0;i<4;i++){
-      letters.push({ch:text[i],x:sx+widths[i]/2,y:H/2+1,w:widths[i]});
-      sx+=widths[i]+spacing;
-    }
-    return letters;
-  }
-  
+
   function drawLogo(alpha){
     cx.clearRect(0,0,W,H);
     cx.save();
@@ -866,125 +847,170 @@ try{!function(){
     }
     cx.restore();
   }
-  
-  function createParticles(){
-    particles=[];
-    var letters=getLetterData();
-    // Create pixel-like particles from each letter position
-    for(var li=0;li<letters.length;li++){
-      var l=letters[li];
-      var count=18+Math.floor(Math.random()*8);
-      for(var p=0;p<count;p++){
-        var angle=Math.random()*Math.PI*2;
-        var speed=2+Math.random()*6;
-        var size=1+Math.random()*3;
-        particles.push({
-          x:l.x+(Math.random()-0.5)*l.w*0.6,
-          y:l.y+(Math.random()-0.5)*30,
-          vx:Math.cos(angle)*speed*(0.5+Math.random()),
-          vy:Math.sin(angle)*speed*(0.5+Math.random())-2,
-          size:size,
-          alpha:0.8+Math.random()*0.2,
-          decay:0.015+Math.random()*0.015,
-          rot:Math.random()*6.28,
-          rotSpeed:(Math.random()-0.5)*0.3
-        });
+
+  // Sample pixel positions from text rendered offscreen
+  function sampleText(text,fontSize,fontWeight){
+    var offCv=document.createElement('canvas');
+    offCv.width=W;offCv.height=H;
+    var oc=offCv.getContext('2d');
+    oc.fillStyle='#fff';
+    oc.font=fontWeight+' '+fontSize+'px Montserrat';
+    oc.textAlign='center';
+    oc.textBaseline='middle';
+    oc.fillText(text,W/2,H/2);
+    var img=oc.getImageData(0,0,W,H);
+    var pts=[];
+    var step=3; // sample every 3px for density
+    for(var y=0;y<H;y+=step){
+      for(var x=0;x<W;x+=step){
+        if(img.data[(y*W+x)*4+3]>128){
+          pts.push({x:x,y:y});
+        }
       }
     }
+    return pts;
   }
-  
-  function drawExplode(){
-    cx.clearRect(0,0,W,H);
-    var alive=false;
-    for(var i=0;i<particles.length;i++){
-      var p=particles[i];
-      p.x+=p.vx;
-      p.y+=p.vy;
-      p.vy+=0.12; // gravity
-      p.vx*=0.98;
-      p.alpha-=p.decay;
-      p.rot+=p.rotSpeed;
-      if(p.alpha<=0)continue;
-      alive=true;
-      cx.save();
-      cx.translate(p.x,p.y);
-      cx.rotate(p.rot);
-      cx.globalAlpha=p.alpha;
-      cx.fillStyle='#fff';
-      cx.fillRect(-p.size/2,-p.size/2,p.size,p.size);
-      cx.restore();
+
+  function createParticles(){
+    // Sample source (MBEX) positions
+    var srcPts=sampleText('MBEX',52,'900');
+    // Sample target (ANTI SUNCTION CLUB) positions
+    var tgtPts=sampleText('ANTI SUNCTION CLUB',15,'800');
+    
+    particles=[];
+    var count=Math.max(srcPts.length,tgtPts.length);
+    
+    for(var i=0;i<count;i++){
+      var src=srcPts[i%srcPts.length];
+      var tgt=tgtPts[i%tgtPts.length];
+      // Scatter position (explosion midpoint)
+      var angle=Math.random()*Math.PI*2;
+      var dist=60+Math.random()*120;
+      var scatterX=src.x+Math.cos(angle)*dist;
+      var scatterY=src.y+Math.sin(angle)*dist;
+      
+      particles.push({
+        // Source (logo)
+        sx:src.x, sy:src.y,
+        // Scatter (explosion peak)
+        mx:scatterX, my:scatterY,
+        // Target (new text)
+        tx:tgt.x, ty:tgt.y,
+        // Current
+        x:src.x, y:src.y,
+        size:1+Math.random()*1.5,
+        alpha:1,
+        delay:Math.random()*0.15 // stagger
+      });
     }
-    return alive;
   }
-  
-  function drawEasterText(alpha){
-    cx.clearRect(0,0,W,H);
-    cx.save();
-    cx.globalAlpha=alpha;
-    cx.fillStyle='#fff';
-    cx.font='800 16px Montserrat';
-    cx.textAlign='center';
-    cx.textBaseline='middle';
-    cx.fillText('ANTI SUNCTION CLUB',W/2,H/2);
-    // Subtle glow
-    cx.globalAlpha=alpha*0.3;
-    cx.shadowColor='rgba(140,170,255,0.6)';
-    cx.shadowBlur=20;
-    cx.fillText('ANTI SUNCTION CLUB',W/2,H/2);
-    cx.restore();
-  }
-  
-  var animRunning=false;
+
+  function easeOutCubic(t){return 1-Math.pow(1-t,3)}
+  function easeInOutCubic(t){return t<0.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
+
   function animLoop(){
+    cx.clearRect(0,0,W,H);
+    eggTimer++;
+    
     if(eggPhase===1){
-      var alive=drawExplode();
-      eggTimer++;
-      if(!alive||eggTimer>90){
-        eggPhase=2;
-        eggTimer=0;
-        eggAlpha=0;
+      // Phase 1: Explode outward (frames 0-30)
+      var dur=30;
+      for(var i=0;i<particles.length;i++){
+        var p=particles[i];
+        var t=Math.max(0,Math.min(1,(eggTimer-p.delay*dur)/dur));
+        t=easeOutCubic(t);
+        p.x=p.sx+(p.mx-p.sx)*t;
+        p.y=p.sy+(p.my-p.sy)*t;
+        p.alpha=1-t*0.3;
+        cx.globalAlpha=p.alpha;
+        cx.fillStyle='#fff';
+        cx.fillRect(p.x-p.size/2,p.y-p.size/2,p.size,p.size);
+      }
+      cx.globalAlpha=1;
+      if(eggTimer>dur+5){eggPhase=2;eggTimer=0}
+      requestAnimationFrame(animLoop);
+      
+    }else if(eggPhase===2){
+      // Phase 2: Assemble into new text (frames 0-40)
+      var dur=40;
+      for(var i=0;i<particles.length;i++){
+        var p=particles[i];
+        var t=Math.max(0,Math.min(1,(eggTimer-p.delay*dur)/dur));
+        t=easeInOutCubic(t);
+        p.x=p.mx+(p.tx-p.mx)*t;
+        p.y=p.my+(p.ty-p.my)*t;
+        p.alpha=0.7+t*0.3;
+        cx.globalAlpha=p.alpha;
+        cx.fillStyle='#fff';
+        cx.fillRect(p.x-p.size/2,p.y-p.size/2,p.size,p.size);
+      }
+      cx.globalAlpha=1;
+      if(eggTimer>dur+8){
+        eggPhase=3;eggTimer=0;
       }
       requestAnimationFrame(animLoop);
-    }else if(eggPhase===2){
-      eggTimer++;
-      eggAlpha=Math.min(1,eggTimer/30);
-      drawEasterText(eggAlpha);
-      if(eggTimer<180){
-        requestAnimationFrame(animLoop);
-      }else{
-        // Fade back to logo
-        eggPhase=3;
-        eggTimer=0;
-        requestAnimationFrame(animLoop);
-      }
+      
     }else if(eggPhase===3){
-      eggTimer++;
-      var fade=1-eggTimer/25;
-      if(fade>0){
-        drawEasterText(fade);
+      // Phase 3: Hold — show crisp text over particles with glow
+      var holdDur=180; // ~3 seconds
+      // Draw assembled particles faintly
+      for(var i=0;i<particles.length;i++){
+        var p=particles[i];
+        cx.globalAlpha=0.15;
+        cx.fillStyle='#fff';
+        cx.fillRect(p.tx-p.size/2,p.ty-p.size/2,p.size,p.size);
+      }
+      // Draw crisp text on top
+      var tAlpha=Math.min(1,eggTimer/15);
+      cx.save();
+      cx.globalAlpha=tAlpha;
+      cx.fillStyle='#fff';
+      cx.font='800 15px Montserrat';
+      cx.textAlign='center';
+      cx.textBaseline='middle';
+      cx.shadowColor='rgba(140,170,255,0.5)';
+      cx.shadowBlur=15;
+      cx.fillText('ANTI SUNCTION CLUB',W/2,H/2);
+      cx.shadowBlur=0;
+      cx.restore();
+      
+      if(eggTimer>holdDur){eggPhase=4;eggTimer=0}
+      requestAnimationFrame(animLoop);
+      
+    }else if(eggPhase===4){
+      // Phase 4: Fade out and restore logo
+      var dur=30;
+      var t=eggTimer/dur;
+      if(t<1){
+        cx.save();
+        cx.globalAlpha=1-t;
+        cx.fillStyle='#fff';
+        cx.font='800 15px Montserrat';
+        cx.textAlign='center';
+        cx.textBaseline='middle';
+        cx.fillText('ANTI SUNCTION CLUB',W/2,H/2);
+        cx.restore();
+        // Fade in logo
+        drawLogo(t);
         requestAnimationFrame(animLoop);
       }else{
-        // Restore logo
+        drawLogo(1);
         eggPhase=0;
         easterEgg=false;
         logoTaps=0;
-        var f2=0;
-        function fadeBack(){
-          f2++;
-          drawLogo(Math.min(1,f2/20));
-          if(f2<20)requestAnimationFrame(fadeBack);
-        }
-        fadeBack();
       }
     }
   }
   
   // Click handler
   cv.style.cursor='pointer';
+  var tapReset;
   cv.addEventListener('click',function(){
     if(easterEgg)return;
     logoTaps++;
     haptic();
+    clearTimeout(tapReset);
+    tapReset=setTimeout(function(){if(!easterEgg)logoTaps=0},3000);
     if(logoTaps>=10){
       easterEgg=true;
       eggPhase=1;
@@ -993,17 +1019,10 @@ try{!function(){
       haptic('heavy');
       animLoop();
     }else{
-      // Subtle shake feedback on each tap
       cv.style.transition='none';
       cv.style.transform='scale(0.95)';
       setTimeout(function(){cv.style.transition='transform 0.15s ease';cv.style.transform='scale(1)'},50);
     }
-  });
-  // Reset counter if no taps for 3 seconds
-  var tapReset;
-  cv.addEventListener('click',function(){
-    clearTimeout(tapReset);
-    tapReset=setTimeout(function(){if(!easterEgg)logoTaps=0},3000);
   });
   
   // Simple fade-in on load, then static
