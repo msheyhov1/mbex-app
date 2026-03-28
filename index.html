@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>MBEX</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;font-family:'Montserrat',sans-serif}
@@ -817,7 +818,7 @@ function createOrder(type){
   var wallet=document.getElementById('walletInput')?document.getElementById('walletInput').value.trim():'';
   
   if(!sum||!fio){alert('Заполните сумму и ФИО');return}
-  haptic(15);
+  haptic('success');
   
   var rate=85.96;
   var sumNum=parseFloat(sum.replace(/\s/g,''));
@@ -1068,14 +1069,28 @@ function cancelProfileFio(){
   document.getElementById('profileFioEdit').style.display='none';
 }
 
-// Haptic feedback — light vibration on button presses
-function haptic(ms){
-  ms=ms||10;
-  if(navigator.vibrate)navigator.vibrate(ms);
-  // Telegram WebApp haptic
-  if(window.Telegram&&Telegram.WebApp&&Telegram.WebApp.HapticFeedback){
-    Telegram.WebApp.HapticFeedback.impactOccurred('light');
-  }
+// Haptic feedback — works in Telegram Mini App and Android browsers
+function haptic(style){
+  style=style||'light';
+  try{
+    // Telegram WebApp — primary method for Mini Apps
+    if(window.Telegram&&Telegram.WebApp&&Telegram.WebApp.HapticFeedback){
+      if(style==='heavy'){
+        Telegram.WebApp.HapticFeedback.impactOccurred('heavy');
+      }else if(style==='medium'){
+        Telegram.WebApp.HapticFeedback.impactOccurred('medium');
+      }else if(style==='success'){
+        Telegram.WebApp.HapticFeedback.notificationOccurred('success');
+      }else{
+        Telegram.WebApp.HapticFeedback.impactOccurred('light');
+      }
+      return;
+    }
+    // Android fallback
+    if(navigator.vibrate){
+      navigator.vibrate(style==='heavy'?25:style==='medium'?15:8);
+    }
+  }catch(e){}
 }
 
 // Ripple + haptic
