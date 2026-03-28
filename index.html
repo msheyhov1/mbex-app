@@ -810,7 +810,7 @@ document.addEventListener('DOMContentLoaded',function(){
   if(tc)setTimeout(function(){tc.classList.add('animate-in')},520);
 });
 
-// MBEX Logo — Bold wordmark from brandbook
+// MBEX Logo — Bold wordmark with easter egg
 try{!function(){
   var cv=document.getElementById('logoCanvas');
   var dpr=window.devicePixelRatio||1;
@@ -820,6 +820,31 @@ try{!function(){
   var cx=cv.getContext('2d');
   cx.scale(dpr,dpr);
   
+  var logoTaps=0;
+  var easterEgg=false;
+  var particles=[];
+  var eggPhase=0; // 0=normal, 1=exploding, 2=showing text
+  var eggTimer=0;
+  var eggAlpha=0;
+  
+  // Get letter positions for MBEX
+  function getLetterData(){
+    cx.font='900 52px Montserrat';
+    var text='MBEX';
+    var spacing=-4;
+    var letters=[];
+    var widths=[];
+    var total=0;
+    for(var i=0;i<4;i++){var w=cx.measureText(text[i]).width;widths.push(w);total+=w+spacing}
+    total-=spacing;
+    var sx=W/2-total/2;
+    for(var i=0;i<4;i++){
+      letters.push({ch:text[i],x:sx+widths[i]/2,y:H/2+1,w:widths[i]});
+      sx+=widths[i]+spacing;
+    }
+    return letters;
+  }
+  
   function drawLogo(alpha){
     cx.clearRect(0,0,W,H);
     cx.save();
@@ -828,9 +853,8 @@ try{!function(){
     cx.font='900 52px Montserrat';
     cx.textAlign='center';
     cx.textBaseline='middle';
-    // Draw MBEX with tight letter spacing (M-B touching, E-X touching)
     var text='MBEX';
-    var spacing=-4; // negative = letters overlap/touch
+    var spacing=-4;
     var widths=[];
     var total=0;
     for(var i=0;i<4;i++){var w=cx.measureText(text[i]).width;widths.push(w);total+=w+spacing}
@@ -842,6 +866,145 @@ try{!function(){
     }
     cx.restore();
   }
+  
+  function createParticles(){
+    particles=[];
+    var letters=getLetterData();
+    // Create pixel-like particles from each letter position
+    for(var li=0;li<letters.length;li++){
+      var l=letters[li];
+      var count=18+Math.floor(Math.random()*8);
+      for(var p=0;p<count;p++){
+        var angle=Math.random()*Math.PI*2;
+        var speed=2+Math.random()*6;
+        var size=1+Math.random()*3;
+        particles.push({
+          x:l.x+(Math.random()-0.5)*l.w*0.6,
+          y:l.y+(Math.random()-0.5)*30,
+          vx:Math.cos(angle)*speed*(0.5+Math.random()),
+          vy:Math.sin(angle)*speed*(0.5+Math.random())-2,
+          size:size,
+          alpha:0.8+Math.random()*0.2,
+          decay:0.015+Math.random()*0.015,
+          rot:Math.random()*6.28,
+          rotSpeed:(Math.random()-0.5)*0.3
+        });
+      }
+    }
+  }
+  
+  function drawExplode(){
+    cx.clearRect(0,0,W,H);
+    var alive=false;
+    for(var i=0;i<particles.length;i++){
+      var p=particles[i];
+      p.x+=p.vx;
+      p.y+=p.vy;
+      p.vy+=0.12; // gravity
+      p.vx*=0.98;
+      p.alpha-=p.decay;
+      p.rot+=p.rotSpeed;
+      if(p.alpha<=0)continue;
+      alive=true;
+      cx.save();
+      cx.translate(p.x,p.y);
+      cx.rotate(p.rot);
+      cx.globalAlpha=p.alpha;
+      cx.fillStyle='#fff';
+      cx.fillRect(-p.size/2,-p.size/2,p.size,p.size);
+      cx.restore();
+    }
+    return alive;
+  }
+  
+  function drawEasterText(alpha){
+    cx.clearRect(0,0,W,H);
+    cx.save();
+    cx.globalAlpha=alpha;
+    cx.fillStyle='#fff';
+    cx.font='800 16px Montserrat';
+    cx.textAlign='center';
+    cx.textBaseline='middle';
+    cx.fillText('ANTI SUNCTION CLUB',W/2,H/2);
+    // Subtle glow
+    cx.globalAlpha=alpha*0.3;
+    cx.shadowColor='rgba(140,170,255,0.6)';
+    cx.shadowBlur=20;
+    cx.fillText('ANTI SUNCTION CLUB',W/2,H/2);
+    cx.restore();
+  }
+  
+  var animRunning=false;
+  function animLoop(){
+    if(eggPhase===1){
+      var alive=drawExplode();
+      eggTimer++;
+      if(!alive||eggTimer>90){
+        eggPhase=2;
+        eggTimer=0;
+        eggAlpha=0;
+      }
+      requestAnimationFrame(animLoop);
+    }else if(eggPhase===2){
+      eggTimer++;
+      eggAlpha=Math.min(1,eggTimer/30);
+      drawEasterText(eggAlpha);
+      if(eggTimer<180){
+        requestAnimationFrame(animLoop);
+      }else{
+        // Fade back to logo
+        eggPhase=3;
+        eggTimer=0;
+        requestAnimationFrame(animLoop);
+      }
+    }else if(eggPhase===3){
+      eggTimer++;
+      var fade=1-eggTimer/25;
+      if(fade>0){
+        drawEasterText(fade);
+        requestAnimationFrame(animLoop);
+      }else{
+        // Restore logo
+        eggPhase=0;
+        easterEgg=false;
+        logoTaps=0;
+        var f2=0;
+        function fadeBack(){
+          f2++;
+          drawLogo(Math.min(1,f2/20));
+          if(f2<20)requestAnimationFrame(fadeBack);
+        }
+        fadeBack();
+      }
+    }
+  }
+  
+  // Click handler
+  cv.style.cursor='pointer';
+  cv.addEventListener('click',function(){
+    if(easterEgg)return;
+    logoTaps++;
+    haptic();
+    if(logoTaps>=10){
+      easterEgg=true;
+      eggPhase=1;
+      eggTimer=0;
+      createParticles();
+      haptic('heavy');
+      animLoop();
+    }else{
+      // Subtle shake feedback on each tap
+      cv.style.transition='none';
+      cv.style.transform='scale(0.95)';
+      setTimeout(function(){cv.style.transition='transform 0.15s ease';cv.style.transform='scale(1)'},50);
+    }
+  });
+  // Reset counter if no taps for 3 seconds
+  var tapReset;
+  cv.addEventListener('click',function(){
+    clearTimeout(tapReset);
+    tapReset=setTimeout(function(){if(!easterEgg)logoTaps=0},3000);
+  });
   
   // Simple fade-in on load, then static
   var frame=0;
