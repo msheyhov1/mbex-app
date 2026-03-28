@@ -332,24 +332,33 @@ input::placeholder{color:var(--text-dim)}
 </div>
 </div>
 <div class="tog-w"><div class="tog on" id="ts" onclick="setTog('s')">Приеду сам</div><div class="tog" id="tc" onclick="setTog('c')">Курьер</div></div>
-<div style="margin-bottom:16px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">ФИО</div><input id="fi" placeholder="Фамилия Имя Отчество"></div>
-<div id="cp" style="display:none;margin-bottom:16px">
-<div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Курьер</div>
-<div style="position:relative">
-<div id="courierSelect" onclick="toggleCourierDrop()" style="padding:12px 16px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);cursor:pointer;display:flex;justify-content:space-between;align-items:center">
-<span id="courierSelectText" style="font-size:16px;color:var(--text-dim)">Выберите курьера</span>
-<svg width="14" height="14" viewBox="0 0 24 24" fill="none" id="courierDropChev" style="transition:transform 0.2s"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+
+<!-- FIO: "Приеду сам" mode — static from profile -->
+<div id="fioSelf" style="margin-bottom:16px">
+<div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">ФИО</div>
+<div style="padding:14px 16px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);font-size:17px;color:#fff;font-weight:400" id="fioSelfDisplay">Иванов Иван Иванович</div>
 </div>
-<div id="courierDrop" style="display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:50;background:rgba(18,18,24,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:0.5px solid rgba(255,255,255,0.08);border-radius:14px;padding:4px 0;box-shadow:0 12px 40px rgba(0,0,0,0.5)">
+
+<!-- FIO: "Курьер" mode — dropdown like wallets -->
+<div id="fioCourier" style="display:none;margin-bottom:16px">
+<div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">ФИО курьера</div>
+<div style="position:relative" id="courierWrap">
+<input id="fi" placeholder="Выберите или введите ФИО" style="padding-right:40px" autocomplete="off">
+<div id="courierDropBtn" onclick="toggleCourierDrop()" style="position:absolute;right:0;top:0;bottom:0;width:40px;display:flex;align-items:center;justify-content:center;cursor:pointer">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" id="courierDropChev" style="transition:transform 0.2s"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,0.35)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</div>
+<!-- Courier dropdown — wallet style -->
+<div id="courierDrop" style="display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:50;background:rgba(18,18,24,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:0.5px solid rgba(255,255,255,0.08);border-radius:14px;padding:8px 0;max-height:260px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5)">
+<div style="padding:6px 14px 4px;font-size:13px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px">Мои курьеры</div>
 <div class="wl-item" onclick="pickCourier('Петров Алексей Сергеевич')">
 <div style="display:flex;align-items:center;gap:8px">
-<div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.5)"></div>
-<div><div style="font-size:15px;font-weight:500">Петров А.С.</div><div style="font-size:12px;color:var(--text-dim)">Верифицирован</div></div>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><path d="M5 19c0-3.3 3.1-6 7-6s7 2.7 7 6" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" stroke-linecap="round"/></svg>
+<div><div style="font-size:15px;font-weight:500">Петров А.С.</div><div style="font-size:12px;color:var(--text-sec)">Верифицирован</div></div>
 </div>
 </div>
 <div class="wl-item" onclick="pickCourier('Сидоров Дмитрий Олегович')">
 <div style="display:flex;align-items:center;gap:8px">
-<div style="width:6px;height:6px;border-radius:50%;border:1px solid rgba(255,255,255,0.2)"></div>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/><path d="M5 19c0-3.3 3.1-6 7-6s7 2.7 7 6" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-linecap="round"/></svg>
 <div><div style="font-size:15px;font-weight:500">Сидоров Д.О.</div><div style="font-size:12px;color:var(--text-dim)">Не верифицирован</div></div>
 </div>
 </div>
@@ -468,6 +477,21 @@ input::placeholder{color:var(--text-dim)}
 </div>
 <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text-sec)">
 <span>1 коп.</span><span>2 коп.</span><span>3 коп.</span><span>5 коп.</span>
+</div>
+</div>
+
+<div class="cd" style="margin-bottom:16px;padding:14px 16px">
+<div style="font-size:14px;color:var(--text-sec);margin-bottom:4px">ФИО</div>
+<div style="display:flex;align-items:center;justify-content:space-between">
+<span style="font-size:17px;font-weight:500" id="profileFio">Иванов Иван Иванович</span>
+<svg onclick="editProfileFio()" width="16" height="16" viewBox="0 0 24 24" fill="none" style="cursor:pointer;opacity:0.3;flex-shrink:0"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</div>
+<div id="profileFioEdit" style="display:none;margin-top:10px">
+<input id="profileFioInput" placeholder="Фамилия Имя Отчество" style="margin-bottom:8px">
+<div style="display:flex;gap:8px">
+<div class="btn-primary" onclick="saveProfileFio()" style="padding:10px;font-size:15px;border-radius:10px">Сохранить</div>
+<div class="btn-o" onclick="cancelProfileFio()" style="padding:10px;font-size:15px;border-radius:10px">Отмена</div>
+</div>
 </div>
 </div>
 
@@ -714,7 +738,14 @@ function go(n){
     document.getElementById('topBuy').className='top-tog'+(n==='buy'?' on':'');
     document.getElementById('topSell').className='top-tog'+(n==='sell'?' on':'');
   }
+  // Sync profile FIO to buy form when entering buy screen
+  if(n==='buy'){
+    var pf=document.getElementById('profileFio');
+    var fd=document.getElementById('fioSelfDisplay');
+    if(pf&&fd)fd.textContent=pf.textContent;
+  }
   uT(n);
+  haptic();
 }
 function goTopTog(n){
   aS.forEach(function(s){var e=document.getElementById('s-'+s);if(e){e.classList.remove('act');e.classList.remove('slide-in')}});
@@ -739,7 +770,24 @@ function goBack(){
   }
 }
 function uT(a){mT.forEach(function(t){var el=document.getElementById('t-'+t);if(!el)return;var on=t===a;el.className='tb-i'+(on?' on':'');el.querySelectorAll('path,circle').forEach(function(p){p.setAttribute('stroke',on?'#fff':'var(--text-dim)')})})}
-function setTog(v){var s=document.getElementById('ts'),c=document.getElementById('tc'),fi=document.getElementById('fi'),cp=document.getElementById('cp');if(v==='s'){s.className='tog on';s.textContent='Приеду сам';c.className='tog';c.textContent='Курьер';fi.readOnly=false;fi.style.opacity='1';fi.placeholder='Фамилия Имя Отчество';cp.style.display='none'}else{c.className='tog on';c.textContent='Курьер';s.className='tog';s.textContent='Приеду сам';fi.readOnly=false;fi.style.opacity='1';fi.placeholder='Фамилия Имя Отчество';cp.style.display='block'}}
+function setTog(v){
+  var s=document.getElementById('ts'),c=document.getElementById('tc');
+  var fioSelf=document.getElementById('fioSelf');
+  var fioCourier=document.getElementById('fioCourier');
+  if(v==='s'){
+    s.className='tog on';c.className='tog';
+    fioSelf.style.display='block';
+    fioCourier.style.display='none';
+    // Sync profile FIO
+    var pf=document.getElementById('profileFio');
+    if(pf)document.getElementById('fioSelfDisplay').textContent=pf.textContent;
+  }else{
+    c.className='tog on';s.className='tog';
+    fioSelf.style.display='none';
+    fioCourier.style.display='block';
+  }
+  haptic();
+}
 function tC(el){var b=document.getElementById('chkb'),v=document.getElementById('chkv'),bw=document.getElementById('bw');var on=b.style.background==='rgb(255, 255, 255)';if(on){b.style.background='transparent';v.style.display='none';bw.classList.add('disabled')}else{b.style.background='#fff';v.style.display='block';bw.classList.remove('disabled')}}
 
 // Buy checkbox
@@ -757,10 +805,19 @@ function createOrder(type){
   // Read form values
   var sumInput=document.querySelector('#s-buy input[placeholder="Введите сумму"]');
   var sum=sumInput?sumInput.value.trim():'';
-  var fio=document.getElementById('fi').value.trim();
+  
+  // Get FIO based on mode (self = from profile, courier = from input)
+  var isSelf=document.getElementById('ts').classList.contains('on');
+  var fio;
+  if(isSelf){
+    fio=document.getElementById('fioSelfDisplay').textContent.trim();
+  }else{
+    fio=document.getElementById('fi')?document.getElementById('fi').value.trim():'';
+  }
   var wallet=document.getElementById('walletInput')?document.getElementById('walletInput').value.trim():'';
   
   if(!sum||!fio){alert('Заполните сумму и ФИО');return}
+  haptic(15);
   
   var rate=85.96;
   var sumNum=parseFloat(sum.replace(/\s/g,''));
@@ -953,8 +1010,8 @@ function saveNewCourier(){
   // Also add to courier dropdown in buy form
   var dropHtml='<div class="wl-item" onclick="pickCourier(\''+full+'\')">';
   dropHtml+='<div style="display:flex;align-items:center;gap:8px">';
-  dropHtml+='<div style="width:6px;height:6px;border-radius:50%;border:1px solid rgba(255,255,255,0.2)"></div>';
-  dropHtml+='<div><div style="font-size:14px;font-weight:500">'+short+'</div><div style="font-size:11px;color:var(--text-dim)">Не верифицирован</div></div></div></div>';
+  dropHtml+='<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/><path d="M5 19c0-3.3 3.1-6 7-6s7 2.7 7 6" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-linecap="round"/></svg>';
+  dropHtml+='<div><div style="font-size:15px;font-weight:500">'+short+'</div><div style="font-size:12px;color:var(--text-dim)">Не верифицирован</div></div></div></div>';
   document.getElementById('courierDrop').insertAdjacentHTML('beforeend',dropHtml);
   document.getElementById('addCourierForm').style.display='none';
 }
@@ -963,7 +1020,7 @@ function removeCourier(el){
   if(card){card.style.transition='opacity 0.2s,transform 0.2s';card.style.opacity='0';card.style.transform='translateX(20px)';setTimeout(function(){card.remove()},200)}
 }
 
-// Courier dropdown in buy form
+// Courier dropdown in buy form (wallet-style)
 function toggleCourierDrop(){
   var drop=document.getElementById('courierDrop');
   var chev=document.getElementById('courierDropChev');
@@ -972,26 +1029,70 @@ function toggleCourierDrop(){
   }else{
     drop.style.display='none';chev.style.transform='';
   }
+  haptic();
 }
 function pickCourier(name){
-  document.getElementById('courierSelectText').textContent=name;
-  document.getElementById('courierSelectText').style.color='#fff';
   document.getElementById('fi').value=name;
   document.getElementById('courierDrop').style.display='none';
   document.getElementById('courierDropChev').style.transform='';
+  haptic();
+}
+// Close courier dropdown when clicking outside
+document.addEventListener('click',function(e){
+  var wrap=document.getElementById('courierWrap');
+  if(wrap&&!wrap.contains(e.target)){
+    var drop=document.getElementById('courierDrop');
+    if(drop)drop.style.display='none';
+    var chev=document.getElementById('courierDropChev');
+    if(chev)chev.style.transform='';
+  }
+});
+
+// Profile FIO edit
+function editProfileFio(){
+  document.getElementById('profileFioEdit').style.display='block';
+  document.getElementById('profileFioInput').value=document.getElementById('profileFio').textContent;
+  document.getElementById('profileFioInput').focus();
+  haptic();
+}
+function saveProfileFio(){
+  var val=document.getElementById('profileFioInput').value.trim();
+  if(!val)return;
+  document.getElementById('profileFio').textContent=val;
+  document.getElementById('profileFioEdit').style.display='none';
+  // Update buy form self-FIO display
+  document.getElementById('fioSelfDisplay').textContent=val;
+  haptic();
+}
+function cancelProfileFio(){
+  document.getElementById('profileFioEdit').style.display='none';
 }
 
-// Ripple
-document.querySelectorAll('.hero-card,.btn-primary,.btn-w').forEach(function(card){
+// Haptic feedback — light vibration on button presses
+function haptic(ms){
+  ms=ms||10;
+  if(navigator.vibrate)navigator.vibrate(ms);
+  // Telegram WebApp haptic
+  if(window.Telegram&&Telegram.WebApp&&Telegram.WebApp.HapticFeedback){
+    Telegram.WebApp.HapticFeedback.impactOccurred('light');
+  }
+}
+
+// Ripple + haptic
+document.querySelectorAll('.hero-card,.btn-primary,.btn-w,.btn-o,.tog,.pill,.tb-i,.row,.cd[onclick]').forEach(function(card){
   card.addEventListener('click',function(e){
-    var r=document.createElement('span');r.className='ripple';
-    var rect=card.getBoundingClientRect();
-    var size=Math.max(rect.width,rect.height);
-    r.style.width=r.style.height=size+'px';
-    r.style.left=(e.clientX-rect.left-size/2)+'px';
-    r.style.top=(e.clientY-rect.top-size/2)+'px';
-    card.appendChild(r);
-    setTimeout(function(){r.remove()},600);
+    haptic();
+    // Only add ripple to cards and primary buttons
+    if(card.classList.contains('hero-card')||card.classList.contains('btn-primary')||card.classList.contains('btn-w')){
+      var r=document.createElement('span');r.className='ripple';
+      var rect=card.getBoundingClientRect();
+      var size=Math.max(rect.width,rect.height);
+      r.style.width=r.style.height=size+'px';
+      r.style.left=(e.clientX-rect.left-size/2)+'px';
+      r.style.top=(e.clientY-rect.top-size/2)+'px';
+      card.appendChild(r);
+      setTimeout(function(){r.remove()},600);
+    }
   });
 });
 
@@ -1221,13 +1322,19 @@ try{!function(){
       }
       
       cx.font=it.size+'px Montserrat';
-      cx.fillStyle='rgba(255,255,255,'+it.alpha.toFixed(4)+')';
+      cx.fillStyle='rgba(255,255,255,'+it.alpha+')';
       cx.fillText(it.text,it.x,it.y);
     }
+    
     requestAnimationFrame(draw);
   }
   draw();
-}()}catch(e){console.error('Crypto error:',e)}
+}()}catch(e){console.error('CryptoText error:',e)}
+
+// Shimmer on primary buttons
+document.querySelectorAll('.btn-primary').forEach(function(btn){
+  btn.classList.add('shimmer');
+});
 </script>
 </body>
 </html>
