@@ -16,10 +16,10 @@
   --text-sec:rgba(255,255,255,0.5);
   --text-dim:rgba(255,255,255,0.25);
   --shimmer:rgba(120,160,255,0.12);
-  --accent:rgba(100,140,255,1);
-  --accent-dim:rgba(100,140,255,0.15);
-  --accent-glow:rgba(100,140,255,0.08);
-  --accent-soft:rgba(100,140,255,0.06);
+  --accent:rgba(140,170,255,1);
+  --accent-dim:rgba(140,170,255,0.12);
+  --accent-glow:rgba(140,170,255,0.08);
+  --accent-soft:rgba(140,170,255,0.06);
   --green:rgba(60,220,140,1);
   --green-dim:rgba(60,220,140,0.12);
   --red:rgba(255,90,90,0.9);
@@ -30,13 +30,13 @@ html,body{height:100%;background:var(--bg);overflow:hidden;font-family:'Montserr
 .app{max-width:430px;margin:0 auto;height:100vh;height:100dvh;display:flex;flex-direction:column;position:relative;overflow:hidden}
 
 /* Header */
-.hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:rgba(11,11,14,0.92);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-bottom:0.5px solid rgba(100,140,255,0.06);z-index:10;flex-shrink:0}
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:rgba(11,11,14,0.92);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-bottom:0.5px solid rgba(140,170,255,0.06);z-index:10;flex-shrink:0}
 
 /* Content */
 .ct{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;position:relative;z-index:2}
 
 /* Tab bar */
-.tb{display:flex;justify-content:space-around;padding:8px 0 env(safe-area-inset-bottom,20px);background:rgba(11,11,14,0.94);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-top:0.5px solid rgba(100,140,255,0.06);z-index:10;flex-shrink:0}
+.tb{display:flex;justify-content:space-around;padding:8px 0 env(safe-area-inset-bottom,20px);background:rgba(11,11,14,0.94);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-top:0.5px solid rgba(140,170,255,0.06);z-index:10;flex-shrink:0}
 .tb-i{cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:transform 0.2s ease}
 .tb-i:active{transform:scale(0.9)}
 .tb-i span{font-size:13px;color:var(--text-dim);font-weight:400;transition:color 0.3s}
@@ -47,7 +47,7 @@ html,body{height:100%;background:var(--bg);overflow:hidden;font-family:'Montserr
 
 /* Inputs */
 input{font-family:inherit;color:#fff;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 16px;font-size:17px;font-weight:400;outline:none;width:100%;box-sizing:border-box;transition:border-color 0.3s, box-shadow 0.3s}
-input:focus{border-color:rgba(100,140,255,0.35);box-shadow:0 0 0 3px rgba(100,140,255,0.06),0 0 20px rgba(100,140,255,0.04)}
+input:focus{border-color:rgba(140,170,255,0.35);box-shadow:0 0 0 3px rgba(140,170,255,0.06),0 0 20px rgba(140,170,255,0.04)}
 #s-buy input:focus{border-color:rgba(60,220,140,0.3);box-shadow:0 0 0 3px rgba(60,220,140,0.06),0 0 20px rgba(60,220,140,0.03)}
 #s-sell input:focus{border-color:rgba(255,90,90,0.25);box-shadow:0 0 0 3px rgba(255,90,90,0.05),0 0 20px rgba(255,90,90,0.03)}
 input::placeholder{color:var(--text-dim)}
@@ -62,9 +62,9 @@ input::placeholder{color:var(--text-dim)}
 .btn-o:hover{border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.6)}
 
 /* Primary CTA — gradient accent button */
-.btn-primary{padding:16px;border-radius:12px;font-weight:600;font-size:17px;text-align:center;cursor:pointer;background:linear-gradient(135deg,#648cff 0%,#5a7af0 50%,#7b9fff 100%);color:#fff;width:100%;font-family:inherit;border:none;position:relative;overflow:hidden;transition:transform 0.15s ease, box-shadow 0.3s ease;box-shadow:0 4px 24px rgba(100,140,255,0.2),0 1px 3px rgba(0,0,0,0.3)}
-.btn-primary:active{transform:scale(0.97);box-shadow:0 2px 12px rgba(100,140,255,0.15)}
-.btn-primary:hover{box-shadow:0 6px 32px rgba(100,140,255,0.3),0 1px 3px rgba(0,0,0,0.3)}
+.btn-primary{padding:16px;border-radius:12px;font-weight:600;font-size:17px;text-align:center;cursor:pointer;background:linear-gradient(135deg,#8caaf0 0%,#7b9ce8 50%,#a0bcff 100%);color:#fff;width:100%;font-family:inherit;border:none;position:relative;overflow:hidden;transition:transform 0.15s ease, box-shadow 0.3s ease;box-shadow:0 4px 24px rgba(140,170,255,0.2),0 1px 3px rgba(0,0,0,0.3)}
+.btn-primary:active{transform:scale(0.97);box-shadow:0 2px 12px rgba(140,170,255,0.15)}
+.btn-primary:hover{box-shadow:0 6px 32px rgba(140,170,255,0.3),0 1px 3px rgba(0,0,0,0.3)}
 /* Shimmer sweep */
 .btn-primary::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transition:none}
 @keyframes btnShimmer{
@@ -92,15 +92,15 @@ input::placeholder{color:var(--text-dim)}
 
 /* Hero cards */
 .hero-cards{display:flex;gap:10px;margin:0 16px 16px}
-.hero-card{flex:1;cursor:pointer;padding:20px 16px;border-radius:16px;position:relative;overflow:hidden;transition:transform 0.25s ease, box-shadow 0.35s ease, border-color 0.3s;border:0.5px solid rgba(100,140,255,0.08);background:linear-gradient(145deg,rgba(100,140,255,0.04) 0%,rgba(255,255,255,0.02) 100%);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
-.hero-card:hover{transform:translateY(-2px);border-color:rgba(100,140,255,0.18);box-shadow:0 8px 32px rgba(100,140,255,0.06)}
+.hero-card{flex:1;cursor:pointer;padding:20px 16px;border-radius:16px;position:relative;overflow:hidden;transition:transform 0.25s ease, box-shadow 0.35s ease, border-color 0.3s;border:0.5px solid rgba(140,170,255,0.08);background:linear-gradient(145deg,rgba(140,170,255,0.04) 0%,rgba(255,255,255,0.02) 100%);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.hero-card:hover{transform:translateY(-2px);border-color:rgba(140,170,255,0.18);box-shadow:0 8px 32px rgba(140,170,255,0.06)}
 .hero-card:active{transform:translateY(0) scale(0.96) !important;transition:transform 0.1s ease !important}
 .hero-card__label{font-size:13px;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;font-weight:600}
 .hero-card__price{font-size:31px;font-weight:600;letter-spacing:-1px;margin-bottom:4px;line-height:1}
 .hero-card__unit{font-size:15px;color:var(--text-sec);font-weight:400}
 
 /* Shimmer on hero card hover */
-.hero-card::after{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(100,140,255,0.1),transparent);pointer-events:none;transition:none}
+.hero-card::after{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(140,170,255,0.1),transparent);pointer-events:none;transition:none}
 .hero-card:hover::after{animation:cardShimmer 0.8s ease-out forwards}
 @keyframes cardShimmer{
   0%{left:-100%}
@@ -126,25 +126,27 @@ input::placeholder{color:var(--text-dim)}
 .hero-card--transfer::after{background:linear-gradient(90deg,transparent,rgba(255,255,255,0.06),transparent)}
 
 /* Ripple effect */
-.ripple{position:absolute;border-radius:50%;background:rgba(100,140,255,0.12);transform:scale(0);animation:rippleAnim 0.6s ease-out;pointer-events:none}
+.ripple{position:absolute;border-radius:50%;background:rgba(140,170,255,0.12);transform:scale(0);animation:rippleAnim 0.6s ease-out;pointer-events:none}
 @keyframes rippleAnim{to{transform:scale(4);opacity:0}}
 
 /* Rows */
 .row{display:flex;align-items:center;padding:14px 0;border-bottom:0.5px solid rgba(255,255,255,0.04);cursor:pointer;transition:padding-left 0.2s ease}
 .row:active{padding-left:4px}
 .row:last-child{border-bottom:none}
-.ri{width:34px;height:34px;border-radius:10px;background:var(--accent-soft);border:0.5px solid rgba(100,140,255,0.1);display:flex;align-items:center;justify-content:center;margin-right:12px;flex-shrink:0}
+.ri{width:34px;height:34px;border-radius:10px;background:var(--accent-soft);border:0.5px solid rgba(140,170,255,0.1);display:flex;align-items:center;justify-content:center;margin-right:12px;flex-shrink:0}
 
 /* Pills */
 .pill{display:inline-block;padding:6px 14px;border-radius:20px;font-size:15px;font-weight:500;cursor:pointer;background:rgba(255,255,255,0.03);color:var(--text-sec);border:0.5px solid rgba(255,255,255,0.06);transition:all 0.25s ease}
 .pill:active{transform:scale(0.95)}
-.pill.on{background:var(--accent-dim);color:var(--accent);border-color:rgba(100,140,255,0.2)}
+.pill.on{background:var(--accent-dim);color:var(--accent);border-color:rgba(140,170,255,0.2)}
 
 /* Toggle */
 .tog-w{display:flex;background:rgba(255,255,255,0.03);border-radius:12px;padding:3px;border:0.5px solid rgba(255,255,255,0.06);margin-bottom:16px}
 .tog{flex:1;padding:12px 0;text-align:center;border-radius:10px;font-size:17px;font-weight:600;cursor:pointer;color:var(--text-sec);background:transparent;transition:all 0.3s}
-.tog.on{color:#fff;background:var(--accent-dim);border:0.5px solid rgba(100,140,255,0.15)}
-#s-buy .tog.on{background:rgba(60,220,140,0.1);border-color:rgba(60,220,140,0.15);color:rgba(60,220,140,1)}
+.tog.on{color:#fff;background:var(--accent-dim);border:0.5px solid rgba(140,170,255,0.15)}
+#s-buy .tog.on,#s-sell .tog.on{background:var(--accent-dim);border-color:rgba(140,170,255,0.15);color:var(--accent)}
+/* Courier dropdowns — accent tint */
+#courierDrop,#courierDropSell{border-color:rgba(140,170,255,0.1) !important;box-shadow:0 12px 40px rgba(0,0,0,0.5),0 0 30px rgba(140,170,255,0.03) !important}
 
 /* Top nav toggle */
 .top-tog-w{display:flex;background:rgba(255,255,255,0.03);border-radius:12px;padding:2px;border:0.5px solid rgba(255,255,255,0.06);margin:12px 16px 0}
@@ -167,8 +169,8 @@ input::placeholder{color:var(--text-dim)}
 
 /* Wallet dropdown */
 .wl-item{padding:10px 14px;cursor:pointer;transition:background 0.15s}
-.wl-item:hover{background:rgba(100,140,255,0.04)}
-.wl-item:active{background:rgba(100,140,255,0.08)}
+.wl-item:hover{background:rgba(140,170,255,0.04)}
+.wl-item:active{background:rgba(140,170,255,0.08)}
 #walletDropBtn{transition:transform 0.2s}
 #walletDropBtn.open{transform:rotate(180deg)}
 #walletDrop{animation:dropIn 0.2s ease-out}
@@ -211,9 +213,9 @@ input::placeholder{color:var(--text-dim)}
 .haptic-shake{animation:hapticShake 0.15s ease-in-out !important}
 
 /* Active order */
-.active-order{background:linear-gradient(135deg,rgba(100,140,255,0.04) 0%,rgba(255,255,255,0.02) 100%);border:1px solid rgba(100,140,255,0.1);border-radius:14px;padding:14px 16px;cursor:pointer;transition:transform 0.2s, border-color 0.3s, box-shadow 0.3s}
+.active-order{background:linear-gradient(135deg,rgba(140,170,255,0.04) 0%,rgba(255,255,255,0.02) 100%);border:1px solid rgba(140,170,255,0.1);border-radius:14px;padding:14px 16px;cursor:pointer;transition:transform 0.2s, border-color 0.3s, box-shadow 0.3s}
 .active-order:active{transform:scale(0.98)}
-.active-order:hover{border-color:rgba(100,140,255,0.18);box-shadow:0 4px 20px rgba(100,140,255,0.06)}
+.active-order:hover{border-color:rgba(140,170,255,0.18);box-shadow:0 4px 20px rgba(140,170,255,0.06)}
 .active-order-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:13px;font-weight:600;background:var(--accent-dim);color:var(--accent);letter-spacing:0.5px;text-transform:uppercase}
 .active-order-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:dotPulse 2s ease-in-out infinite}
 
@@ -231,7 +233,7 @@ input::placeholder{color:var(--text-dim)}
 
 <div class="bg-base"></div>
 <div class="bg-grid"></div>
-<div class="bg-grad" style="background:radial-gradient(ellipse at 50% 0%,rgba(100,140,255,0.03) 0%,transparent 60%)"></div>
+<div class="bg-grad" style="background:radial-gradient(ellipse at 50% 0%,rgba(140,170,255,0.03) 0%,transparent 60%)"></div>
 <div class="bg-noise"></div>
 <canvas id="bg" style="position:absolute;inset:0;z-index:1;pointer-events:none"></canvas>
 <canvas id="cryptoText" style="position:absolute;inset:0;z-index:1;pointer-events:none"></canvas>
@@ -445,13 +447,46 @@ input::placeholder{color:var(--text-dim)}
 <div class="scr" id="s-sell"><div style="padding:0 16px;padding-bottom:40px">
 <div style="font-size:23px;font-weight:600;margin-bottom:6px;margin-top:12px">Продать USDT</div>
 <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px">
+<div style="font-size:15px;color:var(--text-dim)">от 200 000 ₽</div>
 <div style="font-size:15px;color:var(--text-sec);font-weight:500">85.60 ₽</div>
 </div>
-<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">ФИО</div><input id="sellFio" placeholder="Фамилия Имя Отчество"></div>
-<div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;cursor:pointer;font-size:16px;color:var(--text-sec)" id="chk" onclick="tC(this)"><div id="chkb" style="width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="display:none" id="chkv"><path d="M5 13l4 4L19 7" stroke="var(--bg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Принимаю <u style="color:rgba(255,255,255,0.7)">правила</u> и условия</span></div>
+<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Сумма (₽)</div><input id="sellSum" placeholder="Введите сумму"></div>
+<div class="tog-w"><div class="tog on" id="tsSell" onclick="setTogSell('s')">Приеду сам</div><div class="tog" id="tcSell" onclick="setTogSell('c')">Курьер</div></div>
+
+<!-- FIO: "Приеду сам" mode — static from profile -->
+<div id="fioSelfSell" style="margin-bottom:16px">
+<div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">ФИО</div>
+<div style="padding:14px 16px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);font-size:17px;color:#fff;font-weight:400" id="fioSelfDisplaySell">Иванов Иван Иванович</div>
+</div>
+
+<!-- FIO: "Курьер" mode — dropdown like wallets -->
+<div id="fioCourierSell" style="display:none;margin-bottom:16px">
+<div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">ФИО курьера</div>
+<div style="position:relative" id="courierWrapSell">
+<input id="fiSell" placeholder="Выберите или введите ФИО" style="padding-right:40px" autocomplete="off">
+<div onclick="toggleCourierDropSell()" style="position:absolute;right:0;top:0;bottom:0;width:40px;display:flex;align-items:center;justify-content:center;cursor:pointer">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" id="courierDropChevSell" style="transition:transform 0.2s"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,0.35)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</div>
+<div id="courierDropSell" style="display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:50;background:rgba(18,18,24,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:0.5px solid rgba(140,170,255,0.1);border-radius:14px;padding:8px 0;max-height:260px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5)">
+<div style="padding:6px 14px 4px;font-size:13px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px">Мои курьеры</div>
+<div class="wl-item" onclick="pickCourierSell('Петров Алексей Сергеевич')">
+<div style="display:flex;align-items:center;gap:8px">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><path d="M5 19c0-3.3 3.1-6 7-6s7 2.7 7 6" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" stroke-linecap="round"/></svg>
+<div><div style="font-size:15px;font-weight:500">Петров А.С.</div><div style="font-size:12px;color:var(--text-sec)">Верифицирован</div></div>
+</div>
+</div>
+<div class="wl-item" onclick="pickCourierSell('Сидоров Дмитрий Олегович')">
+<div style="display:flex;align-items:center;gap:8px">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/><path d="M5 19c0-3.3 3.1-6 7-6s7 2.7 7 6" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-linecap="round"/></svg>
+<div><div style="font-size:15px;font-weight:500">Сидоров Д.О.</div><div style="font-size:12px;color:var(--text-dim)">Не верифицирован</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;cursor:pointer;font-size:15px;color:var(--text-sec)" id="chk" onclick="tC(this)"><div id="chkb" style="width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="display:none" id="chkv"><path d="M5 13l4 4L19 7" stroke="var(--bg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Принимаю <u style="color:rgba(255,255,255,0.7)">правила</u> и условия</span></div>
 <div class="btn-primary disabled" id="bw" onclick="go('sellok')">Получить кошелёк</div>
-<div style="height:12px"></div>
-<div class="btn-o" onclick="go('home')">На главную</div>
 </div></div>
 
 <!-- SELL OK — wallet with copy button -->
@@ -753,7 +788,7 @@ input::placeholder{color:var(--text-dim)}
 
 <div id="branchLabel" style="text-align:center;font-size:11px;color:var(--text-dim);letter-spacing:0.5px;padding:4px 0;background:rgba(11,11,14,0.94);border-top:0.5px solid var(--card-border);flex-shrink:0">Москва</div>
 <div class="tb" id="tb">
-<div class="tb-i on" id="t-home" onclick="go('home')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 9.5L12 3L21 9.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5Z" stroke="rgba(100,140,255,1)" stroke-width="1.8"/></svg><span>Главная</span></div>
+<div class="tb-i on" id="t-home" onclick="go('home')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 9.5L12 3L21 9.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5Z" stroke="rgba(140,170,255,1)" stroke-width="1.8"/></svg><span>Главная</span></div>
 <div class="tb-i" id="t-history" onclick="go('history')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="var(--text-dim)" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke="var(--text-dim)" stroke-width="1.8" stroke-linecap="round"/></svg><span>История</span></div>
 <div class="tb-i" id="t-profile" onclick="go('profile')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="var(--text-dim)" stroke-width="1.8"/><path d="M4 21c0-3.866 3.582-7 8-7s8 3.134 8 7" stroke="var(--text-dim)" stroke-width="1.8" stroke-linecap="round"/></svg><span>Профиль</span></div>
 </div>
@@ -849,6 +884,12 @@ function go(n){
     var tfd=document.getElementById('transferFioDisplay');
     if(pf&&tfd)tfd.textContent=pf.textContent;
   }
+  // Sync profile FIO to sell form
+  if(n==='sell'){
+    var pf=document.getElementById('profileFio');
+    var sfd=document.getElementById('fioSelfDisplaySell');
+    if(pf&&sfd)sfd.textContent=pf.textContent;
+  }
   uT(n);
   haptic();
 }
@@ -874,7 +915,7 @@ function goBack(){
     uT(cur);
   }
 }
-function uT(a){mT.forEach(function(t){var el=document.getElementById('t-'+t);if(!el)return;var on=t===a;el.className='tb-i'+(on?' on':'');el.querySelectorAll('path,circle').forEach(function(p){p.setAttribute('stroke',on?'rgba(100,140,255,1)':'var(--text-dim)')})})}
+function uT(a){mT.forEach(function(t){var el=document.getElementById('t-'+t);if(!el)return;var on=t===a;el.className='tb-i'+(on?' on':'');el.querySelectorAll('path,circle').forEach(function(p){p.setAttribute('stroke',on?'rgba(140,170,255,1)':'var(--text-dim)')})})}
 function setTog(v){
   var s=document.getElementById('ts'),c=document.getElementById('tc');
   var fioSelf=document.getElementById('fioSelf');
@@ -1277,12 +1318,56 @@ function showActiveDetail(){
   if(dcw)dcw.style.display=orderSec>0?'block':'none';
 }
 
+// Sell toggle (приеду сам / курьер)
+function setTogSell(v){
+  var s=document.getElementById('tsSell'),c=document.getElementById('tcSell');
+  var fioSelf=document.getElementById('fioSelfSell');
+  var fioCourier=document.getElementById('fioCourierSell');
+  if(v==='s'){
+    s.className='tog on';c.className='tog';
+    fioSelf.style.display='block';
+    fioCourier.style.display='none';
+    var pf=document.getElementById('profileFio');
+    if(pf)document.getElementById('fioSelfDisplaySell').textContent=pf.textContent;
+  }else{
+    c.className='tog on';s.className='tog';
+    fioSelf.style.display='none';
+    fioCourier.style.display='block';
+  }
+  haptic();
+}
+function toggleCourierDropSell(){
+  var drop=document.getElementById('courierDropSell');
+  var chev=document.getElementById('courierDropChevSell');
+  if(drop.style.display==='none'||!drop.style.display){
+    drop.style.display='block';chev.style.transform='rotate(180deg)';
+  }else{
+    drop.style.display='none';chev.style.transform='';
+  }
+  haptic();
+}
+function pickCourierSell(name){
+  document.getElementById('fiSell').value=name;
+  document.getElementById('courierDropSell').style.display='none';
+  document.getElementById('courierDropChevSell').style.transform='';
+  haptic();
+}
+document.addEventListener('click',function(e){
+  var wrap=document.getElementById('courierWrapSell');
+  if(wrap&&!wrap.contains(e.target)){
+    var drop=document.getElementById('courierDropSell');
+    if(drop)drop.style.display='none';
+    var chev=document.getElementById('courierDropChevSell');
+    if(chev)chev.style.transform='';
+  }
+});
+
 // Transfer checkbox
 function tCTransfer(){
   var b=document.getElementById('chkbTransfer'),v=document.getElementById('chkvTransfer'),bw=document.getElementById('bwTransfer');
   var on=b.style.background.indexOf('100')!==-1;
   if(on){b.style.background='transparent';v.style.display='none';bw.classList.add('disabled')}
-  else{b.style.background='rgba(100,140,255,1)';v.style.display='block';bw.classList.remove('disabled')}
+  else{b.style.background='rgba(140,170,255,1)';v.style.display='block';bw.classList.remove('disabled')}
   haptic();
 }
 
