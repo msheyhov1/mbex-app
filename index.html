@@ -154,6 +154,18 @@ input::placeholder{color:var(--text-dim)}
 @keyframes breathe{0%,100%{opacity:0.015}50%{opacity:0.04}}
 @keyframes gridMove{0%{transform:translateY(0)}100%{transform:translateY(20px)}}
 
+/* Haptic shake — visual vibration for iOS */
+@keyframes hapticShake{
+  0%{transform:translateX(0)}
+  15%{transform:translateX(-1.5px)}
+  30%{transform:translateX(1.5px)}
+  45%{transform:translateX(-1px)}
+  60%{transform:translateX(1px)}
+  75%{transform:translateX(-0.5px)}
+  100%{transform:translateX(0)}
+}
+.haptic-shake{animation:hapticShake 0.15s ease-in-out !important}
+
 /* Active order */
 .active-order{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:14px 16px;cursor:pointer;transition:transform 0.2s, border-color 0.3s}
 .active-order:active{transform:scale(0.98)}
@@ -226,11 +238,24 @@ input::placeholder{color:var(--text-dim)}
 </div>
 </div>
 
+<!-- Transfer card -->
+<div style="padding:0 16px;margin-bottom:16px">
+<div class="hero-card" id="transferCard" onclick="go('transfer')" style="opacity:0;transform:translateY(20px);width:100%;padding:16px">
+<div style="display:flex;align-items:center;justify-content:space-between">
+<div>
+<div class="hero-card__label" style="margin-bottom:4px">Перестановки</div>
+<div style="font-size:14px;color:var(--text-sec);font-weight:400">Перевод между городами</div>
+</div>
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M7 16l-4-4m0 0l4-4m-4 4h18" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</div>
+</div>
+</div>
+
 <!-- Active order -->
 <div id="activeOrderHome" style="padding:0 16px;margin-bottom:16px;display:none">
-<div class="active-order fade-in fade-in-d3" onclick="go('detail')">
+<div class="active-order fade-in fade-in-d3" onclick="go('detail');showActiveDetail()">
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-<div class="active-order-badge">Активная заявка</div>
+<div class="active-order-badge" id="activeOrderBadge">Активная заявка</div>
 <div style="font-size:14px;color:var(--text-dim)" id="activeTimer">10:00</div>
 </div>
 <div style="display:flex;justify-content:space-between;align-items:center">
@@ -242,6 +267,9 @@ input::placeholder{color:var(--text-dim)}
 <div style="font-size:19px;font-weight:500" id="activeAmount">— <span style="font-size:14px;font-weight:400;color:var(--text-sec)">USDT</span></div>
 <div style="font-size:14px;color:var(--text-dim)" id="activeRub"></div>
 </div>
+</div>
+<div style="margin-top:12px;padding-top:10px;border-top:0.5px solid rgba(255,255,255,0.06)">
+<div class="btn-o" onclick="event.stopPropagation();cancelActiveOrder()" style="padding:10px;font-size:15px;border-radius:10px;color:rgba(255,255,255,0.35)">Отменить заявку</div>
 </div>
 </div>
 </div>
@@ -442,28 +470,32 @@ input::placeholder{color:var(--text-dim)}
 <div style="width:48px;height:48px;border-radius:50%;margin:0 auto 12px;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center">
 <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M12 5l-5 5M12 5l5 5" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </div>
-<div style="font-size:29px;font-weight:500;margin-bottom:4px">2 907.38 USDT</div>
-<div style="font-size:16px;color:var(--text-sec)">Покупка USDT</div>
+<div style="font-size:29px;font-weight:500;margin-bottom:4px" id="detailAmount">— USDT</div>
+<div style="font-size:16px;color:var(--text-sec)" id="detailType">Покупка USDT</div>
 </div>
 
 <div class="cd" style="margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;padding:12px 16px">
-<div style="display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:#fff"></div><span style="font-size:16px;font-weight:500">Завершена</span></div>
-<span style="font-size:15px;color:var(--text-dim)">19 янв 2026, 18:17</span>
+<div style="display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%" id="detailStatusDot"></div><span style="font-size:16px;font-weight:500" id="detailStatus">Активная</span></div>
+<span style="font-size:15px;color:var(--text-dim)" id="detailDate"></span>
 </div>
 
 <div class="cd" style="text-align:left;padding:2px 16px;margin-bottom:10px">
-<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">Курс</span><span style="font-size:16px;font-weight:500">85.96 ₽</span></div>
-<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">Вы отдали</span><span style="font-size:16px;font-weight:500">250 000 ₽</span></div>
-<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">Номер</span><div style="display:flex;align-items:center;gap:6px"><span style="font-size:16px;font-weight:500">24178033</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="cursor:pointer;opacity:0.25"><rect x="9" y="9" width="13" height="13" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke="#fff" stroke-width="1.5"/></svg></div></div>
-<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">ФИО</span><span style="font-size:16px;font-weight:500">Иванов И.И.</span></div>
-<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">Дата</span><span style="font-size:16px;font-weight:500">19 янв 2026, 15:48</span></div>
-<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0"><span style="font-size:16px;color:var(--text-sec)">TXID</span><div style="display:flex;align-items:center;gap:6px"><span style="font-size:15px;color:var(--text-dim);font-family:'Montserrat',sans-serif">c237···c9ef</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="cursor:pointer;opacity:0.25"><rect x="9" y="9" width="13" height="13" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke="#fff" stroke-width="1.5"/></svg></div></div>
+<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">Курс</span><span style="font-size:16px;font-weight:500" id="detailRate">85.96 ₽</span></div>
+<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">Сумма</span><span style="font-size:16px;font-weight:500" id="detailSum">— ₽</span></div>
+<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">Номер</span><span style="font-size:16px;font-weight:500" id="detailNum">—</span></div>
+<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">ФИО</span><span style="font-size:16px;font-weight:500" id="detailFio">—</span></div>
+<div style="display:flex;justify-content:space-between;padding:12px 0"><span style="font-size:16px;color:var(--text-sec)">Таймер</span><span style="font-size:16px;font-weight:500" id="detailTimer">—</span></div>
 </div>
 
-<div class="cd" style="text-align:left;padding:14px 16px">
+<div class="cd" style="text-align:left;padding:14px 16px;margin-bottom:16px">
 <div style="font-size:14px;color:var(--text-sec);margin-bottom:4px">Кошелёк (TRC-20)</div>
-<div style="font-size:15px;font-family:'Montserrat',sans-serif;word-break:break-all;color:var(--text-sec)">TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8</div>
+<div style="font-size:15px;font-family:'Montserrat',sans-serif;word-break:break-all;color:var(--text-sec)" id="detailWallet">TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8</div>
 </div>
+
+<div id="detailCancelWrap">
+<div class="btn-o" onclick="cancelActiveOrder();goBack()" style="margin-bottom:10px">Отменить заявку</div>
+</div>
+<div class="btn-o" onclick="goBack()">Назад</div>
 </div></div>
 
 <!-- PROFILE -->
@@ -602,6 +634,55 @@ input::placeholder{color:var(--text-dim)}
 </div>
 </div></div>
 
+<!-- TRANSFER (Перестановки) -->
+<div class="scr" id="s-transfer"><div style="padding:0 16px;padding-bottom:40px">
+<div style="font-size:23px;font-weight:600;margin-bottom:6px;margin-top:12px">Перестановки</div>
+<div style="font-size:15px;color:var(--text-dim);margin-bottom:20px">Перевод средств между городами</div>
+
+<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Сумма (₽)</div><input id="transferSum" placeholder="Введите сумму"></div>
+
+<!-- Город отправки -->
+<div style="margin-bottom:14px">
+<div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Откуда</div>
+<div style="position:relative" id="cityFromWrap">
+<div onclick="toggleCityDrop('from')" style="padding:14px 16px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);cursor:pointer;display:flex;justify-content:space-between;align-items:center">
+<span id="cityFromText" style="font-size:17px;color:var(--text-dim)">Выберите город</span>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" id="cityFromChev" style="transition:transform 0.2s"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,0.35)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</div>
+<div id="cityFromDrop" style="display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:50;background:rgba(18,18,24,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:0.5px solid rgba(255,255,255,0.08);border-radius:14px;padding:4px 0;box-shadow:0 12px 40px rgba(0,0,0,0.5)">
+<div class="wl-item" onclick="pickCity('from','Москва')"><div style="display:flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><circle cx="12" cy="10" r="2" fill="rgba(255,255,255,0.2)"/></svg><span style="font-size:15px;font-weight:500">Москва</span></div></div>
+<div class="wl-item" onclick="pickCity('from','Махачкала')"><div style="display:flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><circle cx="12" cy="10" r="2" fill="rgba(255,255,255,0.2)"/></svg><span style="font-size:15px;font-weight:500">Махачкала</span></div></div>
+<div class="wl-item" onclick="pickCity('from','Дубай')"><div style="display:flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><circle cx="12" cy="10" r="2" fill="rgba(255,255,255,0.2)"/></svg><span style="font-size:15px;font-weight:500">Дубай</span></div></div>
+</div>
+</div>
+</div>
+
+<!-- Город получения -->
+<div style="margin-bottom:14px">
+<div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Куда</div>
+<div style="position:relative" id="cityToWrap">
+<div onclick="toggleCityDrop('to')" style="padding:14px 16px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);cursor:pointer;display:flex;justify-content:space-between;align-items:center">
+<span id="cityToText" style="font-size:17px;color:var(--text-dim)">Выберите город</span>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" id="cityToChev" style="transition:transform 0.2s"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,0.35)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</div>
+<div id="cityToDrop" style="display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:50;background:rgba(18,18,24,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:0.5px solid rgba(255,255,255,0.08);border-radius:14px;padding:4px 0;box-shadow:0 12px 40px rgba(0,0,0,0.5)">
+<div class="wl-item" onclick="pickCity('to','Москва')"><div style="display:flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><circle cx="12" cy="10" r="2" fill="rgba(255,255,255,0.2)"/></svg><span style="font-size:15px;font-weight:500">Москва</span></div></div>
+<div class="wl-item" onclick="pickCity('to','Махачкала')"><div style="display:flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><circle cx="12" cy="10" r="2" fill="rgba(255,255,255,0.2)"/></svg><span style="font-size:15px;font-weight:500">Махачкала</span></div></div>
+<div class="wl-item" onclick="pickCity('to','Дубай')"><div style="display:flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><circle cx="12" cy="10" r="2" fill="rgba(255,255,255,0.2)"/></svg><span style="font-size:15px;font-weight:500">Дубай</span></div></div>
+</div>
+</div>
+</div>
+
+<!-- ФИО from profile -->
+<div style="margin-bottom:16px">
+<div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">ФИО</div>
+<div style="padding:14px 16px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);font-size:17px;color:#fff;font-weight:400" id="transferFioDisplay">Иванов Иван Иванович</div>
+</div>
+
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;cursor:pointer;font-size:15px;color:var(--text-sec)" onclick="tCTransfer()"><div id="chkbTransfer" style="width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="display:none" id="chkvTransfer"><path d="M5 13l4 4L19 7" stroke="var(--bg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Принимаю <u style="color:rgba(255,255,255,0.7)">правила</u> и условия</span></div>
+<div class="btn-primary disabled" id="bwTransfer" onclick="createTransferOrder()">Продолжить</div>
+</div></div>
+
 <!-- COURIERS -->
 <div class="scr" id="s-couriers"><div style="padding:0 16px;padding-bottom:40px">
 <div style="font-size:23px;font-weight:600;padding:18px 0 14px">Мои курьеры</div>
@@ -665,7 +746,7 @@ input::placeholder{color:var(--text-dim)}
 </div></div>
 
 <script>
-var cur='home',stk=[],mT=['home','history','profile'],sS=['buy','sell','confirm','ok','detail','wallets','couriers','sellok'],aS=['home','buy','sell','confirm','ok','history','detail','profile','wallets','couriers','sellok'];
+var cur='home',stk=[],mT=['home','history','profile'],sS=['buy','sell','confirm','ok','detail','wallets','couriers','sellok','transfer'],aS=['home','buy','sell','confirm','ok','history','detail','profile','wallets','couriers','sellok','transfer'];
 
 // Animate hero cards — show immediately as fallback, animate if JS works
 document.addEventListener('DOMContentLoaded',function(){
@@ -674,6 +755,8 @@ document.addEventListener('DOMContentLoaded',function(){
   var sc=document.getElementById('sellCard');
   if(bc)setTimeout(function(){bc.classList.add('animate-in')},400);
   if(sc)setTimeout(function(){sc.classList.add('animate-in')},460);
+  var tc=document.getElementById('transferCard');
+  if(tc)setTimeout(function(){tc.classList.add('animate-in')},520);
 });
 
 // MBEX Logo — Bold wordmark from brandbook
@@ -744,6 +827,12 @@ function go(n){
     var pf=document.getElementById('profileFio');
     var fd=document.getElementById('fioSelfDisplay');
     if(pf&&fd)fd.textContent=pf.textContent;
+  }
+  // Sync profile FIO to transfer form
+  if(n==='transfer'){
+    var pf=document.getElementById('profileFio');
+    var tfd=document.getElementById('transferFioDisplay');
+    if(pf&&tfd)tfd.textContent=pf.textContent;
   }
   uT(n);
   haptic();
@@ -823,10 +912,26 @@ function createOrder(type){
   var rate=85.96;
   var sumNum=parseFloat(sum.replace(/\s/g,''));
   var usdt=sumNum?Math.round(sumNum/rate*100)/100:0;
+  var num=Math.floor(Math.random()*9000+1000);
+  var now=new Date();
+  var months=['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'];
+  var dateStr=now.getDate()+' '+months[now.getMonth()]+' '+now.getFullYear()+', '+now.getHours()+':'+(now.getMinutes()<10?'0':'')+now.getMinutes();
+
+  // Store active order data
+  activeOrderData={
+    type:'Покупка USDT',
+    usdt:usdt.toLocaleString('ru'),
+    rate:rate,
+    sumRub:sumNum.toLocaleString('ru'),
+    num:num,
+    fio:fio,
+    date:dateStr,
+    wallet:wallet||'TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8'
+  };
   
   // Populate OK screen
   var okInfo=document.getElementById('okInfo');
-  if(okInfo)okInfo.innerHTML='№ <b style="color:#fff;font-weight:500">'+Math.floor(Math.random()*9000+1000)+'</b> · '+fio;
+  if(okInfo)okInfo.innerHTML='№ <b style="color:#fff;font-weight:500">'+num+'</b> · '+fio;
   
   // Show active order on home
   var ao=document.getElementById('activeOrderHome');
@@ -839,6 +944,8 @@ function createOrder(type){
   if(aa)aa.innerHTML=usdt.toLocaleString('ru')+' <span style="font-size:14px;font-weight:400;color:var(--text-sec)">USDT</span>';
   var ar=document.getElementById('activeRub');
   if(ar)ar.textContent='≈ '+sumNum.toLocaleString('ru')+' ₽';
+  var badge=document.getElementById('activeOrderBadge');
+  if(badge){badge.textContent='Активная заявка';badge.style.background='rgba(255,255,255,0.06)';badge.style.color='rgba(255,255,255,0.7)'}
   
   // Start 10 min timer
   orderSec=600;
@@ -849,9 +956,8 @@ function createOrder(type){
     if(orderSec<=0){
       clearInterval(orderTimer);
       orderSec=0;
-      // Mark as cancelled
-      var badge=document.querySelector('.active-order-badge');
-      if(badge){badge.textContent='Отменена';badge.style.background='rgba(255,255,255,0.04)';badge.style.color='var(--text-dim)'}
+      var b=document.getElementById('activeOrderBadge');
+      if(b){b.textContent='Истекла';b.style.background='rgba(255,255,255,0.04)';b.style.color='var(--text-dim)'}
       var atEl=document.getElementById('activeTimer');
       if(atEl)atEl.textContent='Истекло';
     }
@@ -1069,34 +1175,195 @@ function cancelProfileFio(){
   document.getElementById('profileFioEdit').style.display='none';
 }
 
-// Haptic feedback — works in Telegram Mini App and Android browsers
-function haptic(style){
+// Haptic feedback — Telegram > Android vibrate > visual shake (iOS fallback)
+var _hapticEl=null;
+function haptic(style,el){
   style=style||'light';
+  var done=false;
   try{
-    // Telegram WebApp — primary method for Mini Apps
+    // 1. Telegram WebApp HapticFeedback
     if(window.Telegram&&Telegram.WebApp&&Telegram.WebApp.HapticFeedback){
-      if(style==='heavy'){
+      if(style==='success'){
+        Telegram.WebApp.HapticFeedback.notificationOccurred('success');
+      }else if(style==='heavy'){
         Telegram.WebApp.HapticFeedback.impactOccurred('heavy');
       }else if(style==='medium'){
         Telegram.WebApp.HapticFeedback.impactOccurred('medium');
-      }else if(style==='success'){
-        Telegram.WebApp.HapticFeedback.notificationOccurred('success');
       }else{
         Telegram.WebApp.HapticFeedback.impactOccurred('light');
       }
-      return;
+      done=true;
     }
-    // Android fallback
-    if(navigator.vibrate){
+    // 2. Android vibrate
+    if(!done&&navigator.vibrate){
       navigator.vibrate(style==='heavy'?25:style==='medium'?15:8);
+      done=true;
     }
   }catch(e){}
+  // 3. Visual shake fallback (always, for iOS + extra feedback everywhere)
+  var target=el||_hapticEl;
+  if(target){
+    target.classList.remove('haptic-shake');
+    void target.offsetWidth; // force reflow to restart animation
+    target.classList.add('haptic-shake');
+    setTimeout(function(){target.classList.remove('haptic-shake')},160);
+  }
 }
+
+// Cancel active order
+function cancelActiveOrder(){
+  clearInterval(orderTimer);
+  orderSec=0;
+  var ao=document.getElementById('activeOrderHome');
+  if(ao){
+    ao.style.transition='opacity 0.3s,transform 0.3s';
+    ao.style.opacity='0';
+    ao.style.transform='translateY(-10px)';
+    setTimeout(function(){ao.style.display='none';ao.style.opacity='';ao.style.transform=''},300);
+  }
+  activeOrderData=null;
+  haptic('medium');
+}
+
+// Active order data store
+var activeOrderData=null;
+
+// Show active order detail (dynamic, not hardcoded)
+function showActiveDetail(){
+  if(!activeOrderData)return;
+  var d=activeOrderData;
+  var da=document.getElementById('detailAmount');if(da)da.textContent=d.usdt+' USDT';
+  var dt=document.getElementById('detailType');if(dt)dt.textContent=d.type;
+  var ds=document.getElementById('detailStatus');
+  var dd=document.getElementById('detailStatusDot');
+  if(orderSec>0){
+    if(ds)ds.textContent='Активная';
+    if(dd)dd.style.background='#fff';
+  }else{
+    if(ds)ds.textContent='Отменена';
+    if(dd){dd.style.background='transparent';dd.style.border='1px solid rgba(255,255,255,0.2)'}
+  }
+  var ddate=document.getElementById('detailDate');if(ddate)ddate.textContent=d.date;
+  var dr=document.getElementById('detailRate');if(dr)dr.textContent=d.rate+' ₽';
+  var dsum=document.getElementById('detailSum');if(dsum)dsum.textContent=d.sumRub+' ₽';
+  var dn=document.getElementById('detailNum');if(dn)dn.textContent=d.num;
+  var df=document.getElementById('detailFio');if(df)df.textContent=d.fio;
+  var dtm=document.getElementById('detailTimer');
+  if(dtm){
+    if(orderSec>0){
+      var m=Math.floor(orderSec/60),s=orderSec%60;
+      dtm.textContent=m+':'+(s<10?'0':'')+s;
+    }else{
+      dtm.textContent='Истекло';
+    }
+  }
+  var dw=document.getElementById('detailWallet');if(dw)dw.textContent=d.wallet||'TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8';
+  var dcw=document.getElementById('detailCancelWrap');
+  if(dcw)dcw.style.display=orderSec>0?'block':'none';
+}
+
+// Transfer (Перестановки) functions
+function toggleCityDrop(dir){
+  var drop=document.getElementById('city'+(dir==='from'?'From':'To')+'Drop');
+  var chev=document.getElementById('city'+(dir==='from'?'From':'To')+'Chev');
+  if(drop.style.display==='none'||!drop.style.display){
+    drop.style.display='block';chev.style.transform='rotate(180deg)';
+  }else{
+    drop.style.display='none';chev.style.transform='';
+  }
+  haptic();
+}
+function pickCity(dir,city){
+  var txt=document.getElementById('city'+(dir==='from'?'From':'To')+'Text');
+  txt.textContent=city;
+  txt.style.color='#fff';
+  var drop=document.getElementById('city'+(dir==='from'?'From':'To')+'Drop');
+  var chev=document.getElementById('city'+(dir==='from'?'From':'To')+'Chev');
+  drop.style.display='none';chev.style.transform='';
+  haptic();
+}
+// Close city dropdowns on outside click
+document.addEventListener('click',function(e){
+  ['From','To'].forEach(function(dir){
+    var wrap=document.getElementById('city'+dir+'Wrap');
+    if(wrap&&!wrap.contains(e.target)){
+      var drop=document.getElementById('city'+dir+'Drop');
+      if(drop)drop.style.display='none';
+      var chev=document.getElementById('city'+dir+'Chev');
+      if(chev)chev.style.transform='';
+    }
+  });
+});
+
+// Transfer checkbox
+function tCTransfer(){
+  var b=document.getElementById('chkbTransfer'),v=document.getElementById('chkvTransfer'),bw=document.getElementById('bwTransfer');
+  var on=b.style.background==='rgb(255, 255, 255)';
+  if(on){b.style.background='transparent';v.style.display='none';bw.classList.add('disabled')}
+  else{b.style.background='#fff';v.style.display='block';bw.classList.remove('disabled')}
+  haptic();
+}
+
+// Create transfer order
+function createTransferOrder(){
+  var sum=document.getElementById('transferSum').value.trim();
+  var from=document.getElementById('cityFromText').textContent;
+  var to=document.getElementById('cityToText').textContent;
+  var fio=document.getElementById('transferFioDisplay').textContent.trim();
+  if(!sum){alert('Введите сумму');return}
+  if(from==='Выберите город'||to==='Выберите город'){alert('Выберите города');return}
+  if(from===to){alert('Города должны отличаться');return}
+  if(!fio){alert('Укажите ФИО в профиле');return}
+
+  var num=Math.floor(Math.random()*9000+1000);
+  var now=new Date();
+  var months=['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'];
+  var dateStr=now.getDate()+' '+months[now.getMonth()]+' '+now.getFullYear()+', '+now.getHours()+':'+(now.getMinutes()<10?'0':'')+now.getMinutes();
+
+  activeOrderData={
+    type:'Перестановка',
+    usdt:from+' → '+to,
+    rate:'—',
+    sumRub:parseFloat(sum.replace(/\s/g,'')).toLocaleString('ru'),
+    num:num,
+    fio:fio,
+    date:dateStr,
+    wallet:'—'
+  };
+
+  // Show active order on home
+  var ao=document.getElementById('activeOrderHome');if(ao)ao.style.display='block';
+  var at=document.getElementById('activeType');if(at)at.textContent='Перестановка';
+  var ai=document.getElementById('activeInfo');if(ai)ai.textContent=from+' → '+to;
+  var aa=document.getElementById('activeAmount');if(aa)aa.innerHTML=parseFloat(sum.replace(/\s/g,'')).toLocaleString('ru')+' <span style="font-size:14px;font-weight:400;color:var(--text-sec)">₽</span>';
+  var ar=document.getElementById('activeRub');if(ar)ar.textContent='';
+  var badge=document.getElementById('activeOrderBadge');
+  if(badge){badge.textContent='Активная заявка';badge.style.background='rgba(255,255,255,0.06)';badge.style.color='rgba(255,255,255,0.7)'}
+
+  // Start timer
+  orderSec=600;
+  clearInterval(orderTimer);
+  updateTimer();
+  orderTimer=setInterval(function(){
+    orderSec--;
+    if(orderSec<=0){clearInterval(orderTimer);orderSec=0}
+    updateTimer();
+  },1000);
+
+  haptic('success');
+  go('ok');
+  var okInfo=document.getElementById('okInfo');
+  if(okInfo)okInfo.innerHTML='№ <b style="color:#fff;font-weight:500">'+num+'</b> · '+fio+'<br><br>Перестановка: '+from+' → '+to+'<br>Сумма: '+parseFloat(sum.replace(/\s/g,'')).toLocaleString('ru')+' ₽';
+}
+
+// Sync transfer FIO when navigating to transfer
+// (handled in go() function)
 
 // Ripple + haptic
 document.querySelectorAll('.hero-card,.btn-primary,.btn-w,.btn-o,.tog,.pill,.tb-i,.row,.cd[onclick]').forEach(function(card){
   card.addEventListener('click',function(e){
-    haptic();
+    _hapticEl=card;
+    haptic('light',card);
     // Only add ripple to cards and primary buttons
     if(card.classList.contains('hero-card')||card.classList.contains('btn-primary')||card.classList.contains('btn-w')){
       var r=document.createElement('span');r.className='ripple';
