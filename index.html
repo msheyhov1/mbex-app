@@ -27,31 +27,31 @@ html,body{height:100%;background:var(--bg);overflow:hidden;font-family:'Montserr
 .ct{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;position:relative;z-index:2}
 
 /* Tab bar */
-.tb{display:flex;flex-wrap:wrap;justify-content:space-around;padding:8px 0 env(safe-area-inset-bottom,20px);background:rgba(11,11,14,0.94);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-top:0.5px solid var(--card-border);z-index:10;flex-shrink:0}
+.tb{display:flex;justify-content:space-around;padding:8px 0 env(safe-area-inset-bottom,20px);background:rgba(11,11,14,0.94);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);z-index:10;flex-shrink:0}
 .tb-i{cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:transform 0.2s ease}
 .tb-i:active{transform:scale(0.9)}
-.tb-i span{font-size:12px;color:var(--text-dim);font-weight:400;transition:color 0.3s}
+.tb-i span{font-size:13px;color:var(--text-dim);font-weight:400;transition:color 0.3s}
 .tb-i.on span{color:#fff;font-weight:500}
 
 /* Cards */
 .cd{background:var(--card);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:0.5px solid var(--card-border);border-radius:14px;padding:14px 16px;transition:border-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease}
 
 /* Inputs */
-input{font-family:inherit;color:#fff;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 16px;font-size:16px;font-weight:400;outline:none;width:100%;box-sizing:border-box;transition:border-color 0.3s, box-shadow 0.3s}
+input{font-family:inherit;color:#fff;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 16px;font-size:17px;font-weight:400;outline:none;width:100%;box-sizing:border-box;transition:border-color 0.3s, box-shadow 0.3s}
 input:focus{border-color:rgba(255,255,255,0.2);box-shadow:0 0 0 3px rgba(255,255,255,0.03)}
 input::placeholder{color:var(--text-dim)}
 
 /* Buttons */
-.btn-w{padding:15px;border-radius:12px;font-weight:600;font-size:16px;text-align:center;cursor:pointer;background:rgba(255,255,255,0.06);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:rgba(255,255,255,0.8);width:100%;font-family:inherit;border:0.5px solid rgba(255,255,255,0.08);position:relative;overflow:hidden;transition:transform 0.15s ease, background 0.3s ease, box-shadow 0.3s ease}
+.btn-w{padding:15px;border-radius:12px;font-weight:600;font-size:17px;text-align:center;cursor:pointer;background:rgba(255,255,255,0.06);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:rgba(255,255,255,0.8);width:100%;font-family:inherit;border:0.5px solid rgba(255,255,255,0.08);position:relative;overflow:hidden;transition:transform 0.15s ease, background 0.3s ease, box-shadow 0.3s ease}
 .btn-w:active{transform:scale(0.97);background:rgba(255,255,255,0.1)}
 .btn-w:hover{background:rgba(255,255,255,0.08)}
 
-.btn-o{padding:15px;border-radius:12px;font-weight:500;font-size:16px;text-align:center;cursor:pointer;background:transparent;color:rgba(255,255,255,0.4);border:0.5px solid rgba(255,255,255,0.08);width:100%;font-family:inherit;transition:transform 0.15s ease, border-color 0.3s ease, color 0.3s ease}
+.btn-o{padding:15px;border-radius:12px;font-weight:500;font-size:17px;text-align:center;cursor:pointer;background:transparent;color:rgba(255,255,255,0.4);border:0.5px solid rgba(255,255,255,0.08);width:100%;font-family:inherit;transition:transform 0.15s ease, border-color 0.3s ease, color 0.3s ease}
 .btn-o:active{transform:scale(0.97)}
 .btn-o:hover{border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.6)}
 
 /* Primary CTA — white button OKX style with blue shimmer */
-.btn-primary{padding:16px;border-radius:12px;font-weight:600;font-size:16px;text-align:center;cursor:pointer;background:#fff;color:#0b0b0e;width:100%;font-family:inherit;border:none;position:relative;overflow:hidden;transition:transform 0.15s ease, box-shadow 0.3s ease}
+.btn-primary{padding:16px;border-radius:12px;font-weight:600;font-size:17px;text-align:center;cursor:pointer;background:#fff;color:#0b0b0e;width:100%;font-family:inherit;border:none;position:relative;overflow:hidden;transition:transform 0.15s ease, box-shadow 0.3s ease}
 .btn-primary:active{transform:scale(0.97)}
 .btn-primary:hover{box-shadow:0 0 30px rgba(120,160,255,0.08)}
 /* Blue shimmer sweep */
@@ -71,9 +71,9 @@ input::placeholder{color:var(--text-dim)}
 .hero-card{flex:1;cursor:pointer;padding:20px 16px;border-radius:16px;position:relative;overflow:hidden;transition:transform 0.25s ease, box-shadow 0.35s ease, border-color 0.3s;border:0.5px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.03);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
 .hero-card:hover{transform:translateY(-2px);border-color:rgba(255,255,255,0.12)}
 .hero-card:active{transform:translateY(0) scale(0.96) !important;transition:transform 0.1s ease !important}
-.hero-card__label{font-size:13px;color:var(--text-sec);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;font-weight:500}
-.hero-card__price{font-size:30px;font-weight:600;letter-spacing:-1px;margin-bottom:4px;line-height:1}
-.hero-card__unit{font-size:14px;color:var(--text-sec);font-weight:400}
+.hero-card__label{font-size:14px;color:var(--text-sec);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;font-weight:500}
+.hero-card__price{font-size:31px;font-weight:600;letter-spacing:-1px;margin-bottom:4px;line-height:1}
+.hero-card__unit{font-size:15px;color:var(--text-sec);font-weight:400}
 
 /* Blue shimmer on hero card hover */
 .hero-card::after{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,var(--shimmer),transparent);pointer-events:none;transition:none}
@@ -94,18 +94,18 @@ input::placeholder{color:var(--text-dim)}
 .ri{width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;margin-right:12px;flex-shrink:0}
 
 /* Pills */
-.pill{display:inline-block;padding:6px 14px;border-radius:20px;font-size:14px;font-weight:500;cursor:pointer;background:rgba(255,255,255,0.03);color:var(--text-sec);border:0.5px solid rgba(255,255,255,0.06);transition:all 0.25s ease}
+.pill{display:inline-block;padding:6px 14px;border-radius:20px;font-size:15px;font-weight:500;cursor:pointer;background:rgba(255,255,255,0.03);color:var(--text-sec);border:0.5px solid rgba(255,255,255,0.06);transition:all 0.25s ease}
 .pill:active{transform:scale(0.95)}
 .pill.on{background:rgba(255,255,255,0.1);color:#fff;border-color:rgba(255,255,255,0.15)}
 
 /* Toggle */
 .tog-w{display:flex;background:rgba(255,255,255,0.03);border-radius:12px;padding:3px;border:0.5px solid rgba(255,255,255,0.06);margin-bottom:16px}
-.tog{flex:1;padding:12px 0;text-align:center;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;color:var(--text-sec);background:transparent;transition:all 0.3s}
+.tog{flex:1;padding:12px 0;text-align:center;border-radius:10px;font-size:17px;font-weight:600;cursor:pointer;color:var(--text-sec);background:transparent;transition:all 0.3s}
 .tog.on{color:#fff;background:rgba(255,255,255,0.08);border:0.5px solid rgba(255,255,255,0.1)}
 
 /* Top nav toggle */
 .top-tog-w{display:flex;background:rgba(255,255,255,0.03);border-radius:12px;padding:2px;border:0.5px solid rgba(255,255,255,0.06);margin:12px 16px 0}
-.top-tog{flex:1;padding:10px 0;text-align:center;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;color:var(--text-sec);background:transparent;transition:all 0.3s}
+.top-tog{flex:1;padding:10px 0;text-align:center;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;color:var(--text-sec);background:transparent;transition:all 0.3s}
 .top-tog.on{color:#fff;background:rgba(255,255,255,0.08)}
 
 /* Screens */
@@ -157,7 +157,7 @@ input::placeholder{color:var(--text-dim)}
 .active-order{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:14px 16px;cursor:pointer;transition:transform 0.2s, border-color 0.3s}
 .active-order:active{transform:scale(0.98)}
 .active-order:hover{border-color:rgba(255,255,255,0.12)}
-.active-order-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.7);letter-spacing:0.5px;text-transform:uppercase}
+.active-order-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:13px;font-weight:600;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.7);letter-spacing:0.5px;text-transform:uppercase}
 .active-order-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:#fff;animation:dotPulse 2s ease-in-out infinite}
 
 /* Background layers */
@@ -168,7 +168,7 @@ input::placeholder{color:var(--text-dim)}
 
 /* Header logo — static, no animation */
 .hdr-logo{
-  font-size:13px;font-weight:600;letter-spacing:2px;color:#fff;
+  font-size:14px;font-weight:600;letter-spacing:2px;color:#fff;
   display:inline-block;
 }
 </style>
@@ -187,7 +187,7 @@ input::placeholder{color:var(--text-dim)}
 
 <!-- HEADER -->
 <div class="hdr">
-<div onclick="goBack()" style="cursor:pointer;font-size:15px;display:flex;align-items:center;gap:4px"><span id="hi">&#x2715;</span> <span id="ht">Закрыть</span></div>
+<div onclick="goBack()" style="cursor:pointer;font-size:16px;display:flex;align-items:center;gap:4px"><span id="hi">&#x2715;</span> <span id="ht">Закрыть</span></div>
 <div style="text-align:center"><div class="hdr-logo">MBEX</div></div>
 <div style="width:40px"></div>
 </div>
@@ -211,8 +211,8 @@ input::placeholder{color:var(--text-dim)}
 <!-- Chart -->
 <div style="padding:0 16px;margin-top:10px" id="chart-area"></div>
 <div style="padding:4px 16px 0;display:flex;justify-content:space-between;align-items:baseline">
-<div style="font-size:13px;font-weight:400;color:var(--text-sec)">USDT / RUB</div>
-<div style="font-size:12px;color:var(--text-dim)">14:41 MSK</div>
+<div style="font-size:14px;font-weight:400;color:var(--text-sec)">USDT / RUB</div>
+<div style="font-size:13px;color:var(--text-dim)">14:41 MSK</div>
 </div>
 
 <!-- Buy / Sell hero cards — NO badges -->
@@ -234,16 +234,16 @@ input::placeholder{color:var(--text-dim)}
 <div class="active-order fade-in fade-in-d3" onclick="go('detail')">
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
 <div class="active-order-badge">Активная заявка</div>
-<div style="font-size:13px;color:var(--text-dim)">14:41</div>
+<div style="font-size:14px;color:var(--text-dim)">14:41</div>
 </div>
 <div style="display:flex;justify-content:space-between;align-items:center">
 <div>
-<div style="font-size:16px;font-weight:500">Покупка USDT</div>
-<div style="font-size:13px;color:var(--text-dim);margin-top:2px">TRC-20 · 85.96 ₽</div>
+<div style="font-size:17px;font-weight:500">Покупка USDT</div>
+<div style="font-size:14px;color:var(--text-dim);margin-top:2px">TRC-20 · 85.96 ₽</div>
 </div>
 <div style="text-align:right">
-<div style="font-size:18px;font-weight:500">5 814 <span style="font-size:13px;font-weight:400;color:var(--text-sec)">USDT</span></div>
-<div style="font-size:13px;color:var(--text-dim)">≈ 499 955 ₽</div>
+<div style="font-size:19px;font-weight:500">5 814 <span style="font-size:14px;font-weight:400;color:var(--text-sec)">USDT</span></div>
+<div style="font-size:14px;color:var(--text-dim)">≈ 499 955 ₽</div>
 </div>
 </div>
 </div>
@@ -253,32 +253,32 @@ input::placeholder{color:var(--text-dim)}
 <div style="padding:0 16px;margin-bottom:16px">
 <div class="cd fade-in fade-in-d4" style="padding:12px 16px">
 <div style="display:flex;justify-content:space-between;align-items:center">
-<span style="font-size:15px;font-weight:500;flex:1">Tether USDT</span>
-<span style="font-size:15px;font-weight:500;width:70px;text-align:right">85.96</span>
-<span style="font-size:15px;font-weight:500;width:70px;text-align:right;color:var(--text-sec)">85.60</span>
+<span style="font-size:16px;font-weight:500;flex:1">Tether USDT</span>
+<span style="font-size:16px;font-weight:500;width:70px;text-align:right">85.96</span>
+<span style="font-size:16px;font-weight:500;width:70px;text-align:right;color:var(--text-sec)">85.60</span>
 </div>
 </div>
 </div>
 
 <!-- Quick links -->
 <div style="padding:0 16px;padding-bottom:90px">
-<div class="row fade-in fade-in-d5"><div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/></svg></div><span style="flex:1;font-size:16px;font-weight:500">Поддержка</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg></div>
-<div class="row fade-in fade-in-d5"><div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/></svg></div><span style="flex:1;font-size:16px;font-weight:500">Реферальная система</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg></div>
-<div class="row fade-in fade-in-d5"><div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/></svg></div><span style="flex:1;font-size:16px;font-weight:500">AML / KYC</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg></div>
-<div class="row fade-in fade-in-d5" onclick="toggleBranches()"><div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><circle cx="12" cy="10" r="3" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/></svg></div><span style="flex:1;font-size:16px;font-weight:500">Филиалы</span><svg id="branchChev" width="14" height="14" viewBox="0 0 24 24" fill="none" style="transition:transform 0.2s"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg></div>
+<div class="row fade-in fade-in-d5"><div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/></svg></div><span style="flex:1;font-size:17px;font-weight:500">Поддержка</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg></div>
+<div class="row fade-in fade-in-d5"><div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/></svg></div><span style="flex:1;font-size:17px;font-weight:500">Реферальная система</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg></div>
+<div class="row fade-in fade-in-d5"><div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/></svg></div><span style="flex:1;font-size:17px;font-weight:500">AML / KYC</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg></div>
+<div class="row fade-in fade-in-d5" onclick="toggleBranches()"><div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><circle cx="12" cy="10" r="3" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/></svg></div><span style="flex:1;font-size:17px;font-weight:500">Филиалы</span><svg id="branchChev" width="14" height="14" viewBox="0 0 24 24" fill="none" style="transition:transform 0.2s"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg></div>
 <!-- Branch selector -->
 <div id="branchList" style="display:none;padding:0 0 4px 46px">
 <div class="branch-item" onclick="pickBranch(this,'moscow')" data-active="true" style="display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:0.5px solid rgba(255,255,255,0.04);cursor:pointer">
 <div style="width:8px;height:8px;border-radius:50%;background:#fff;flex-shrink:0" class="branch-dot"></div>
-<span style="font-size:15px;font-weight:500">Москва</span>
+<span style="font-size:16px;font-weight:500">Москва</span>
 </div>
 <div class="branch-item" onclick="pickBranch(this,'makhachkala')" style="display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:0.5px solid rgba(255,255,255,0.04);cursor:pointer">
 <div style="width:8px;height:8px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);flex-shrink:0" class="branch-dot"></div>
-<span style="font-size:15px;color:var(--text-sec)">Махачкала</span>
+<span style="font-size:16px;color:var(--text-sec)">Махачкала</span>
 </div>
 <div class="branch-item" onclick="pickBranch(this,'dubai')" style="display:flex;align-items:center;gap:8px;padding:10px 0;cursor:pointer">
 <div style="width:8px;height:8px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);flex-shrink:0" class="branch-dot"></div>
-<span style="font-size:15px;color:var(--text-sec)">Дубай</span>
+<span style="font-size:16px;color:var(--text-sec)">Дубай</span>
 </div>
 </div>
 </div>
@@ -286,13 +286,13 @@ input::placeholder{color:var(--text-dim)}
 
 <!-- BUY -->
 <div class="scr" id="s-buy"><div style="padding:0 16px;padding-bottom:40px">
-<div style="font-size:22px;font-weight:600;margin-bottom:2px">Купить USDT</div>
+<div style="font-size:23px;font-weight:600;margin-bottom:2px">Купить USDT</div>
 <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px">
-<div style="font-size:14px;color:var(--text-dim)">от 200 000 ₽</div>
-<div style="font-size:14px;color:var(--text-sec);font-weight:500">85.96 ₽</div>
+<div style="font-size:15px;color:var(--text-dim)">от 200 000 ₽</div>
+<div style="font-size:15px;color:var(--text-sec);font-weight:500">85.96 ₽</div>
 </div>
-<div style="margin-bottom:14px"><div style="font-size:14px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Сумма (₽)</div><input placeholder="Введите сумму"></div>
-<div style="margin-bottom:16px"><div style="font-size:14px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Кошелёк (TRC-20)</div>
+<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Сумма (₽)</div><input placeholder="Введите сумму"></div>
+<div style="margin-bottom:16px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Кошелёк (TRC-20)</div>
 <div style="position:relative" id="walletWrap">
 <input id="walletInput" placeholder="Txxxxxxxxxxxxxxxxxxxxxxxxx" style="font-family:'Montserrat',sans-serif;padding-right:40px" autocomplete="off">
 <div id="walletDropBtn" onclick="toggleWalletDrop()" style="position:absolute;right:0;top:0;bottom:0;width:40px;display:flex;align-items:center;justify-content:center;cursor:pointer">
@@ -300,61 +300,61 @@ input::placeholder{color:var(--text-dim)}
 </div>
 <!-- Wallet dropdown -->
 <div id="walletDrop" style="display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:50;background:rgba(18,18,24,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:0.5px solid rgba(255,255,255,0.08);border-radius:14px;padding:8px 0;max-height:260px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5)">
-<div style="padding:6px 14px 4px;font-size:12px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px">Избранные</div>
+<div style="padding:6px 14px 4px;font-size:13px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px">Избранные</div>
 <div class="wl-item" onclick="pickWallet(this)" data-addr="TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8">
 <div style="display:flex;align-items:center;gap:8px">
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/></svg>
-<div><div style="font-size:14px;font-weight:500">Основной</div><div style="font-size:12px;color:var(--text-dim);font-family:'Montserrat',sans-serif">TGXHmq...JXDe8</div></div>
+<div><div style="font-size:15px;font-weight:500">Основной</div><div style="font-size:13px;color:var(--text-dim);font-family:'Montserrat',sans-serif">TGXHmq...JXDe8</div></div>
 </div>
 </div>
 <div class="wl-item" onclick="pickWallet(this)" data-addr="TNPeeaaFB7K9cmo4uQpcU32zGK8G1NYqeL">
 <div style="display:flex;align-items:center;gap:8px">
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/></svg>
-<div><div style="font-size:14px;font-weight:500">Бизнес</div><div style="font-size:12px;color:var(--text-dim);font-family:'Montserrat',sans-serif">TNPeea...qeL</div></div>
+<div><div style="font-size:15px;font-weight:500">Бизнес</div><div style="font-size:13px;color:var(--text-dim);font-family:'Montserrat',sans-serif">TNPeea...qeL</div></div>
 </div>
 </div>
-<div style="padding:8px 14px 4px;font-size:12px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;border-top:0.5px solid rgba(255,255,255,0.05);margin-top:4px">Недавние</div>
+<div style="padding:8px 14px 4px;font-size:13px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;border-top:0.5px solid rgba(255,255,255,0.05);margin-top:4px">Недавние</div>
 <div class="wl-item" onclick="pickWallet(this)" data-addr="TLa2f6VPqDg6e44W7fMEQJ42P3vC7Qcg13">
 <div style="display:flex;align-items:center;gap:8px">
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/><path d="M12 7v5l3 3" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-linecap="round"/></svg>
-<div><div style="font-size:12px;color:var(--text-sec);font-family:'Montserrat',sans-serif">TLa2f6...cg13</div></div>
+<div><div style="font-size:13px;color:var(--text-sec);font-family:'Montserrat',sans-serif">TLa2f6...cg13</div></div>
 </div>
 </div>
 <div class="wl-item" onclick="pickWallet(this)" data-addr="TYDzsYUEpvnYmQk4zGP9sWWcTEd2MiAtW6">
 <div style="display:flex;align-items:center;gap:8px">
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/><path d="M12 7v5l3 3" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-linecap="round"/></svg>
-<div><div style="font-size:12px;color:var(--text-sec);font-family:'Montserrat',sans-serif">TYDzsY...tW6</div></div>
+<div><div style="font-size:13px;color:var(--text-sec);font-family:'Montserrat',sans-serif">TYDzsY...tW6</div></div>
 </div>
 </div>
 <div class="wl-item" onclick="pickWallet(this)" data-addr="TX7feKBLr4SAr7cZaN1KFCBri6PKbF3vS8">
 <div style="display:flex;align-items:center;gap:8px">
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/><path d="M12 7v5l3 3" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-linecap="round"/></svg>
-<div><div style="font-size:12px;color:var(--text-sec);font-family:'Montserrat',sans-serif">TX7feK...vS8</div></div>
+<div><div style="font-size:13px;color:var(--text-sec);font-family:'Montserrat',sans-serif">TX7feK...vS8</div></div>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="tog-w"><div class="tog on" id="ts" onclick="setTog('s')">Приеду сам</div><div class="tog" id="tc" onclick="setTog('c')">Курьер</div></div>
-<div style="margin-bottom:16px"><div style="font-size:14px;font-weight:500;color:var(--text-sec);margin-bottom:6px">ФИО</div><input id="fi" value="Иванов Иван Иванович" readonly style="opacity:0.4"></div>
+<div style="margin-bottom:16px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">ФИО</div><input id="fi" value="Иванов Иван Иванович" readonly style="opacity:0.4"></div>
 <div id="cp" style="display:none;margin-bottom:16px">
-<div style="font-size:14px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Курьер</div>
+<div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Курьер</div>
 <div style="position:relative">
 <div id="courierSelect" onclick="toggleCourierDrop()" style="padding:12px 16px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);cursor:pointer;display:flex;justify-content:space-between;align-items:center">
-<span id="courierSelectText" style="font-size:15px;color:var(--text-dim)">Выберите курьера</span>
+<span id="courierSelectText" style="font-size:16px;color:var(--text-dim)">Выберите курьера</span>
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" id="courierDropChev" style="transition:transform 0.2s"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </div>
 <div id="courierDrop" style="display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:50;background:rgba(18,18,24,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:0.5px solid rgba(255,255,255,0.08);border-radius:14px;padding:4px 0;box-shadow:0 12px 40px rgba(0,0,0,0.5)">
 <div class="wl-item" onclick="pickCourier('Петров Алексей Сергеевич')">
 <div style="display:flex;align-items:center;gap:8px">
 <div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.5)"></div>
-<div><div style="font-size:14px;font-weight:500">Петров А.С.</div><div style="font-size:11px;color:var(--text-dim)">Верифицирован</div></div>
+<div><div style="font-size:15px;font-weight:500">Петров А.С.</div><div style="font-size:12px;color:var(--text-dim)">Верифицирован</div></div>
 </div>
 </div>
 <div class="wl-item" onclick="pickCourier('Сидоров Дмитрий Олегович')">
 <div style="display:flex;align-items:center;gap:8px">
 <div style="width:6px;height:6px;border-radius:50%;border:1px solid rgba(255,255,255,0.2)"></div>
-<div><div style="font-size:14px;font-weight:500">Сидоров Д.О.</div><div style="font-size:11px;color:var(--text-dim)">Не верифицирован</div></div>
+<div><div style="font-size:15px;font-weight:500">Сидоров Д.О.</div><div style="font-size:12px;color:var(--text-dim)">Не верифицирован</div></div>
 </div>
 </div>
 </div>
@@ -365,14 +365,14 @@ input::placeholder{color:var(--text-dim)}
 
 <!-- SELL -->
 <div class="scr" id="s-sell"><div style="padding:0 16px;padding-bottom:40px">
-<div style="font-size:22px;font-weight:600;margin-bottom:2px">Продать USDT</div>
+<div style="font-size:23px;font-weight:600;margin-bottom:2px">Продать USDT</div>
 <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px">
-<div style="font-size:14px;color:var(--text-sec);font-weight:500">85.60 ₽</div>
+<div style="font-size:15px;color:var(--text-sec);font-weight:500">85.60 ₽</div>
 </div>
-<div style="margin-bottom:14px"><div style="font-size:14px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Фамилия *</div><input placeholder="Фамилия"></div>
-<div style="margin-bottom:14px"><div style="font-size:14px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Имя *</div><input placeholder="Имя"></div>
-<div style="margin-bottom:14px"><div style="font-size:14px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Отчество *</div><input placeholder="Отчество"></div>
-<div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;cursor:pointer;font-size:15px;color:var(--text-sec)" id="chk" onclick="tC(this)"><div id="chkb" style="width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="display:none" id="chkv"><path d="M5 13l4 4L19 7" stroke="var(--bg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Принимаю <u style="color:rgba(255,255,255,0.7)">правила</u> и условия</span></div>
+<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Фамилия *</div><input placeholder="Фамилия"></div>
+<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Имя *</div><input placeholder="Имя"></div>
+<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Отчество *</div><input placeholder="Отчество"></div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;cursor:pointer;font-size:16px;color:var(--text-sec)" id="chk" onclick="tC(this)"><div id="chkb" style="width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="display:none" id="chkv"><path d="M5 13l4 4L19 7" stroke="var(--bg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Принимаю <u style="color:rgba(255,255,255,0.7)">правила</u> и условия</span></div>
 <div class="btn-primary disabled" id="bw" onclick="go('confirm')">Получить кошелёк</div>
 <div style="height:12px"></div>
 <div class="btn-o" onclick="go('home')">На главную</div>
@@ -381,27 +381,27 @@ input::placeholder{color:var(--text-dim)}
 <!-- CONFIRM -->
 <div class="scr" id="s-confirm"><div style="padding:0 16px;text-align:center;padding-bottom:40px">
 <div style="margin-top:30px;margin-bottom:16px"><div style="width:56px;height:56px;border-radius:50%;margin:0 auto;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 40 40" fill="none"><path d="M8 8L20 20L8 32" stroke="rgba(255,255,255,0.5)" stroke-width="3" stroke-linecap="round"/><path d="M20 8L32 20L20 32" stroke="rgba(255,255,255,0.5)" stroke-width="3" stroke-linecap="round"/></svg></div></div>
-<div style="font-size:24px;font-weight:500">500 000 ₽</div>
-<div style="font-size:15px;color:var(--text-sec);margin-bottom:24px">Подтверждение</div>
-<div class="cd" style="text-align:left;margin-bottom:10px"><div style="font-size:13px;color:var(--text-dim);margin-bottom:3px">ФИО</div><div style="font-size:16px;font-weight:400">Иванов Иван Иванович</div></div>
-<div class="cd" style="text-align:left;margin-bottom:24px"><div style="font-size:13px;color:var(--text-dim);margin-bottom:3px">Кошелёк (TRC-20)</div><div style="font-size:13px;color:var(--text-sec);font-family:'Montserrat',sans-serif;word-break:break-all">TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8</div></div>
+<div style="font-size:25px;font-weight:500">500 000 ₽</div>
+<div style="font-size:16px;color:var(--text-sec);margin-bottom:24px">Подтверждение</div>
+<div class="cd" style="text-align:left;margin-bottom:10px"><div style="font-size:14px;color:var(--text-dim);margin-bottom:3px">ФИО</div><div style="font-size:17px;font-weight:400">Иванов Иван Иванович</div></div>
+<div class="cd" style="text-align:left;margin-bottom:24px"><div style="font-size:14px;color:var(--text-dim);margin-bottom:3px">Кошелёк (TRC-20)</div><div style="font-size:14px;color:var(--text-sec);font-family:'Montserrat',sans-serif;word-break:break-all">TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8</div></div>
 <div class="btn-primary" onclick="go('ok')">Создать заявку</div>
 </div></div>
 
 <!-- SUCCESS -->
 <div class="scr" id="s-ok"><div style="padding:0 16px;text-align:center;padding-bottom:40px">
 <div style="margin-top:50px;margin-bottom:14px"><div style="width:64px;height:64px;border-radius:50%;margin:0 auto;border:1.5px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
-<div style="font-size:20px;font-weight:600;margin-bottom:8px;letter-spacing:0.5px">Заявка создана</div>
-<div style="font-size:15px;color:var(--text-sec);line-height:1.7;margin-bottom:24px">№ <b style="color:#fff;font-weight:500">276</b> · Иванов И.И.<br><br>Пресненская наб. 12<br>Башня Федерация — Восток, 5 эт.</div>
+<div style="font-size:21px;font-weight:600;margin-bottom:8px;letter-spacing:0.5px">Заявка создана</div>
+<div style="font-size:16px;color:var(--text-sec);line-height:1.7;margin-bottom:24px">№ <b style="color:#fff;font-weight:500">276</b> · Иванов И.И.<br><br>Пресненская наб. 12<br>Башня Федерация — Восток, 5 эт.</div>
 <div class="btn-o" onclick="go('home')">На главную</div>
 </div></div>
 
 <!-- HISTORY -->
 <div class="scr" id="s-history"><div style="padding:0 16px;padding-bottom:90px">
-<div style="font-size:22px;font-weight:600;padding:18px 0 12px">История</div>
+<div style="font-size:23px;font-weight:600;padding:18px 0 12px">История</div>
 <div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap"><div class="pill on" onclick="this.classList.toggle('on')">Покупка</div><div class="pill" onclick="this.classList.toggle('on')">Продажа</div><div class="pill" onclick="this.classList.toggle('on')">Завершена</div></div>
-<div class="cd" onclick="go('detail')" style="margin-bottom:10px;cursor:pointer"><div style="display:flex;justify-content:space-between"><div><div style="font-size:16px;font-weight:500">Покупка</div><div style="font-size:13px;color:var(--text-dim)">USDT TRC-20</div></div><div style="text-align:right"><div style="font-size:16px;font-weight:500">5 814 USDT</div><div style="font-size:13px;color:var(--text-sec)">Создана</div></div></div></div>
-<div class="cd" onclick="go('detail')" style="margin-bottom:10px;cursor:pointer"><div style="display:flex;justify-content:space-between"><div><div style="font-size:16px;font-weight:500">Покупка</div><div style="font-size:13px;color:var(--text-dim)">USDT TRC-20</div></div><div style="text-align:right"><div style="font-size:16px;font-weight:500">2 907 USDT</div><div style="font-size:13px;color:var(--text-dim)">Завершена</div></div></div></div>
+<div class="cd" onclick="go('detail')" style="margin-bottom:10px;cursor:pointer"><div style="display:flex;justify-content:space-between"><div><div style="font-size:17px;font-weight:500">Покупка</div><div style="font-size:14px;color:var(--text-dim)">USDT TRC-20</div></div><div style="text-align:right"><div style="font-size:17px;font-weight:500">5 814 USDT</div><div style="font-size:14px;color:var(--text-sec)">Создана</div></div></div></div>
+<div class="cd" onclick="go('detail')" style="margin-bottom:10px;cursor:pointer"><div style="display:flex;justify-content:space-between"><div><div style="font-size:17px;font-weight:500">Покупка</div><div style="font-size:14px;color:var(--text-dim)">USDT TRC-20</div></div><div style="text-align:right"><div style="font-size:17px;font-weight:500">2 907 USDT</div><div style="font-size:14px;color:var(--text-dim)">Завершена</div></div></div></div>
 </div></div>
 
 <!-- DETAIL -->
@@ -410,67 +410,67 @@ input::placeholder{color:var(--text-dim)}
 <div style="width:48px;height:48px;border-radius:50%;margin:0 auto 12px;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center">
 <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M12 5l-5 5M12 5l5 5" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </div>
-<div style="font-size:28px;font-weight:500;margin-bottom:4px">2 907.38 USDT</div>
-<div style="font-size:15px;color:var(--text-sec)">Покупка USDT</div>
+<div style="font-size:29px;font-weight:500;margin-bottom:4px">2 907.38 USDT</div>
+<div style="font-size:16px;color:var(--text-sec)">Покупка USDT</div>
 </div>
 
 <div class="cd" style="margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;padding:12px 16px">
-<div style="display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:#fff"></div><span style="font-size:15px;font-weight:500">Завершена</span></div>
-<span style="font-size:14px;color:var(--text-dim)">19 янв 2026, 18:17</span>
+<div style="display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:#fff"></div><span style="font-size:16px;font-weight:500">Завершена</span></div>
+<span style="font-size:15px;color:var(--text-dim)">19 янв 2026, 18:17</span>
 </div>
 
 <div class="cd" style="text-align:left;padding:2px 16px;margin-bottom:10px">
-<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:15px;color:var(--text-sec)">Курс</span><span style="font-size:15px;font-weight:500">85.96 ₽</span></div>
-<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:15px;color:var(--text-sec)">Вы отдали</span><span style="font-size:15px;font-weight:500">250 000 ₽</span></div>
-<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:15px;color:var(--text-sec)">Номер</span><div style="display:flex;align-items:center;gap:6px"><span style="font-size:15px;font-weight:500">24178033</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="cursor:pointer;opacity:0.25"><rect x="9" y="9" width="13" height="13" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke="#fff" stroke-width="1.5"/></svg></div></div>
-<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:15px;color:var(--text-sec)">ФИО</span><span style="font-size:15px;font-weight:500">Иванов И.И.</span></div>
-<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:15px;color:var(--text-sec)">Дата</span><span style="font-size:15px;font-weight:500">19 янв 2026, 15:48</span></div>
-<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0"><span style="font-size:15px;color:var(--text-sec)">TXID</span><div style="display:flex;align-items:center;gap:6px"><span style="font-size:14px;color:var(--text-dim);font-family:'Montserrat',sans-serif">c237···c9ef</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="cursor:pointer;opacity:0.25"><rect x="9" y="9" width="13" height="13" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke="#fff" stroke-width="1.5"/></svg></div></div>
+<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">Курс</span><span style="font-size:16px;font-weight:500">85.96 ₽</span></div>
+<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">Вы отдали</span><span style="font-size:16px;font-weight:500">250 000 ₽</span></div>
+<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">Номер</span><div style="display:flex;align-items:center;gap:6px"><span style="font-size:16px;font-weight:500">24178033</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="cursor:pointer;opacity:0.25"><rect x="9" y="9" width="13" height="13" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke="#fff" stroke-width="1.5"/></svg></div></div>
+<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">ФИО</span><span style="font-size:16px;font-weight:500">Иванов И.И.</span></div>
+<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">Дата</span><span style="font-size:16px;font-weight:500">19 янв 2026, 15:48</span></div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0"><span style="font-size:16px;color:var(--text-sec)">TXID</span><div style="display:flex;align-items:center;gap:6px"><span style="font-size:15px;color:var(--text-dim);font-family:'Montserrat',sans-serif">c237···c9ef</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="cursor:pointer;opacity:0.25"><rect x="9" y="9" width="13" height="13" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke="#fff" stroke-width="1.5"/></svg></div></div>
 </div>
 
 <div class="cd" style="text-align:left;padding:14px 16px">
-<div style="font-size:13px;color:var(--text-sec);margin-bottom:4px">Кошелёк (TRC-20)</div>
-<div style="font-size:14px;font-family:'Montserrat',sans-serif;word-break:break-all;color:var(--text-sec)">TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8</div>
+<div style="font-size:14px;color:var(--text-sec);margin-bottom:4px">Кошелёк (TRC-20)</div>
+<div style="font-size:15px;font-family:'Montserrat',sans-serif;word-break:break-all;color:var(--text-sec)">TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8</div>
 </div>
 </div></div>
 
 <!-- PROFILE -->
 <div class="scr" id="s-profile"><div style="padding:0 16px;padding-bottom:90px">
-<div style="font-size:24px;font-weight:600;padding:18px 0 14px">Профиль</div>
+<div style="font-size:25px;font-weight:600;padding:18px 0 14px">Профиль</div>
 
 <div class="cd" style="margin-bottom:16px;padding:16px">
-<div style="font-size:13px;color:var(--text-sec);text-align:center;letter-spacing:0.3px;margin-bottom:14px">Обменивайте для персональной скидки</div>
+<div style="font-size:14px;color:var(--text-sec);text-align:center;letter-spacing:0.3px;margin-bottom:14px">Обменивайте для персональной скидки</div>
 <div style="flex:1;height:3px;background:rgba(255,255,255,0.08);border-radius:2px;position:relative;margin-bottom:8px"><div style="position:absolute;left:0;top:0;height:100%;width:8%;background:#fff;border-radius:2px"></div></div>
-<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-dim);margin-bottom:4px">
+<div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text-dim);margin-bottom:4px">
 <span>100K</span><span>200K</span><span>300K</span><span>500K</span>
 </div>
-<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-sec)">
+<div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text-sec)">
 <span>1 коп.</span><span>2 коп.</span><span>3 коп.</span><span>5 коп.</span>
 </div>
 </div>
 
-<div style="font-size:18px;font-weight:600;margin-bottom:10px">Статистика</div>
+<div style="font-size:19px;font-weight:600;margin-bottom:10px">Статистика</div>
 
 <div class="cd" style="margin-bottom:8px;padding:14px 16px">
-<div style="font-size:13px;color:var(--text-sec);margin-bottom:4px">Реф. баланс</div>
-<div style="font-size:20px;font-weight:500">0 USDT</div>
+<div style="font-size:14px;color:var(--text-sec);margin-bottom:4px">Реф. баланс</div>
+<div style="font-size:21px;font-weight:500">0 USDT</div>
 </div>
 
 <div class="cd" style="margin-bottom:8px;padding:14px 16px">
-<div style="font-size:13px;color:var(--text-sec);margin-bottom:4px">Обменов</div>
-<div style="font-size:20px;font-weight:500">0</div>
+<div style="font-size:14px;color:var(--text-sec);margin-bottom:4px">Обменов</div>
+<div style="font-size:21px;font-weight:500">0</div>
 </div>
 
 <div class="cd" style="margin-bottom:16px;padding:14px 16px">
-<div style="font-size:13px;color:var(--text-sec);margin-bottom:4px">Реф. код</div>
+<div style="font-size:14px;color:var(--text-sec);margin-bottom:4px">Реф. код</div>
 <div style="display:flex;align-items:center;justify-content:space-between">
-<span style="font-size:18px;font-weight:500;font-family:'Montserrat',sans-serif;letter-spacing:1px">MBX7200K</span>
+<span style="font-size:19px;font-weight:500;font-family:'Montserrat',sans-serif;letter-spacing:1px">MBX7200K</span>
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="cursor:pointer;opacity:0.3"><rect x="9" y="9" width="13" height="13" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke="#fff" stroke-width="1.5"/></svg>
 </div>
 </div>
 
 <div class="cd" onclick="" style="margin-bottom:20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:16px;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.08)">
-<span style="font-size:16px;font-weight:500">Реферальная система</span>
+<span style="font-size:17px;font-weight:500">Реферальная система</span>
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/></svg>
 </div>
 
@@ -478,7 +478,7 @@ input::placeholder{color:var(--text-dim)}
 <div class="cd" onclick="go('wallets')" style="margin-bottom:8px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:16px;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.08)">
 <div style="display:flex;align-items:center;gap:10px">
 <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="20" height="14" rx="2" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><path d="M2 10h20" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><circle cx="17" cy="14" r="1.5" fill="rgba(255,255,255,0.3)"/></svg>
-<span style="font-size:16px;font-weight:500">Кошельки</span>
+<span style="font-size:17px;font-weight:500">Кошельки</span>
 </div>
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/></svg>
 </div>
@@ -487,38 +487,38 @@ input::placeholder{color:var(--text-dim)}
 <div class="cd" onclick="go('couriers')" style="margin-bottom:20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:16px;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.08)">
 <div style="display:flex;align-items:center;gap:10px">
 <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/></svg>
-<span style="font-size:16px;font-weight:500">Курьеры</span>
+<span style="font-size:17px;font-weight:500">Курьеры</span>
 </div>
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/></svg>
 </div>
 
-<div style="font-size:18px;font-weight:600;margin-bottom:10px">Контакты</div>
+<div style="font-size:19px;font-weight:600;margin-bottom:10px">Контакты</div>
 
 <div class="cd" style="margin-bottom:8px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center">
-<span style="font-size:15px;color:var(--text-sec)">Не верифицирован</span>
+<span style="font-size:16px;color:var(--text-sec)">Не верифицирован</span>
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="opacity:0.25"><path d="M18 6L6 18M6 6l12 12" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
 </div>
 
 <div class="cd" style="padding:14px 16px;margin-bottom:8px">
-<div style="font-size:13px;color:var(--text-sec);margin-bottom:4px">Telegram ID</div>
-<div style="font-size:16px;font-weight:500">7310949179</div>
+<div style="font-size:14px;color:var(--text-sec);margin-bottom:4px">Telegram ID</div>
+<div style="font-size:17px;font-weight:500">7310949179</div>
 </div>
 
 <div class="cd" style="padding:14px 16px">
-<div style="font-size:13px;color:var(--text-sec);margin-bottom:4px">Почта</div>
-<div style="font-size:16px;font-weight:500">user@example.com</div>
+<div style="font-size:14px;color:var(--text-sec);margin-bottom:4px">Почта</div>
+<div style="font-size:17px;font-weight:500">user@example.com</div>
 </div>
 </div></div>
 
 <!-- WALLETS -->
 <div class="scr" id="s-wallets"><div style="padding:0 16px;padding-bottom:40px">
-<div style="font-size:22px;font-weight:600;padding:18px 0 14px">Мои кошельки</div>
+<div style="font-size:23px;font-weight:600;padding:18px 0 14px">Мои кошельки</div>
 
 <div id="walletsList">
 <div class="cd wallet-saved" style="margin-bottom:8px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center">
 <div>
-<div style="font-size:15px;font-weight:500;margin-bottom:2px">Основной</div>
-<div style="font-size:13px;color:var(--text-sec)">TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8</div>
+<div style="font-size:16px;font-weight:500;margin-bottom:2px">Основной</div>
+<div style="font-size:14px;color:var(--text-sec)">TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8</div>
 </div>
 <div style="display:flex;align-items:center;gap:10px">
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z" fill="rgba(255,255,255,0.25)" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/></svg>
@@ -527,8 +527,8 @@ input::placeholder{color:var(--text-dim)}
 </div>
 <div class="cd wallet-saved" style="margin-bottom:8px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center">
 <div>
-<div style="font-size:15px;font-weight:500;margin-bottom:2px">Бизнес</div>
-<div style="font-size:13px;color:var(--text-sec)">TNPeeaaFB7K9cmo4uQpcU32zGK8G1NYqeL</div>
+<div style="font-size:16px;font-weight:500;margin-bottom:2px">Бизнес</div>
+<div style="font-size:14px;color:var(--text-sec)">TNPeeaaFB7K9cmo4uQpcU32zGK8G1NYqeL</div>
 </div>
 <div style="display:flex;align-items:center;gap:10px">
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z" fill="rgba(255,255,255,0.25)" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/></svg>
@@ -540,24 +540,24 @@ input::placeholder{color:var(--text-dim)}
 <!-- Add wallet form -->
 <div id="addWalletForm" style="display:none;margin-bottom:12px">
 <div class="cd" style="padding:16px">
-<div style="margin-bottom:12px"><div style="font-size:14px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Название</div><input id="newWalletName" placeholder="Например: Личный"></div>
-<div style="margin-bottom:14px"><div style="font-size:14px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Адрес (TRC-20)</div><input id="newWalletAddr" placeholder="Txxxxxxxxxxxxxxxxxxxxxxxxx"></div>
+<div style="margin-bottom:12px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Название</div><input id="newWalletName" placeholder="Например: Личный"></div>
+<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Адрес (TRC-20)</div><input id="newWalletAddr" placeholder="Txxxxxxxxxxxxxxxxxxxxxxxxx"></div>
 <div style="display:flex;gap:8px">
-<div class="btn-primary" onclick="saveNewWallet()" style="padding:12px;font-size:15px;border-radius:10px">Сохранить</div>
-<div class="btn-o" onclick="toggleAddWallet()" style="padding:12px;font-size:15px;border-radius:10px">Отмена</div>
+<div class="btn-primary" onclick="saveNewWallet()" style="padding:12px;font-size:16px;border-radius:10px">Сохранить</div>
+<div class="btn-o" onclick="toggleAddWallet()" style="padding:12px;font-size:16px;border-radius:10px">Отмена</div>
 </div>
 </div>
 </div>
 
 <div class="cd" onclick="toggleAddWallet()" style="cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;padding:14px 16px;border:0.5px dashed rgba(255,255,255,0.1)">
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/></svg>
-<span style="font-size:15px;color:var(--text-sec)">Добавить кошелёк</span>
+<span style="font-size:16px;color:var(--text-sec)">Добавить кошелёк</span>
 </div>
 </div></div>
 
 <!-- COURIERS -->
 <div class="scr" id="s-couriers"><div style="padding:0 16px;padding-bottom:40px">
-<div style="font-size:22px;font-weight:600;padding:18px 0 14px">Мои курьеры</div>
+<div style="font-size:23px;font-weight:600;padding:18px 0 14px">Мои курьеры</div>
 
 <div id="couriersList">
 <div class="cd courier-saved" style="margin-bottom:8px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center">
@@ -566,8 +566,8 @@ input::placeholder{color:var(--text-dim)}
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><path d="M4 21c0-3.866 3.582-7 8-7s8 3.134 8 7" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/></svg>
 </div>
 <div>
-<div style="font-size:15px;font-weight:500;margin-bottom:2px">Петров Алексей Сергеевич</div>
-<div style="display:flex;align-items:center;gap:4px"><div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.5)"></div><span style="font-size:12px;color:var(--text-sec)">Верифицирован</span></div>
+<div style="font-size:16px;font-weight:500;margin-bottom:2px">Петров Алексей Сергеевич</div>
+<div style="display:flex;align-items:center;gap:4px"><div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.5)"></div><span style="font-size:13px;color:var(--text-sec)">Верифицирован</span></div>
 </div>
 </div>
 <svg onclick="removeCourier(this)" width="16" height="16" viewBox="0 0 24 24" fill="none" style="cursor:pointer;opacity:0.2;flex-shrink:0"><path d="M18 6L6 18M6 6l12 12" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
@@ -579,8 +579,8 @@ input::placeholder{color:var(--text-dim)}
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><path d="M4 21c0-3.866 3.582-7 8-7s8 3.134 8 7" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/></svg>
 </div>
 <div>
-<div style="font-size:15px;font-weight:500;margin-bottom:2px">Сидоров Дмитрий Олегович</div>
-<div style="display:flex;align-items:center;gap:4px"><div style="width:6px;height:6px;border-radius:50%;border:1px solid rgba(255,255,255,0.2)"></div><span style="font-size:12px;color:var(--text-dim)">Не верифицирован</span></div>
+<div style="font-size:16px;font-weight:500;margin-bottom:2px">Сидоров Дмитрий Олегович</div>
+<div style="display:flex;align-items:center;gap:4px"><div style="width:6px;height:6px;border-radius:50%;border:1px solid rgba(255,255,255,0.2)"></div><span style="font-size:13px;color:var(--text-dim)">Не верифицирован</span></div>
 </div>
 </div>
 <svg onclick="removeCourier(this)" width="16" height="16" viewBox="0 0 24 24" fill="none" style="cursor:pointer;opacity:0.2;flex-shrink:0"><path d="M18 6L6 18M6 6l12 12" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
@@ -590,29 +590,29 @@ input::placeholder{color:var(--text-dim)}
 <!-- Add courier form -->
 <div id="addCourierForm" style="display:none;margin-bottom:12px">
 <div class="cd" style="padding:16px">
-<div style="margin-bottom:12px"><div style="font-size:14px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Фамилия</div><input id="newCourierLast" placeholder="Фамилия"></div>
-<div style="margin-bottom:12px"><div style="font-size:14px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Имя</div><input id="newCourierFirst" placeholder="Имя"></div>
-<div style="margin-bottom:14px"><div style="font-size:14px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Отчество</div><input id="newCourierMiddle" placeholder="Отчество"></div>
+<div style="margin-bottom:12px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Фамилия</div><input id="newCourierLast" placeholder="Фамилия"></div>
+<div style="margin-bottom:12px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Имя</div><input id="newCourierFirst" placeholder="Имя"></div>
+<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Отчество</div><input id="newCourierMiddle" placeholder="Отчество"></div>
 <div style="display:flex;gap:8px">
-<div class="btn-primary" onclick="saveNewCourier()" style="padding:12px;font-size:15px;border-radius:10px">Добавить</div>
-<div class="btn-o" onclick="toggleAddCourier()" style="padding:12px;font-size:15px;border-radius:10px">Отмена</div>
+<div class="btn-primary" onclick="saveNewCourier()" style="padding:12px;font-size:16px;border-radius:10px">Добавить</div>
+<div class="btn-o" onclick="toggleAddCourier()" style="padding:12px;font-size:16px;border-radius:10px">Отмена</div>
 </div>
 </div>
 </div>
 
 <div class="cd" onclick="toggleAddCourier()" style="cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;padding:14px 16px;border:0.5px dashed rgba(255,255,255,0.1)">
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/></svg>
-<span style="font-size:15px;color:var(--text-sec)">Добавить курьера</span>
+<span style="font-size:16px;color:var(--text-sec)">Добавить курьера</span>
 </div>
 </div></div>
 
 </div>
 
+<div id="branchLabel" style="text-align:center;font-size:11px;color:var(--text-dim);letter-spacing:0.5px;padding:4px 0;background:rgba(11,11,14,0.94);border-top:0.5px solid var(--card-border);flex-shrink:0">Москва</div>
 <div class="tb" id="tb">
 <div class="tb-i on" id="t-home" onclick="go('home')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 9.5L12 3L21 9.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5Z" stroke="#fff" stroke-width="1.8"/></svg><span>Главная</span></div>
 <div class="tb-i" id="t-history" onclick="go('history')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="var(--text-dim)" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke="var(--text-dim)" stroke-width="1.8" stroke-linecap="round"/></svg><span>История</span></div>
 <div class="tb-i" id="t-profile" onclick="go('profile')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="var(--text-dim)" stroke-width="1.8"/><path d="M4 21c0-3.866 3.582-7 8-7s8 3.134 8 7" stroke="var(--text-dim)" stroke-width="1.8" stroke-linecap="round"/></svg><span>Профиль</span></div>
-<div id="branchLabel" style="width:100%;text-align:center;font-size:11px;color:var(--text-dim);letter-spacing:0.5px;margin-top:2px">Москва</div>
 </div>
 
 </div></div>
