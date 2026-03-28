@@ -48,6 +48,8 @@ html,body{height:100%;background:var(--bg);overflow:hidden;font-family:'Montserr
 /* Inputs */
 input{font-family:inherit;color:#fff;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 16px;font-size:17px;font-weight:400;outline:none;width:100%;box-sizing:border-box;transition:border-color 0.3s, box-shadow 0.3s}
 input:focus{border-color:rgba(100,140,255,0.35);box-shadow:0 0 0 3px rgba(100,140,255,0.06),0 0 20px rgba(100,140,255,0.04)}
+#s-buy input:focus{border-color:rgba(60,220,140,0.3);box-shadow:0 0 0 3px rgba(60,220,140,0.06),0 0 20px rgba(60,220,140,0.03)}
+#s-sell input:focus{border-color:rgba(255,90,90,0.25);box-shadow:0 0 0 3px rgba(255,90,90,0.05),0 0 20px rgba(255,90,90,0.03)}
 input::placeholder{color:var(--text-dim)}
 
 /* Buttons */
@@ -75,6 +77,19 @@ input::placeholder{color:var(--text-dim)}
 /* Disabled primary */
 .btn-primary.disabled{opacity:0.2;pointer-events:none;box-shadow:none}
 
+/* Buy screen — green CTA */
+#s-buy .btn-primary:not(.disabled){background:linear-gradient(135deg,#2dd47a 0%,#28c76f 50%,#3ce08c 100%);box-shadow:0 4px 24px rgba(60,220,140,0.2),0 1px 3px rgba(0,0,0,0.3)}
+#s-buy .btn-primary:hover:not(.disabled){box-shadow:0 6px 32px rgba(60,220,140,0.3)}
+#s-buy .btn-primary:active:not(.disabled){box-shadow:0 2px 12px rgba(60,220,140,0.15)}
+
+/* Sell screen — red CTA */
+#s-sell .btn-primary:not(.disabled),#s-sellok .btn-primary:not(.disabled){background:linear-gradient(135deg,#ff5a5a 0%,#e84c4c 50%,#ff7070 100%);box-shadow:0 4px 24px rgba(255,90,90,0.2),0 1px 3px rgba(0,0,0,0.3)}
+#s-sell .btn-primary:hover:not(.disabled),#s-sellok .btn-primary:hover:not(.disabled){box-shadow:0 6px 32px rgba(255,90,90,0.3)}
+
+/* Transfer screen — white CTA */
+#s-transfer .btn-primary:not(.disabled){background:#fff;color:#0b0b0e;box-shadow:0 4px 24px rgba(255,255,255,0.08),0 1px 3px rgba(0,0,0,0.3)}
+#s-transfer .btn-primary:hover:not(.disabled){box-shadow:0 6px 32px rgba(255,255,255,0.12)}
+
 /* Hero cards */
 .hero-cards{display:flex;gap:10px;margin:0 16px 16px}
 .hero-card{flex:1;cursor:pointer;padding:20px 16px;border-radius:16px;position:relative;overflow:hidden;transition:transform 0.25s ease, box-shadow 0.35s ease, border-color 0.3s;border:0.5px solid rgba(100,140,255,0.08);background:linear-gradient(145deg,rgba(100,140,255,0.04) 0%,rgba(255,255,255,0.02) 100%);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
@@ -91,6 +106,24 @@ input::placeholder{color:var(--text-dim)}
   0%{left:-100%}
   100%{left:150%}
 }
+
+/* Buy card — green */
+.hero-card--buy{border-color:rgba(60,220,140,0.1);background:linear-gradient(145deg,rgba(60,220,140,0.05) 0%,rgba(255,255,255,0.01) 100%)}
+.hero-card--buy:hover{border-color:rgba(60,220,140,0.2);box-shadow:0 8px 32px rgba(60,220,140,0.07)}
+.hero-card--buy .hero-card__label{color:rgba(60,220,140,1)}
+.hero-card--buy::after{background:linear-gradient(90deg,transparent,rgba(60,220,140,0.1),transparent)}
+
+/* Sell card — red */
+.hero-card--sell{border-color:rgba(255,90,90,0.1);background:linear-gradient(145deg,rgba(255,90,90,0.04) 0%,rgba(255,255,255,0.01) 100%)}
+.hero-card--sell:hover{border-color:rgba(255,90,90,0.2);box-shadow:0 8px 32px rgba(255,90,90,0.06)}
+.hero-card--sell .hero-card__label{color:rgba(255,90,90,0.9)}
+.hero-card--sell::after{background:linear-gradient(90deg,transparent,rgba(255,90,90,0.08),transparent)}
+
+/* Transfer card — white/monochrome */
+.hero-card--transfer{border-color:rgba(255,255,255,0.06);background:linear-gradient(145deg,rgba(255,255,255,0.03) 0%,rgba(255,255,255,0.01) 100%)}
+.hero-card--transfer:hover{border-color:rgba(255,255,255,0.14);box-shadow:0 8px 32px rgba(255,255,255,0.03)}
+.hero-card--transfer .hero-card__label{color:rgba(255,255,255,0.5)}
+.hero-card--transfer::after{background:linear-gradient(90deg,transparent,rgba(255,255,255,0.06),transparent)}
 
 /* Ripple effect */
 .ripple{position:absolute;border-radius:50%;background:rgba(100,140,255,0.12);transform:scale(0);animation:rippleAnim 0.6s ease-out;pointer-events:none}
@@ -111,11 +144,14 @@ input::placeholder{color:var(--text-dim)}
 .tog-w{display:flex;background:rgba(255,255,255,0.03);border-radius:12px;padding:3px;border:0.5px solid rgba(255,255,255,0.06);margin-bottom:16px}
 .tog{flex:1;padding:12px 0;text-align:center;border-radius:10px;font-size:17px;font-weight:600;cursor:pointer;color:var(--text-sec);background:transparent;transition:all 0.3s}
 .tog.on{color:#fff;background:var(--accent-dim);border:0.5px solid rgba(100,140,255,0.15)}
+#s-buy .tog.on{background:rgba(60,220,140,0.1);border-color:rgba(60,220,140,0.15);color:rgba(60,220,140,1)}
 
 /* Top nav toggle */
 .top-tog-w{display:flex;background:rgba(255,255,255,0.03);border-radius:12px;padding:2px;border:0.5px solid rgba(255,255,255,0.06);margin:12px 16px 0}
 .top-tog{flex:1;padding:10px 0;text-align:center;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;color:var(--text-sec);background:transparent;transition:all 0.3s}
-.top-tog.on{color:#fff;background:var(--accent-dim)}
+.top-tog.on{color:#fff}
+#topBuy.on{background:rgba(60,220,140,0.12);color:rgba(60,220,140,1)}
+#topSell.on{background:rgba(255,90,90,0.1);color:rgba(255,90,90,0.9)}
 
 /* Screens */
 .scr{display:none;will-change:opacity,transform}.scr.act{display:block}
@@ -234,12 +270,12 @@ input::placeholder{color:var(--text-dim)}
 
 <!-- Buy / Sell hero cards — NO badges -->
 <div class="hero-cards" style="margin-top:14px">
-<div class="hero-card" id="buyCard" onclick="go('buy')">
+<div class="hero-card hero-card--buy" id="buyCard" onclick="go('buy')">
 <div class="hero-card__label">Купить</div>
 <div class="hero-card__price">85.96</div>
 <div class="hero-card__unit">₽ за USDT</div>
 </div>
-<div class="hero-card" id="sellCard" onclick="go('sell')">
+<div class="hero-card hero-card--sell" id="sellCard" onclick="go('sell')">
 <div class="hero-card__label">Продать</div>
 <div class="hero-card__price">85.60</div>
 <div class="hero-card__unit">₽ за USDT</div>
@@ -248,7 +284,7 @@ input::placeholder{color:var(--text-dim)}
 
 <!-- Transfer card -->
 <div style="padding:0 16px;margin-bottom:16px">
-<div class="hero-card" id="transferCard" onclick="go('transfer')" style="opacity:0;transform:translateY(20px);width:100%;padding:16px">
+<div class="hero-card hero-card--transfer" id="transferCard" onclick="go('transfer')" style="opacity:0;transform:translateY(20px);width:100%;padding:16px">
 <div style="display:flex;align-items:center;justify-content:space-between">
 <div>
 <div class="hero-card__label" style="margin-bottom:0">Перестановки</div>
@@ -857,14 +893,14 @@ function setTog(v){
   }
   haptic();
 }
-function tC(el){var b=document.getElementById('chkb'),v=document.getElementById('chkv'),bw=document.getElementById('bw');var on=b.style.background.indexOf('100')!==-1;if(on){b.style.background='transparent';v.style.display='none';bw.classList.add('disabled')}else{b.style.background='rgba(100,140,255,1)';v.style.display='block';bw.classList.remove('disabled')}}
+function tC(el){var b=document.getElementById('chkb'),v=document.getElementById('chkv'),bw=document.getElementById('bw');var on=b.style.background.indexOf('255')!==-1;if(on){b.style.background='transparent';v.style.display='none';bw.classList.add('disabled')}else{b.style.background='rgba(255,90,90,0.9)';v.style.display='block';bw.classList.remove('disabled')}}
 
 // Buy checkbox
 function tCBuy(el){
   var b=document.getElementById('chkbBuy'),v=document.getElementById('chkvBuy'),bw=document.getElementById('bwBuy');
-  var on=b.style.background.indexOf('100')!==-1;
+  var on=b.style.background.indexOf('60')!==-1;
   if(on){b.style.background='transparent';v.style.display='none';bw.classList.add('disabled')}
-  else{b.style.background='rgba(100,140,255,1)';v.style.display='block';bw.classList.remove('disabled')}
+  else{b.style.background='rgba(60,220,140,1)';v.style.display='block';bw.classList.remove('disabled')}
 }
 
 // Create order and show in active orders with 10min timer
@@ -1361,38 +1397,38 @@ try{!function(){
 
     // Fill area under line
     var grad=cx.createLinearGradient(0,padT,0,H-padB);
-    grad.addColorStop(0,'rgba(100,140,255,0.08)');
-    grad.addColorStop(1,'rgba(100,140,255,0)');
+    grad.addColorStop(0,'rgba(60,220,140,0.1)');
+    grad.addColorStop(1,'rgba(60,220,140,0)');
     cx.beginPath();cx.moveTo(toX(0),toY(pts[0]));
     for(var i=1;i<pts.length;i++)cx.lineTo(toX(i),toY(pts[i]));
     cx.lineTo(W-padR,H-padB);cx.lineTo(padL,H-padB);cx.closePath();
     cx.fillStyle=grad;cx.fill();
 
-    // Line — BLUE NEON GLOW (draw 3 layers)
+    // Line — GREEN NEON GLOW (draw 3 layers)
     // Layer 1: wide soft glow
     cx.beginPath();cx.moveTo(toX(0),toY(pts[0]));
     for(var i=1;i<pts.length;i++)cx.lineTo(toX(i),toY(pts[i]));
-    cx.strokeStyle='rgba(100,140,255,0.1)';cx.lineWidth=6;cx.lineJoin='round';cx.lineCap='round';cx.stroke();
+    cx.strokeStyle='rgba(60,220,140,0.1)';cx.lineWidth=6;cx.lineJoin='round';cx.lineCap='round';cx.stroke();
     // Layer 2: medium glow
     cx.beginPath();cx.moveTo(toX(0),toY(pts[0]));
     for(var i=1;i<pts.length;i++)cx.lineTo(toX(i),toY(pts[i]));
-    cx.strokeStyle='rgba(100,140,255,0.2)';cx.lineWidth=3;cx.stroke();
+    cx.strokeStyle='rgba(60,220,140,0.22)';cx.lineWidth=3;cx.stroke();
     // Layer 3: bright core
     cx.beginPath();cx.moveTo(toX(0),toY(pts[0]));
     for(var i=1;i<pts.length;i++)cx.lineTo(toX(i),toY(pts[i]));
-    cx.strokeStyle='rgba(140,175,255,0.8)';cx.lineWidth=1.5;cx.stroke();
+    cx.strokeStyle='rgba(80,235,160,0.85)';cx.lineWidth=1.5;cx.stroke();
 
-    // Last dot — pulsing with accent glow
+    // Last dot — pulsing with green glow
     var lx=toX(pts.length-1),ly=toY(pts[pts.length-1]);
     var pulseR=5+3*Math.abs(Math.sin(pulseT));
     cx.beginPath();cx.arc(lx,ly,pulseR,0,Math.PI*2);
-    cx.fillStyle='rgba(100,140,255,'+(0.06+0.08*Math.abs(Math.sin(pulseT))).toFixed(2)+')';cx.fill();
+    cx.fillStyle='rgba(60,220,140,'+(0.06+0.08*Math.abs(Math.sin(pulseT))).toFixed(2)+')';cx.fill();
     cx.beginPath();cx.arc(lx,ly,8,0,Math.PI*2);
-    cx.fillStyle='rgba(100,140,255,0.04)';cx.fill();
+    cx.fillStyle='rgba(60,220,140,0.04)';cx.fill();
     cx.beginPath();cx.arc(lx,ly,3.5,0,Math.PI*2);
-    cx.fillStyle='rgba(150,185,255,1)';cx.fill();
+    cx.fillStyle='rgba(80,235,160,1)';cx.fill();
     cx.beginPath();cx.arc(lx,ly,7,0,Math.PI*2);
-    cx.strokeStyle='rgba(100,140,255,0.15)';cx.lineWidth=0.5;cx.stroke();
+    cx.strokeStyle='rgba(60,220,140,0.15)';cx.lineWidth=0.5;cx.stroke();
 
     // Hover — vertical line + price text (NO box)
     if(hoverIdx>=0&&hoverIdx<pts.length){
