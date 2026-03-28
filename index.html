@@ -117,7 +117,7 @@ input::placeholder{color:var(--text-dim)}
 }
 
 /* Logo area */
-.logo-area{text-align:center;padding:20px 16px 2px}
+.logo-area{text-align:center;padding:10px 16px 0}
 #logoCanvas{display:block;margin:0 auto}
 
 /* Wallet dropdown */
@@ -166,11 +166,7 @@ input::placeholder{color:var(--text-dim)}
 .bg-grad{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 0%,rgba(255,255,255,0.02) 0%,transparent 50%);pointer-events:none;animation:breathe 6s ease-in-out infinite}
 .bg-noise{position:absolute;inset:0;z-index:0;opacity:0.012;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
-/* Header logo — static, no animation */
-.hdr-logo{
-  font-size:14px;font-weight:600;letter-spacing:2px;color:#fff;
-  display:inline-block;
-}
+
 </style>
 </head>
 <body>
@@ -188,7 +184,7 @@ input::placeholder{color:var(--text-dim)}
 <!-- HEADER -->
 <div class="hdr">
 <div onclick="goBack()" style="cursor:pointer;font-size:16px;display:flex;align-items:center;gap:4px"><span id="hi">&#x2715;</span> <span id="ht">Закрыть</span></div>
-<div style="text-align:center"><div class="hdr-logo">MBEX</div></div>
+<div style="width:40px"></div>
 <div style="width:40px"></div>
 </div>
 
@@ -209,7 +205,7 @@ input::placeholder{color:var(--text-dim)}
 </div>
 
 <!-- Chart -->
-<div style="padding:0 16px;margin-top:10px" id="chart-area"></div>
+<div style="padding:0 16px;margin-top:4px" id="chart-area"></div>
 <div style="padding:4px 16px 0;display:flex;justify-content:space-between;align-items:baseline">
 <div style="font-size:14px;font-weight:400;color:var(--text-sec)">USDT / RUB</div>
 <div style="font-size:13px;color:var(--text-dim)">14:41 MSK</div>
@@ -230,20 +226,20 @@ input::placeholder{color:var(--text-dim)}
 </div>
 
 <!-- Active order -->
-<div id="activeOrderHome" style="padding:0 16px;margin-bottom:16px">
+<div id="activeOrderHome" style="padding:0 16px;margin-bottom:16px;display:none">
 <div class="active-order fade-in fade-in-d3" onclick="go('detail')">
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
 <div class="active-order-badge">Активная заявка</div>
-<div style="font-size:14px;color:var(--text-dim)">14:41</div>
+<div style="font-size:14px;color:var(--text-dim)" id="activeTimer">10:00</div>
 </div>
 <div style="display:flex;justify-content:space-between;align-items:center">
 <div>
-<div style="font-size:17px;font-weight:500">Покупка USDT</div>
-<div style="font-size:14px;color:var(--text-dim);margin-top:2px">TRC-20 · 85.96 ₽</div>
+<div style="font-size:17px;font-weight:500" id="activeType">Покупка USDT</div>
+<div style="font-size:14px;color:var(--text-dim);margin-top:2px" id="activeInfo">TRC-20 · 85.96 ₽</div>
 </div>
 <div style="text-align:right">
-<div style="font-size:19px;font-weight:500">5 814 <span style="font-size:14px;font-weight:400;color:var(--text-sec)">USDT</span></div>
-<div style="font-size:14px;color:var(--text-dim)">≈ 499 955 ₽</div>
+<div style="font-size:19px;font-weight:500" id="activeAmount">— <span style="font-size:14px;font-weight:400;color:var(--text-sec)">USDT</span></div>
+<div style="font-size:14px;color:var(--text-dim)" id="activeRub"></div>
 </div>
 </div>
 </div>
@@ -286,7 +282,7 @@ input::placeholder{color:var(--text-dim)}
 
 <!-- BUY -->
 <div class="scr" id="s-buy"><div style="padding:0 16px;padding-bottom:40px">
-<div style="font-size:23px;font-weight:600;margin-bottom:2px">Купить USDT</div>
+<div style="font-size:23px;font-weight:600;margin-bottom:6px;margin-top:12px">Купить USDT</div>
 <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px">
 <div style="font-size:15px;color:var(--text-dim)">от 200 000 ₽</div>
 <div style="font-size:15px;color:var(--text-sec);font-weight:500">85.96 ₽</div>
@@ -336,7 +332,7 @@ input::placeholder{color:var(--text-dim)}
 </div>
 </div>
 <div class="tog-w"><div class="tog on" id="ts" onclick="setTog('s')">Приеду сам</div><div class="tog" id="tc" onclick="setTog('c')">Курьер</div></div>
-<div style="margin-bottom:16px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">ФИО</div><input id="fi" value="Иванов Иван Иванович" readonly style="opacity:0.4"></div>
+<div style="margin-bottom:16px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">ФИО</div><input id="fi" placeholder="Фамилия Имя Отчество"></div>
 <div id="cp" style="display:none;margin-bottom:16px">
 <div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Курьер</div>
 <div style="position:relative">
@@ -360,21 +356,39 @@ input::placeholder{color:var(--text-dim)}
 </div>
 </div>
 </div>
-<div class="btn-primary shimmer" onclick="go('confirm')">Продолжить</div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;cursor:pointer;font-size:15px;color:var(--text-sec)" id="chkBuy" onclick="tCBuy(this)"><div id="chkbBuy" style="width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="display:none" id="chkvBuy"><path d="M5 13l4 4L19 7" stroke="var(--bg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Принимаю <u style="color:rgba(255,255,255,0.7)">правила</u> и условия</span></div>
+<div class="btn-primary disabled" id="bwBuy" onclick="createOrder('buy')">Продолжить</div>
 </div></div>
 
 <!-- SELL -->
 <div class="scr" id="s-sell"><div style="padding:0 16px;padding-bottom:40px">
-<div style="font-size:23px;font-weight:600;margin-bottom:2px">Продать USDT</div>
+<div style="font-size:23px;font-weight:600;margin-bottom:6px;margin-top:12px">Продать USDT</div>
 <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px">
 <div style="font-size:15px;color:var(--text-sec);font-weight:500">85.60 ₽</div>
 </div>
-<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Фамилия *</div><input placeholder="Фамилия"></div>
-<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Имя *</div><input placeholder="Имя"></div>
-<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Отчество *</div><input placeholder="Отчество"></div>
+<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">ФИО</div><input id="sellFio" placeholder="Фамилия Имя Отчество"></div>
 <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;cursor:pointer;font-size:16px;color:var(--text-sec)" id="chk" onclick="tC(this)"><div id="chkb" style="width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="display:none" id="chkv"><path d="M5 13l4 4L19 7" stroke="var(--bg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Принимаю <u style="color:rgba(255,255,255,0.7)">правила</u> и условия</span></div>
-<div class="btn-primary disabled" id="bw" onclick="go('confirm')">Получить кошелёк</div>
+<div class="btn-primary disabled" id="bw" onclick="go('sellok')">Получить кошелёк</div>
 <div style="height:12px"></div>
+<div class="btn-o" onclick="go('home')">На главную</div>
+</div></div>
+
+<!-- SELL OK — wallet with copy button -->
+<div class="scr" id="s-sellok"><div style="padding:0 16px;text-align:center;padding-bottom:40px">
+<div style="margin-top:40px;margin-bottom:14px"><div style="width:64px;height:64px;border-radius:50%;margin:0 auto;border:1.5px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+<div style="font-size:21px;font-weight:600;margin-bottom:6px">Кошелёк получен</div>
+<div style="font-size:15px;color:var(--text-sec);margin-bottom:20px">Переведите USDT на этот адрес</div>
+<div class="cd" style="text-align:left;margin-bottom:20px;padding:16px">
+<div style="font-size:13px;color:var(--text-sec);margin-bottom:8px">Адрес кошелька (TRC-20)</div>
+<div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+<div style="font-size:14px;color:#fff;word-break:break-all;line-height:1.5">TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8</div>
+<div onclick="copySellWallet(this)" style="cursor:pointer;flex-shrink:0;padding:8px;border-radius:8px;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;transition:background 0.2s">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="9" y="9" width="13" height="13" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke="#fff" stroke-width="1.5"/></svg>
+</div>
+</div>
+<div id="sellCopyMsg" style="font-size:12px;color:var(--text-sec);margin-top:6px;opacity:0;transition:opacity 0.3s">Скопировано!</div>
+</div>
+<div id="sellTimer" style="font-size:14px;color:var(--text-sec);margin-bottom:20px"></div>
 <div class="btn-o" onclick="go('home')">На главную</div>
 </div></div>
 
@@ -392,7 +406,15 @@ input::placeholder{color:var(--text-dim)}
 <div class="scr" id="s-ok"><div style="padding:0 16px;text-align:center;padding-bottom:40px">
 <div style="margin-top:50px;margin-bottom:14px"><div style="width:64px;height:64px;border-radius:50%;margin:0 auto;border:1.5px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
 <div style="font-size:21px;font-weight:600;margin-bottom:8px;letter-spacing:0.5px">Заявка создана</div>
-<div style="font-size:16px;color:var(--text-sec);line-height:1.7;margin-bottom:24px">№ <b style="color:#fff;font-weight:500">276</b> · Иванов И.И.<br><br>Пресненская наб. 12<br>Башня Федерация — Восток, 5 эт.</div>
+<div style="font-size:16px;color:var(--text-sec);line-height:1.7;margin-bottom:16px" id="okInfo">№ <b style="color:#fff;font-weight:500">276</b> · Иванов И.И.<br><br>Пресненская наб. 12<br>Башня Федерация — Восток, 5 эт.</div>
+<div class="cd" style="text-align:left;margin-bottom:20px;padding:14px 16px">
+<div style="font-size:13px;color:var(--text-sec);margin-bottom:6px">Кошелёк для оплаты (TRC-20)</div>
+<div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+<div id="okWallet" style="font-size:13px;color:#fff;word-break:break-all">TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8</div>
+<svg onclick="copyWallet()" width="20" height="20" viewBox="0 0 24 24" fill="none" style="cursor:pointer;flex-shrink:0;opacity:0.4"><rect x="9" y="9" width="13" height="13" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke="#fff" stroke-width="1.5"/></svg>
+</div>
+</div>
+<div id="okTimer" style="font-size:14px;color:var(--text-sec);margin-bottom:20px"></div>
 <div class="btn-o" onclick="go('home')">На главную</div>
 </div></div>
 
@@ -618,7 +640,7 @@ input::placeholder{color:var(--text-dim)}
 </div></div>
 
 <script>
-var cur='home',stk=[],mT=['home','history','profile'],sS=['buy','sell','confirm','ok','detail','wallets','couriers'],aS=['home','buy','sell','confirm','ok','history','detail','profile','wallets','couriers'];
+var cur='home',stk=[],mT=['home','history','profile'],sS=['buy','sell','confirm','ok','detail','wallets','couriers','sellok'],aS=['home','buy','sell','confirm','ok','history','detail','profile','wallets','couriers','sellok'];
 
 // Animate hero cards — show immediately as fallback, animate if JS works
 document.addEventListener('DOMContentLoaded',function(){
@@ -629,151 +651,49 @@ document.addEventListener('DOMContentLoaded',function(){
   if(sc)setTimeout(function(){sc.classList.add('animate-in')},460);
 });
 
-// MBEX Brand Logo Animation — brandbook X symbol with blockchain nodes
+// MBEX Logo — Bold wordmark from brandbook
 try{!function(){
   var cv=document.getElementById('logoCanvas');
   var dpr=window.devicePixelRatio||1;
-  var W=340,H=90;
+  var W=340,H=65;
   cv.width=W*dpr;cv.height=H*dpr;
   cv.style.width=W+'px';cv.style.height=H+'px';
   var cx=cv.getContext('2d');
   cx.scale(dpr,dpr);
   
-  var COL='#fff';
-  
-  // Brand X: cross with arrow tips + blockchain nodes
-  function drawBrandX(x,y,size,alpha,nodeAlpha){
-    cx.save();
-    cx.translate(x,y);
-    cx.globalAlpha=alpha;
-    var s=size;
-    
-    cx.strokeStyle=COL;
-    cx.lineWidth=s*0.11;
-    cx.lineCap='round';
-    cx.lineJoin='round';
-    
-    // Main X cross
-    cx.beginPath();
-    cx.moveTo(-s*0.38,-s*0.44);
-    cx.lineTo(s*0.38,s*0.44);
-    cx.stroke();
-    cx.beginPath();
-    cx.moveTo(-s*0.38,s*0.44);
-    cx.lineTo(s*0.38,-s*0.44);
-    cx.stroke();
-    
-    // Arrow tips right (brand E→X connection)
-    cx.lineWidth=s*0.09;
-    cx.beginPath();
-    cx.moveTo(s*0.12,-s*0.48);
-    cx.lineTo(s*0.48,-s*0.18);
-    cx.stroke();
-    cx.beginPath();
-    cx.moveTo(s*0.12,s*0.48);
-    cx.lineTo(s*0.48,s*0.18);
-    cx.stroke();
-    
-    // Center vertical line (monogram stem)
-    cx.lineWidth=s*0.08;
-    cx.beginPath();
-    cx.moveTo(0,-s*0.5);
-    cx.lineTo(0,s*0.5);
-    cx.stroke();
-    
-    // Blockchain nodes
-    if(nodeAlpha>0){
-      cx.globalAlpha=alpha*nodeAlpha;
-      var nr=s*0.055;
-      var nodes=[
-        [-s*0.44,-s*0.5],[s*0.44,-s*0.5],
-        [-s*0.44,s*0.5],[s*0.44,s*0.5],
-        [s*0.54,0],[-s*0.54,0],
-        [0,-s*0.58],[0,s*0.58]
-      ];
-      cx.strokeStyle=COL;
-      cx.lineWidth=1;
-      for(var i=0;i<nodes.length;i++){
-        cx.beginPath();
-        cx.arc(nodes[i][0],nodes[i][1],nr,0,Math.PI*2);
-        cx.stroke();
-      }
-      // Branch lines
-      cx.lineWidth=0.6;
-      cx.globalAlpha=alpha*nodeAlpha*0.3;
-      for(var i=0;i<nodes.length;i++){
-        cx.beginPath();cx.moveTo(0,0);
-        cx.lineTo(nodes[i][0],nodes[i][1]);
-        cx.stroke();
-      }
-    }
-    cx.restore();
-  }
-  
-  // Draw MBEX text
-  function drawText(alpha,spacing){
+  function drawLogo(alpha){
+    cx.clearRect(0,0,W,H);
     cx.save();
     cx.globalAlpha=alpha;
-    cx.fillStyle=COL;
-    cx.font='700 34px Montserrat';
+    cx.fillStyle='#fff';
+    cx.font='900 52px Montserrat';
     cx.textAlign='center';
     cx.textBaseline='middle';
+    // Draw MBEX with tight letter spacing (M-B touching, E-X touching)
     var text='MBEX';
-    var cX=W/2,cY=H/2;
+    var spacing=-4; // negative = letters overlap/touch
     var widths=[];
     var total=0;
     for(var i=0;i<4;i++){var w=cx.measureText(text[i]).width;widths.push(w);total+=w+spacing}
     total-=spacing;
-    var sx=cX-total/2;
+    var sx=W/2-total/2;
     for(var i=0;i<4;i++){
-      cx.fillText(text[i],sx+widths[i]/2,cY);
+      cx.fillText(text[i],sx+widths[i]/2,H/2+1);
       sx+=widths[i]+spacing;
     }
     cx.restore();
   }
   
-  var frame=0,phase='symbol',phaseStart=0;
-  var SYMBOL=65,EXPAND=35,MORPH=30,HOLD=140,FADE=20,WAIT=15;
-  
-  function eO(t){return 1-Math.pow(1-t,3)}
-  function eI(t){return t*t}
-  
+  // Simple fade-in on load, then static
+  var frame=0;
   function draw(){
     frame++;
-    cx.clearRect(0,0,W,H);
-    var pt=frame-phaseStart;
-    
-    if(phase==='symbol'){
-      var t=Math.min(1,pt/SYMBOL);
-      var e=eO(t);
-      drawBrandX(W/2,H/2,18+28*e,Math.min(1,t*3),0);
-      if(pt>=SYMBOL){phase='expand';phaseStart=frame}
+    if(frame<30){
+      drawLogo(Math.min(1,frame/25));
+    }else if(frame===30){
+      drawLogo(1);
     }
-    else if(phase==='expand'){
-      var t=Math.min(1,pt/EXPAND);
-      drawBrandX(W/2,H/2,46+4*eO(t),1,eO(t));
-      if(pt>=EXPAND){phase='morph';phaseStart=frame}
-    }
-    else if(phase==='morph'){
-      var t=Math.min(1,pt/MORPH);
-      var e=eO(t);
-      if(1-e>0.01)drawBrandX(W/2,H/2,50*(1-e*0.3),1-e,1-e);
-      drawText(e,10*(1-e)+2*e);
-      if(pt>=MORPH){phase='hold';phaseStart=frame}
-    }
-    else if(phase==='hold'){
-      drawText(1,2);
-      if(pt>=HOLD){phase='fade';phaseStart=frame}
-    }
-    else if(phase==='fade'){
-      var t=Math.min(1,pt/FADE);
-      drawText(1-eI(t),2);
-      if(pt>=FADE){phase='wait';phaseStart=frame}
-    }
-    else if(phase==='wait'){
-      if(pt>=WAIT){phase='symbol';phaseStart=frame}
-    }
-    requestAnimationFrame(draw);
+    if(frame<=30)requestAnimationFrame(draw);
   }
   draw();
 }()}catch(e){console.error('Logo error:',e)}
@@ -819,8 +739,104 @@ function goBack(){
   }
 }
 function uT(a){mT.forEach(function(t){var el=document.getElementById('t-'+t);if(!el)return;var on=t===a;el.className='tb-i'+(on?' on':'');el.querySelectorAll('path,circle').forEach(function(p){p.setAttribute('stroke',on?'#fff':'var(--text-dim)')})})}
-function setTog(v){var s=document.getElementById('ts'),c=document.getElementById('tc'),fi=document.getElementById('fi'),cp=document.getElementById('cp');if(v==='s'){s.className='tog on';s.textContent='Приеду сам';c.className='tog';c.textContent='Курьер';fi.value='Иванов Иван Иванович';fi.readOnly=true;fi.style.opacity='0.4';cp.style.display='none'}else{c.className='tog on';c.textContent='Курьер';s.className='tog';s.textContent='Приеду сам';fi.value='';fi.readOnly=false;fi.style.opacity='1';fi.placeholder='ФИО курьера';cp.style.display='block'}}
+function setTog(v){var s=document.getElementById('ts'),c=document.getElementById('tc'),fi=document.getElementById('fi'),cp=document.getElementById('cp');if(v==='s'){s.className='tog on';s.textContent='Приеду сам';c.className='tog';c.textContent='Курьер';fi.readOnly=false;fi.style.opacity='1';fi.placeholder='Фамилия Имя Отчество';cp.style.display='none'}else{c.className='tog on';c.textContent='Курьер';s.className='tog';s.textContent='Приеду сам';fi.readOnly=false;fi.style.opacity='1';fi.placeholder='Фамилия Имя Отчество';cp.style.display='block'}}
 function tC(el){var b=document.getElementById('chkb'),v=document.getElementById('chkv'),bw=document.getElementById('bw');var on=b.style.background==='rgb(255, 255, 255)';if(on){b.style.background='transparent';v.style.display='none';bw.classList.add('disabled')}else{b.style.background='#fff';v.style.display='block';bw.classList.remove('disabled')}}
+
+// Buy checkbox
+function tCBuy(el){
+  var b=document.getElementById('chkbBuy'),v=document.getElementById('chkvBuy'),bw=document.getElementById('bwBuy');
+  var on=b.style.background==='rgb(255, 255, 255)';
+  if(on){b.style.background='transparent';v.style.display='none';bw.classList.add('disabled')}
+  else{b.style.background='#fff';v.style.display='block';bw.classList.remove('disabled')}
+}
+
+// Create order and show in active orders with 10min timer
+var orderTimer=null;
+var orderSec=600;
+function createOrder(type){
+  // Read form values
+  var sumInput=document.querySelector('#s-buy input[placeholder="Введите сумму"]');
+  var sum=sumInput?sumInput.value.trim():'';
+  var fio=document.getElementById('fi').value.trim();
+  var wallet=document.getElementById('walletInput')?document.getElementById('walletInput').value.trim():'';
+  
+  if(!sum||!fio){alert('Заполните сумму и ФИО');return}
+  
+  var rate=85.96;
+  var sumNum=parseFloat(sum.replace(/\s/g,''));
+  var usdt=sumNum?Math.round(sumNum/rate*100)/100:0;
+  
+  // Populate OK screen
+  var okInfo=document.getElementById('okInfo');
+  if(okInfo)okInfo.innerHTML='№ <b style="color:#fff;font-weight:500">'+Math.floor(Math.random()*9000+1000)+'</b> · '+fio;
+  
+  // Show active order on home
+  var ao=document.getElementById('activeOrderHome');
+  if(ao)ao.style.display='block';
+  var at=document.getElementById('activeType');
+  if(at)at.textContent='Покупка USDT';
+  var ai=document.getElementById('activeInfo');
+  if(ai)ai.textContent='TRC-20 · '+rate+' ₽';
+  var aa=document.getElementById('activeAmount');
+  if(aa)aa.innerHTML=usdt.toLocaleString('ru')+' <span style="font-size:14px;font-weight:400;color:var(--text-sec)">USDT</span>';
+  var ar=document.getElementById('activeRub');
+  if(ar)ar.textContent='≈ '+sumNum.toLocaleString('ru')+' ₽';
+  
+  // Start 10 min timer
+  orderSec=600;
+  clearInterval(orderTimer);
+  updateTimer();
+  orderTimer=setInterval(function(){
+    orderSec--;
+    if(orderSec<=0){
+      clearInterval(orderTimer);
+      orderSec=0;
+      // Mark as cancelled
+      var badge=document.querySelector('.active-order-badge');
+      if(badge){badge.textContent='Отменена';badge.style.background='rgba(255,255,255,0.04)';badge.style.color='var(--text-dim)'}
+      var atEl=document.getElementById('activeTimer');
+      if(atEl)atEl.textContent='Истекло';
+    }
+    updateTimer();
+  },1000);
+  
+  go('ok');
+}
+function updateTimer(){
+  if(orderSec<=0)return;
+  var m=Math.floor(orderSec/60);
+  var s=orderSec%60;
+  var str=m+':'+(s<10?'0':'')+s;
+  var el=document.getElementById('okTimer');
+  if(el)el.textContent='Осталось: '+str;
+  var at=document.getElementById('activeTimer');
+  if(at)at.textContent=str;
+}
+
+// Copy wallet
+function copyWallet(){
+  var w=document.getElementById('okWallet');
+  if(w){
+    navigator.clipboard.writeText(w.textContent).then(function(){
+      w.style.color='rgba(255,255,255,0.5)';
+      setTimeout(function(){w.style.color='#fff'},600);
+    });
+  }
+}
+
+// Copy sell wallet with visual feedback
+function copySellWallet(btn){
+  var addr='TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8';
+  navigator.clipboard.writeText(addr).then(function(){
+    btn.style.background='rgba(255,255,255,0.15)';
+    var msg=document.getElementById('sellCopyMsg');
+    if(msg)msg.style.opacity='1';
+    setTimeout(function(){
+      btn.style.background='rgba(255,255,255,0.05)';
+      if(msg)msg.style.opacity='0';
+    },1500);
+  });
+}
 
 // Wallet dropdown
 function toggleWalletDrop(){
@@ -979,21 +995,24 @@ document.querySelectorAll('.hero-card,.btn-primary,.btn-w').forEach(function(car
   });
 });
 
-// Chart — monochrome
+// Chart — monochrome with time axis
 try{!function(){
   var pts=[85.2,85.4,85.3,85.6,85.5,85.8,85.7,86.0,85.9,86.1,85.8,85.9,86.0,85.7,85.8,86.1,86.0,85.9,86.2,86.1,85.9,86.0,85.8,85.96];
+  var times=['00:00','01:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00'];
   var container=document.getElementById('chart-area');
-  var W=343,H=120,padL=8,padR=36,padT=12,padB=14;
+  var W=343,H=135,padL=8,padR=36,padT=12,padB=22;
   var cW=W-padL-padR,cH=H-padT-padB;
   var mn=Math.min.apply(null,pts)-0.3,mx=Math.max.apply(null,pts)+0.3;
   var toX=function(i){return padL+(i/(pts.length-1))*cW};
   var toY=function(v){return padT+cH-((v-mn)/(mx-mn))*cH};
 
   var cv=document.createElement('canvas');
-  cv.width=W;cv.height=H;
+  var chartDpr=window.devicePixelRatio||1;
+  cv.width=W*chartDpr;cv.height=H*chartDpr;
   cv.style.width='100%';cv.style.height=H+'px';cv.style.display='block';cv.style.cursor='crosshair';
   container.appendChild(cv);
   var cx=cv.getContext('2d');
+  cx.scale(chartDpr,chartDpr);
 
   var hoverIdx=-1;
   var pulseT=0;
@@ -1002,7 +1021,6 @@ try{!function(){
     pulseT+=0.03;
     cx.clearRect(0,0,W,H);
 
-    // Grid
     var steps=4;
     for(var g=0;g<=steps;g++){
       var val=mn+(mx-mn)*(g/steps);
@@ -1013,47 +1031,69 @@ try{!function(){
       cx.fillText(val.toFixed(1),W-padR+4,gy+3);
     }
 
-    // Fill
+    // Fill area under line
     var grad=cx.createLinearGradient(0,padT,0,H-padB);
-    grad.addColorStop(0,'rgba(255,255,255,0.04)');
+    grad.addColorStop(0,'rgba(255,255,255,0.05)');
     grad.addColorStop(1,'rgba(255,255,255,0)');
     cx.beginPath();cx.moveTo(toX(0),toY(pts[0]));
     for(var i=1;i<pts.length;i++)cx.lineTo(toX(i),toY(pts[i]));
     cx.lineTo(W-padR,H-padB);cx.lineTo(padL,H-padB);cx.closePath();
     cx.fillStyle=grad;cx.fill();
 
-    // Line
+    // Line — WHITE NEON GLOW (draw 3 layers)
+    // Layer 1: wide soft glow
     cx.beginPath();cx.moveTo(toX(0),toY(pts[0]));
     for(var i=1;i<pts.length;i++)cx.lineTo(toX(i),toY(pts[i]));
-    cx.strokeStyle='rgba(255,255,255,0.35)';cx.lineWidth=1.2;cx.lineJoin='round';cx.stroke();
+    cx.strokeStyle='rgba(255,255,255,0.08)';cx.lineWidth=6;cx.lineJoin='round';cx.lineCap='round';cx.stroke();
+    // Layer 2: medium glow
+    cx.beginPath();cx.moveTo(toX(0),toY(pts[0]));
+    for(var i=1;i<pts.length;i++)cx.lineTo(toX(i),toY(pts[i]));
+    cx.strokeStyle='rgba(255,255,255,0.15)';cx.lineWidth=3;cx.stroke();
+    // Layer 3: bright core
+    cx.beginPath();cx.moveTo(toX(0),toY(pts[0]));
+    for(var i=1;i<pts.length;i++)cx.lineTo(toX(i),toY(pts[i]));
+    cx.strokeStyle='rgba(255,255,255,0.7)';cx.lineWidth=1.5;cx.stroke();
 
-    // Pulsing dot — white
+    // Last dot — bright pulsing with neon glow
     var lx=toX(pts.length-1),ly=toY(pts[pts.length-1]);
-    var pulseR=3+2.5*Math.abs(Math.sin(pulseT));
-    var pulseA=0.05+0.12*(1-Math.abs(Math.sin(pulseT)));
+    var pulseR=5+3*Math.abs(Math.sin(pulseT));
     cx.beginPath();cx.arc(lx,ly,pulseR,0,Math.PI*2);
-    cx.strokeStyle='rgba(255,255,255,'+pulseA.toFixed(2)+')';cx.lineWidth=1;cx.stroke();
-    cx.beginPath();cx.arc(lx,ly,2,0,Math.PI*2);
+    cx.fillStyle='rgba(255,255,255,'+(0.04+0.06*Math.abs(Math.sin(pulseT))).toFixed(2)+')';cx.fill();
+    cx.beginPath();cx.arc(lx,ly,8,0,Math.PI*2);
+    cx.fillStyle='rgba(255,255,255,0.03)';cx.fill();
+    cx.beginPath();cx.arc(lx,ly,3.5,0,Math.PI*2);
     cx.fillStyle='#fff';cx.fill();
+    cx.beginPath();cx.arc(lx,ly,7,0,Math.PI*2);
+    cx.strokeStyle='rgba(255,255,255,0.12)';cx.lineWidth=0.5;cx.stroke();
 
-    // Hover
+    // Hover — vertical line + price text (NO box)
     if(hoverIdx>=0&&hoverIdx<pts.length){
       var tx=toX(hoverIdx),ty=toY(pts[hoverIdx]);
       var val=pts[hoverIdx].toFixed(2);
 
-      cx.beginPath();cx.moveTo(tx,padT);cx.lineTo(tx,H-padB);
-      cx.strokeStyle='rgba(255,255,255,0.06)';cx.lineWidth=0.5;cx.setLineDash([3,3]);cx.stroke();cx.setLineDash([]);
+      // Vertical dashed line
+      cx.beginPath();cx.moveTo(tx,padT);cx.lineTo(tx,H-4);
+      cx.strokeStyle='rgba(255,255,255,0.08)';cx.lineWidth=0.5;cx.setLineDash([3,3]);cx.stroke();cx.setLineDash([]);
 
-      cx.beginPath();cx.arc(tx,ty,3,0,Math.PI*2);cx.fillStyle='rgba(255,255,255,0.6)';cx.fill();
+      // Dot on line with glow
+      cx.beginPath();cx.arc(tx,ty,5,0,Math.PI*2);
+      cx.fillStyle='rgba(255,255,255,0.1)';cx.fill();
+      cx.beginPath();cx.arc(tx,ty,2.5,0,Math.PI*2);
+      cx.fillStyle='#fff';cx.fill();
 
-      var bw=44,bh=18,bx=tx-bw/2,by=ty-24;
-      if(by<2)by=ty+8;
-      if(bx<padL)bx=padL;if(bx+bw>W-padR)bx=W-padR-bw;
-      cx.beginPath();cx.roundRect(bx,by,bw,bh,4);
-      cx.fillStyle='rgba(255,255,255,0.06)';cx.fill();
-      cx.strokeStyle='rgba(255,255,255,0.08)';cx.lineWidth=0.5;cx.stroke();
-      cx.font='500 8px Montserrat';cx.fillStyle='rgba(255,255,255,0.5)';cx.textAlign='center';
-      cx.fillText(val,bx+bw/2,by+12);
+      // Price text — NO box, just clean digits
+      var by=ty-20;
+      if(by<8)by=ty+16;
+      cx.font='600 9px Montserrat';
+      cx.fillStyle='rgba(255,255,255,0.7)';
+      cx.textAlign='center';
+      cx.fillText(val,tx,by);
+
+      // Time label at bottom
+      cx.font='600 8px Montserrat';
+      cx.fillStyle='rgba(255,255,255,0.4)';
+      cx.textAlign='center';
+      cx.fillText(times[hoverIdx],tx,H-2);
     }
 
     requestAnimationFrame(drawChart);
@@ -1129,7 +1169,7 @@ try{!function(){
   var cv=document.getElementById('cryptoText');
   var cx=cv.getContext('2d');
   var W=cv.width=cv.parentElement.offsetWidth;
-  var H=cv.height=cv.parentElement.offsetHeight;
+  var H=cv.height=Math.round(cv.parentElement.offsetHeight*0.45);
   
   // Crypto phrases pool
   var phrases=[
@@ -1180,11 +1220,10 @@ try{!function(){
         items[i]=makeItem(true);
       }
       
-         cx.font=it.size+'px Montserrat';
+      cx.font=it.size+'px Montserrat';
       cx.fillStyle='rgba(255,255,255,'+it.alpha.toFixed(4)+')';
       cx.fillText(it.text,it.x,it.y);
     }
-    
     requestAnimationFrame(draw);
   }
   draw();
