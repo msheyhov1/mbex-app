@@ -205,6 +205,56 @@ input::placeholder{color:var(--text-dim)}
 #officeGallery::-webkit-scrollbar{display:none}
 #officeGallery{scrollbar-width:none}
 
+/* ═══ UI POLISH ═══ */
+
+/* Smooth screen slide-out for goBack */
+.scr.slide-out{animation:screenSlideOut 0.2s ease-in forwards}
+@keyframes screenSlideOut{
+  from{opacity:1;transform:translateX(0)}
+  to{opacity:0;transform:translateX(24px)}
+}
+
+/* Success icon entrance */
+.success-icon{animation:successPop 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards}
+@keyframes successPop{
+  0%{transform:scale(0);opacity:0}
+  60%{transform:scale(1.1)}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Card press effect — smoother depth */
+.cd:active{transform:scale(0.985);transition:transform 0.1s ease}
+
+/* Row items — subtle hover feedback */
+.wl-item:active{background:rgba(255,255,255,0.06);transform:scale(0.99)}
+
+/* Toggle active state polish */
+.tog{transition:all 0.25s cubic-bezier(0.4,0,0.2,1)}
+.top-tog{transition:all 0.25s cubic-bezier(0.4,0,0.2,1)}
+
+/* Pill active state polish */
+.pill{transition:all 0.2s cubic-bezier(0.4,0,0.2,1)}
+
+/* Timer pulse when running low (< 2 min) */
+.timer-warning{color:var(--red) !important;animation:timerPulse 1s ease-in-out infinite}
+@keyframes timerPulse{0%,100%{opacity:1}50%{opacity:0.6}}
+
+/* Branch label transition */
+#branchLabel{transition:opacity 0.2s ease}
+
+/* Copy button active feedback */
+.copy-flash{animation:copyFlash 0.3s ease-out}
+@keyframes copyFlash{
+  0%{box-shadow:0 0 0 0 rgba(255,255,255,0.3)}
+  100%{box-shadow:0 0 0 12px rgba(255,255,255,0)}
+}
+
+/* Steps counter style */
+.step-num{transition:background 0.3s, border-color 0.3s}
+
+/* Scrollbar for all platforms */
+*{scrollbar-width:none;-ms-overflow-style:none}
+
 </style>
 </head>
 <body>
@@ -308,17 +358,17 @@ input::placeholder{color:var(--text-dim)}
 <!-- Quick links — grouped card -->
 <div style="padding:0 16px;padding-bottom:90px">
 <div class="cd fade-in fade-in-d5" style="padding:0">
-<div style="display:flex;align-items:center;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.06);cursor:pointer" onclick="">
+<div style="display:flex;align-items:center;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.06);cursor:pointer" onclick="window.open('https://t.me/mbex_support','_blank')">
 <div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/></svg></div>
 <span style="flex:1;font-size:16px;font-weight:500">Поддержка</span>
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg>
 </div>
-<div style="display:flex;align-items:center;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.06);cursor:pointer" onclick="">
+<div style="display:flex;align-items:center;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.06);cursor:pointer" onclick="go('referral')">
 <div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/></svg></div>
 <span style="flex:1;font-size:16px;font-weight:500">Реферальная система</span>
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg>
 </div>
-<div style="display:flex;align-items:center;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.06);cursor:pointer" onclick="">
+<div style="display:flex;align-items:center;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.06);cursor:pointer" onclick="go('aml')">
 <div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/></svg></div>
 <span style="flex:1;font-size:16px;font-weight:500">AML / KYC</span>
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg>
@@ -484,31 +534,32 @@ input::placeholder{color:var(--text-dim)}
 </div>
 
 <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;cursor:pointer;font-size:15px;color:var(--text-sec)" id="chk" onclick="tC(this)"><div id="chkb" style="width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="display:none" id="chkv"><path d="M5 13l4 4L19 7" stroke="var(--bg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Принимаю <u style="color:rgba(255,255,255,0.7)">правила</u> и условия</span></div>
-<div class="btn-primary disabled" id="bw" onclick="go('sellok')">Получить кошелёк</div>
+<div class="btn-primary disabled" id="bw" onclick="createSellOrder()">Получить кошелёк</div>
 </div></div>
 
-<!-- SELL OK — wallet with copy button -->
+<!-- SELL OK — wallet with copy button + order info + timer -->
 <div class="scr" id="s-sellok"><div style="padding:0 16px;text-align:center;padding-bottom:40px">
-<div style="margin-top:40px;margin-bottom:14px"><div style="width:64px;height:64px;border-radius:50%;margin:0 auto;border:1.5px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
-<div style="font-size:21px;font-weight:600;margin-bottom:6px">Кошелёк получен</div>
-<div style="font-size:15px;color:var(--text-sec);margin-bottom:20px">Переведите USDT на этот адрес</div>
-<div class="cd" style="text-align:left;margin-bottom:20px;padding:16px">
+<div style="margin-top:40px;margin-bottom:14px"><div style="width:64px;height:64px;border-radius:50%;margin:0 auto;border:1.5px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center" class="success-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+<div style="font-size:21px;font-weight:600;margin-bottom:6px">Заявка создана</div>
+<div style="font-size:15px;color:var(--text-sec);margin-bottom:16px">Переведите USDT на этот адрес</div>
+<div style="font-size:14px;color:var(--text-dim);margin-bottom:16px" id="sellOkInfo"></div>
+<div class="cd" style="text-align:left;margin-bottom:16px;padding:16px">
 <div style="font-size:13px;color:var(--text-sec);margin-bottom:8px">Адрес кошелька (TRC-20)</div>
 <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
-<div style="font-size:14px;color:#fff;word-break:break-all;line-height:1.5">TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8</div>
+<div style="font-size:14px;color:#fff;word-break:break-all;line-height:1.5" id="sellOkWallet">TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8</div>
 <div onclick="copySellWallet(this)" style="cursor:pointer;flex-shrink:0;padding:8px;border-radius:8px;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;transition:background 0.2s">
 <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="9" y="9" width="13" height="13" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke="#fff" stroke-width="1.5"/></svg>
 </div>
 </div>
 <div id="sellCopyMsg" style="font-size:12px;color:var(--text-sec);margin-top:6px;opacity:0;transition:opacity 0.3s">Скопировано!</div>
 </div>
-<div id="sellTimer" style="font-size:14px;color:var(--text-sec);margin-bottom:20px"></div>
+<div id="sellOkTimer" style="font-size:14px;color:var(--text-sec);margin-bottom:20px"></div>
 <div class="btn-o" onclick="go('home')">На главную</div>
 </div></div>
 
 <!-- SUCCESS -->
 <div class="scr" id="s-ok"><div style="padding:0 16px;text-align:center;padding-bottom:40px">
-<div style="margin-top:50px;margin-bottom:14px"><div style="width:64px;height:64px;border-radius:50%;margin:0 auto;border:1.5px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+<div style="margin-top:50px;margin-bottom:14px"><div style="width:64px;height:64px;border-radius:50%;margin:0 auto;border:1.5px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center" class="success-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
 <div style="font-size:21px;font-weight:600;margin-bottom:8px;letter-spacing:0.5px">Заявка создана</div>
 <div style="font-size:16px;color:var(--text-sec);line-height:1.7;margin-bottom:16px" id="okInfo">№ <b style="color:#fff;font-weight:500">276</b> · Иванов И.И.<br><br>Пресненская наб. 12<br>Башня Федерация — Восток, 5 эт.</div>
 <div class="cd" style="text-align:left;margin-bottom:20px;padding:14px 16px">
@@ -612,7 +663,7 @@ input::placeholder{color:var(--text-dim)}
 </div>
 
 <!-- Links -->
-<div class="cd" onclick="" style="margin-bottom:8px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:14px 16px">
+<div class="cd" onclick="go('referral')" style="margin-bottom:8px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:14px 16px">
 <span style="font-size:16px;font-weight:500">Реферальная система</span>
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/></svg>
 </div>
@@ -751,7 +802,7 @@ input::placeholder{color:var(--text-dim)}
 
 <!-- TRANSFER OK -->
 <div class="scr" id="s-transferOk"><div style="padding:0 16px;text-align:center;padding-bottom:40px">
-<div style="margin-top:50px;margin-bottom:14px"><div style="width:64px;height:64px;border-radius:50%;margin:0 auto;border:1.5px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+<div style="margin-top:50px;margin-bottom:14px"><div style="width:64px;height:64px;border-radius:50%;margin:0 auto;border:1.5px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center" class="success-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
 <div style="font-size:21px;font-weight:600;margin-bottom:8px">Спасибо за заявку!</div>
 <div style="font-size:15px;color:var(--text-sec);line-height:1.6;margin-bottom:20px">Скоро с вами свяжется наш менеджер</div>
 <div style="font-size:14px;color:var(--text-dim);margin-bottom:24px" id="transferOkInfo"></div>
@@ -859,6 +910,85 @@ Instagram</a>
 </div>
 </div></div>
 
+<!-- REFERRAL SYSTEM -->
+<div class="scr" id="s-referral"><div style="padding:0 16px;padding-bottom:40px">
+<div style="font-size:23px;font-weight:600;padding:18px 0 6px">Реферальная система</div>
+<div style="font-size:15px;color:var(--text-dim);margin-bottom:20px;line-height:1.5">Приглашайте друзей и получайте бонусы с каждого их обмена</div>
+
+<div class="cd" style="margin-bottom:12px;padding:16px">
+<div style="display:flex;gap:12px;margin-bottom:16px">
+<div style="flex:1;text-align:center;padding:14px 8px;border-radius:12px;background:rgba(255,255,255,0.03);border:0.5px solid rgba(255,255,255,0.06)">
+<div style="font-size:24px;font-weight:600;margin-bottom:2px">0</div>
+<div style="font-size:12px;color:var(--text-dim)">Рефералов</div>
+</div>
+<div style="flex:1;text-align:center;padding:14px 8px;border-radius:12px;background:rgba(255,255,255,0.03);border:0.5px solid rgba(255,255,255,0.06)">
+<div style="font-size:24px;font-weight:600;margin-bottom:2px">0</div>
+<div style="font-size:12px;color:var(--text-dim)">USDT заработано</div>
+</div>
+</div>
+<div style="font-size:13px;color:var(--text-sec);margin-bottom:10px;font-weight:500">Ваш реферальный код</div>
+<div style="display:flex;align-items:center;gap:8px">
+<div style="flex:1;padding:12px 14px;border-radius:10px;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.08);font-size:18px;font-weight:600;letter-spacing:1.5px">MBX7200K</div>
+<div onclick="copyRefCode(this)" style="cursor:pointer;padding:12px;border-radius:10px;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;transition:background 0.2s">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="9" y="9" width="13" height="13" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke="#fff" stroke-width="1.5"/></svg>
+</div>
+</div>
+<div id="refCopyMsg" style="font-size:12px;color:var(--text-sec);margin-top:6px;opacity:0;transition:opacity 0.3s;text-align:center">Скопировано!</div>
+</div>
+
+<div style="font-size:14px;font-weight:600;margin-bottom:8px;margin-top:6px;color:var(--text-sec)">Как это работает</div>
+<div class="cd" style="padding:0">
+<div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.04)">
+<div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;font-weight:600;color:var(--text-sec)">1</div>
+<div><div style="font-size:15px;font-weight:500;margin-bottom:2px">Поделитесь кодом</div><div style="font-size:13px;color:var(--text-dim);line-height:1.4">Отправьте реферальный код другу</div></div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.04)">
+<div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;font-weight:600;color:var(--text-sec)">2</div>
+<div><div style="font-size:15px;font-weight:500;margin-bottom:2px">Друг совершает обмен</div><div style="font-size:13px;color:var(--text-dim);line-height:1.4">При регистрации указывает ваш код</div></div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px">
+<div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;font-weight:600;color:var(--text-sec)">3</div>
+<div><div style="font-size:15px;font-weight:500;margin-bottom:2px">Получайте бонусы</div><div style="font-size:13px;color:var(--text-dim);line-height:1.4">Начисляем USDT за каждую сделку реферала</div></div>
+</div>
+</div>
+</div></div>
+
+<!-- AML / KYC -->
+<div class="scr" id="s-aml"><div style="padding:0 16px;padding-bottom:40px">
+<div style="font-size:23px;font-weight:600;padding:18px 0 6px">AML / KYC</div>
+<div style="font-size:15px;color:var(--text-dim);margin-bottom:20px;line-height:1.5">Политика противодействия отмыванию денег</div>
+
+<div class="cd" style="padding:0;margin-bottom:12px">
+<div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.04)">
+<div class="ri" style="margin-right:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/></svg></div>
+<div><div style="font-size:15px;font-weight:500;margin-bottom:2px">Проверка транзакций</div><div style="font-size:13px;color:var(--text-dim);line-height:1.4">Все операции проходят автоматическую AML-проверку для безопасности</div></div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.04)">
+<div class="ri" style="margin-right:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/><path d="M4 21c0-3.866 3.582-7 8-7s8 3.134 8 7" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+<div><div style="font-size:15px;font-weight:500;margin-bottom:2px">Верификация личности</div><div style="font-size:13px;color:var(--text-dim);line-height:1.4">При обменах свыше 100 000 ₽ может потребоваться KYC-верификация</div></div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px">
+<div class="ri" style="margin-right:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+<div><div style="font-size:15px;font-weight:500;margin-bottom:2px">Документы</div><div style="font-size:13px;color:var(--text-dim);line-height:1.4">Паспорт РФ или загранпаспорт для подтверждения</div></div>
+</div>
+</div>
+
+<div class="cd" style="padding:14px 16px;margin-bottom:12px">
+<div style="font-size:14px;font-weight:500;margin-bottom:6px">Ваш статус</div>
+<div style="display:flex;align-items:center;gap:8px">
+<div style="width:8px;height:8px;border-radius:50%;border:1px solid rgba(255,255,255,0.2)"></div>
+<span style="font-size:15px;color:var(--text-dim)">Не верифицирован</span>
+</div>
+</div>
+
+<a href="https://t.me/mbex_support" target="_blank" style="display:block;text-decoration:none">
+<div class="btn-primary" style="display:flex;align-items:center;justify-content:center;gap:8px">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="#0b0b0e" stroke-width="1.5"/></svg>
+Пройти верификацию
+</div>
+</a>
+</div></div>
+
 </div>
 
 <div id="branchLabel" style="text-align:center;font-size:11px;color:var(--text-dim);letter-spacing:0.5px;padding:4px 0;background:rgba(11,11,14,0.94);border-top:0.5px solid var(--card-border);flex-shrink:0">Москва</div>
@@ -871,7 +1001,7 @@ Instagram</a>
 </div></div>
 
 <script>
-var cur='home',stk=[],mT=['home','history','profile'],sS=['buy','sell','ok','detail','wallets','couriers','sellok','transfer','transferOk','contacts'],aS=['home','buy','sell','ok','history','detail','profile','wallets','couriers','sellok','transfer','transferOk','contacts'];
+var cur='home',stk=[],mT=['home','history','profile'],sS=['buy','sell','ok','detail','wallets','couriers','sellok','transfer','transferOk','contacts','referral','aml'],aS=['home','buy','sell','ok','history','detail','profile','wallets','couriers','sellok','transfer','transferOk','contacts','referral','aml'];
 
 // Animate hero cards — show immediately as fallback, animate if JS works
 document.addEventListener('DOMContentLoaded',function(){
@@ -1039,7 +1169,10 @@ function updateTimer(){
   var el=document.getElementById('okTimer');
   if(el)el.textContent='Осталось: '+str;
   var at=document.getElementById('activeTimer');
-  if(at)at.textContent=str;
+  if(at){
+    at.textContent=str;
+    if(orderSec<=120){at.classList.add('timer-warning')}else{at.classList.remove('timer-warning')}
+  }
 }
 
 // Copy wallet
@@ -1055,7 +1188,8 @@ function copyWallet(){
 
 // Copy sell wallet with visual feedback
 function copySellWallet(btn){
-  var addr='TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8';
+  var walletEl=document.getElementById('sellOkWallet');
+  var addr=walletEl?walletEl.textContent:'TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8';
   navigator.clipboard.writeText(addr).then(function(){
     btn.style.background='rgba(255,255,255,0.15)';
     var msg=document.getElementById('sellCopyMsg');
@@ -1065,6 +1199,83 @@ function copySellWallet(btn){
       if(msg)msg.style.opacity='0';
     },1500);
   });
+  haptic();
+}
+
+// Copy referral code
+function copyRefCode(btn){
+  navigator.clipboard.writeText('MBX7200K').then(function(){
+    btn.style.background='rgba(255,255,255,0.15)';
+    var msg=document.getElementById('refCopyMsg');
+    if(msg)msg.style.opacity='1';
+    setTimeout(function(){
+      btn.style.background='rgba(255,255,255,0.05)';
+      if(msg)msg.style.opacity='0';
+    },1500);
+  });
+  haptic();
+}
+
+// Create SELL order — full flow with timer + active order on home
+function createSellOrder(){
+  var sum=document.getElementById('sellSum').value.trim();
+  var isSelf=document.getElementById('tsSell').classList.contains('on');
+  var fio=isSelf?document.getElementById('fioSelfDisplaySell').textContent.trim():(document.getElementById('fiSell')?document.getElementById('fiSell').value.trim():'');
+  if(!sum||!fio){alert('Заполните сумму и ФИО');return}
+  haptic('success');
+  var sumNum=parseFloat(sum.replace(/\s/g,''));
+  var num=Math.floor(Math.random()*9000+1000);
+  var now=new Date();
+  var months=['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'];
+  var dateStr=now.getDate()+' '+months[now.getMonth()]+' '+now.getFullYear()+', '+now.getHours()+':'+(now.getMinutes()<10?'0':'')+now.getMinutes();
+
+  // Store and add to history
+  activeOrderData={type:'Продажа',info:'USDT TRC-20',sum:sumNum.toLocaleString('ru')+' ₽',status:'active',num:num,fio:fio,date:dateStr,wallet:'TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8'};
+  activeOrderIdx=orderHistory.length;
+  orderHistory.push(activeOrderData);
+
+  // Fill sellok screen
+  var si=document.getElementById('sellOkInfo');
+  if(si)si.innerHTML='№ <b style="color:#fff;font-weight:500">'+num+'</b> · '+fio+'<br>'+sumNum.toLocaleString('ru')+' ₽';
+
+  // Show active order on home
+  var ao=document.getElementById('activeOrderHome');if(ao)ao.style.display='block';
+  var at=document.getElementById('activeType');if(at)at.textContent='Продажа';
+  var ai=document.getElementById('activeInfo');if(ai)ai.textContent='USDT TRC-20';
+  var aa=document.getElementById('activeAmount');
+  if(aa)aa.innerHTML=sumNum.toLocaleString('ru')+' <span style="font-size:14px;font-weight:400;color:var(--text-sec)">₽</span>';
+  var badge=document.getElementById('activeOrderBadge');
+  if(badge)badge.textContent='Активная заявка';
+
+  // Start 10 min timer
+  orderSec=600;
+  clearInterval(orderTimer);
+  updateSellTimer();
+  updateTimer();
+  orderTimer=setInterval(function(){
+    orderSec--;
+    if(orderSec<=0){
+      clearInterval(orderTimer);orderSec=0;
+      if(activeOrderIdx!==null&&orderHistory[activeOrderIdx])orderHistory[activeOrderIdx].status='cancelled';
+      var b=document.getElementById('activeOrderBadge');
+      if(b)b.textContent='Истекла';
+      var atEl=document.getElementById('activeTimer');
+      if(atEl)atEl.textContent='Истекло';
+      var st=document.getElementById('sellOkTimer');
+      if(st)st.textContent='Время истекло';
+    }
+    updateTimer();
+    updateSellTimer();
+  },1000);
+
+  go('sellok');
+}
+function updateSellTimer(){
+  if(orderSec<=0)return;
+  var m=Math.floor(orderSec/60);
+  var s=orderSec%60;
+  var st=document.getElementById('sellOkTimer');
+  if(st)st.textContent='Осталось: '+m+':'+(s<10?'0':'')+s;
 }
 
 // Wallet dropdown
@@ -1705,11 +1916,6 @@ try{!function(){
     v.addEventListener('canplay',tryPlay,{once:true});
   }
 }();
-
-// Shimmer on primary buttons
-document.querySelectorAll('.btn-primary').forEach(function(btn){
-  btn.classList.add('shimmer');
-});
 </script>
 </body>
 </html>
