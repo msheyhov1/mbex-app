@@ -49,8 +49,6 @@ html,body{height:100%;background:var(--bg);overflow:hidden;font-family:'Montserr
 /* Inputs */
 input{font-family:inherit;color:#fff;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 16px;font-size:17px;font-weight:400;outline:none;width:100%;box-sizing:border-box;transition:border-color 0.3s, box-shadow 0.3s}
 input:focus{border-color:rgba(255,255,255,0.2);box-shadow:0 0 0 3px rgba(255,255,255,0.04),0 0 20px rgba(255,255,255,0.03)}
-#s-buy input:focus{border-color:rgba(60,220,140,0.3);box-shadow:0 0 0 3px rgba(60,220,140,0.06),0 0 20px rgba(60,220,140,0.03)}
-#s-sell input:focus{border-color:rgba(255,90,90,0.25);box-shadow:0 0 0 3px rgba(255,90,90,0.05),0 0 20px rgba(255,90,90,0.03)}
 input::placeholder{color:var(--text-dim)}
 
 /* Buttons */
@@ -139,9 +137,7 @@ input::placeholder{color:var(--text-dim)}
 /* Top nav toggle */
 .top-tog-w{display:flex;background:rgba(255,255,255,0.03);border-radius:12px;padding:2px;border:0.5px solid rgba(255,255,255,0.06);margin:12px 16px 0}
 .top-tog{flex:1;padding:10px 0;text-align:center;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;color:var(--text-sec);background:transparent;transition:all 0.3s}
-.top-tog.on{color:#fff}
-#topBuy.on{background:rgba(60,220,140,0.12);color:rgba(60,220,140,1)}
-#topSell.on{background:rgba(255,90,90,0.1);color:rgba(255,90,90,0.9)}
+.top-tog.on{color:#fff;background:rgba(255,255,255,0.08)}
 
 /* Screens */
 .scr{display:none;will-change:opacity,transform}.scr.act{display:block}
@@ -152,8 +148,7 @@ input::placeholder{color:var(--text-dim)}
 }
 
 /* Logo area */
-.logo-area{text-align:center;padding:10px 16px 0}
-#logoCanvas{display:block;margin:0 auto}
+.logo-area{text-align:center;padding:4px 16px 0}
 
 /* Wallet dropdown */
 .wl-item{padding:10px 14px;cursor:pointer;transition:background 0.15s}
@@ -208,12 +203,10 @@ input::placeholder{color:var(--text-dim)}
 .active-order-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:13px;font-weight:600;background:var(--accent-dim);color:var(--accent);letter-spacing:0.5px;text-transform:uppercase}
 .active-order-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:dotPulse 2s ease-in-out infinite}
 
-/* Background layers */
+/* Background */
 .bg-base{position:absolute;inset:0;z-index:0;background:var(--bg);pointer-events:none}
-.bg-grid{position:absolute;inset:0;z-index:0;opacity:0.02;background-image:linear-gradient(rgba(255,255,255,0.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.5) 1px,transparent 1px);background-size:40px 40px;animation:gridMove 8s linear infinite;pointer-events:none}
-.bg-grad{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 0%,rgba(255,255,255,0.02) 0%,transparent 50%);pointer-events:none;animation:breathe 6s ease-in-out infinite}
-.bg-noise{position:absolute;inset:0;z-index:0;opacity:0.012;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-
+#officeGallery::-webkit-scrollbar{display:none}
+#officeGallery{scrollbar-width:none}
 
 </style>
 </head>
@@ -221,17 +214,12 @@ input::placeholder{color:var(--text-dim)}
 <div class="app">
 
 <div class="bg-base"></div>
-<div class="bg-grid"></div>
-<div class="bg-grad" style="background:radial-gradient(ellipse at 50% 0%,rgba(255,255,255,0.02) 0%,transparent 60%)"></div>
-<div class="bg-noise"></div>
-<canvas id="bg" style="position:absolute;inset:0;z-index:1;pointer-events:none"></canvas>
-<canvas id="cryptoText" style="position:absolute;inset:0;z-index:1;pointer-events:none"></canvas>
 
 <div style="position:relative;z-index:2;display:flex;flex-direction:column;height:100%">
 
 <!-- HEADER -->
-<div class="hdr">
-<div onclick="goBack()" style="cursor:pointer;font-size:16px;display:flex;align-items:center;gap:4px"><span id="hi">&#x2715;</span> <span id="ht">Закрыть</span></div>
+<div class="hdr" id="hdr" style="display:none">
+<div onclick="goBack()" style="cursor:pointer;font-size:16px;display:flex;align-items:center;gap:4px"><span id="hi">&#10094;</span> <span id="ht">Назад</span></div>
 <div style="width:40px"></div>
 <div style="width:40px"></div>
 </div>
@@ -248,15 +236,17 @@ input::placeholder{color:var(--text-dim)}
 <div class="scr act" id="s-home">
 
 <!-- Logo with brand animation -->
-<div class="logo-area">
-<canvas id="logoCanvas"></canvas>
+<div class="logo-area" style="position:relative;height:44px;overflow:hidden">
+<img src="logo.png" id="logoImg" style="display:block;margin:0 auto;height:32px;width:auto;opacity:0;position:relative;z-index:2">
+<!-- Animated arrow pattern overlay inspired by brandbook -->
+<canvas id="logoAnim" style="position:absolute;inset:0;z-index:3;pointer-events:none"></canvas>
 </div>
 
 <!-- Chart -->
 <div style="padding:0 16px;margin-top:4px" id="chart-area"></div>
 <div style="padding:4px 16px 0;display:flex;justify-content:space-between;align-items:baseline">
 <div style="font-size:14px;font-weight:400;color:var(--text-sec)">USDT / RUB</div>
-<div style="font-size:13px;color:var(--text-dim)">14:41 MSK</div>
+<div style="font-size:12px;color:var(--text-dim)">актуальный курс на: 14:41 MSK</div>
 </div>
 
 <!-- Buy / Sell hero cards — NO badges -->
@@ -319,12 +309,84 @@ input::placeholder{color:var(--text-dim)}
 </div>
 </div>
 
-<!-- Quick links -->
+<!-- Quick links — grouped card -->
 <div style="padding:0 16px;padding-bottom:90px">
-<div class="row fade-in fade-in-d5"><div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/></svg></div><span style="flex:1;font-size:17px;font-weight:500">Поддержка</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg></div>
-<div class="row fade-in fade-in-d5"><div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/></svg></div><span style="flex:1;font-size:17px;font-weight:500">Реферальная система</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg></div>
-<div class="row fade-in fade-in-d5"><div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/></svg></div><span style="flex:1;font-size:17px;font-weight:500">AML / KYC</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg></div>
-<div class="row fade-in fade-in-d5" onclick="toggleBranches()"><div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><circle cx="12" cy="10" r="3" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/></svg></div><span style="flex:1;font-size:17px;font-weight:500">Филиалы</span><svg id="branchChev" width="14" height="14" viewBox="0 0 24 24" fill="none" style="transition:transform 0.2s"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg></div>
+<div class="cd fade-in fade-in-d5" style="padding:0">
+<div style="display:flex;align-items:center;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.06);cursor:pointer" onclick="">
+<div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/></svg></div>
+<span style="flex:1;font-size:16px;font-weight:500">Поддержка</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg>
+</div>
+<div style="display:flex;align-items:center;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.06);cursor:pointer" onclick="">
+<div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/></svg></div>
+<span style="flex:1;font-size:16px;font-weight:500">Реферальная система</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg>
+</div>
+<div style="display:flex;align-items:center;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.06);cursor:pointer" onclick="">
+<div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/></svg></div>
+<span style="flex:1;font-size:16px;font-weight:500">AML / KYC</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg>
+</div>
+<div style="display:flex;align-items:center;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.06);cursor:pointer" onclick="toggleContacts()">
+<div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/></svg></div>
+<span style="flex:1;font-size:16px;font-weight:500">Контакты</span>
+<svg id="contactChev" width="14" height="14" viewBox="0 0 24 24" fill="none" style="transition:transform 0.2s"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg>
+</div>
+<!-- Contacts expanded -->
+<div id="contactsPanel" style="display:none;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.06)">
+<!-- Address -->
+<div style="margin-bottom:12px">
+<div style="font-size:12px;color:var(--text-dim);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">Адрес</div>
+<div style="font-size:15px;font-weight:500;margin-bottom:2px">Пресненская наб. 12</div>
+<div style="font-size:14px;color:var(--text-sec)">Башня Федерация — Восток, 5 этаж, офис 512</div>
+</div>
+<!-- Map link -->
+<a href="https://yandex.ru/maps/-/CDawrR" target="_blank" style="display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.08);margin-bottom:12px;text-decoration:none;color:#fff;cursor:pointer">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/><circle cx="12" cy="10" r="3" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/></svg>
+<span style="font-size:14px;font-weight:500">Открыть в Яндекс Картах</span>
+<svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="margin-left:auto;opacity:0.3"><path d="M7 17L17 7M17 7H7M17 7v10" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a>
+<!-- Schedule -->
+<div style="margin-bottom:12px">
+<div style="font-size:12px;color:var(--text-dim);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">Режим работы</div>
+<div style="font-size:14px;color:var(--text-sec)">Пн — Пт: 10:00 — 20:00</div>
+<div style="font-size:14px;color:var(--text-sec)">Сб — Вс: 11:00 — 18:00</div>
+</div>
+<!-- Socials -->
+<div style="display:flex;gap:8px;margin-bottom:14px">
+<a href="https://mbex.io" target="_blank" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:10px;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.08);text-decoration:none;color:var(--text-sec);font-size:13px;font-weight:500">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10A15.3 15.3 0 0112 2z" stroke="currentColor" stroke-width="1.5"/></svg>
+Сайт</a>
+<a href="https://t.me/mbex_exchange" target="_blank" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:10px;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.08);text-decoration:none;color:var(--text-sec);font-size:13px;font-weight:500">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M21 5L2 12.5l7 1M21 5l-5 15-6.5-6.5M21 5l-12 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+Telegram</a>
+<a href="https://instagram.com/mbex_exchange" target="_blank" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:10px;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.08);text-decoration:none;color:var(--text-sec);font-size:13px;font-weight:500">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>
+Instagram</a>
+</div>
+<!-- Office gallery -->
+<div style="font-size:12px;color:var(--text-dim);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px">Наш офис</div>
+<div id="officeGallery" style="display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;scroll-snap-type:x mandatory">
+<div style="flex-shrink:0;width:200px;height:130px;border-radius:10px;background:linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));border:0.5px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;scroll-snap-align:start">
+<div style="text-align:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="opacity:0.2;margin-bottom:4px"><rect x="2" y="3" width="20" height="18" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M2 15l5-5 4 4 4-6 7 7" stroke="#fff" stroke-width="1.5"/></svg><div style="font-size:11px;color:var(--text-dim)">Ресепшн</div></div>
+</div>
+<div style="flex-shrink:0;width:200px;height:130px;border-radius:10px;background:linear-gradient(135deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01));border:0.5px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;scroll-snap-align:start">
+<div style="text-align:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="opacity:0.2;margin-bottom:4px"><rect x="2" y="3" width="20" height="18" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M2 15l5-5 4 4 4-6 7 7" stroke="#fff" stroke-width="1.5"/></svg><div style="font-size:11px;color:var(--text-dim)">Переговорная</div></div>
+</div>
+<div style="flex-shrink:0;width:200px;height:130px;border-radius:10px;background:linear-gradient(135deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02));border:0.5px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;scroll-snap-align:start">
+<div style="text-align:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="opacity:0.2;margin-bottom:4px"><rect x="2" y="3" width="20" height="18" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M2 15l5-5 4 4 4-6 7 7" stroke="#fff" stroke-width="1.5"/></svg><div style="font-size:11px;color:var(--text-dim)">Рабочая зона</div></div>
+</div>
+<div style="flex-shrink:0;width:200px;height:130px;border-radius:10px;background:linear-gradient(135deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));border:0.5px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;scroll-snap-align:start">
+<div style="text-align:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="opacity:0.2;margin-bottom:4px"><rect x="2" y="3" width="20" height="18" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M2 15l5-5 4 4 4-6 7 7" stroke="#fff" stroke-width="1.5"/></svg><div style="font-size:11px;color:var(--text-dim)">Лаунж</div></div>
+</div>
+</div>
+</div>
+<div style="display:flex;align-items:center;padding:14px 16px;cursor:pointer" onclick="toggleBranches()">
+<div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><circle cx="12" cy="10" r="3" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/></svg></div>
+<span style="flex:1;font-size:16px;font-weight:500">Филиалы</span>
+<svg id="branchChev" width="14" height="14" viewBox="0 0 24 24" fill="none" style="transition:transform 0.2s"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg>
+</div>
+</div>
 <!-- Branch selector -->
 <div id="branchList" style="display:none;padding:0 0 4px 46px">
 <div class="branch-item" onclick="pickBranch(this,'moscow')" data-active="true" style="display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:0.5px solid rgba(255,255,255,0.04);cursor:pointer">
@@ -495,16 +557,6 @@ input::placeholder{color:var(--text-dim)}
 </div>
 <div id="sellTimer" style="font-size:14px;color:var(--text-sec);margin-bottom:20px"></div>
 <div class="btn-o" onclick="go('home')">На главную</div>
-</div></div>
-
-<!-- CONFIRM -->
-<div class="scr" id="s-confirm"><div style="padding:0 16px;text-align:center;padding-bottom:40px">
-<div style="margin-top:30px;margin-bottom:16px"><div style="width:56px;height:56px;border-radius:50%;margin:0 auto;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 40 40" fill="none"><path d="M8 8L20 20L8 32" stroke="rgba(255,255,255,0.5)" stroke-width="3" stroke-linecap="round"/><path d="M20 8L32 20L20 32" stroke="rgba(255,255,255,0.5)" stroke-width="3" stroke-linecap="round"/></svg></div></div>
-<div style="font-size:25px;font-weight:500">500 000 ₽</div>
-<div style="font-size:16px;color:var(--text-sec);margin-bottom:24px">Подтверждение</div>
-<div class="cd" style="text-align:left;margin-bottom:10px"><div style="font-size:14px;color:var(--text-dim);margin-bottom:3px">ФИО</div><div style="font-size:17px;font-weight:400">Иванов Иван Иванович</div></div>
-<div class="cd" style="text-align:left;margin-bottom:24px"><div style="font-size:14px;color:var(--text-dim);margin-bottom:3px">Кошелёк (TRC-20)</div><div style="font-size:14px;color:var(--text-sec);font-family:'Montserrat',sans-serif;word-break:break-all">TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8</div></div>
-<div class="btn-primary" onclick="go('ok')">Создать заявку</div>
 </div></div>
 
 <!-- SUCCESS -->
@@ -822,7 +874,7 @@ input::placeholder{color:var(--text-dim)}
 </div></div>
 
 <script>
-var cur='home',stk=[],mT=['home','history','profile'],sS=['buy','sell','confirm','ok','detail','wallets','couriers','sellok','transfer','transferOk'],aS=['home','buy','sell','confirm','ok','history','detail','profile','wallets','couriers','sellok','transfer','transferOk'];
+var cur='home',stk=[],mT=['home','history','profile'],sS=['buy','sell','ok','detail','wallets','couriers','sellok','transfer','transferOk'],aS=['home','buy','sell','ok','history','detail','profile','wallets','couriers','sellok','transfer','transferOk'];
 
 // Animate hero cards — show immediately as fallback, animate if JS works
 document.addEventListener('DOMContentLoaded',function(){
@@ -838,238 +890,140 @@ document.addEventListener('DOMContentLoaded',function(){
   },1200);
 });
 
-// MBEX Logo — Bold wordmark with easter egg
-// Wait for font to load before drawing on canvas
-(document.fonts?document.fonts.ready:Promise.resolve()).then(function(){
-try{!function(){
-  var cv=document.getElementById('logoCanvas');
-  if(!cv)return;
+// MBEX Logo animation — arrows assemble from brandbook pattern
+!function(){
+  var img=document.getElementById('logoImg');
+  var cv=document.getElementById('logoAnim');
+  if(!cv||!img)return;
+  var parent=cv.parentElement;
   var dpr=window.devicePixelRatio||1;
-  var W=340,H=65;
-  cv.width=W*dpr;cv.height=H*dpr;
-  cv.style.width=W+'px';cv.style.height=H+'px';
-  var cx=cv.getContext('2d');
-  cx.scale(dpr,dpr);
+  var W,H,cx;
   
-  var logoTaps=0;
-  var easterEgg=false;
-  var particles=[];
-  var eggPhase=0; // 0=normal, 1=explode out, 2=assemble, 3=hold, 4=fade back
-  var eggTimer=0;
-
-  function drawLogo(alpha){
-    cx.clearRect(0,0,W,H);
+  function resize(){
+    W=parent.offsetWidth;H=parent.offsetHeight;
+    cv.width=W*dpr;cv.height=H*dpr;
+    cv.style.width=W+'px';cv.style.height=H+'px';
+    cx=cv.getContext('2d');
+    cx.scale(dpr,dpr);
+  }
+  resize();
+  
+  // Arrow particles inspired by the X monogram pattern
+  var arrows=[];
+  var NUM=14;
+  var centerX=W/2,centerY=H/2;
+  var phase=0; // 0=scatter-in, 1=hold, 2=pattern-pulse, 3=hold-clean
+  var timer=0;
+  var logoShown=false;
+  
+  for(var i=0;i<NUM;i++){
+    var angle=(i/NUM)*Math.PI*2;
+    var dist=80+Math.random()*60;
+    arrows.push({
+      // Start position (offscreen scattered)
+      sx:centerX+Math.cos(angle)*dist,
+      sy:centerY+Math.sin(angle)*dist,
+      // Target (around logo center)
+      tx:centerX+(Math.random()-0.5)*120,
+      ty:centerY+(Math.random()-0.5)*20,
+      // Current
+      x:0,y:0,
+      rot:angle,
+      rotTarget:(Math.random()-0.5)*0.5,
+      size:6+Math.random()*4,
+      alpha:0,
+      delay:Math.random()*0.3
+    });
+  }
+  
+  function drawArrow(x,y,size,rot,alpha){
     cx.save();
+    cx.translate(x,y);
+    cx.rotate(rot);
     cx.globalAlpha=alpha;
-    cx.fillStyle='#fff';
-    cx.font='900 52px Montserrat';
-    cx.textAlign='center';
-    cx.textBaseline='middle';
-    var text='MBEX';
-    var spacing=-4;
-    var widths=[];
-    var total=0;
-    for(var i=0;i<4;i++){var w=cx.measureText(text[i]).width;widths.push(w);total+=w+spacing}
-    total-=spacing;
-    var sx=W/2-total/2;
-    for(var i=0;i<4;i++){
-      cx.fillText(text[i],sx+widths[i]/2,H/2+1);
-      sx+=widths[i]+spacing;
-    }
+    cx.strokeStyle='#fff';
+    cx.lineWidth=1.2;
+    cx.lineCap='round';
+    cx.lineJoin='round';
+    // Arrow shape like brandbook chevrons
+    cx.beginPath();
+    cx.moveTo(-size*0.5,-size*0.4);
+    cx.lineTo(size*0.3,0);
+    cx.lineTo(-size*0.5,size*0.4);
+    cx.stroke();
+    // Cross element from X monogram
+    cx.beginPath();
+    cx.moveTo(-size*0.2,-size*0.3);
+    cx.lineTo(size*0.2,size*0.3);
+    cx.moveTo(size*0.2,-size*0.3);
+    cx.lineTo(-size*0.2,size*0.3);
+    cx.stroke();
     cx.restore();
   }
-
-  // Sample pixel positions from text rendered offscreen
-  function sampleText(text,fontSize,fontWeight){
-    var offCv=document.createElement('canvas');
-    offCv.width=W;offCv.height=H;
-    var oc=offCv.getContext('2d');
-    oc.fillStyle='#fff';
-    oc.font=fontWeight+' '+fontSize+'px Montserrat';
-    oc.textAlign='center';
-    oc.textBaseline='middle';
-    oc.fillText(text,W/2,H/2);
-    var img=oc.getImageData(0,0,W,H);
-    var pts=[];
-    var step=3; // sample every 3px for density
-    for(var y=0;y<H;y+=step){
-      for(var x=0;x<W;x+=step){
-        if(img.data[(y*W+x)*4+3]>128){
-          pts.push({x:x,y:y});
-        }
-      }
-    }
-    return pts;
-  }
-
-  function createParticles(){
-    // Sample source (MBEX) positions
-    var srcPts=sampleText('MBEX',52,'900');
-    // Sample target (ANTI SUNCTION CLUB) positions
-    var tgtPts=sampleText('ANTI SUNCTION CLUB',15,'800');
-    
-    particles=[];
-    var count=Math.max(srcPts.length,tgtPts.length);
-    
-    for(var i=0;i<count;i++){
-      var src=srcPts[i%srcPts.length];
-      var tgt=tgtPts[i%tgtPts.length];
-      // Scatter position (explosion midpoint)
-      var angle=Math.random()*Math.PI*2;
-      var dist=60+Math.random()*120;
-      var scatterX=src.x+Math.cos(angle)*dist;
-      var scatterY=src.y+Math.sin(angle)*dist;
-      
-      particles.push({
-        // Source (logo)
-        sx:src.x, sy:src.y,
-        // Scatter (explosion peak)
-        mx:scatterX, my:scatterY,
-        // Target (new text)
-        tx:tgt.x, ty:tgt.y,
-        // Current
-        x:src.x, y:src.y,
-        size:1+Math.random()*1.5,
-        alpha:1,
-        delay:Math.random()*0.15 // stagger
-      });
-    }
-  }
-
+  
   function easeOutCubic(t){return 1-Math.pow(1-t,3)}
-  function easeInOutCubic(t){return t<0.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
-
-  function animLoop(){
+  function easeInOutSine(t){return -(Math.cos(Math.PI*t)-1)/2}
+  
+  var totalT=0;
+  function animate(){
     cx.clearRect(0,0,W,H);
-    eggTimer++;
+    timer++;
+    totalT+=0.016;
     
-    if(eggPhase===1){
-      // Phase 1: Explode outward (frames 0-30)
-      var dur=30;
-      for(var i=0;i<particles.length;i++){
-        var p=particles[i];
-        var t=Math.max(0,Math.min(1,(eggTimer-p.delay*dur)/dur));
+    if(phase===0){
+      // Phase 0: arrows fly in from scatter positions toward center (0-60 frames)
+      var dur=60;
+      for(var i=0;i<arrows.length;i++){
+        var a=arrows[i];
+        var t=Math.max(0,Math.min(1,(timer-a.delay*dur)/dur));
         t=easeOutCubic(t);
-        p.x=p.sx+(p.mx-p.sx)*t;
-        p.y=p.sy+(p.my-p.sy)*t;
-        p.alpha=1-t*0.3;
-        cx.globalAlpha=p.alpha;
-        cx.fillStyle='#fff';
-        cx.fillRect(p.x-p.size/2,p.y-p.size/2,p.size,p.size);
+        a.x=a.sx+(a.tx-a.sx)*t;
+        a.y=a.sy+(a.ty-a.sy)*t;
+        a.alpha=t*0.4;
+        a.rot+=(a.rotTarget-a.rot)*0.05;
+        drawArrow(a.x,a.y,a.size,a.rot,a.alpha);
       }
-      cx.globalAlpha=1;
-      if(eggTimer>dur+5){eggPhase=2;eggTimer=0}
-      requestAnimationFrame(animLoop);
-      
-    }else if(eggPhase===2){
-      // Phase 2: Assemble into new text (frames 0-40)
+      if(timer>dur+10){
+        phase=1;timer=0;
+        // Show logo image
+        img.style.transition='opacity 0.5s ease';
+        img.style.opacity='1';
+        logoShown=true;
+      }
+    }else if(phase===1){
+      // Phase 1: arrows fade out while logo is visible (0-40 frames)
       var dur=40;
-      for(var i=0;i<particles.length;i++){
-        var p=particles[i];
-        var t=Math.max(0,Math.min(1,(eggTimer-p.delay*dur)/dur));
-        t=easeInOutCubic(t);
-        p.x=p.mx+(p.tx-p.mx)*t;
-        p.y=p.my+(p.ty-p.my)*t;
-        p.alpha=0.7+t*0.3;
-        cx.globalAlpha=p.alpha;
-        cx.fillStyle='#fff';
-        cx.fillRect(p.x-p.size/2,p.y-p.size/2,p.size,p.size);
+      var t=Math.min(1,timer/dur);
+      for(var i=0;i<arrows.length;i++){
+        var a=arrows[i];
+        a.alpha=0.4*(1-t);
+        // Gentle drift outward
+        a.x+=Math.cos(a.rot)*0.3;
+        a.y+=Math.sin(a.rot)*0.3;
+        drawArrow(a.x,a.y,a.size,a.rot,a.alpha);
       }
-      cx.globalAlpha=1;
-      if(eggTimer>dur+8){
-        eggPhase=3;eggTimer=0;
-      }
-      requestAnimationFrame(animLoop);
-      
-    }else if(eggPhase===3){
-      // Phase 3: Hold — show crisp text over particles with glow
-      var holdDur=180; // ~3 seconds
-      // Draw assembled particles faintly
-      for(var i=0;i<particles.length;i++){
-        var p=particles[i];
-        cx.globalAlpha=0.15;
-        cx.fillStyle='#fff';
-        cx.fillRect(p.tx-p.size/2,p.ty-p.size/2,p.size,p.size);
-      }
-      // Draw crisp text on top
-      var tAlpha=Math.min(1,eggTimer/15);
-      cx.save();
-      cx.globalAlpha=tAlpha;
-      cx.fillStyle='#fff';
-      cx.font='800 15px Montserrat';
-      cx.textAlign='center';
-      cx.textBaseline='middle';
-      cx.shadowColor='rgba(255,255,255,0.4)';
-      cx.shadowBlur=15;
-      cx.fillText('ANTI SUNCTION CLUB',W/2,H/2);
-      cx.shadowBlur=0;
-      cx.restore();
-      
-      if(eggTimer>holdDur){eggPhase=4;eggTimer=0}
-      requestAnimationFrame(animLoop);
-      
-    }else if(eggPhase===4){
-      // Phase 4: Fade out and restore logo
-      var dur=30;
-      var t=eggTimer/dur;
-      if(t<1){
-        cx.save();
-        cx.globalAlpha=1-t;
-        cx.fillStyle='#fff';
-        cx.font='800 15px Montserrat';
-        cx.textAlign='center';
-        cx.textBaseline='middle';
-        cx.fillText('ANTI SUNCTION CLUB',W/2,H/2);
-        cx.restore();
-        // Fade in logo
-        drawLogo(t);
-        requestAnimationFrame(animLoop);
-      }else{
-        drawLogo(1);
-        eggPhase=0;
-        easterEgg=false;
-        logoTaps=0;
+      if(timer>dur+80){phase=2;timer=0}
+    }else if(phase===2){
+      // Phase 2: subtle pattern pulse — arrows orbit gently around logo (continuous)
+      for(var i=0;i<arrows.length;i++){
+        var a=arrows[i];
+        var baseAngle=(i/NUM)*Math.PI*2+totalT*0.15;
+        var radius=50+Math.sin(totalT*0.5+i)*15;
+        a.x=centerX+Math.cos(baseAngle)*radius;
+        a.y=centerY+Math.sin(baseAngle)*radius*0.3;
+        a.rot=baseAngle+Math.PI*0.5;
+        a.alpha=0.06+Math.sin(totalT*0.8+i*0.7)*0.04;
+        drawArrow(a.x,a.y,a.size*0.7,a.rot,a.alpha);
       }
     }
+    
+    requestAnimationFrame(animate);
   }
   
-  // Click handler
-  cv.style.cursor='pointer';
-  var tapReset;
-  cv.addEventListener('click',function(){
-    if(easterEgg)return;
-    logoTaps++;
-    haptic();
-    clearTimeout(tapReset);
-    tapReset=setTimeout(function(){if(!easterEgg)logoTaps=0},3000);
-    if(logoTaps>=10){
-      easterEgg=true;
-      eggPhase=1;
-      eggTimer=0;
-      createParticles();
-      haptic('heavy');
-      animLoop();
-    }else{
-      cv.style.transition='none';
-      cv.style.transform='scale(0.95)';
-      setTimeout(function(){cv.style.transition='transform 0.15s ease';cv.style.transform='scale(1)'},50);
-    }
-  });
-  
-  // Simple fade-in on load, then static
-  var frame=0;
-  function draw(){
-    frame++;
-    if(frame<30){
-      drawLogo(Math.min(1,frame/25));
-    }else if(frame===30){
-      drawLogo(1);
-    }
-    if(frame<=30)requestAnimationFrame(draw);
-  }
-  draw();
-}()}catch(e){console.error('Logo error:',e)}
-}); // end fonts.ready
+  // Start after a brief delay
+  setTimeout(function(){animate()},300);
+}();
+
 
 function go(n){
   stk.push(cur);cur=n;
@@ -1078,8 +1032,7 @@ function go(n){
   if(el){el.classList.add('act');el.classList.add('slide-in')}
   document.getElementById('sc').scrollTop=0;
   var sub=sS.indexOf(n)!==-1;
-  document.getElementById('hi').innerHTML=sub?'&#10094;':'&#10005;';
-  document.getElementById('ht').textContent=sub?'Назад':'Закрыть';
+  document.getElementById('hdr').style.display=sub?'flex':'none';
   document.getElementById('tb').style.display=sub?'none':'flex';document.getElementById('branchLabel').style.display=sub?'none':'block';
   var showTop=(n==='buy'||n==='sell');
   document.getElementById('topToggle').style.display=showTop?'flex':'none';
@@ -1124,8 +1077,7 @@ function goBack(){
     var el=document.getElementById('s-'+cur);if(el)el.classList.add('act');
     document.getElementById('sc').scrollTop=0;
     var sub=sS.indexOf(cur)!==-1;
-    document.getElementById('hi').innerHTML=sub?'&#10094;':'&#10005;';
-    document.getElementById('ht').textContent=sub?'Назад':'Закрыть';
+    document.getElementById('hdr').style.display=sub?'flex':'none';
     document.getElementById('tb').style.display=sub?'none':'flex';document.getElementById('branchLabel').style.display=sub?'none':'block';
     var showTop=(cur==='buy'||cur==='sell');
     document.getElementById('topToggle').style.display=showTop?'flex':'none';
@@ -1841,115 +1793,37 @@ try{!function(){
 }()}catch(e){console.error('Chart error:',e)}
 }); // end chart fonts.ready
 
-// BG particles — monochrome white
-try{!function(){
-  var cv=document.getElementById('bg'),cx=cv.getContext('2d');
-  var W=cv.width=cv.parentElement.offsetWidth,H=cv.height=cv.parentElement.offsetHeight;
-  var pts=[];
-  for(var i=0;i<30;i++){
-    pts.push({
-      x:Math.random()*W,y:Math.random()*H,
-      r:Math.random()*0.5+0.1,
-      a:Math.random()*0.02+0.004,
-      sp:Math.random()*0.002+0.0003,
-      ph:Math.random()*6.28,
-      dy:Math.random()*0.005+0.001,
-      dx:Math.random()*0.002-0.001
-    });
-  }
-  var t=0;
-  function draw(){
-    cx.clearRect(0,0,W,H);t++;
-    for(var i=0;i<pts.length;i++){
-      var s=pts[i];
-      s.y+=s.dy;s.x+=s.dx+Math.sin(t*0.003+s.ph)*0.015;
-      if(s.y>H+2){s.y=-2;s.x=Math.random()*W}
-      if(s.x<-2)s.x=W+2;if(s.x>W+2)s.x=-2;
-      var f=s.a+s.a*0.5*Math.sin(t*s.sp*60+s.ph);
-      cx.beginPath();cx.arc(s.x,s.y,s.r,0,Math.PI*2);
-      cx.fillStyle='rgba(255,255,255,'+f.toFixed(3)+')';cx.fill();
-    }
-    for(var i=0;i<pts.length;i++){
-      for(var j=i+1;j<pts.length;j++){
-        var dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y;
-        var dist=Math.sqrt(dx*dx+dy*dy);
-        if(dist<80){
-          var op=((80-dist)/80)*0.008;
-          cx.beginPath();cx.moveTo(pts[i].x,pts[i].y);cx.lineTo(pts[j].x,pts[j].y);
-          cx.strokeStyle='rgba(255,255,255,'+op.toFixed(4)+')';cx.lineWidth=0.5;cx.stroke();
-        }
-      }
-    }
-    requestAnimationFrame(draw);
-  }
-  draw();
-}()}catch(e){console.error('BG error:',e)}
+// Swipe back gesture (left-to-right)
+!function(){
+  var sx=0,sy=0,tracking=false;
+  var ct=document.getElementById('sc');
+  ct.addEventListener('touchstart',function(e){
+    var t=e.touches[0];
+    if(t.clientX<40){sx=t.clientX;sy=t.clientY;tracking=true}
+    else{tracking=false}
+  },{passive:true});
+  ct.addEventListener('touchmove',function(e){
+    if(!tracking)return;
+    var t=e.touches[0];
+    var dx=t.clientX-sx,dy=Math.abs(t.clientY-sy);
+    if(dx>60&&dy<50){tracking=false;goBack()}
+  },{passive:true});
+  ct.addEventListener('touchend',function(){tracking=false},{passive:true});
+}();
 
-// Floating crypto text background
-try{!function(){
-  var cv=document.getElementById('cryptoText');
-  var cx=cv.getContext('2d');
-  var W=cv.width=cv.parentElement.offsetWidth;
-  var H=cv.height=Math.round(cv.parentElement.offsetHeight*0.45);
-  
-  // Crypto phrases pool
-  var phrases=[
-    '0x7a3b9f2e','SHA-256','block #841,293','nonce: 4a2f8b','UTXO','merkle root',
-    'tx: 0xd4e9...3f2a','gas: 21000','wei','gwei','ERC-20','TRC-20',
-    'hash: 9f3a7b...','consensus','proof-of-stake','validator','epoch 248',
-    'f47ac10b-58cc','block hash','prev: 0x8b2f...','mempool','confirmations: 6',
-    'keccak256','secp256k1','ed25519','0xdead...beef','chain_id: 1',
-    'slot: 7841920','finalized','0x1f3e...7d9c','difficulty: 2^74',
-    'base_fee: 12','priority: 2','signature: r,s,v','ABI','bytecode',
-    'peer_count: 47','sync: 99.8%','state_root','receipt_root',
-    'bloom: 0x00...','logs[]','topics[0]','index: 3842',
-    'timestamp: 1711584000','uncle_count: 0','size: 89.2 KB',
-    'input: 0xa9059c...','value: 0','to: 0x7a69...',
-  ];
-  
-  // Create floating text items
-  var items=[];
-  var NUM=12;
-  
-  function makeItem(startOffscreen){
-    var phrase=phrases[Math.floor(Math.random()*phrases.length)];
-    return {
-      text:phrase,
-      x:startOffscreen?-200-Math.random()*300:Math.random()*W,
-      y:Math.random()*H,
-      speed:0.15+Math.random()*0.25,
-      size:8+Math.random()*3,
-      alpha:0.025+Math.random()*0.02
-    };
+// Toggle contacts panel
+function toggleContacts(){
+  var panel=document.getElementById('contactsPanel');
+  var chev=document.getElementById('contactChev');
+  if(panel.style.display==='none'||!panel.style.display){
+    panel.style.display='block';
+    chev.style.transform='rotate(90deg)';
+  }else{
+    panel.style.display='none';
+    chev.style.transform='';
   }
-  
-  for(var i=0;i<NUM;i++){
-    items.push(makeItem(false));
-    // Spread initial x positions
-    items[i].x=Math.random()*W*1.5-W*0.25;
-  }
-  
-  function draw(){
-    cx.clearRect(0,0,W,H);
-    
-    for(var i=0;i<items.length;i++){
-      var it=items[i];
-      it.x+=it.speed;
-      
-      // If scrolled off right, reset from left
-      if(it.x>W+200){
-        items[i]=makeItem(true);
-      }
-      
-      cx.font=it.size+'px Montserrat';
-      cx.fillStyle='rgba(255,255,255,'+it.alpha+')';
-      cx.fillText(it.text,it.x,it.y);
-    }
-    
-    requestAnimationFrame(draw);
-  }
-  draw();
-}()}catch(e){console.error('CryptoText error:',e)}
+  haptic();
+}
 
 // Shimmer on primary buttons
 document.querySelectorAll('.btn-primary').forEach(function(btn){
