@@ -174,13 +174,14 @@ input::placeholder{color:var(--text-dim)}
   100%{opacity:1;transform:translateY(0)}
 }
 
-/* Staggered fade in */
+/* Staggered fade in — plays once then stays visible */
 .fade-in{opacity:0;transform:translateY(10px);animation:fadeInUp 0.4s ease-out forwards}
 .fade-in-d1{animation-delay:0.1s}
 .fade-in-d2{animation-delay:0.2s}
 .fade-in-d3{animation-delay:0.3s}
 .fade-in-d4{animation-delay:0.4s}
 .fade-in-d5{animation-delay:0.5s}
+.fade-done{opacity:1 !important;transform:none !important;animation:none !important}
 @keyframes fadeInUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
 /* General */
@@ -825,13 +826,16 @@ var cur='home',stk=[],mT=['home','history','profile'],sS=['buy','sell','confirm'
 
 // Animate hero cards — show immediately as fallback, animate if JS works
 document.addEventListener('DOMContentLoaded',function(){
-  // Fallback: make cards visible even without animation
   var bc=document.getElementById('buyCard');
   var sc=document.getElementById('sellCard');
   if(bc)setTimeout(function(){bc.classList.add('animate-in')},400);
   if(sc)setTimeout(function(){sc.classList.add('animate-in')},460);
   var tc=document.getElementById('transferCard');
   if(tc)setTimeout(function(){tc.classList.add('animate-in')},520);
+  // After all fade-in animations finish, lock them visible
+  setTimeout(function(){
+    document.querySelectorAll('.fade-in').forEach(function(el){el.classList.add('fade-done')});
+  },1200);
 });
 
 // MBEX Logo — Bold wordmark with easter egg
