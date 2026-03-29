@@ -322,27 +322,8 @@ input::placeholder{color:var(--text-dim)}
 </div>
 </div>
 
-<!-- Active order -->
-<div id="activeOrderHome" style="padding:0 16px;margin-bottom:16px;display:none">
-<div class="active-order fade-in fade-in-d3" onclick="go('detail');showActiveDetail()">
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-<div class="active-order-badge" id="activeOrderBadge">Активная заявка</div>
-<div style="font-size:14px;color:var(--text-dim)" id="activeTimer">10:00</div>
-</div>
-<div style="display:flex;justify-content:space-between;align-items:center">
-<div>
-<div style="font-size:17px;font-weight:500" id="activeType">Покупка</div>
-<div style="font-size:14px;color:var(--text-dim);margin-top:2px" id="activeInfo"></div>
-</div>
-<div style="text-align:right">
-<div style="font-size:19px;font-weight:500" id="activeAmount">— <span style="font-size:14px;font-weight:400;color:var(--text-sec)">₽</span></div>
-</div>
-</div>
-<div style="margin-top:12px;padding-top:10px;border-top:0.5px solid rgba(255,255,255,0.06)">
-<div class="btn-o" onclick="event.stopPropagation();cancelActiveOrder()" style="padding:10px;font-size:15px;border-radius:10px;color:rgba(255,255,255,0.35)">Отменить заявку</div>
-</div>
-</div>
-</div>
+<!-- Active orders (dynamic, supports multiple) -->
+<div id="activeOrdersHome" style="padding:0 16px;margin-bottom:16px"></div>
 
 <!-- Rate row -->
 <div style="padding:0 16px;margin-bottom:16px">
@@ -614,7 +595,7 @@ input::placeholder{color:var(--text-dim)}
 </div>
 
 <div id="detailCancelWrap">
-<div class="btn-o" onclick="cancelActiveOrder();goBack()" style="margin-bottom:10px">Отменить заявку</div>
+<div class="btn-o" onclick="cancelOrderByIdx(viewingOrderIdx);goBack()" style="margin-bottom:10px">Отменить заявку</div>
 </div>
 <div class="btn-o" onclick="goBack()">Назад</div>
 </div></div>
@@ -1106,11 +1087,152 @@ function tCBuy(el){
   else{b.style.background='#fff';v.style.display='block';bw.classList.remove('disabled')}
 }
 
-// Create order and show in active orders with 10min timer
-var orderTimer=null;
-var orderSec=600;
-var activeOrderIdx=null;
+// ═══ MULTI-ORDER SYSTEM ═══
+// Each order in orderHistory has its own .timerSec and .timerId
 var orderHistory=[];
+var viewingOrderIdx=null; // which order is shown on detail screen
+var currentOkIdx=null; // which order is shown on ok/sellok screen
+
+// Master tick — runs every second, updates all active orders
+var masterTimer=null;
+function startMasterTimer(){
+  if(masterTimer)return;
+  masterTimer=setInterval(function(){
+    var hasActive=false;
+    for(var i=0;i<orderHistory.length;i++){
+      var o=orderHistory[i];
+      if(o.status!=='active'||!o.timerSec)continue;
+      o.timerSec--;
+      if(o.timerSec<=0){
+        o.timerSec=0;
+        o.status='cancelled';
+      }
+      hasActive=true;
+    }
+    renderActiveOrders();
+    // Update ok/sellok timer if visible
+    if(currentOkIdx!==null&&orderHistory[currentOkIdx]){
+      var co=orderHistory[currentOkIdx];
+      var okT=document.getElementById('okTimer');
+      var soT=document.getElementById('sellOkTimer');
+      if(co.timerSec>0){
+        var m=Math.floor(co.timerSec/60),s=co.timerSec%60;
+        var str='Осталось: '+m+':'+(s<10?'0':'')+s;
+        if(okT)okT.textContent=str;
+        if(soT)soT.textContent=str;
+      }else{
+        if(okT)okT.textContent='Время истекло';
+        if(soT)soT.textContent='Время истекло';
+      }
+    }
+    // Update detail timer if viewing
+    if(viewingOrderIdx!==null&&orderHistory[viewingOrderIdx]){
+      var vo=orderHistory[viewingOrderIdx];
+      var dtm=document.getElementById('detailTimer');
+      if(dtm){
+        if(vo.status==='active'&&vo.timerSec>0){
+          var m2=Math.floor(vo.timerSec/60),s2=vo.timerSec%60;
+          dtm.textContent=m2+':'+(s2<10?'0':'')+s2;
+        }else{
+          dtm.textContent=vo.status==='active'?'Истекло':'—';
+        }
+      }
+      var dcw=document.getElementById('detailCancelWrap');
+      if(dcw)dcw.style.display=(vo.status==='active'&&vo.timerSec>0)?'block':'none';
+    }
+    if(!hasActive){clearInterval(masterTimer);masterTimer=null}
+  },1000);
+}
+
+// Render all active orders on home screen
+function renderActiveOrders(){
+  var container=document.getElementById('activeOrdersHome');
+  if(!container)return;
+  var html='';
+  for(var i=0;i<orderHistory.length;i++){
+    var o=orderHistory[i];
+    if(o.status!=='active')continue;
+    var m=Math.floor((o.timerSec||0)/60),s=(o.timerSec||0)%60;
+    var timeStr=o.timerSec>0?m+':'+(s<10?'0':'')+s:'Истекло';
+    var timerClass=o.timerSec>0&&o.timerSec<=120?' timer-warning':'';
+    html+='<div class="active-order" style="margin-bottom:10px;cursor:pointer" onclick="viewOrderDetail('+i+')">';
+    html+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">';
+    html+='<div class="active-order-badge">Активная заявка</div>';
+    html+='<div style="font-size:14px;color:var(--text-dim)" class="'+timerClass+'">'+timeStr+'</div>';
+    html+='</div>';
+    html+='<div style="display:flex;justify-content:space-between;align-items:center">';
+    html+='<div><div style="font-size:17px;font-weight:500">'+o.type+'</div>';
+    html+='<div style="font-size:14px;color:var(--text-dim);margin-top:2px">'+o.info+'</div></div>';
+    html+='<div style="text-align:right"><div style="font-size:19px;font-weight:500">'+o.sum+'</div></div>';
+    html+='</div>';
+    html+='<div style="margin-top:12px;padding-top:10px;border-top:0.5px solid rgba(255,255,255,0.06)">';
+    html+='<div class="btn-o" onclick="event.stopPropagation();cancelOrderByIdx('+i+')" style="padding:10px;font-size:15px;border-radius:10px;color:rgba(255,255,255,0.35)">Отменить заявку</div>';
+    html+='</div></div>';
+  }
+  container.innerHTML=html;
+}
+
+// Cancel specific order by index
+function cancelOrderByIdx(idx){
+  var o=orderHistory[idx];
+  if(!o)return;
+  o.status='cancelled';
+  o.timerSec=0;
+  renderActiveOrders();
+  haptic('medium');
+}
+
+// View order detail from home active card or history
+function viewOrderDetail(idx){
+  var o=orderHistory[idx];
+  if(!o)return;
+  viewingOrderIdx=idx;
+  showOrderDetail(o);
+  go('detail');
+}
+
+// Show order detail on detail screen
+function showOrderDetail(d){
+  var da=document.getElementById('detailAmount');if(da)da.textContent=d.sum||'';
+  var dt=document.getElementById('detailType');if(dt)dt.textContent=d.type;
+  var ds=document.getElementById('detailStatus');
+  var dd=document.getElementById('detailStatusDot');
+  var statusText=d.status==='active'?'Активная':d.status==='done'?'Завершена':'Отменена';
+  if(ds)ds.textContent=statusText;
+  if(dd){
+    if(d.status==='active'){dd.style.background='var(--accent-light)';dd.style.border='none'}
+    else if(d.status==='done'){dd.style.background='rgba(60,220,140,0.8)';dd.style.border='none'}
+    else{dd.style.background='transparent';dd.style.border='1px solid rgba(255,255,255,0.2)'}
+  }
+  var ddate=document.getElementById('detailDate');if(ddate)ddate.textContent=d.date||'';
+  var dr=document.getElementById('detailRate');if(dr)dr.textContent=d.info||'';
+  var dsum=document.getElementById('detailSum');if(dsum)dsum.textContent=d.sum||'';
+  var dn=document.getElementById('detailNum');if(dn)dn.textContent=d.num||'';
+  var df=document.getElementById('detailFio');if(df)df.textContent=d.fio||'';
+  var dtm=document.getElementById('detailTimer');
+  if(dtm){
+    if(d.status==='active'&&d.timerSec>0){
+      var m=Math.floor(d.timerSec/60),s=d.timerSec%60;
+      dtm.textContent=m+':'+(s<10?'0':'')+s;
+    }else{
+      dtm.textContent=d.status==='active'?'Истекло':'—';
+    }
+  }
+  var dw=document.getElementById('detailWallet');if(dw)dw.textContent=d.wallet||'—';
+  var dcw=document.getElementById('detailCancelWrap');
+  if(dcw)dcw.style.display=(d.status==='active'&&d.timerSec>0)?'block':'none';
+}
+
+// Helper: generate order metadata
+function makeOrderMeta(){
+  var num=Math.floor(Math.random()*9000+1000);
+  var now=new Date();
+  var months=['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'];
+  var dateStr=now.getDate()+' '+months[now.getMonth()]+' '+now.getFullYear()+', '+now.getHours()+':'+(now.getMinutes()<10?'0':'')+now.getMinutes();
+  return {num:num,dateStr:dateStr};
+}
+
+// ═══ CREATE BUY ORDER ═══
 function createOrder(type){
   var sumInput=document.querySelector('#s-buy input[placeholder="Введите сумму"]');
   var sum=sumInput?sumInput.value.trim():'';
@@ -1120,59 +1242,42 @@ function createOrder(type){
   if(!sum||!fio){alert('Заполните сумму и ФИО');return}
   haptic('success');
   var sumNum=parseFloat(sum.replace(/\s/g,''));
-  var num=Math.floor(Math.random()*9000+1000);
-  var now=new Date();
-  var months=['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'];
-  var dateStr=now.getDate()+' '+months[now.getMonth()]+' '+now.getFullYear()+', '+now.getHours()+':'+(now.getMinutes()<10?'0':'')+now.getMinutes();
+  var meta=makeOrderMeta();
 
-  // Store and add to history
-  activeOrderData={type:'Покупка',info:'USDT TRC-20',sum:sumNum.toLocaleString('ru')+' ₽',status:'active',num:num,fio:fio,date:dateStr,wallet:wallet||'TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8'};
-  activeOrderIdx=orderHistory.length;
-  orderHistory.push(activeOrderData);
+  var order={type:'Покупка',info:'USDT TRC-20',sum:sumNum.toLocaleString('ru')+' ₽',status:'active',num:meta.num,fio:fio,date:meta.dateStr,wallet:wallet||'TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8',timerSec:600};
+  var idx=orderHistory.length;
+  orderHistory.push(order);
+  currentOkIdx=idx;
 
   var okInfo=document.getElementById('okInfo');
-  if(okInfo)okInfo.innerHTML='№ <b style="color:#fff;font-weight:500">'+num+'</b> · '+fio;
+  if(okInfo)okInfo.innerHTML='№ <b style="color:#fff;font-weight:500">'+meta.num+'</b> · '+fio;
 
-  // Show active order — rubles only
-  var ao=document.getElementById('activeOrderHome');if(ao)ao.style.display='block';
-  var at=document.getElementById('activeType');if(at)at.textContent='Покупка';
-  var ai=document.getElementById('activeInfo');if(ai)ai.textContent='USDT TRC-20';
-  var aa=document.getElementById('activeAmount');
-  if(aa)aa.innerHTML=sumNum.toLocaleString('ru')+' <span style="font-size:14px;font-weight:400;color:var(--text-sec)">₽</span>';
-  var badge=document.getElementById('activeOrderBadge');
-  if(badge)badge.textContent='Активная заявка';
-
-  // Start 10 min timer
-  orderSec=600;
-  clearInterval(orderTimer);
-  updateTimer();
-  orderTimer=setInterval(function(){
-    orderSec--;
-    if(orderSec<=0){
-      clearInterval(orderTimer);orderSec=0;
-      if(activeOrderIdx!==null&&orderHistory[activeOrderIdx])orderHistory[activeOrderIdx].status='cancelled';
-      var b=document.getElementById('activeOrderBadge');
-      if(b)b.textContent='Истекла';
-      var atEl=document.getElementById('activeTimer');
-      if(atEl)atEl.textContent='Истекло';
-    }
-    updateTimer();
-  },1000);
-  
+  renderActiveOrders();
+  startMasterTimer();
   go('ok');
 }
-function updateTimer(){
-  if(orderSec<=0)return;
-  var m=Math.floor(orderSec/60);
-  var s=orderSec%60;
-  var str=m+':'+(s<10?'0':'')+s;
-  var el=document.getElementById('okTimer');
-  if(el)el.textContent='Осталось: '+str;
-  var at=document.getElementById('activeTimer');
-  if(at){
-    at.textContent=str;
-    if(orderSec<=120){at.classList.add('timer-warning')}else{at.classList.remove('timer-warning')}
-  }
+
+// ═══ CREATE SELL ORDER ═══
+function createSellOrder(){
+  var sum=document.getElementById('sellSum').value.trim();
+  var isSelf=document.getElementById('tsSell').classList.contains('on');
+  var fio=isSelf?document.getElementById('fioSelfDisplaySell').textContent.trim():(document.getElementById('fiSell')?document.getElementById('fiSell').value.trim():'');
+  if(!sum||!fio){alert('Заполните сумму и ФИО');return}
+  haptic('success');
+  var sumNum=parseFloat(sum.replace(/\s/g,''));
+  var meta=makeOrderMeta();
+
+  var order={type:'Продажа',info:'USDT TRC-20',sum:sumNum.toLocaleString('ru')+' ₽',status:'active',num:meta.num,fio:fio,date:meta.dateStr,wallet:'TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8',timerSec:600};
+  var idx=orderHistory.length;
+  orderHistory.push(order);
+  currentOkIdx=idx;
+
+  var si=document.getElementById('sellOkInfo');
+  if(si)si.innerHTML='№ <b style="color:#fff;font-weight:500">'+meta.num+'</b> · '+fio+'<br>'+sumNum.toLocaleString('ru')+' ₽';
+
+  renderActiveOrders();
+  startMasterTimer();
+  go('sellok');
 }
 
 // Copy wallet
@@ -1214,68 +1319,6 @@ function copyRefCode(btn){
     },1500);
   });
   haptic();
-}
-
-// Create SELL order — full flow with timer + active order on home
-function createSellOrder(){
-  var sum=document.getElementById('sellSum').value.trim();
-  var isSelf=document.getElementById('tsSell').classList.contains('on');
-  var fio=isSelf?document.getElementById('fioSelfDisplaySell').textContent.trim():(document.getElementById('fiSell')?document.getElementById('fiSell').value.trim():'');
-  if(!sum||!fio){alert('Заполните сумму и ФИО');return}
-  haptic('success');
-  var sumNum=parseFloat(sum.replace(/\s/g,''));
-  var num=Math.floor(Math.random()*9000+1000);
-  var now=new Date();
-  var months=['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'];
-  var dateStr=now.getDate()+' '+months[now.getMonth()]+' '+now.getFullYear()+', '+now.getHours()+':'+(now.getMinutes()<10?'0':'')+now.getMinutes();
-
-  // Store and add to history
-  activeOrderData={type:'Продажа',info:'USDT TRC-20',sum:sumNum.toLocaleString('ru')+' ₽',status:'active',num:num,fio:fio,date:dateStr,wallet:'TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8'};
-  activeOrderIdx=orderHistory.length;
-  orderHistory.push(activeOrderData);
-
-  // Fill sellok screen
-  var si=document.getElementById('sellOkInfo');
-  if(si)si.innerHTML='№ <b style="color:#fff;font-weight:500">'+num+'</b> · '+fio+'<br>'+sumNum.toLocaleString('ru')+' ₽';
-
-  // Show active order on home
-  var ao=document.getElementById('activeOrderHome');if(ao)ao.style.display='block';
-  var at=document.getElementById('activeType');if(at)at.textContent='Продажа';
-  var ai=document.getElementById('activeInfo');if(ai)ai.textContent='USDT TRC-20';
-  var aa=document.getElementById('activeAmount');
-  if(aa)aa.innerHTML=sumNum.toLocaleString('ru')+' <span style="font-size:14px;font-weight:400;color:var(--text-sec)">₽</span>';
-  var badge=document.getElementById('activeOrderBadge');
-  if(badge)badge.textContent='Активная заявка';
-
-  // Start 10 min timer
-  orderSec=600;
-  clearInterval(orderTimer);
-  updateSellTimer();
-  updateTimer();
-  orderTimer=setInterval(function(){
-    orderSec--;
-    if(orderSec<=0){
-      clearInterval(orderTimer);orderSec=0;
-      if(activeOrderIdx!==null&&orderHistory[activeOrderIdx])orderHistory[activeOrderIdx].status='cancelled';
-      var b=document.getElementById('activeOrderBadge');
-      if(b)b.textContent='Истекла';
-      var atEl=document.getElementById('activeTimer');
-      if(atEl)atEl.textContent='Истекло';
-      var st=document.getElementById('sellOkTimer');
-      if(st)st.textContent='Время истекло';
-    }
-    updateTimer();
-    updateSellTimer();
-  },1000);
-
-  go('sellok');
-}
-function updateSellTimer(){
-  if(orderSec<=0)return;
-  var m=Math.floor(orderSec/60);
-  var s=orderSec%60;
-  var st=document.getElementById('sellOkTimer');
-  if(st)st.textContent='Осталось: '+m+':'+(s<10?'0':'')+s;
 }
 
 // Wallet dropdown
@@ -1486,59 +1529,9 @@ function haptic(style,el){
   }
 }
 
-// Cancel active order
+// Cancel order (legacy alias for detail screen)
 function cancelActiveOrder(){
-  clearInterval(orderTimer);
-  orderSec=0;
-  // Mark in history as cancelled
-  if(activeOrderIdx!==null&&orderHistory[activeOrderIdx])orderHistory[activeOrderIdx].status='cancelled';
-  var ao=document.getElementById('activeOrderHome');
-  if(ao){
-    ao.style.transition='opacity 0.3s,transform 0.3s';
-    ao.style.opacity='0';
-    ao.style.transform='translateY(-10px)';
-    setTimeout(function(){ao.style.display='none';ao.style.opacity='';ao.style.transform=''},300);
-  }
-  activeOrderData=null;
-  activeOrderIdx=null;
-  haptic('medium');
-}
-
-// Active order data store
-var activeOrderData=null;
-
-// Show active order detail (dynamic, not hardcoded)
-function showActiveDetail(){
-  if(!activeOrderData)return;
-  var d=activeOrderData;
-  var da=document.getElementById('detailAmount');if(da)da.textContent=d.sum||'';
-  var dt=document.getElementById('detailType');if(dt)dt.textContent=d.type;
-  var ds=document.getElementById('detailStatus');
-  var dd=document.getElementById('detailStatusDot');
-  var statusText=d.status==='active'?'Активная':d.status==='done'?'Завершена':'Отменена';
-  if(ds)ds.textContent=statusText;
-  if(dd){
-    if(d.status==='active'){dd.style.background='var(--accent-light)';dd.style.border='none'}
-    else if(d.status==='done'){dd.style.background='rgba(60,220,140,0.8)';dd.style.border='none'}
-    else{dd.style.background='transparent';dd.style.border='1px solid rgba(255,255,255,0.2)'}
-  }
-  var ddate=document.getElementById('detailDate');if(ddate)ddate.textContent=d.date||'';
-  var dr=document.getElementById('detailRate');if(dr)dr.textContent=d.info||'';
-  var dsum=document.getElementById('detailSum');if(dsum)dsum.textContent=d.sum||'';
-  var dn=document.getElementById('detailNum');if(dn)dn.textContent=d.num||'';
-  var df=document.getElementById('detailFio');if(df)df.textContent=d.fio||'';
-  var dtm=document.getElementById('detailTimer');
-  if(dtm){
-    if(d.status==='active'&&orderSec>0){
-      var m=Math.floor(orderSec/60),s=orderSec%60;
-      dtm.textContent=m+':'+(s<10?'0':'')+s;
-    }else{
-      dtm.textContent=d.status==='active'?'Истекло':'—';
-    }
-  }
-  var dw=document.getElementById('detailWallet');if(dw)dw.textContent=d.wallet||'—';
-  var dcw=document.getElementById('detailCancelWrap');
-  if(dcw)dcw.style.display=(d.status==='active'&&orderSec>0)?'block':'none';
+  if(viewingOrderIdx!==null)cancelOrderByIdx(viewingOrderIdx);
 }
 
 // Sell toggle (приеду сам / курьер)
@@ -1657,28 +1650,25 @@ function createTransferOrder(){
   if(to==='Выберите город'){alert('Выберите город получения');return}
   if(!fio){alert('Укажите ФИО в профиле');return}
 
-  var num=Math.floor(Math.random()*9000+1000);
-  var now=new Date();
-  var months=['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'];
-  var dateStr=now.getDate()+' '+months[now.getMonth()]+' '+now.getFullYear()+', '+now.getHours()+':'+(now.getMinutes()<10?'0':'')+now.getMinutes();
+  var meta=makeOrderMeta();
   var sumNum=parseFloat(sum.replace(/\s/g,''));
 
-  // Add to history
+  // Add to history (no timer for transfers)
   orderHistory.push({
     type:'Перестановка',
     info:from+' → '+to,
     sum:sumNum.toLocaleString('ru')+' ₽',
     status:'active',
-    num:num,
+    num:meta.num,
     fio:fio,
-    date:dateStr
+    date:meta.dateStr,
+    timerSec:0
   });
 
   haptic('success');
-  // Show thank you screen instead of ok screen
   go('transferOk');
   var toi=document.getElementById('transferOkInfo');
-  if(toi)toi.innerHTML='№ <b style="color:#fff;font-weight:500">'+num+'</b><br>'+from+' → '+to+'<br>'+sumNum.toLocaleString('ru')+' ₽';
+  if(toi)toi.innerHTML='№ <b style="color:#fff;font-weight:500">'+meta.num+'</b><br>'+from+' → '+to+'<br>'+sumNum.toLocaleString('ru')+' ₽';
 }
 
 // History filter
@@ -1712,8 +1702,8 @@ function renderHistory(filter){
 function viewHistoryOrder(idx){
   var o=orderHistory[idx];
   if(!o)return;
-  activeOrderData=o;
-  showActiveDetail();
+  viewingOrderIdx=idx;
+  showOrderDetail(o);
   go('detail');
 }
 
