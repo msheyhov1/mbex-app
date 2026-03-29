@@ -211,7 +211,7 @@ input::placeholder{color:var(--text-dim)}
 <div class="app">
 
 <div class="bg-base"></div>
-<video id="bgVideo" autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0.06;pointer-events:none"></video>
+<video id="bgVideo" autoplay muted loop playsinline webkit-playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0;pointer-events:none"><source src="bg.mp4" type="video/mp4"></video>
 
 <div style="position:relative;z-index:2;display:flex;flex-direction:column;height:100%">
 
@@ -1674,17 +1674,36 @@ try{!function(){
   ct.addEventListener('touchend',function(){tracking=false},{passive:true});
 }();
 
-// Background video — fade in smoothly
+// Background video — force autoplay on iOS
 !function(){
   var v=document.getElementById('bgVideo');
   if(!v)return;
-  v.src='bg.mp4';
-  v.style.opacity='0';
   v.style.transition='opacity 2s ease';
-  v.addEventListener('canplay',function(){
-    setTimeout(function(){v.style.opacity='0.45'},500);
-  });
-  v.load();
+  
+  function showVideo(){
+    v.style.opacity='0.45';
+  }
+  
+  function tryPlay(){
+    var p=v.play();
+    if(p&&p.then){
+      p.then(showVideo).catch(function(){
+        // iOS blocked autoplay — try again on first touch
+        document.addEventListener('touchstart',function once(){
+          v.play().then(showVideo).catch(function(){});
+          document.removeEventListener('touchstart',once);
+        },{once:true});
+      });
+    }else{
+      showVideo();
+    }
+  }
+  
+  if(v.readyState>=2){
+    tryPlay();
+  }else{
+    v.addEventListener('canplay',tryPlay,{once:true});
+  }
 }();
 
 // Shimmer on primary buttons
