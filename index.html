@@ -325,16 +325,54 @@ input::placeholder{color:var(--text-dim)}
 <!-- Active orders (dynamic, supports multiple) -->
 <div id="activeOrdersHome" style="padding:0 16px;margin-bottom:16px"></div>
 
-<!-- Rate row -->
+<!-- Rate rows -->
 <div style="padding:0 16px;margin-bottom:16px">
-<div class="cd fade-in fade-in-d4" style="padding:12px 16px">
-<div style="display:flex;justify-content:space-between;align-items:center">
+<div class="cd fade-in fade-in-d4" style="padding:0">
+<!-- Tether USDT row -->
+<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:0.5px solid rgba(255,255,255,0.06)">
 <span style="font-size:16px;font-weight:500;flex:1">Tether USDT</span>
 <span style="font-size:16px;font-weight:500;width:70px;text-align:right;color:rgba(60,220,140,1)">85.96</span>
 <span style="font-size:16px;font-weight:500;width:70px;text-align:right;color:rgba(255,90,90,0.9)">85.60</span>
 </div>
+<!-- ЦБ РФ row -->
+<div style="padding:12px 16px">
+<div style="display:flex;justify-content:space-between;align-items:center">
+<span style="font-size:16px;font-weight:500;flex:1">ЦБ РФ</span>
+<div style="text-align:right;width:70px">
+<div style="font-size:16px;font-weight:500" id="cbrYesterday">84.73</div>
+<div style="font-size:11px;color:var(--text-dim)">вчера</div>
+</div>
+<div style="text-align:right;width:70px">
+<div style="font-size:16px;font-weight:500" id="cbrToday">85.41</div>
+<div style="font-size:11px;color:var(--text-dim)">сегодня</div>
 </div>
 </div>
+</div>
+</div>
+</div>
+
+<script>
+// ЦБ РФ rate color logic
+!function(){
+  var ye=document.getElementById('cbrYesterday');
+  var te=document.getElementById('cbrToday');
+  if(!ye||!te)return;
+  var yv=parseFloat(ye.textContent);
+  var tv=parseFloat(te.textContent);
+  if(tv>yv){
+    // курс поднялся — вчера красный, сегодня зелёный
+    ye.style.color='rgba(255,90,90,0.9)';
+    te.style.color='rgba(60,220,140,1)';
+  }else if(tv<yv){
+    // курс снизился — вчера зелёный, сегодня красный
+    ye.style.color='rgba(60,220,140,1)';
+    te.style.color='rgba(255,90,90,0.9)';
+  }else{
+    ye.style.color='var(--text-sec)';
+    te.style.color='var(--text-sec)';
+  }
+}();
+</script>
 
 <!-- Quick links — grouped card -->
 <div style="padding:0 16px;padding-bottom:90px">
