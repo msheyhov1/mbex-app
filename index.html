@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no,email=no,address=no">
 <title>MBEX</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -254,6 +255,10 @@ input::placeholder{color:var(--text-dim)}
 
 /* Scrollbar for all platforms */
 *{scrollbar-width:none;-ms-overflow-style:none}
+
+/* Kill mobile auto-link coloring (phone, email, etc) */
+a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-decoration:none !important}
+#s-profile a{color:inherit !important;text-decoration:none !important}
 
 </style>
 </head>
@@ -704,12 +709,12 @@ input::placeholder{color:var(--text-dim)}
 </div>
 <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:0.5px solid rgba(255,255,255,0.05)">
 <span style="font-size:14px;color:var(--text-dim)">Telegram ID</span>
-<span style="font-size:14px;font-weight:600;color:#fff;text-shadow:0 0 8px rgba(255,255,255,0.4),0 0 20px rgba(255,255,255,0.15)">7310949179</span>
+<span style="font-size:14px;font-weight:600;color:#fff !important;text-shadow:0 0 8px rgba(255,255,255,0.4),0 0 20px rgba(255,255,255,0.15);-webkit-text-fill-color:#fff">7310949179</span>
 </div>
 <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:0.5px solid rgba(255,255,255,0.05)">
 <span style="font-size:14px;color:var(--text-dim)">Телефон</span>
 <div style="display:flex;align-items:center;gap:8px">
-<span style="font-size:14px;font-weight:500" id="profilePhone">+7 (999) 123-45-67</span>
+<span style="font-size:14px;font-weight:500;color:#fff !important;-webkit-text-fill-color:#fff" id="profilePhone">+7 (999) 123-45-67</span>
 <svg onclick="editProfilePhone()" width="14" height="14" viewBox="0 0 24 24" fill="none" style="cursor:pointer;opacity:0.5;flex-shrink:0"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </div>
 </div>
@@ -721,7 +726,16 @@ input::placeholder{color:var(--text-dim)}
 </div>
 <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0">
 <span style="font-size:14px;color:var(--text-dim)">Почта</span>
-<span style="font-size:14px;font-weight:500">user@example.com</span>
+<div style="display:flex;align-items:center;gap:8px">
+<span style="font-size:14px;font-weight:500;color:#fff !important;-webkit-text-fill-color:#fff" id="profileEmail">user@example.com</span>
+<svg onclick="editProfileEmail()" width="14" height="14" viewBox="0 0 24 24" fill="none" style="cursor:pointer;opacity:0.5;flex-shrink:0"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</div>
+</div>
+<div id="profileEmailEdit" style="display:none;padding:8px 0 4px">
+<div style="display:flex;gap:8px">
+<input id="profileEmailInput" placeholder="email@example.com" style="font-size:14px;padding:10px 12px" type="email">
+<div class="btn-primary" onclick="saveProfileEmail()" style="padding:10px 14px;font-size:13px;border-radius:10px;width:auto;flex-shrink:0">OK</div>
+</div>
 </div>
 </div>
 </div></div>
@@ -851,7 +865,7 @@ input::placeholder{color:var(--text-dim)}
 <div style="font-size:14px;color:var(--text-sec)">Башня Федерация — Восток, 5 этаж, офис 512</div>
 </div>
 
-<a href="https://yandex.ru/maps/-/CDawrR" target="_blank" style="display:flex;align-items:center;gap:8px;padding:12px 16px;border-radius:14px;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.08);margin-bottom:12px;text-decoration:none;color:#fff">
+<a href="https://yandex.ru/maps/org/195743966550?si=5r0knwmzjxnyb99d7ar4nr334g" target="_blank" style="display:flex;align-items:center;gap:8px;padding:12px 16px;border-radius:14px;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.08);margin-bottom:12px;text-decoration:none;color:#fff">
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/><circle cx="12" cy="10" r="3" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/></svg>
 <span style="font-size:15px;font-weight:500">Открыть в Яндекс Картах</span>
 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="margin-left:auto;opacity:0.5"><path d="M7 17L17 7M17 7H7M17 7v10" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -876,17 +890,20 @@ Instagram</a>
 
 <div style="font-size:12px;color:var(--text-dim);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px">Наш офис</div>
 <div id="officeGallery" style="display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;scroll-snap-type:x mandatory">
-<div style="flex-shrink:0;width:220px;height:140px;border-radius:12px;background:linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));border:0.5px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;scroll-snap-align:start">
-<div style="text-align:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" style="opacity:0.25;margin-bottom:6px"><rect x="2" y="3" width="20" height="18" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M2 15l5-5 4 4 4-6 7 7" stroke="#fff" stroke-width="1.5"/></svg><div style="font-size:12px;color:var(--text-dim)">Ресепшн</div></div>
+<div style="flex-shrink:0;width:260px;height:170px;border-radius:12px;overflow:hidden;border:0.5px solid rgba(255,255,255,0.08);scroll-snap-align:start">
+<img src="photo1.jpg" alt="Башня Федерация" style="width:100%;height:100%;object-fit:cover;display:block">
 </div>
-<div style="flex-shrink:0;width:220px;height:140px;border-radius:12px;background:linear-gradient(135deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01));border:0.5px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;scroll-snap-align:start">
-<div style="text-align:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" style="opacity:0.25;margin-bottom:6px"><rect x="2" y="3" width="20" height="18" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M2 15l5-5 4 4 4-6 7 7" stroke="#fff" stroke-width="1.5"/></svg><div style="font-size:12px;color:var(--text-dim)">Переговорная</div></div>
+<div style="flex-shrink:0;width:260px;height:170px;border-radius:12px;overflow:hidden;border:0.5px solid rgba(255,255,255,0.08);scroll-snap-align:start">
+<img src="photo2.jpg" alt="Вход" style="width:100%;height:100%;object-fit:cover;display:block">
 </div>
-<div style="flex-shrink:0;width:220px;height:140px;border-radius:12px;background:linear-gradient(135deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02));border:0.5px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;scroll-snap-align:start">
-<div style="text-align:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" style="opacity:0.25;margin-bottom:6px"><rect x="2" y="3" width="20" height="18" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M2 15l5-5 4 4 4-6 7 7" stroke="#fff" stroke-width="1.5"/></svg><div style="font-size:12px;color:var(--text-dim)">Рабочая зона</div></div>
+<div style="flex-shrink:0;width:260px;height:170px;border-radius:12px;overflow:hidden;border:0.5px solid rgba(255,255,255,0.08);scroll-snap-align:start">
+<img src="photo3.jpg" alt="Атриум" style="width:100%;height:100%;object-fit:cover;display:block">
 </div>
-<div style="flex-shrink:0;width:220px;height:140px;border-radius:12px;background:linear-gradient(135deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));border:0.5px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;scroll-snap-align:start">
-<div style="text-align:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" style="opacity:0.25;margin-bottom:6px"><rect x="2" y="3" width="20" height="18" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M2 15l5-5 4 4 4-6 7 7" stroke="#fff" stroke-width="1.5"/></svg><div style="font-size:12px;color:var(--text-dim)">Лаунж</div></div>
+<div style="flex-shrink:0;width:260px;height:170px;border-radius:12px;overflow:hidden;border:0.5px solid rgba(255,255,255,0.08);scroll-snap-align:start">
+<img src="photo4.jpg" alt="Офис MBEX" style="width:100%;height:100%;object-fit:cover;display:block">
+</div>
+<div style="flex-shrink:0;width:260px;height:170px;border-radius:12px;overflow:hidden;border:0.5px solid rgba(255,255,255,0.08);scroll-snap-align:start">
+<img src="photo5.jpg" alt="Лаунж MBEX" style="width:100%;height:100%;object-fit:cover;display:block">
 </div>
 </div>
 </div></div>
@@ -1569,6 +1586,23 @@ function saveProfilePhone(){
   if(!val)return;
   document.getElementById('profilePhone').textContent=val;
   document.getElementById('profilePhoneEdit').style.display='none';
+  haptic();
+}
+
+// Profile email edit
+function editProfileEmail(){
+  var edit=document.getElementById('profileEmailEdit');
+  if(edit.style.display==='block'){edit.style.display='none';return}
+  edit.style.display='block';
+  document.getElementById('profileEmailInput').value=document.getElementById('profileEmail').textContent;
+  document.getElementById('profileEmailInput').focus();
+  haptic();
+}
+function saveProfileEmail(){
+  var val=document.getElementById('profileEmailInput').value.trim();
+  if(!val)return;
+  document.getElementById('profileEmail').textContent=val;
+  document.getElementById('profileEmailEdit').style.display='none';
   haptic();
 }
 
