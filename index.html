@@ -343,13 +343,16 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 <div style="padding:12px 16px">
 <div style="display:flex;justify-content:space-between;align-items:center">
 <span style="font-size:16px;font-weight:500;flex:1">ЦБ РФ</span>
-<div style="text-align:right;width:70px">
-<div style="font-size:16px;font-weight:500" id="cbrYesterday">84.73</div>
-<div style="font-size:11px;color:var(--text-dim)">вчера</div>
+<div style="display:flex;align-items:center;gap:6px">
+<div style="text-align:center">
+<div style="font-size:14px;font-weight:500;color:#fff;line-height:1" id="cbrYesterday">84.73</div>
+<div style="font-size:10px;color:var(--text-dim);margin-top:3px">вчера</div>
 </div>
-<div style="text-align:right;width:70px">
-<div style="font-size:16px;font-weight:500" id="cbrToday">85.41</div>
-<div style="font-size:11px;color:var(--text-dim)">сегодня</div>
+<div id="cbrArrow" style="display:flex;align-items:center;justify-content:center;width:18px;margin-bottom:14px"></div>
+<div style="text-align:center">
+<div style="font-size:14px;font-weight:500;color:#fff;line-height:1" id="cbrToday">85.41</div>
+<div style="font-size:10px;color:var(--text-dim);margin-top:3px">сегодня</div>
+</div>
 </div>
 </div>
 </div>
@@ -357,24 +360,22 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 </div>
 
 <script>
-// ЦБ РФ rate color logic
+// ЦБ РФ arrow logic
 !function(){
   var ye=document.getElementById('cbrYesterday');
   var te=document.getElementById('cbrToday');
-  if(!ye||!te)return;
+  var ar=document.getElementById('cbrArrow');
+  if(!ye||!te||!ar)return;
   var yv=parseFloat(ye.textContent);
   var tv=parseFloat(te.textContent);
   if(tv>yv){
-    // курс поднялся — вчера красный, сегодня зелёный
-    ye.style.color='rgba(255,90,90,0.9)';
-    te.style.color='rgba(60,220,140,1)';
+    // курс вырос — стрелка вверх зелёная
+    ar.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M12 5l-5 5M12 5l5 5" stroke="rgba(60,220,140,1)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   }else if(tv<yv){
-    // курс снизился — вчера зелёный, сегодня красный
-    ye.style.color='rgba(60,220,140,1)';
-    te.style.color='rgba(255,90,90,0.9)';
+    // курс упал — стрелка вниз красная
+    ar.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M12 19l-5-5M12 19l5-5" stroke="rgba(255,90,90,0.9)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   }else{
-    ye.style.color='var(--text-sec)';
-    te.style.color='var(--text-sec)';
+    ar.innerHTML='<span style="color:var(--text-dim)">=</span>';
   }
 }();
 </script>
@@ -406,21 +407,6 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 <div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/><circle cx="12" cy="10" r="3" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/></svg></div>
 <span style="flex:1;font-size:16px;font-weight:500">Филиалы</span>
 <svg id="branchChev" width="14" height="14" viewBox="0 0 24 24" fill="none" style="transition:transform 0.2s"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg>
-</div>
-</div>
-<!-- Branch selector -->
-<div id="branchList" style="display:none;padding:0 0 4px 46px">
-<div class="branch-item" onclick="pickBranch(this,'moscow')" data-active="true" style="display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:0.5px solid rgba(255,255,255,0.04);cursor:pointer">
-<div style="width:8px;height:8px;border-radius:50%;background:#fff;flex-shrink:0" class="branch-dot"></div>
-<span style="font-size:16px;font-weight:500">Москва</span>
-</div>
-<div class="branch-item" onclick="pickBranch(this,'makhachkala')" style="display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:0.5px solid rgba(255,255,255,0.04);cursor:pointer">
-<div style="width:8px;height:8px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);flex-shrink:0" class="branch-dot"></div>
-<span style="font-size:16px;color:var(--text-sec)">Махачкала</span>
-</div>
-<div class="branch-item" onclick="pickBranch(this,'dubai')" style="display:flex;align-items:center;gap:8px;padding:10px 0;cursor:pointer">
-<div style="width:8px;height:8px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);flex-shrink:0" class="branch-dot"></div>
-<span style="font-size:16px;color:var(--text-sec)">Дубай</span>
 </div>
 </div>
 </div>
@@ -1057,6 +1043,26 @@ Instagram</a>
 <div class="tb-i" id="t-profile" onclick="go('profile')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="var(--text-dim)" stroke-width="1.8"/><path d="M4 21c0-3.866 3.582-7 8-7s8 3.134 8 7" stroke="var(--text-dim)" stroke-width="1.8" stroke-linecap="round"/></svg><span>Профиль</span></div>
 </div>
 
+<!-- Branch modal overlay -->
+<div id="branchModal" style="display:none;position:absolute;inset:0;z-index:100;background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center" onclick="closeBranchModal()">
+<div onclick="event.stopPropagation()" style="background:rgba(18,18,24,0.95);border:0.5px solid rgba(255,255,255,0.12);border-radius:18px;padding:24px 20px;width:280px;box-shadow:0 20px 60px rgba(0,0,0,0.6)">
+<div style="font-size:18px;font-weight:600;margin-bottom:4px;text-align:center">Филиал</div>
+<div style="font-size:13px;color:var(--text-dim);margin-bottom:20px;text-align:center">Выберите город</div>
+<div class="branch-item" onclick="pickBranch(this,'moscow')" data-active="true" style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;cursor:pointer;transition:background 0.15s;margin-bottom:6px;background:rgba(255,255,255,0.06)">
+<div style="width:10px;height:10px;border-radius:50%;background:#fff;flex-shrink:0" class="branch-dot"></div>
+<span style="font-size:17px;font-weight:500">Москва</span>
+</div>
+<div class="branch-item" onclick="pickBranch(this,'makhachkala')" style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;cursor:pointer;transition:background 0.15s;margin-bottom:6px">
+<div style="width:10px;height:10px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.2);flex-shrink:0" class="branch-dot"></div>
+<span style="font-size:17px;color:var(--text-sec)">Махачкала</span>
+</div>
+<div class="branch-item" onclick="pickBranch(this,'dubai')" style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;cursor:pointer;transition:background 0.15s">
+<div style="width:10px;height:10px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.2);flex-shrink:0" class="branch-dot"></div>
+<span style="font-size:17px;color:var(--text-sec)">Дубай</span>
+</div>
+</div>
+</div>
+
 </div></div>
 
 <script>
@@ -1428,29 +1434,30 @@ document.addEventListener('click',function(e){
 
 // Branches toggle
 function toggleBranches(){
-  var list=document.getElementById('branchList');
-  var chev=document.getElementById('branchChev');
-  if(list.style.display==='none'||!list.style.display){
-    list.style.display='block';
-    chev.style.transform='rotate(90deg)';
-  }else{
-    list.style.display='none';
-    chev.style.transform='';
-  }
+  var modal=document.getElementById('branchModal');
+  modal.style.display='flex';
+  haptic();
+}
+function closeBranchModal(){
+  document.getElementById('branchModal').style.display='none';
 }
 function pickBranch(el,city){
   var names={moscow:'Москва',makhachkala:'Махачкала',dubai:'Дубай'};
   document.querySelectorAll('.branch-item').forEach(function(item){
     item.querySelector('.branch-dot').style.background='transparent';
-    item.querySelector('.branch-dot').style.border='1px solid rgba(255,255,255,0.15)';
+    item.querySelector('.branch-dot').style.border='1.5px solid rgba(255,255,255,0.2)';
     item.querySelector('span').style.color='var(--text-sec)';
     item.querySelector('span').style.fontWeight='400';
+    item.style.background='transparent';
   });
   el.querySelector('.branch-dot').style.background='#fff';
   el.querySelector('.branch-dot').style.border='none';
   el.querySelector('span').style.color='#fff';
   el.querySelector('span').style.fontWeight='500';
+  el.style.background='rgba(255,255,255,0.06)';
   document.getElementById('branchLabel').textContent=names[city]||city;
+  haptic();
+  setTimeout(closeBranchModal,200);
 }
 
 // Profile wallets
