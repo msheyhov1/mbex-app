@@ -29,6 +29,10 @@
   --red:rgba(255,90,90,0.9);
   --red-dim:rgba(255,90,90,0.1);
 }
+/* Fallback: if backdrop-filter not supported, use solid dark bg */
+@supports not ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
+  :root{--glass:rgba(22,22,28,0.93)}
+}
 html,body{height:100%;background:var(--bg);overflow:hidden;font-family:'Montserrat',-apple-system,sans-serif;color:var(--text)}
 ::-webkit-scrollbar{display:none}
 .app{max-width:430px;margin:0 auto;height:100vh;height:100dvh;display:flex;flex-direction:column;position:relative;overflow:hidden}
