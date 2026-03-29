@@ -214,6 +214,7 @@ input::placeholder{color:var(--text-dim)}
 <div class="app">
 
 <div class="bg-base"></div>
+<video id="bgVideo" autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0.06;pointer-events:none"></video>
 
 <div style="position:relative;z-index:2;display:flex;flex-direction:column;height:100%">
 
@@ -235,18 +236,16 @@ input::placeholder{color:var(--text-dim)}
 <!-- ═══ HOME ═══ -->
 <div class="scr act" id="s-home">
 
-<!-- Logo with brand animation -->
-<div class="logo-area" style="position:relative;height:44px;overflow:hidden">
-<img src="logo.png" id="logoImg" style="display:block;margin:0 auto;height:32px;width:auto;opacity:0;position:relative;z-index:2">
-<!-- Animated arrow pattern overlay inspired by brandbook -->
-<canvas id="logoAnim" style="position:absolute;inset:0;z-index:3;pointer-events:none"></canvas>
+<!-- Logo -->
+<div class="logo-area" style="height:40px;padding:6px 16px 0">
+<img src="logo.png" alt="MBEX" style="display:block;margin:0 auto;height:32px;width:auto">
 </div>
 
 <!-- Chart -->
 <div style="padding:0 16px;margin-top:4px" id="chart-area"></div>
 <div style="padding:4px 16px 0;display:flex;justify-content:space-between;align-items:baseline">
 <div style="font-size:14px;font-weight:400;color:var(--text-sec)">USDT / RUB</div>
-<div style="font-size:12px;color:var(--text-dim)">актуальный курс на: 14:41 MSK</div>
+<div style="font-size:12px;color:var(--text-dim)">актуальный курс на: 29.03, 14:41 MSK</div>
 </div>
 
 <!-- Buy / Sell hero cards — NO badges -->
@@ -327,59 +326,10 @@ input::placeholder{color:var(--text-dim)}
 <span style="flex:1;font-size:16px;font-weight:500">AML / KYC</span>
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg>
 </div>
-<div style="display:flex;align-items:center;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.06);cursor:pointer" onclick="toggleContacts()">
+<div style="display:flex;align-items:center;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.06);cursor:pointer" onclick="go('contacts')">
 <div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/></svg></div>
 <span style="flex:1;font-size:16px;font-weight:500">Контакты</span>
-<svg id="contactChev" width="14" height="14" viewBox="0 0 24 24" fill="none" style="transition:transform 0.2s"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg>
-</div>
-<!-- Contacts expanded -->
-<div id="contactsPanel" style="display:none;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.06)">
-<!-- Address -->
-<div style="margin-bottom:12px">
-<div style="font-size:12px;color:var(--text-dim);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">Адрес</div>
-<div style="font-size:15px;font-weight:500;margin-bottom:2px">Пресненская наб. 12</div>
-<div style="font-size:14px;color:var(--text-sec)">Башня Федерация — Восток, 5 этаж, офис 512</div>
-</div>
-<!-- Map link -->
-<a href="https://yandex.ru/maps/-/CDawrR" target="_blank" style="display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.08);margin-bottom:12px;text-decoration:none;color:#fff;cursor:pointer">
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/><circle cx="12" cy="10" r="3" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/></svg>
-<span style="font-size:14px;font-weight:500">Открыть в Яндекс Картах</span>
-<svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="margin-left:auto;opacity:0.3"><path d="M7 17L17 7M17 7H7M17 7v10" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-</a>
-<!-- Schedule -->
-<div style="margin-bottom:12px">
-<div style="font-size:12px;color:var(--text-dim);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">Режим работы</div>
-<div style="font-size:14px;color:var(--text-sec)">Пн — Пт: 10:00 — 20:00</div>
-<div style="font-size:14px;color:var(--text-sec)">Сб — Вс: 11:00 — 18:00</div>
-</div>
-<!-- Socials -->
-<div style="display:flex;gap:8px;margin-bottom:14px">
-<a href="https://mbex.io" target="_blank" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:10px;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.08);text-decoration:none;color:var(--text-sec);font-size:13px;font-weight:500">
-<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10A15.3 15.3 0 0112 2z" stroke="currentColor" stroke-width="1.5"/></svg>
-Сайт</a>
-<a href="https://t.me/mbex_exchange" target="_blank" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:10px;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.08);text-decoration:none;color:var(--text-sec);font-size:13px;font-weight:500">
-<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M21 5L2 12.5l7 1M21 5l-5 15-6.5-6.5M21 5l-12 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-Telegram</a>
-<a href="https://instagram.com/mbex_exchange" target="_blank" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:10px;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.08);text-decoration:none;color:var(--text-sec);font-size:13px;font-weight:500">
-<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>
-Instagram</a>
-</div>
-<!-- Office gallery -->
-<div style="font-size:12px;color:var(--text-dim);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px">Наш офис</div>
-<div id="officeGallery" style="display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;scroll-snap-type:x mandatory">
-<div style="flex-shrink:0;width:200px;height:130px;border-radius:10px;background:linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));border:0.5px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;scroll-snap-align:start">
-<div style="text-align:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="opacity:0.2;margin-bottom:4px"><rect x="2" y="3" width="20" height="18" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M2 15l5-5 4 4 4-6 7 7" stroke="#fff" stroke-width="1.5"/></svg><div style="font-size:11px;color:var(--text-dim)">Ресепшн</div></div>
-</div>
-<div style="flex-shrink:0;width:200px;height:130px;border-radius:10px;background:linear-gradient(135deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01));border:0.5px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;scroll-snap-align:start">
-<div style="text-align:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="opacity:0.2;margin-bottom:4px"><rect x="2" y="3" width="20" height="18" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M2 15l5-5 4 4 4-6 7 7" stroke="#fff" stroke-width="1.5"/></svg><div style="font-size:11px;color:var(--text-dim)">Переговорная</div></div>
-</div>
-<div style="flex-shrink:0;width:200px;height:130px;border-radius:10px;background:linear-gradient(135deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02));border:0.5px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;scroll-snap-align:start">
-<div style="text-align:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="opacity:0.2;margin-bottom:4px"><rect x="2" y="3" width="20" height="18" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M2 15l5-5 4 4 4-6 7 7" stroke="#fff" stroke-width="1.5"/></svg><div style="font-size:11px;color:var(--text-dim)">Рабочая зона</div></div>
-</div>
-<div style="flex-shrink:0;width:200px;height:130px;border-radius:10px;background:linear-gradient(135deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));border:0.5px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;scroll-snap-align:start">
-<div style="text-align:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="opacity:0.2;margin-bottom:4px"><rect x="2" y="3" width="20" height="18" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M2 15l5-5 4 4 4-6 7 7" stroke="#fff" stroke-width="1.5"/></svg><div style="font-size:11px;color:var(--text-dim)">Лаунж</div></div>
-</div>
-</div>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg>
 </div>
 <div style="display:flex;align-items:center;padding:14px 16px;cursor:pointer" onclick="toggleBranches()">
 <div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><circle cx="12" cy="10" r="3" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/></svg></div>
@@ -409,7 +359,7 @@ Instagram</a>
 <div class="scr" id="s-buy"><div style="padding:0 16px;padding-bottom:40px">
 <div style="font-size:23px;font-weight:600;margin-bottom:6px;margin-top:12px">Купить USDT</div>
 <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px">
-<div style="font-size:15px;color:var(--text-dim)">от 200 000 ₽</div>
+<div style="font-size:15px;color:var(--text-dim)">от 1 000 ₽</div>
 <div style="font-size:15px;color:var(--text-sec);font-weight:500">85.96 ₽</div>
 </div>
 <div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Сумма (₽)</div><input placeholder="Введите сумму"></div>
@@ -498,7 +448,7 @@ Instagram</a>
 <div class="scr" id="s-sell"><div style="padding:0 16px;padding-bottom:40px">
 <div style="font-size:23px;font-weight:600;margin-bottom:6px;margin-top:12px">Продать USDT</div>
 <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px">
-<div style="font-size:15px;color:var(--text-dim)">от 200 000 ₽</div>
+<div style="font-size:15px;color:var(--text-dim)">от 1 000 ₽</div>
 <div style="font-size:15px;color:var(--text-sec);font-weight:500">85.60 ₽</div>
 </div>
 <div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Сумма (₽)</div><input id="sellSum" placeholder="Введите сумму"></div>
@@ -811,6 +761,56 @@ Instagram</a>
 <div class="btn-o" onclick="go('home')">На главную</div>
 </div></div>
 
+<!-- CONTACTS -->
+<div class="scr" id="s-contacts"><div style="padding:0 16px;padding-bottom:40px">
+<div style="font-size:23px;font-weight:600;padding:18px 0 14px">Контакты</div>
+
+<div class="cd" style="padding:14px 16px;margin-bottom:12px">
+<div style="font-size:12px;color:var(--text-dim);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px">Адрес</div>
+<div style="font-size:16px;font-weight:500;margin-bottom:2px">Пресненская наб. 12</div>
+<div style="font-size:14px;color:var(--text-sec)">Башня Федерация — Восток, 5 этаж, офис 512</div>
+</div>
+
+<a href="https://yandex.ru/maps/-/CDawrR" target="_blank" style="display:flex;align-items:center;gap:8px;padding:12px 16px;border-radius:14px;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.08);margin-bottom:12px;text-decoration:none;color:#fff">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/><circle cx="12" cy="10" r="3" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/></svg>
+<span style="font-size:15px;font-weight:500">Открыть в Яндекс Картах</span>
+<svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="margin-left:auto;opacity:0.3"><path d="M7 17L17 7M17 7H7M17 7v10" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a>
+
+<div class="cd" style="padding:14px 16px;margin-bottom:12px">
+<div style="font-size:12px;color:var(--text-dim);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px">Режим работы</div>
+<div style="font-size:15px;font-weight:500">Ежедневно: 24/7</div>
+</div>
+
+<div style="display:flex;gap:8px;margin-bottom:14px">
+<a href="https://mbex.io" target="_blank" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:12px;border-radius:12px;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.08);text-decoration:none;color:var(--text-sec);font-size:14px;font-weight:500">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10A15.3 15.3 0 0112 2z" stroke="currentColor" stroke-width="1.5"/></svg>
+Сайт</a>
+<a href="https://t.me/mbex_exchange" target="_blank" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:12px;border-radius:12px;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.08);text-decoration:none;color:var(--text-sec);font-size:14px;font-weight:500">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M21 5L2 12.5l7 1M21 5l-5 15-6.5-6.5M21 5l-12 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+Telegram</a>
+<a href="https://instagram.com/mbex_exchange" target="_blank" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:12px;border-radius:12px;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.08);text-decoration:none;color:var(--text-sec);font-size:14px;font-weight:500">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>
+Instagram</a>
+</div>
+
+<div style="font-size:12px;color:var(--text-dim);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px">Наш офис</div>
+<div id="officeGallery" style="display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;scroll-snap-type:x mandatory">
+<div style="flex-shrink:0;width:220px;height:140px;border-radius:12px;background:linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));border:0.5px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;scroll-snap-align:start">
+<div style="text-align:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" style="opacity:0.15;margin-bottom:6px"><rect x="2" y="3" width="20" height="18" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M2 15l5-5 4 4 4-6 7 7" stroke="#fff" stroke-width="1.5"/></svg><div style="font-size:12px;color:var(--text-dim)">Ресепшн</div></div>
+</div>
+<div style="flex-shrink:0;width:220px;height:140px;border-radius:12px;background:linear-gradient(135deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01));border:0.5px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;scroll-snap-align:start">
+<div style="text-align:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" style="opacity:0.15;margin-bottom:6px"><rect x="2" y="3" width="20" height="18" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M2 15l5-5 4 4 4-6 7 7" stroke="#fff" stroke-width="1.5"/></svg><div style="font-size:12px;color:var(--text-dim)">Переговорная</div></div>
+</div>
+<div style="flex-shrink:0;width:220px;height:140px;border-radius:12px;background:linear-gradient(135deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02));border:0.5px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;scroll-snap-align:start">
+<div style="text-align:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" style="opacity:0.15;margin-bottom:6px"><rect x="2" y="3" width="20" height="18" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M2 15l5-5 4 4 4-6 7 7" stroke="#fff" stroke-width="1.5"/></svg><div style="font-size:12px;color:var(--text-dim)">Рабочая зона</div></div>
+</div>
+<div style="flex-shrink:0;width:220px;height:140px;border-radius:12px;background:linear-gradient(135deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));border:0.5px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;scroll-snap-align:start">
+<div style="text-align:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" style="opacity:0.15;margin-bottom:6px"><rect x="2" y="3" width="20" height="18" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M2 15l5-5 4 4 4-6 7 7" stroke="#fff" stroke-width="1.5"/></svg><div style="font-size:12px;color:var(--text-dim)">Лаунж</div></div>
+</div>
+</div>
+</div></div>
+
 <!-- COURIERS -->
 <div class="scr" id="s-couriers"><div style="padding:0 16px;padding-bottom:40px">
 <div style="font-size:23px;font-weight:600;padding:18px 0 14px">Мои курьеры</div>
@@ -874,7 +874,7 @@ Instagram</a>
 </div></div>
 
 <script>
-var cur='home',stk=[],mT=['home','history','profile'],sS=['buy','sell','ok','detail','wallets','couriers','sellok','transfer','transferOk'],aS=['home','buy','sell','ok','history','detail','profile','wallets','couriers','sellok','transfer','transferOk'];
+var cur='home',stk=[],mT=['home','history','profile'],sS=['buy','sell','ok','detail','wallets','couriers','sellok','transfer','transferOk','contacts'],aS=['home','buy','sell','ok','history','detail','profile','wallets','couriers','sellok','transfer','transferOk','contacts'];
 
 // Animate hero cards — show immediately as fallback, animate if JS works
 document.addEventListener('DOMContentLoaded',function(){
@@ -889,140 +889,6 @@ document.addEventListener('DOMContentLoaded',function(){
     document.querySelectorAll('.fade-in').forEach(function(el){el.classList.add('fade-done')});
   },1200);
 });
-
-// MBEX Logo animation — arrows assemble from brandbook pattern
-!function(){
-  var img=document.getElementById('logoImg');
-  var cv=document.getElementById('logoAnim');
-  if(!cv||!img)return;
-  var parent=cv.parentElement;
-  var dpr=window.devicePixelRatio||1;
-  var W,H,cx;
-  
-  function resize(){
-    W=parent.offsetWidth;H=parent.offsetHeight;
-    cv.width=W*dpr;cv.height=H*dpr;
-    cv.style.width=W+'px';cv.style.height=H+'px';
-    cx=cv.getContext('2d');
-    cx.scale(dpr,dpr);
-  }
-  resize();
-  
-  // Arrow particles inspired by the X monogram pattern
-  var arrows=[];
-  var NUM=14;
-  var centerX=W/2,centerY=H/2;
-  var phase=0; // 0=scatter-in, 1=hold, 2=pattern-pulse, 3=hold-clean
-  var timer=0;
-  var logoShown=false;
-  
-  for(var i=0;i<NUM;i++){
-    var angle=(i/NUM)*Math.PI*2;
-    var dist=80+Math.random()*60;
-    arrows.push({
-      // Start position (offscreen scattered)
-      sx:centerX+Math.cos(angle)*dist,
-      sy:centerY+Math.sin(angle)*dist,
-      // Target (around logo center)
-      tx:centerX+(Math.random()-0.5)*120,
-      ty:centerY+(Math.random()-0.5)*20,
-      // Current
-      x:0,y:0,
-      rot:angle,
-      rotTarget:(Math.random()-0.5)*0.5,
-      size:6+Math.random()*4,
-      alpha:0,
-      delay:Math.random()*0.3
-    });
-  }
-  
-  function drawArrow(x,y,size,rot,alpha){
-    cx.save();
-    cx.translate(x,y);
-    cx.rotate(rot);
-    cx.globalAlpha=alpha;
-    cx.strokeStyle='#fff';
-    cx.lineWidth=1.2;
-    cx.lineCap='round';
-    cx.lineJoin='round';
-    // Arrow shape like brandbook chevrons
-    cx.beginPath();
-    cx.moveTo(-size*0.5,-size*0.4);
-    cx.lineTo(size*0.3,0);
-    cx.lineTo(-size*0.5,size*0.4);
-    cx.stroke();
-    // Cross element from X monogram
-    cx.beginPath();
-    cx.moveTo(-size*0.2,-size*0.3);
-    cx.lineTo(size*0.2,size*0.3);
-    cx.moveTo(size*0.2,-size*0.3);
-    cx.lineTo(-size*0.2,size*0.3);
-    cx.stroke();
-    cx.restore();
-  }
-  
-  function easeOutCubic(t){return 1-Math.pow(1-t,3)}
-  function easeInOutSine(t){return -(Math.cos(Math.PI*t)-1)/2}
-  
-  var totalT=0;
-  function animate(){
-    cx.clearRect(0,0,W,H);
-    timer++;
-    totalT+=0.016;
-    
-    if(phase===0){
-      // Phase 0: arrows fly in from scatter positions toward center (0-60 frames)
-      var dur=60;
-      for(var i=0;i<arrows.length;i++){
-        var a=arrows[i];
-        var t=Math.max(0,Math.min(1,(timer-a.delay*dur)/dur));
-        t=easeOutCubic(t);
-        a.x=a.sx+(a.tx-a.sx)*t;
-        a.y=a.sy+(a.ty-a.sy)*t;
-        a.alpha=t*0.4;
-        a.rot+=(a.rotTarget-a.rot)*0.05;
-        drawArrow(a.x,a.y,a.size,a.rot,a.alpha);
-      }
-      if(timer>dur+10){
-        phase=1;timer=0;
-        // Show logo image
-        img.style.transition='opacity 0.5s ease';
-        img.style.opacity='1';
-        logoShown=true;
-      }
-    }else if(phase===1){
-      // Phase 1: arrows fade out while logo is visible (0-40 frames)
-      var dur=40;
-      var t=Math.min(1,timer/dur);
-      for(var i=0;i<arrows.length;i++){
-        var a=arrows[i];
-        a.alpha=0.4*(1-t);
-        // Gentle drift outward
-        a.x+=Math.cos(a.rot)*0.3;
-        a.y+=Math.sin(a.rot)*0.3;
-        drawArrow(a.x,a.y,a.size,a.rot,a.alpha);
-      }
-      if(timer>dur+80){phase=2;timer=0}
-    }else if(phase===2){
-      // Phase 2: subtle pattern pulse — arrows orbit gently around logo (continuous)
-      for(var i=0;i<arrows.length;i++){
-        var a=arrows[i];
-        var baseAngle=(i/NUM)*Math.PI*2+totalT*0.15;
-        var radius=50+Math.sin(totalT*0.5+i)*15;
-        a.x=centerX+Math.cos(baseAngle)*radius;
-        a.y=centerY+Math.sin(baseAngle)*radius*0.3;
-        a.rot=baseAngle+Math.PI*0.5;
-        a.alpha=0.06+Math.sin(totalT*0.8+i*0.7)*0.04;
-        drawArrow(a.x,a.y,a.size*0.7,a.rot,a.alpha);
-      }
-    }
-    
-    requestAnimationFrame(animate);
-  }
-  
-  // Start after a brief delay
-  setTimeout(function(){animate()},300);
-}();
 
 
 function go(n){
@@ -1811,19 +1677,18 @@ try{!function(){
   ct.addEventListener('touchend',function(){tracking=false},{passive:true});
 }();
 
-// Toggle contacts panel
-function toggleContacts(){
-  var panel=document.getElementById('contactsPanel');
-  var chev=document.getElementById('contactChev');
-  if(panel.style.display==='none'||!panel.style.display){
-    panel.style.display='block';
-    chev.style.transform='rotate(90deg)';
-  }else{
-    panel.style.display='none';
-    chev.style.transform='';
-  }
-  haptic();
-}
+// Background video — fade in smoothly
+!function(){
+  var v=document.getElementById('bgVideo');
+  if(!v)return;
+  v.src='bg.mp4';
+  v.style.opacity='0';
+  v.style.transition='opacity 2s ease';
+  v.addEventListener('canplay',function(){
+    setTimeout(function(){v.style.opacity='0.06'},500);
+  });
+  v.load();
+}();
 
 // Shimmer on primary buttons
 document.querySelectorAll('.btn-primary').forEach(function(btn){
