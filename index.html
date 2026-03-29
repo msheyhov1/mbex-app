@@ -16,10 +16,11 @@
   --text-sec:rgba(255,255,255,0.5);
   --text-dim:rgba(255,255,255,0.25);
   --shimmer:rgba(120,160,255,0.12);
-  --accent:rgba(140,170,255,1);
-  --accent-dim:rgba(140,170,255,0.12);
-  --accent-glow:rgba(140,170,255,0.08);
-  --accent-soft:rgba(140,170,255,0.06);
+  --accent:#fff;
+  --accent-light:#fff;
+  --accent-dim:rgba(255,255,255,0.1);
+  --accent-glow:rgba(255,255,255,0.08);
+  --accent-soft:rgba(255,255,255,0.05);
   --green:rgba(60,220,140,1);
   --green-dim:rgba(60,220,140,0.12);
   --red:rgba(255,90,90,0.9);
@@ -30,24 +31,24 @@ html,body{height:100%;background:var(--bg);overflow:hidden;font-family:'Montserr
 .app{max-width:430px;margin:0 auto;height:100vh;height:100dvh;display:flex;flex-direction:column;position:relative;overflow:hidden}
 
 /* Header */
-.hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:rgba(11,11,14,0.92);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-bottom:0.5px solid rgba(140,170,255,0.06);z-index:10;flex-shrink:0}
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:rgba(11,11,14,0.92);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-bottom:0.5px solid rgba(255,255,255,0.04);z-index:10;flex-shrink:0}
 
 /* Content */
 .ct{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;position:relative;z-index:2}
 
 /* Tab bar */
-.tb{display:flex;justify-content:space-around;padding:8px 0 env(safe-area-inset-bottom,20px);background:rgba(11,11,14,0.94);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-top:0.5px solid rgba(140,170,255,0.06);z-index:10;flex-shrink:0}
+.tb{display:flex;justify-content:space-around;padding:8px 0 env(safe-area-inset-bottom,20px);background:rgba(11,11,14,0.94);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-top:0.5px solid rgba(255,255,255,0.04);z-index:10;flex-shrink:0}
 .tb-i{cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:transform 0.2s ease}
 .tb-i:active{transform:scale(0.9)}
 .tb-i span{font-size:13px;color:var(--text-dim);font-weight:400;transition:color 0.3s}
-.tb-i.on span{color:var(--accent);font-weight:500}
+.tb-i.on span{color:var(--accent-light);font-weight:500}
 
 /* Cards */
 .cd{background:var(--card);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:0.5px solid var(--card-border);border-radius:14px;padding:14px 16px;transition:border-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease}
 
 /* Inputs */
 input{font-family:inherit;color:#fff;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 16px;font-size:17px;font-weight:400;outline:none;width:100%;box-sizing:border-box;transition:border-color 0.3s, box-shadow 0.3s}
-input:focus{border-color:rgba(140,170,255,0.35);box-shadow:0 0 0 3px rgba(140,170,255,0.06),0 0 20px rgba(140,170,255,0.04)}
+input:focus{border-color:rgba(255,255,255,0.2);box-shadow:0 0 0 3px rgba(255,255,255,0.04),0 0 20px rgba(255,255,255,0.03)}
 #s-buy input:focus{border-color:rgba(60,220,140,0.3);box-shadow:0 0 0 3px rgba(60,220,140,0.06),0 0 20px rgba(60,220,140,0.03)}
 #s-sell input:focus{border-color:rgba(255,90,90,0.25);box-shadow:0 0 0 3px rgba(255,90,90,0.05),0 0 20px rgba(255,90,90,0.03)}
 input::placeholder{color:var(--text-dim)}
@@ -62,9 +63,9 @@ input::placeholder{color:var(--text-dim)}
 .btn-o:hover{border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.6)}
 
 /* Primary CTA — gradient accent button */
-.btn-primary{padding:16px;border-radius:12px;font-weight:600;font-size:17px;text-align:center;cursor:pointer;background:linear-gradient(135deg,#8caaf0 0%,#7b9ce8 50%,#a0bcff 100%);color:#fff;width:100%;font-family:inherit;border:none;position:relative;overflow:hidden;transition:transform 0.15s ease, box-shadow 0.3s ease;box-shadow:0 4px 24px rgba(140,170,255,0.2),0 1px 3px rgba(0,0,0,0.3)}
-.btn-primary:active{transform:scale(0.97);box-shadow:0 2px 12px rgba(140,170,255,0.15)}
-.btn-primary:hover{box-shadow:0 6px 32px rgba(140,170,255,0.3),0 1px 3px rgba(0,0,0,0.3)}
+.btn-primary{padding:16px;border-radius:12px;font-weight:600;font-size:17px;text-align:center;cursor:pointer;background:#fff;color:#0b0b0e;width:100%;font-family:inherit;border:none;position:relative;overflow:hidden;transition:transform 0.15s ease, box-shadow 0.3s ease;box-shadow:0 0 20px rgba(255,255,255,0.1),0 4px 16px rgba(0,0,0,0.3)}
+.btn-primary:active{transform:scale(0.97);box-shadow:0 0 10px rgba(255,255,255,0.06)}
+.btn-primary:hover{box-shadow:0 0 30px rgba(255,255,255,0.15),0 4px 16px rgba(0,0,0,0.3)}
 /* Shimmer sweep */
 .btn-primary::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transition:none}
 @keyframes btnShimmer{
@@ -77,30 +78,17 @@ input::placeholder{color:var(--text-dim)}
 /* Disabled primary */
 .btn-primary.disabled{opacity:0.2;pointer-events:none;box-shadow:none}
 
-/* Buy screen — green CTA */
-#s-buy .btn-primary:not(.disabled){background:linear-gradient(135deg,#2dd47a 0%,#28c76f 50%,#3ce08c 100%);box-shadow:0 4px 24px rgba(60,220,140,0.2),0 1px 3px rgba(0,0,0,0.3)}
-#s-buy .btn-primary:hover:not(.disabled){box-shadow:0 6px 32px rgba(60,220,140,0.3)}
-#s-buy .btn-primary:active:not(.disabled){box-shadow:0 2px 12px rgba(60,220,140,0.15)}
-
-/* Sell screen — red CTA */
-#s-sell .btn-primary:not(.disabled),#s-sellok .btn-primary:not(.disabled){background:linear-gradient(135deg,#ff5a5a 0%,#e84c4c 50%,#ff7070 100%);box-shadow:0 4px 24px rgba(255,90,90,0.2),0 1px 3px rgba(0,0,0,0.3)}
-#s-sell .btn-primary:hover:not(.disabled),#s-sellok .btn-primary:hover:not(.disabled){box-shadow:0 6px 32px rgba(255,90,90,0.3)}
-
-/* Transfer screen — white CTA */
-#s-transfer .btn-primary:not(.disabled){background:#fff;color:#0b0b0e;box-shadow:0 4px 24px rgba(255,255,255,0.08),0 1px 3px rgba(0,0,0,0.3)}
-#s-transfer .btn-primary:hover:not(.disabled){box-shadow:0 6px 32px rgba(255,255,255,0.12)}
-
 /* Hero cards */
 .hero-cards{display:flex;gap:10px;margin:0 16px 16px}
-.hero-card{flex:1;cursor:pointer;padding:20px 16px;border-radius:16px;position:relative;overflow:hidden;transition:transform 0.25s ease, box-shadow 0.35s ease, border-color 0.3s;border:0.5px solid rgba(140,170,255,0.08);background:linear-gradient(145deg,rgba(140,170,255,0.04) 0%,rgba(255,255,255,0.02) 100%);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
-.hero-card:hover{transform:translateY(-2px);border-color:rgba(140,170,255,0.18);box-shadow:0 8px 32px rgba(140,170,255,0.06)}
+.hero-card{flex:1;cursor:pointer;padding:20px 16px;border-radius:16px;position:relative;overflow:hidden;transition:transform 0.25s ease, box-shadow 0.35s ease, border-color 0.3s;border:0.5px solid rgba(255,255,255,0.05);background:linear-gradient(145deg,rgba(255,255,255,0.03) 0%,rgba(255,255,255,0.02) 100%);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);text-align:center}
+.hero-card:hover{transform:translateY(-2px);border-color:rgba(255,255,255,0.12);box-shadow:0 8px 32px rgba(255,255,255,0.04)}
 .hero-card:active{transform:translateY(0) scale(0.96) !important;transition:transform 0.1s ease !important}
 .hero-card__label{font-size:13px;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;font-weight:600}
 .hero-card__price{font-size:31px;font-weight:600;letter-spacing:-1px;margin-bottom:4px;line-height:1}
 .hero-card__unit{font-size:15px;color:var(--text-sec);font-weight:400}
 
 /* Shimmer on hero card hover */
-.hero-card::after{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(140,170,255,0.1),transparent);pointer-events:none;transition:none}
+.hero-card::after{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.06),transparent);pointer-events:none;transition:none}
 .hero-card:hover::after{animation:cardShimmer 0.8s ease-out forwards}
 @keyframes cardShimmer{
   0%{left:-100%}
@@ -126,27 +114,27 @@ input::placeholder{color:var(--text-dim)}
 .hero-card--transfer::after{background:linear-gradient(90deg,transparent,rgba(255,255,255,0.06),transparent)}
 
 /* Ripple effect */
-.ripple{position:absolute;border-radius:50%;background:rgba(140,170,255,0.12);transform:scale(0);animation:rippleAnim 0.6s ease-out;pointer-events:none}
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,0.08);transform:scale(0);animation:rippleAnim 0.6s ease-out;pointer-events:none}
 @keyframes rippleAnim{to{transform:scale(4);opacity:0}}
 
 /* Rows */
-.row{display:flex;align-items:center;padding:14px 0;border-bottom:0.5px solid rgba(255,255,255,0.04);cursor:pointer;transition:padding-left 0.2s ease}
+.row{display:flex;align-items:center;padding:14px 0;border-bottom:0.5px solid rgba(255,255,255,0.08);cursor:pointer;transition:padding-left 0.2s ease}
 .row:active{padding-left:4px}
 .row:last-child{border-bottom:none}
-.ri{width:34px;height:34px;border-radius:10px;background:var(--accent-soft);border:0.5px solid rgba(140,170,255,0.1);display:flex;align-items:center;justify-content:center;margin-right:12px;flex-shrink:0}
+.ri{width:34px;height:34px;border-radius:10px;background:var(--accent-soft);border:0.5px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;margin-right:12px;flex-shrink:0}
 
 /* Pills */
 .pill{display:inline-block;padding:6px 14px;border-radius:20px;font-size:15px;font-weight:500;cursor:pointer;background:rgba(255,255,255,0.03);color:var(--text-sec);border:0.5px solid rgba(255,255,255,0.06);transition:all 0.25s ease}
 .pill:active{transform:scale(0.95)}
-.pill.on{background:var(--accent-dim);color:var(--accent);border-color:rgba(140,170,255,0.2)}
+.pill.on{background:var(--accent-dim);color:var(--accent-light);border-color:rgba(255,255,255,0.12)}
 
 /* Toggle */
 .tog-w{display:flex;background:rgba(255,255,255,0.03);border-radius:12px;padding:3px;border:0.5px solid rgba(255,255,255,0.06);margin-bottom:16px}
 .tog{flex:1;padding:12px 0;text-align:center;border-radius:10px;font-size:17px;font-weight:600;cursor:pointer;color:var(--text-sec);background:transparent;transition:all 0.3s}
-.tog.on{color:#fff;background:var(--accent-dim);border:0.5px solid rgba(140,170,255,0.15)}
-#s-buy .tog.on,#s-sell .tog.on{background:var(--accent-dim);border-color:rgba(140,170,255,0.15);color:var(--accent)}
+.tog.on{color:#fff;background:var(--accent-dim);border:0.5px solid rgba(255,255,255,0.1)}
+#s-buy .tog.on,#s-sell .tog.on{background:var(--accent-dim);border-color:rgba(255,255,255,0.1);color:var(--accent-light)}
 /* Courier dropdowns — accent tint */
-#courierDrop,#courierDropSell{border-color:rgba(140,170,255,0.1) !important;box-shadow:0 12px 40px rgba(0,0,0,0.5),0 0 30px rgba(140,170,255,0.03) !important}
+#courierDrop,#courierDropSell{border-color:rgba(255,255,255,0.06) !important;box-shadow:0 12px 40px rgba(0,0,0,0.5),0 0 30px rgba(255,255,255,0.02) !important}
 
 /* Top nav toggle */
 .top-tog-w{display:flex;background:rgba(255,255,255,0.03);border-radius:12px;padding:2px;border:0.5px solid rgba(255,255,255,0.06);margin:12px 16px 0}
@@ -169,8 +157,8 @@ input::placeholder{color:var(--text-dim)}
 
 /* Wallet dropdown */
 .wl-item{padding:10px 14px;cursor:pointer;transition:background 0.15s}
-.wl-item:hover{background:rgba(140,170,255,0.04)}
-.wl-item:active{background:rgba(140,170,255,0.08)}
+.wl-item:hover{background:rgba(255,255,255,0.03)}
+.wl-item:active{background:rgba(255,255,255,0.04)}
 #walletDropBtn{transition:transform 0.2s}
 #walletDropBtn.open{transform:rotate(180deg)}
 #walletDrop{animation:dropIn 0.2s ease-out}
@@ -213,9 +201,9 @@ input::placeholder{color:var(--text-dim)}
 .haptic-shake{animation:hapticShake 0.15s ease-in-out !important}
 
 /* Active order */
-.active-order{background:linear-gradient(135deg,rgba(140,170,255,0.04) 0%,rgba(255,255,255,0.02) 100%);border:1px solid rgba(140,170,255,0.1);border-radius:14px;padding:14px 16px;cursor:pointer;transition:transform 0.2s, border-color 0.3s, box-shadow 0.3s}
+.active-order{background:linear-gradient(135deg,rgba(255,255,255,0.03) 0%,rgba(255,255,255,0.02) 100%);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:14px 16px;cursor:pointer;transition:transform 0.2s, border-color 0.3s, box-shadow 0.3s}
 .active-order:active{transform:scale(0.98)}
-.active-order:hover{border-color:rgba(140,170,255,0.18);box-shadow:0 4px 20px rgba(140,170,255,0.06)}
+.active-order:hover{border-color:rgba(255,255,255,0.12);box-shadow:0 4px 20px rgba(255,255,255,0.04)}
 .active-order-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:13px;font-weight:600;background:var(--accent-dim);color:var(--accent);letter-spacing:0.5px;text-transform:uppercase}
 .active-order-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:dotPulse 2s ease-in-out infinite}
 
@@ -233,7 +221,7 @@ input::placeholder{color:var(--text-dim)}
 
 <div class="bg-base"></div>
 <div class="bg-grid"></div>
-<div class="bg-grad" style="background:radial-gradient(ellipse at 50% 0%,rgba(140,170,255,0.03) 0%,transparent 60%)"></div>
+<div class="bg-grad" style="background:radial-gradient(ellipse at 50% 0%,rgba(255,255,255,0.02) 0%,transparent 60%)"></div>
 <div class="bg-noise"></div>
 <canvas id="bg" style="position:absolute;inset:0;z-index:1;pointer-events:none"></canvas>
 <canvas id="cryptoText" style="position:absolute;inset:0;z-index:1;pointer-events:none"></canvas>
@@ -306,12 +294,11 @@ input::placeholder{color:var(--text-dim)}
 </div>
 <div style="display:flex;justify-content:space-between;align-items:center">
 <div>
-<div style="font-size:17px;font-weight:500" id="activeType">Покупка USDT</div>
-<div style="font-size:14px;color:var(--text-dim);margin-top:2px" id="activeInfo">TRC-20 · 85.96 ₽</div>
+<div style="font-size:17px;font-weight:500" id="activeType">Покупка</div>
+<div style="font-size:14px;color:var(--text-dim);margin-top:2px" id="activeInfo"></div>
 </div>
 <div style="text-align:right">
-<div style="font-size:19px;font-weight:500" id="activeAmount">— <span style="font-size:14px;font-weight:400;color:var(--text-sec)">USDT</span></div>
-<div style="font-size:14px;color:var(--text-dim)" id="activeRub"></div>
+<div style="font-size:19px;font-weight:500" id="activeAmount">— <span style="font-size:14px;font-weight:400;color:var(--text-sec)">₽</span></div>
 </div>
 </div>
 <div style="margin-top:12px;padding-top:10px;border-top:0.5px solid rgba(255,255,255,0.06)">
@@ -325,8 +312,8 @@ input::placeholder{color:var(--text-dim)}
 <div class="cd fade-in fade-in-d4" style="padding:12px 16px">
 <div style="display:flex;justify-content:space-between;align-items:center">
 <span style="font-size:16px;font-weight:500;flex:1">Tether USDT</span>
-<span style="font-size:16px;font-weight:500;width:70px;text-align:right">85.96</span>
-<span style="font-size:16px;font-weight:500;width:70px;text-align:right;color:var(--text-sec)">85.60</span>
+<span style="font-size:16px;font-weight:500;width:70px;text-align:right;color:rgba(60,220,140,1)">85.96</span>
+<span style="font-size:16px;font-weight:500;width:70px;text-align:right;color:rgba(255,90,90,0.9)">85.60</span>
 </div>
 </div>
 </div>
@@ -468,7 +455,7 @@ input::placeholder{color:var(--text-dim)}
 <div onclick="toggleCourierDropSell()" style="position:absolute;right:0;top:0;bottom:0;width:40px;display:flex;align-items:center;justify-content:center;cursor:pointer">
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" id="courierDropChevSell" style="transition:transform 0.2s"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,0.35)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </div>
-<div id="courierDropSell" style="display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:50;background:rgba(18,18,24,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:0.5px solid rgba(140,170,255,0.1);border-radius:14px;padding:8px 0;max-height:260px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5)">
+<div id="courierDropSell" style="display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:50;background:rgba(18,18,24,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:0.5px solid rgba(255,255,255,0.06);border-radius:14px;padding:8px 0;max-height:260px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5)">
 <div style="padding:6px 14px 4px;font-size:13px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px">Мои курьеры</div>
 <div class="wl-item" onclick="pickCourierSell('Петров Алексей Сергеевич')">
 <div style="display:flex;align-items:center;gap:8px">
@@ -538,9 +525,13 @@ input::placeholder{color:var(--text-dim)}
 <!-- HISTORY -->
 <div class="scr" id="s-history"><div style="padding:0 16px;padding-bottom:90px">
 <div style="font-size:23px;font-weight:600;padding:18px 0 12px">История</div>
-<div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap"><div class="pill on" onclick="this.classList.toggle('on')">Покупка</div><div class="pill" onclick="this.classList.toggle('on')">Продажа</div><div class="pill" onclick="this.classList.toggle('on')">Завершена</div></div>
-<div class="cd" onclick="go('detail')" style="margin-bottom:10px;cursor:pointer"><div style="display:flex;justify-content:space-between"><div><div style="font-size:17px;font-weight:500">Покупка</div><div style="font-size:14px;color:var(--text-dim)">USDT TRC-20</div></div><div style="text-align:right"><div style="font-size:17px;font-weight:500">5 814 USDT</div><div style="font-size:14px;color:var(--text-sec)">Создана</div></div></div></div>
-<div class="cd" onclick="go('detail')" style="margin-bottom:10px;cursor:pointer"><div style="display:flex;justify-content:space-between"><div><div style="font-size:17px;font-weight:500">Покупка</div><div style="font-size:14px;color:var(--text-dim)">USDT TRC-20</div></div><div style="text-align:right"><div style="font-size:17px;font-weight:500">2 907 USDT</div><div style="font-size:14px;color:var(--text-dim)">Завершена</div></div></div></div>
+<div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap">
+<div class="pill on" onclick="filterHistory('all',this)">Все</div>
+<div class="pill" onclick="filterHistory('active',this)">Активные</div>
+<div class="pill" onclick="filterHistory('done',this)">Завершённые</div>
+</div>
+<div id="historyList"></div>
+<div id="historyEmpty" style="text-align:center;padding:40px 0;color:var(--text-dim);font-size:15px;display:none">Заявок пока нет</div>
 </div></div>
 
 <!-- DETAIL -->
@@ -559,7 +550,7 @@ input::placeholder{color:var(--text-dim)}
 </div>
 
 <div class="cd" style="text-align:left;padding:2px 16px;margin-bottom:10px">
-<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">Курс</span><span style="font-size:16px;font-weight:500" id="detailRate">85.96 ₽</span></div>
+<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">Тип</span><span style="font-size:16px;font-weight:500" id="detailRate">—</span></div>
 <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">Сумма</span><span style="font-size:16px;font-weight:500" id="detailSum">— ₽</span></div>
 <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">Номер</span><span style="font-size:16px;font-weight:500" id="detailNum">—</span></div>
 <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">ФИО</span><span style="font-size:16px;font-weight:500" id="detailFio">—</span></div>
@@ -579,92 +570,76 @@ input::placeholder{color:var(--text-dim)}
 
 <!-- PROFILE -->
 <div class="scr" id="s-profile"><div style="padding:0 16px;padding-bottom:90px">
-<div style="font-size:25px;font-weight:600;padding:18px 0 14px">Профиль</div>
+<div style="font-size:23px;font-weight:600;padding:18px 0 12px">Профиль</div>
 
-<div class="cd" style="margin-bottom:16px;padding:16px">
-<div style="font-size:14px;color:var(--text-sec);text-align:center;letter-spacing:0.3px;margin-bottom:14px">Обменивайте для персональной скидки</div>
-<div style="flex:1;height:3px;background:rgba(255,255,255,0.08);border-radius:2px;position:relative;margin-bottom:8px"><div style="position:absolute;left:0;top:0;height:100%;width:8%;background:#fff;border-radius:2px"></div></div>
-<div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text-dim);margin-bottom:4px">
-<span>100K</span><span>200K</span><span>300K</span><span>500K</span>
-</div>
-<div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text-sec)">
-<span>1 коп.</span><span>2 коп.</span><span>3 коп.</span><span>5 коп.</span>
-</div>
-</div>
-
-<div class="cd" style="margin-bottom:16px;padding:14px 16px">
-<div style="font-size:14px;color:var(--text-sec);margin-bottom:4px">ФИО</div>
+<!-- FIO -->
+<div class="cd" style="margin-bottom:10px;padding:12px 16px">
 <div style="display:flex;align-items:center;justify-content:space-between">
-<span style="font-size:17px;font-weight:500" id="profileFio">Иванов Иван Иванович</span>
+<div><div style="font-size:12px;color:var(--text-dim);margin-bottom:2px">ФИО</div><span style="font-size:16px;font-weight:500" id="profileFio">Иванов Иван Иванович</span></div>
 <svg onclick="editProfileFio()" width="16" height="16" viewBox="0 0 24 24" fill="none" style="cursor:pointer;opacity:0.3;flex-shrink:0"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </div>
 <div id="profileFioEdit" style="display:none;margin-top:10px">
 <input id="profileFioInput" placeholder="Фамилия Имя Отчество" style="margin-bottom:8px">
 <div style="display:flex;gap:8px">
-<div class="btn-primary" onclick="saveProfileFio()" style="padding:10px;font-size:15px;border-radius:10px">Сохранить</div>
-<div class="btn-o" onclick="cancelProfileFio()" style="padding:10px;font-size:15px;border-radius:10px">Отмена</div>
+<div class="btn-primary" onclick="saveProfileFio()" style="padding:10px;font-size:14px;border-radius:10px">Сохранить</div>
+<div class="btn-o" onclick="cancelProfileFio()" style="padding:10px;font-size:14px;border-radius:10px">Отмена</div>
 </div>
 </div>
 </div>
 
-<div style="font-size:19px;font-weight:600;margin-bottom:10px">Статистика</div>
-
-<div class="cd" style="margin-bottom:8px;padding:14px 16px">
-<div style="font-size:14px;color:var(--text-sec);margin-bottom:4px">Реф. баланс</div>
-<div style="font-size:21px;font-weight:500">0 USDT</div>
+<!-- Discount bar -->
+<div class="cd" style="margin-bottom:10px;padding:12px 16px">
+<div style="font-size:12px;color:var(--text-dim);margin-bottom:8px">Скидка за объём</div>
+<div style="height:3px;background:rgba(255,255,255,0.08);border-radius:2px;position:relative;margin-bottom:6px"><div style="position:absolute;left:0;top:0;height:100%;width:8%;background:#fff;border-radius:2px"></div></div>
+<div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-dim)">
+<span>100K</span><span>200K</span><span>300K</span><span>500K</span>
+</div>
 </div>
 
-<div class="cd" style="margin-bottom:8px;padding:14px 16px">
-<div style="font-size:14px;color:var(--text-sec);margin-bottom:4px">Обменов</div>
-<div style="font-size:21px;font-weight:500">0</div>
+<!-- Stats row -->
+<div style="display:flex;gap:8px;margin-bottom:10px">
+<div class="cd" style="flex:1;padding:12px 14px"><div style="font-size:12px;color:var(--text-dim);margin-bottom:2px">Реф. баланс</div><div style="font-size:17px;font-weight:500">0 USDT</div></div>
+<div class="cd" style="flex:1;padding:12px 14px"><div style="font-size:12px;color:var(--text-dim);margin-bottom:2px">Обменов</div><div style="font-size:17px;font-weight:500">0</div></div>
 </div>
 
-<div class="cd" style="margin-bottom:16px;padding:14px 16px">
-<div style="font-size:14px;color:var(--text-sec);margin-bottom:4px">Реф. код</div>
+<!-- Ref code -->
+<div class="cd" style="margin-bottom:10px;padding:12px 16px">
+<div style="font-size:12px;color:var(--text-dim);margin-bottom:2px">Реф. код</div>
 <div style="display:flex;align-items:center;justify-content:space-between">
-<span style="font-size:19px;font-weight:500;font-family:'Montserrat',sans-serif;letter-spacing:1px">MBX7200K</span>
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="cursor:pointer;opacity:0.3"><rect x="9" y="9" width="13" height="13" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke="#fff" stroke-width="1.5"/></svg>
+<span style="font-size:17px;font-weight:500;letter-spacing:1px">MBX7200K</span>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="cursor:pointer;opacity:0.3"><rect x="9" y="9" width="13" height="13" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke="#fff" stroke-width="1.5"/></svg>
 </div>
 </div>
 
-<div class="cd" onclick="" style="margin-bottom:20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:16px;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.08)">
-<span style="font-size:17px;font-weight:500">Реферальная система</span>
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/></svg>
+<!-- Links -->
+<div class="cd" onclick="" style="margin-bottom:8px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:14px 16px">
+<span style="font-size:16px;font-weight:500">Реферальная система</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/></svg>
+</div>
+<div class="cd" onclick="go('wallets')" style="margin-bottom:8px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:14px 16px">
+<span style="font-size:16px;font-weight:500">Кошельки</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/></svg>
+</div>
+<div class="cd" onclick="go('couriers')" style="margin-bottom:14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:14px 16px">
+<span style="font-size:16px;font-weight:500">Курьеры</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/></svg>
 </div>
 
-<!-- Кошельки — link to sub-screen -->
-<div class="cd" onclick="go('wallets')" style="margin-bottom:8px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:16px;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.08)">
-<div style="display:flex;align-items:center;gap:10px">
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="20" height="14" rx="2" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><path d="M2 10h20" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><circle cx="17" cy="14" r="1.5" fill="rgba(255,255,255,0.3)"/></svg>
-<span style="font-size:17px;font-weight:500">Кошельки</span>
+<!-- Contacts compact -->
+<div style="font-size:14px;font-weight:600;margin-bottom:8px;color:var(--text-sec)">Контакты</div>
+<div class="cd" style="padding:10px 16px;margin-bottom:8px">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:0.5px solid rgba(255,255,255,0.05)">
+<span style="font-size:14px;color:var(--text-dim)">Статус</span>
+<span style="font-size:14px;color:var(--text-sec)">Не верифицирован</span>
 </div>
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/></svg>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:0.5px solid rgba(255,255,255,0.05)">
+<span style="font-size:14px;color:var(--text-dim)">Telegram ID</span>
+<span style="font-size:14px;font-weight:500">7310949179</span>
 </div>
-
-<!-- Курьеры — link to sub-screen -->
-<div class="cd" onclick="go('couriers')" style="margin-bottom:20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:16px;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.08)">
-<div style="display:flex;align-items:center;gap:10px">
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/></svg>
-<span style="font-size:17px;font-weight:500">Курьеры</span>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0">
+<span style="font-size:14px;color:var(--text-dim)">Почта</span>
+<span style="font-size:14px;font-weight:500">user@example.com</span>
 </div>
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/></svg>
-</div>
-
-<div style="font-size:19px;font-weight:600;margin-bottom:10px">Контакты</div>
-
-<div class="cd" style="margin-bottom:8px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center">
-<span style="font-size:16px;color:var(--text-sec)">Не верифицирован</span>
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="opacity:0.25"><path d="M18 6L6 18M6 6l12 12" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
-</div>
-
-<div class="cd" style="padding:14px 16px;margin-bottom:8px">
-<div style="font-size:14px;color:var(--text-sec);margin-bottom:4px">Telegram ID</div>
-<div style="font-size:17px;font-weight:500">7310949179</div>
-</div>
-
-<div class="cd" style="padding:14px 16px">
-<div style="font-size:14px;color:var(--text-sec);margin-bottom:4px">Почта</div>
-<div style="font-size:17px;font-weight:500">user@example.com</div>
 </div>
 </div></div>
 
@@ -720,9 +695,49 @@ input::placeholder{color:var(--text-dim)}
 
 <div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Сумма (₽)</div><input id="transferSum" placeholder="Введите сумму"></div>
 
-<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Откуда</div><input id="transferFrom" placeholder="Город / страна отправки"></div>
+<!-- Откуда — dropdown offices only -->
+<div style="margin-bottom:14px">
+<div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Откуда</div>
+<div style="position:relative" id="transferFromWrap">
+<div onclick="toggleTransferFrom()" style="padding:14px 16px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);cursor:pointer;display:flex;justify-content:space-between;align-items:center">
+<span id="transferFromText" style="font-size:17px;color:var(--text-dim)">Выберите офис</span>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" id="transferFromChev" style="transition:transform 0.2s"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,0.35)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</div>
+<div id="transferFromDrop" style="display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:50;background:rgba(18,18,24,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:0.5px solid rgba(255,255,255,0.08);border-radius:14px;padding:4px 0;box-shadow:0 12px 40px rgba(0,0,0,0.5)">
+<div style="padding:6px 14px 4px;font-size:12px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px">Наши офисы</div>
+<div class="wl-item" onclick="pickTransferFrom('Москва')"><div style="display:flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><circle cx="12" cy="10" r="2" fill="rgba(255,255,255,0.2)"/></svg><span style="font-size:15px;font-weight:500">Москва</span></div></div>
+<div class="wl-item" onclick="pickTransferFrom('Махачкала')"><div style="display:flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><circle cx="12" cy="10" r="2" fill="rgba(255,255,255,0.2)"/></svg><span style="font-size:15px;font-weight:500">Махачкала</span></div></div>
+<div class="wl-item" onclick="pickTransferFrom('Дубай')"><div style="display:flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><circle cx="12" cy="10" r="2" fill="rgba(255,255,255,0.2)"/></svg><span style="font-size:15px;font-weight:500">Дубай</span></div></div>
+</div>
+</div>
+</div>
 
-<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Куда</div><input id="transferTo" placeholder="Город / страна получения"></div>
+<!-- Куда — dropdown cities -->
+<div style="margin-bottom:14px">
+<div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Куда</div>
+<div style="position:relative" id="transferToWrap">
+<div onclick="toggleTransferTo()" style="padding:14px 16px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);cursor:pointer;display:flex;justify-content:space-between;align-items:center">
+<span id="transferToText" style="font-size:17px;color:var(--text-dim)">Выберите город</span>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" id="transferToChev" style="transition:transform 0.2s"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,0.35)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</div>
+<div id="transferToDrop" style="display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:50;background:rgba(18,18,24,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:0.5px solid rgba(255,255,255,0.08);border-radius:14px;padding:4px 0;max-height:280px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5)">
+<div style="padding:6px 14px 4px;font-size:12px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px">Города</div>
+<div class="wl-item" onclick="pickTransferTo('Москва')"><span style="font-size:15px;font-weight:500">Москва</span></div>
+<div class="wl-item" onclick="pickTransferTo('Санкт-Петербург')"><span style="font-size:15px;font-weight:500">Санкт-Петербург</span></div>
+<div class="wl-item" onclick="pickTransferTo('Махачкала')"><span style="font-size:15px;font-weight:500">Махачкала</span></div>
+<div class="wl-item" onclick="pickTransferTo('Казань')"><span style="font-size:15px;font-weight:500">Казань</span></div>
+<div class="wl-item" onclick="pickTransferTo('Новосибирск')"><span style="font-size:15px;font-weight:500">Новосибирск</span></div>
+<div class="wl-item" onclick="pickTransferTo('Екатеринбург')"><span style="font-size:15px;font-weight:500">Екатеринбург</span></div>
+<div class="wl-item" onclick="pickTransferTo('Краснодар')"><span style="font-size:15px;font-weight:500">Краснодар</span></div>
+<div class="wl-item" onclick="pickTransferTo('Ростов-на-Дону')"><span style="font-size:15px;font-weight:500">Ростов-на-Дону</span></div>
+<div class="wl-item" onclick="pickTransferTo('Нижний Новгород')"><span style="font-size:15px;font-weight:500">Нижний Новгород</span></div>
+<div class="wl-item" onclick="pickTransferTo('Самара')"><span style="font-size:15px;font-weight:500">Самара</span></div>
+<div class="wl-item" onclick="pickTransferTo('Уфа')"><span style="font-size:15px;font-weight:500">Уфа</span></div>
+<div class="wl-item" onclick="pickTransferTo('Воронеж')"><span style="font-size:15px;font-weight:500">Воронеж</span></div>
+<div class="wl-item" onclick="pickTransferTo('Дубай')"><span style="font-size:15px;font-weight:500">Дубай</span></div>
+</div>
+</div>
+</div>
 
 <!-- ФИО from profile -->
 <div style="margin-bottom:16px">
@@ -732,6 +747,15 @@ input::placeholder{color:var(--text-dim)}
 
 <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;cursor:pointer;font-size:15px;color:var(--text-sec)" onclick="tCTransfer()"><div id="chkbTransfer" style="width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="display:none" id="chkvTransfer"><path d="M5 13l4 4L19 7" stroke="var(--bg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Принимаю <u style="color:rgba(255,255,255,0.7)">правила</u> и условия</span></div>
 <div class="btn-primary disabled" id="bwTransfer" onclick="createTransferOrder()">Продолжить</div>
+</div></div>
+
+<!-- TRANSFER OK -->
+<div class="scr" id="s-transferOk"><div style="padding:0 16px;text-align:center;padding-bottom:40px">
+<div style="margin-top:50px;margin-bottom:14px"><div style="width:64px;height:64px;border-radius:50%;margin:0 auto;border:1.5px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+<div style="font-size:21px;font-weight:600;margin-bottom:8px">Спасибо за заявку!</div>
+<div style="font-size:15px;color:var(--text-sec);line-height:1.6;margin-bottom:20px">Скоро с вами свяжется наш менеджер</div>
+<div style="font-size:14px;color:var(--text-dim);margin-bottom:24px" id="transferOkInfo"></div>
+<div class="btn-o" onclick="go('home')">На главную</div>
 </div></div>
 
 <!-- COURIERS -->
@@ -789,7 +813,7 @@ input::placeholder{color:var(--text-dim)}
 
 <div id="branchLabel" style="text-align:center;font-size:11px;color:var(--text-dim);letter-spacing:0.5px;padding:4px 0;background:rgba(11,11,14,0.94);border-top:0.5px solid var(--card-border);flex-shrink:0">Москва</div>
 <div class="tb" id="tb">
-<div class="tb-i on" id="t-home" onclick="go('home')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 9.5L12 3L21 9.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5Z" stroke="rgba(140,170,255,1)" stroke-width="1.8"/></svg><span>Главная</span></div>
+<div class="tb-i on" id="t-home" onclick="go('home')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 9.5L12 3L21 9.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5Z" stroke="var(--accent-light)" stroke-width="1.8"/></svg><span>Главная</span></div>
 <div class="tb-i" id="t-history" onclick="go('history')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="var(--text-dim)" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke="var(--text-dim)" stroke-width="1.8" stroke-linecap="round"/></svg><span>История</span></div>
 <div class="tb-i" id="t-profile" onclick="go('profile')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="var(--text-dim)" stroke-width="1.8"/><path d="M4 21c0-3.866 3.582-7 8-7s8 3.134 8 7" stroke="var(--text-dim)" stroke-width="1.8" stroke-linecap="round"/></svg><span>Профиль</span></div>
 </div>
@@ -797,7 +821,7 @@ input::placeholder{color:var(--text-dim)}
 </div></div>
 
 <script>
-var cur='home',stk=[],mT=['home','history','profile'],sS=['buy','sell','confirm','ok','detail','wallets','couriers','sellok','transfer'],aS=['home','buy','sell','confirm','ok','history','detail','profile','wallets','couriers','sellok','transfer'];
+var cur='home',stk=[],mT=['home','history','profile'],sS=['buy','sell','confirm','ok','detail','wallets','couriers','sellok','transfer','transferOk'],aS=['home','buy','sell','confirm','ok','history','detail','profile','wallets','couriers','sellok','transfer','transferOk'];
 
 // Animate hero cards — show immediately as fallback, animate if JS works
 document.addEventListener('DOMContentLoaded',function(){
@@ -811,8 +835,11 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 
 // MBEX Logo — Bold wordmark with easter egg
+// Wait for font to load before drawing on canvas
+(document.fonts?document.fonts.ready:Promise.resolve()).then(function(){
 try{!function(){
   var cv=document.getElementById('logoCanvas');
+  if(!cv)return;
   var dpr=window.devicePixelRatio||1;
   var W=340,H=65;
   cv.width=W*dpr;cv.height=H*dpr;
@@ -968,7 +995,7 @@ try{!function(){
       cx.font='800 15px Montserrat';
       cx.textAlign='center';
       cx.textBaseline='middle';
-      cx.shadowColor='rgba(140,170,255,0.5)';
+      cx.shadowColor='rgba(255,255,255,0.4)';
       cx.shadowBlur=15;
       cx.fillText('ANTI SUNCTION CLUB',W/2,H/2);
       cx.shadowBlur=0;
@@ -1038,6 +1065,7 @@ try{!function(){
   }
   draw();
 }()}catch(e){console.error('Logo error:',e)}
+}); // end fonts.ready
 
 function go(n){
   stk.push(cur);cur=n;
@@ -1073,6 +1101,8 @@ function go(n){
     var sfd=document.getElementById('fioSelfDisplaySell');
     if(pf&&sfd)sfd.textContent=pf.textContent;
   }
+  // Render history when entering history screen
+  if(n==='history')renderHistory('all');
   uT(n);
   haptic();
 }
@@ -1098,7 +1128,7 @@ function goBack(){
     uT(cur);
   }
 }
-function uT(a){mT.forEach(function(t){var el=document.getElementById('t-'+t);if(!el)return;var on=t===a;el.className='tb-i'+(on?' on':'');el.querySelectorAll('path,circle').forEach(function(p){p.setAttribute('stroke',on?'rgba(140,170,255,1)':'var(--text-dim)')})})}
+function uT(a){mT.forEach(function(t){var el=document.getElementById('t-'+t);if(!el)return;var on=t===a;el.className='tb-i'+(on?' on':'');el.querySelectorAll('path,circle').forEach(function(p){p.setAttribute('stroke',on?'var(--accent-light)':'var(--text-dim)')})})}
 function setTog(v){
   var s=document.getElementById('ts'),c=document.getElementById('tc');
   var fioSelf=document.getElementById('fioSelf');
@@ -1117,75 +1147,52 @@ function setTog(v){
   }
   haptic();
 }
-function tC(el){var b=document.getElementById('chkb'),v=document.getElementById('chkv'),bw=document.getElementById('bw');var on=b.style.background.indexOf('255')!==-1;if(on){b.style.background='transparent';v.style.display='none';bw.classList.add('disabled')}else{b.style.background='rgba(255,90,90,0.9)';v.style.display='block';bw.classList.remove('disabled')}}
+function tC(el){var b=document.getElementById('chkb'),v=document.getElementById('chkv'),bw=document.getElementById('bw');var on=b.style.background==='rgb(255, 255, 255)';if(on){b.style.background='transparent';v.style.display='none';bw.classList.add('disabled')}else{b.style.background='#fff';v.style.display='block';bw.classList.remove('disabled')}}
 
 // Buy checkbox
 function tCBuy(el){
   var b=document.getElementById('chkbBuy'),v=document.getElementById('chkvBuy'),bw=document.getElementById('bwBuy');
-  var on=b.style.background.indexOf('60')!==-1;
+  var on=b.style.background==='rgb(255, 255, 255)';
   if(on){b.style.background='transparent';v.style.display='none';bw.classList.add('disabled')}
-  else{b.style.background='rgba(60,220,140,1)';v.style.display='block';bw.classList.remove('disabled')}
+  else{b.style.background='#fff';v.style.display='block';bw.classList.remove('disabled')}
 }
 
 // Create order and show in active orders with 10min timer
 var orderTimer=null;
 var orderSec=600;
+var activeOrderIdx=null;
+var orderHistory=[];
 function createOrder(type){
-  // Read form values
   var sumInput=document.querySelector('#s-buy input[placeholder="Введите сумму"]');
   var sum=sumInput?sumInput.value.trim():'';
-  
-  // Get FIO based on mode (self = from profile, courier = from input)
   var isSelf=document.getElementById('ts').classList.contains('on');
-  var fio;
-  if(isSelf){
-    fio=document.getElementById('fioSelfDisplay').textContent.trim();
-  }else{
-    fio=document.getElementById('fi')?document.getElementById('fi').value.trim():'';
-  }
+  var fio=isSelf?document.getElementById('fioSelfDisplay').textContent.trim():(document.getElementById('fi')?document.getElementById('fi').value.trim():'');
   var wallet=document.getElementById('walletInput')?document.getElementById('walletInput').value.trim():'';
-  
   if(!sum||!fio){alert('Заполните сумму и ФИО');return}
   haptic('success');
-  
-  var rate=85.96;
   var sumNum=parseFloat(sum.replace(/\s/g,''));
-  var usdt=sumNum?Math.round(sumNum/rate*100)/100:0;
   var num=Math.floor(Math.random()*9000+1000);
   var now=new Date();
   var months=['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'];
   var dateStr=now.getDate()+' '+months[now.getMonth()]+' '+now.getFullYear()+', '+now.getHours()+':'+(now.getMinutes()<10?'0':'')+now.getMinutes();
 
-  // Store active order data
-  activeOrderData={
-    type:'Покупка USDT',
-    usdt:usdt.toLocaleString('ru'),
-    rate:rate,
-    sumRub:sumNum.toLocaleString('ru'),
-    num:num,
-    fio:fio,
-    date:dateStr,
-    wallet:wallet||'TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8'
-  };
-  
-  // Populate OK screen
+  // Store and add to history
+  activeOrderData={type:'Покупка',info:'USDT TRC-20',sum:sumNum.toLocaleString('ru')+' ₽',status:'active',num:num,fio:fio,date:dateStr,wallet:wallet||'TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8'};
+  activeOrderIdx=orderHistory.length;
+  orderHistory.push(activeOrderData);
+
   var okInfo=document.getElementById('okInfo');
   if(okInfo)okInfo.innerHTML='№ <b style="color:#fff;font-weight:500">'+num+'</b> · '+fio;
-  
-  // Show active order on home
-  var ao=document.getElementById('activeOrderHome');
-  if(ao)ao.style.display='block';
-  var at=document.getElementById('activeType');
-  if(at)at.textContent='Покупка USDT';
-  var ai=document.getElementById('activeInfo');
-  if(ai)ai.textContent='TRC-20 · '+rate+' ₽';
+
+  // Show active order — rubles only
+  var ao=document.getElementById('activeOrderHome');if(ao)ao.style.display='block';
+  var at=document.getElementById('activeType');if(at)at.textContent='Покупка';
+  var ai=document.getElementById('activeInfo');if(ai)ai.textContent='USDT TRC-20';
   var aa=document.getElementById('activeAmount');
-  if(aa)aa.innerHTML=usdt.toLocaleString('ru')+' <span style="font-size:14px;font-weight:400;color:var(--text-sec)">USDT</span>';
-  var ar=document.getElementById('activeRub');
-  if(ar)ar.textContent='≈ '+sumNum.toLocaleString('ru')+' ₽';
+  if(aa)aa.innerHTML=sumNum.toLocaleString('ru')+' <span style="font-size:14px;font-weight:400;color:var(--text-sec)">₽</span>';
   var badge=document.getElementById('activeOrderBadge');
-  if(badge){badge.textContent='Активная заявка';badge.style.background='rgba(255,255,255,0.06)';badge.style.color='rgba(255,255,255,0.7)'}
-  
+  if(badge)badge.textContent='Активная заявка';
+
   // Start 10 min timer
   orderSec=600;
   clearInterval(orderTimer);
@@ -1193,10 +1200,10 @@ function createOrder(type){
   orderTimer=setInterval(function(){
     orderSec--;
     if(orderSec<=0){
-      clearInterval(orderTimer);
-      orderSec=0;
+      clearInterval(orderTimer);orderSec=0;
+      if(activeOrderIdx!==null&&orderHistory[activeOrderIdx])orderHistory[activeOrderIdx].status='cancelled';
       var b=document.getElementById('activeOrderBadge');
-      if(b){b.textContent='Истекла';b.style.background='rgba(255,255,255,0.04)';b.style.color='var(--text-dim)'}
+      if(b)b.textContent='Истекла';
       var atEl=document.getElementById('activeTimer');
       if(atEl)atEl.textContent='Истекло';
     }
@@ -1453,6 +1460,8 @@ function haptic(style,el){
 function cancelActiveOrder(){
   clearInterval(orderTimer);
   orderSec=0;
+  // Mark in history as cancelled
+  if(activeOrderIdx!==null&&orderHistory[activeOrderIdx])orderHistory[activeOrderIdx].status='cancelled';
   var ao=document.getElementById('activeOrderHome');
   if(ao){
     ao.style.transition='opacity 0.3s,transform 0.3s';
@@ -1461,6 +1470,7 @@ function cancelActiveOrder(){
     setTimeout(function(){ao.style.display='none';ao.style.opacity='';ao.style.transform=''},300);
   }
   activeOrderData=null;
+  activeOrderIdx=null;
   haptic('medium');
 }
 
@@ -1471,34 +1481,34 @@ var activeOrderData=null;
 function showActiveDetail(){
   if(!activeOrderData)return;
   var d=activeOrderData;
-  var da=document.getElementById('detailAmount');if(da)da.textContent=d.usdt+' USDT';
+  var da=document.getElementById('detailAmount');if(da)da.textContent=d.sum||'';
   var dt=document.getElementById('detailType');if(dt)dt.textContent=d.type;
   var ds=document.getElementById('detailStatus');
   var dd=document.getElementById('detailStatusDot');
-  if(orderSec>0){
-    if(ds)ds.textContent='Активная';
-    if(dd)dd.style.background='#fff';
-  }else{
-    if(ds)ds.textContent='Отменена';
-    if(dd){dd.style.background='transparent';dd.style.border='1px solid rgba(255,255,255,0.2)'}
+  var statusText=d.status==='active'?'Активная':d.status==='done'?'Завершена':'Отменена';
+  if(ds)ds.textContent=statusText;
+  if(dd){
+    if(d.status==='active'){dd.style.background='var(--accent-light)';dd.style.border='none'}
+    else if(d.status==='done'){dd.style.background='rgba(60,220,140,0.8)';dd.style.border='none'}
+    else{dd.style.background='transparent';dd.style.border='1px solid rgba(255,255,255,0.2)'}
   }
-  var ddate=document.getElementById('detailDate');if(ddate)ddate.textContent=d.date;
-  var dr=document.getElementById('detailRate');if(dr)dr.textContent=d.rate+' ₽';
-  var dsum=document.getElementById('detailSum');if(dsum)dsum.textContent=d.sumRub+' ₽';
-  var dn=document.getElementById('detailNum');if(dn)dn.textContent=d.num;
-  var df=document.getElementById('detailFio');if(df)df.textContent=d.fio;
+  var ddate=document.getElementById('detailDate');if(ddate)ddate.textContent=d.date||'';
+  var dr=document.getElementById('detailRate');if(dr)dr.textContent=d.info||'';
+  var dsum=document.getElementById('detailSum');if(dsum)dsum.textContent=d.sum||'';
+  var dn=document.getElementById('detailNum');if(dn)dn.textContent=d.num||'';
+  var df=document.getElementById('detailFio');if(df)df.textContent=d.fio||'';
   var dtm=document.getElementById('detailTimer');
   if(dtm){
-    if(orderSec>0){
+    if(d.status==='active'&&orderSec>0){
       var m=Math.floor(orderSec/60),s=orderSec%60;
       dtm.textContent=m+':'+(s<10?'0':'')+s;
     }else{
-      dtm.textContent='Истекло';
+      dtm.textContent=d.status==='active'?'Истекло':'—';
     }
   }
-  var dw=document.getElementById('detailWallet');if(dw)dw.textContent=d.wallet||'TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8';
+  var dw=document.getElementById('detailWallet');if(dw)dw.textContent=d.wallet||'—';
   var dcw=document.getElementById('detailCancelWrap');
-  if(dcw)dcw.style.display=orderSec>0?'block':'none';
+  if(dcw)dcw.style.display=(d.status==='active'&&orderSec>0)?'block':'none';
 }
 
 // Sell toggle (приеду сам / курьер)
@@ -1548,61 +1558,133 @@ document.addEventListener('click',function(e){
 // Transfer checkbox
 function tCTransfer(){
   var b=document.getElementById('chkbTransfer'),v=document.getElementById('chkvTransfer'),bw=document.getElementById('bwTransfer');
-  var on=b.style.background.indexOf('100')!==-1;
+  var on=b.style.background==='rgb(255, 255, 255)';
   if(on){b.style.background='transparent';v.style.display='none';bw.classList.add('disabled')}
-  else{b.style.background='rgba(140,170,255,1)';v.style.display='block';bw.classList.remove('disabled')}
+  else{b.style.background='#fff';v.style.display='block';bw.classList.remove('disabled')}
   haptic();
 }
 
-// Create transfer order
+// Transfer "Откуда" dropdown
+function toggleTransferFrom(){
+  var drop=document.getElementById('transferFromDrop');
+  var chev=document.getElementById('transferFromChev');
+  if(drop.style.display==='none'||!drop.style.display){
+    drop.style.display='block';chev.style.transform='rotate(180deg)';
+  }else{
+    drop.style.display='none';chev.style.transform='';
+  }
+  haptic();
+}
+function pickTransferFrom(city){
+  document.getElementById('transferFromText').textContent=city;
+  document.getElementById('transferFromText').style.color='#fff';
+  document.getElementById('transferFromDrop').style.display='none';
+  document.getElementById('transferFromChev').style.transform='';
+  haptic();
+}
+document.addEventListener('click',function(e){
+  var wrap=document.getElementById('transferFromWrap');
+  if(wrap&&!wrap.contains(e.target)){
+    var d=document.getElementById('transferFromDrop');if(d)d.style.display='none';
+    var c=document.getElementById('transferFromChev');if(c)c.style.transform='';
+  }
+  var wrap2=document.getElementById('transferToWrap');
+  if(wrap2&&!wrap2.contains(e.target)){
+    var d2=document.getElementById('transferToDrop');if(d2)d2.style.display='none';
+    var c2=document.getElementById('transferToChev');if(c2)c2.style.transform='';
+  }
+});
+
+// Transfer "Куда" dropdown
+function toggleTransferTo(){
+  var drop=document.getElementById('transferToDrop');
+  var chev=document.getElementById('transferToChev');
+  if(drop.style.display==='none'||!drop.style.display){
+    drop.style.display='block';chev.style.transform='rotate(180deg)';
+  }else{
+    drop.style.display='none';chev.style.transform='';
+  }
+  haptic();
+}
+function pickTransferTo(city){
+  document.getElementById('transferToText').textContent=city;
+  document.getElementById('transferToText').style.color='#fff';
+  document.getElementById('transferToDrop').style.display='none';
+  document.getElementById('transferToChev').style.transform='';
+  haptic();
+}
+
+// Order history store (defined above)
+
+// Create transfer order — goes to history, NOT active order on home
 function createTransferOrder(){
   var sum=document.getElementById('transferSum').value.trim();
-  var from=document.getElementById('transferFrom').value.trim();
-  var to=document.getElementById('transferTo').value.trim();
+  var from=document.getElementById('transferFromText').textContent;
+  var to=document.getElementById('transferToText').textContent;
   var fio=document.getElementById('transferFioDisplay').textContent.trim();
   if(!sum){alert('Введите сумму');return}
-  if(!from||!to){alert('Укажите откуда и куда');return}
+  if(from==='Выберите офис'){alert('Выберите офис отправки');return}
+  if(to==='Выберите город'){alert('Выберите город получения');return}
   if(!fio){alert('Укажите ФИО в профиле');return}
 
   var num=Math.floor(Math.random()*9000+1000);
   var now=new Date();
   var months=['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'];
   var dateStr=now.getDate()+' '+months[now.getMonth()]+' '+now.getFullYear()+', '+now.getHours()+':'+(now.getMinutes()<10?'0':'')+now.getMinutes();
+  var sumNum=parseFloat(sum.replace(/\s/g,''));
 
-  activeOrderData={
+  // Add to history
+  orderHistory.push({
     type:'Перестановка',
-    usdt:from+' → '+to,
-    rate:'—',
-    sumRub:parseFloat(sum.replace(/\s/g,'')).toLocaleString('ru'),
+    info:from+' → '+to,
+    sum:sumNum.toLocaleString('ru')+' ₽',
+    status:'active',
     num:num,
     fio:fio,
-    date:dateStr,
-    wallet:'—'
-  };
-
-  // Show active order on home
-  var ao=document.getElementById('activeOrderHome');if(ao)ao.style.display='block';
-  var at=document.getElementById('activeType');if(at)at.textContent='Перестановка';
-  var ai=document.getElementById('activeInfo');if(ai)ai.textContent=from+' → '+to;
-  var aa=document.getElementById('activeAmount');if(aa)aa.innerHTML=parseFloat(sum.replace(/\s/g,'')).toLocaleString('ru')+' <span style="font-size:14px;font-weight:400;color:var(--text-sec)">₽</span>';
-  var ar=document.getElementById('activeRub');if(ar)ar.textContent='';
-  var badge=document.getElementById('activeOrderBadge');
-  if(badge){badge.textContent='Активная заявка';badge.style.background='rgba(255,255,255,0.06)';badge.style.color='rgba(255,255,255,0.7)'}
-
-  // Start timer
-  orderSec=600;
-  clearInterval(orderTimer);
-  updateTimer();
-  orderTimer=setInterval(function(){
-    orderSec--;
-    if(orderSec<=0){clearInterval(orderTimer);orderSec=0}
-    updateTimer();
-  },1000);
+    date:dateStr
+  });
 
   haptic('success');
-  go('ok');
-  var okInfo=document.getElementById('okInfo');
-  if(okInfo)okInfo.innerHTML='№ <b style="color:#fff;font-weight:500">'+num+'</b> · '+fio+'<br><br>Перестановка: '+from+' → '+to+'<br>Сумма: '+parseFloat(sum.replace(/\s/g,'')).toLocaleString('ru')+' ₽';
+  // Show thank you screen instead of ok screen
+  go('transferOk');
+  var toi=document.getElementById('transferOkInfo');
+  if(toi)toi.innerHTML='№ <b style="color:#fff;font-weight:500">'+num+'</b><br>'+from+' → '+to+'<br>'+sumNum.toLocaleString('ru')+' ₽';
+}
+
+// History filter
+function filterHistory(filter,el){
+  document.querySelectorAll('#s-history .pill').forEach(function(p){p.classList.remove('on')});
+  el.classList.add('on');
+  renderHistory(filter);
+  haptic();
+}
+function renderHistory(filter){
+  filter=filter||'all';
+  var list=document.getElementById('historyList');
+  var empty=document.getElementById('historyEmpty');
+  var html='';
+  var count=0;
+  for(var i=orderHistory.length-1;i>=0;i--){
+    var o=orderHistory[i];
+    if(filter!=='all'&&o.status!==filter)continue;
+    count++;
+    var statusText=o.status==='active'?'Активная':o.status==='done'?'Завершена':'Отменена';
+    var statusColor=o.status==='active'?'var(--accent-light)':o.status==='done'?'rgba(60,220,140,0.8)':'var(--text-dim)';
+    html+='<div class="cd" style="margin-bottom:8px;cursor:pointer;padding:12px 16px" onclick="viewHistoryOrder('+i+')">';
+    html+='<div style="display:flex;justify-content:space-between;align-items:center">';
+    html+='<div><div style="font-size:16px;font-weight:500">'+o.type+'</div><div style="font-size:13px;color:var(--text-dim);margin-top:2px">'+o.info+'</div></div>';
+    html+='<div style="text-align:right"><div style="font-size:16px;font-weight:500">'+o.sum+'</div><div style="font-size:13px;color:'+statusColor+'">'+statusText+'</div></div>';
+    html+='</div></div>';
+  }
+  list.innerHTML=html;
+  empty.style.display=count?'none':'block';
+}
+function viewHistoryOrder(idx){
+  var o=orderHistory[idx];
+  if(!o)return;
+  activeOrderData=o;
+  showActiveDetail();
+  go('detail');
 }
 
 // Sync transfer FIO when navigating to transfer
@@ -1628,10 +1710,12 @@ document.querySelectorAll('.hero-card,.btn-primary,.btn-w,.btn-o,.tog,.pill,.tb-
 });
 
 // Chart — monochrome with time axis
+(document.fonts?document.fonts.ready:Promise.resolve()).then(function(){
 try{!function(){
   var pts=[85.2,85.4,85.3,85.6,85.5,85.8,85.7,86.0,85.9,86.1,85.8,85.9,86.0,85.7,85.8,86.1,86.0,85.9,86.2,86.1,85.9,86.0,85.8,85.96];
   var times=['00:00','01:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00'];
   var container=document.getElementById('chart-area');
+  if(!container)return;
   var W=343,H=135,padL=8,padR=36,padT=12,padB=22;
   var cW=W-padL-padR,cH=H-padT-padB;
   var mn=Math.min.apply(null,pts)-0.3,mx=Math.max.apply(null,pts)+0.3;
@@ -1751,6 +1835,7 @@ try{!function(){
   },{passive:false});
   cv.addEventListener('touchend',function(){hoverIdx=-1});
 }()}catch(e){console.error('Chart error:',e)}
+}); // end chart fonts.ready
 
 // BG particles — monochrome white
 try{!function(){
