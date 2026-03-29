@@ -704,7 +704,20 @@ input::placeholder{color:var(--text-dim)}
 </div>
 <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:0.5px solid rgba(255,255,255,0.05)">
 <span style="font-size:14px;color:var(--text-dim)">Telegram ID</span>
-<span style="font-size:14px;font-weight:500">7310949179</span>
+<span style="font-size:14px;font-weight:600;color:#fff;text-shadow:0 0 8px rgba(255,255,255,0.4),0 0 20px rgba(255,255,255,0.15)">7310949179</span>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:0.5px solid rgba(255,255,255,0.05)">
+<span style="font-size:14px;color:var(--text-dim)">Телефон</span>
+<div style="display:flex;align-items:center;gap:8px">
+<span style="font-size:14px;font-weight:500" id="profilePhone">+7 (999) 123-45-67</span>
+<svg onclick="editProfilePhone()" width="14" height="14" viewBox="0 0 24 24" fill="none" style="cursor:pointer;opacity:0.5;flex-shrink:0"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</div>
+</div>
+<div id="profilePhoneEdit" style="display:none;padding:8px 0 4px">
+<div style="display:flex;gap:8px">
+<input id="profilePhoneInput" placeholder="+7 (___) ___-__-__" style="font-size:14px;padding:10px 12px">
+<div class="btn-primary" onclick="saveProfilePhone()" style="padding:10px 14px;font-size:13px;border-radius:10px;width:auto;flex-shrink:0">OK</div>
+</div>
 </div>
 <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0">
 <span style="font-size:14px;color:var(--text-dim)">Почта</span>
@@ -935,7 +948,7 @@ Instagram</a>
 <div style="font-size:15px;color:var(--text-dim);margin-bottom:20px;line-height:1.5">Приглашайте друзей и получайте бонусы с каждого их обмена</div>
 
 <div class="cd" style="margin-bottom:12px;padding:16px">
-<div style="display:flex;gap:12px;margin-bottom:16px">
+<div style="display:flex;gap:12px;margin-bottom:12px">
 <div style="flex:1;text-align:center;padding:14px 8px;border-radius:12px;background:rgba(255,255,255,0.03);border:0.5px solid rgba(255,255,255,0.06)">
 <div style="font-size:24px;font-weight:600;margin-bottom:2px">0</div>
 <div style="font-size:12px;color:var(--text-dim)">Рефералов</div>
@@ -943,6 +956,16 @@ Instagram</a>
 <div style="flex:1;text-align:center;padding:14px 8px;border-radius:12px;background:rgba(255,255,255,0.03);border:0.5px solid rgba(255,255,255,0.06)">
 <div style="font-size:24px;font-weight:600;margin-bottom:2px">0</div>
 <div style="font-size:12px;color:var(--text-dim)">USDT заработано</div>
+</div>
+</div>
+<div style="display:flex;gap:12px;margin-bottom:16px">
+<div style="flex:1;text-align:center;padding:14px 8px;border-radius:12px;background:rgba(255,255,255,0.03);border:0.5px solid rgba(255,255,255,0.06)">
+<div style="font-size:24px;font-weight:600;margin-bottom:2px">0</div>
+<div style="font-size:12px;color:var(--text-dim)">Обменов рефералов</div>
+</div>
+<div style="flex:1;text-align:center;padding:14px 8px;border-radius:12px;background:rgba(255,255,255,0.03);border:0.5px solid rgba(255,255,255,0.06)">
+<div style="font-size:24px;font-weight:600;margin-bottom:2px">0 ₽</div>
+<div style="font-size:12px;color:var(--text-dim)">Оборот за месяц</div>
 </div>
 </div>
 <div style="font-size:13px;color:var(--text-sec);margin-bottom:10px;font-weight:500">Ваш реферальный код</div>
@@ -1530,6 +1553,23 @@ function saveProfileFio(){
 }
 function cancelProfileFio(){
   document.getElementById('profileFioEdit').style.display='none';
+}
+
+// Profile phone edit
+function editProfilePhone(){
+  var edit=document.getElementById('profilePhoneEdit');
+  if(edit.style.display==='block'){edit.style.display='none';return}
+  edit.style.display='block';
+  document.getElementById('profilePhoneInput').value=document.getElementById('profilePhone').textContent;
+  document.getElementById('profilePhoneInput').focus();
+  haptic();
+}
+function saveProfilePhone(){
+  var val=document.getElementById('profilePhoneInput').value.trim();
+  if(!val)return;
+  document.getElementById('profilePhone').textContent=val;
+  document.getElementById('profilePhoneEdit').style.display='none';
+  haptic();
 }
 
 // Haptic feedback — Telegram > Android vibrate > visual shake (iOS fallback)
