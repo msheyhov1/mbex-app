@@ -203,6 +203,19 @@ input::placeholder{color:var(--text-dim)}
 
 /* Background */
 .bg-base{position:absolute;inset:0;z-index:0;background:var(--bg);pointer-events:none}
+
+/* Animated glow — white neon aurora */
+@keyframes glowBreathe{
+  0%,100%{opacity:0.7;transform:translateX(-50%) scale(1)}
+  50%{opacity:1;transform:translateX(-50%) scale(1.15)}
+}
+@keyframes glowOrbit{
+  0%{transform:translate(-60%,-20%) scale(0.8);opacity:0.6}
+  33%{transform:translate(-35%,-35%) scale(1.1);opacity:1}
+  66%{transform:translate(-55%,-5%) scale(0.9);opacity:0.7}
+  100%{transform:translate(-60%,-20%) scale(0.8);opacity:0.6}
+}
+#bgGlow2{position:absolute;top:-160px;left:50%;width:320px;height:260px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(255,255,255,0.11) 0%,rgba(200,220,255,0.05) 40%,transparent 70%);z-index:0;pointer-events:none;animation:glowOrbit 8s ease-in-out infinite}
 #officeGallery::-webkit-scrollbar{display:none}
 #officeGallery{scrollbar-width:none}
 
@@ -320,7 +333,6 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 </div>
 
 <div class="bg-base"></div>
-<video id="bgVideo" autoplay muted loop playsinline webkit-playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0;pointer-events:none"><source src="bg.mp4" type="video/mp4"></video>
 
 <div style="position:relative;z-index:2;display:flex;flex-direction:column;height:100%">
 
@@ -342,23 +354,30 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 <!-- ═══ HOME ═══ -->
 <div class="scr act" id="s-home">
 
+<!-- Glow aurora — emanates from top edge -->
+<div style="position:relative;height:0;overflow:visible;pointer-events:none">
+<div style="position:absolute;top:-220px;left:50%;transform:translateX(-50%);width:500px;height:400px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(255,255,255,0.18) 0%,rgba(255,255,255,0.08) 30%,rgba(255,255,255,0.015) 55%,transparent 75%);animation:glowBreathe 6s ease-in-out infinite"></div>
+<div id="bgGlow2" style="position:absolute;top:-160px;left:50%"></div>
+<div style="position:absolute;top:-180px;left:50%;transform:translateX(-50%);width:280px;height:220px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(255,255,255,0.11) 0%,rgba(220,230,255,0.04) 40%,transparent 70%);animation:glowBreathe 4s ease-in-out infinite reverse"></div>
+</div>
+
 <!-- Pull-to-refresh -->
 <div class="ptr-indicator" id="ptrIndicator"><div class="ptr-spinner"></div>Обновление...</div>
 
 <!-- Logo -->
-<div class="logo-area" style="height:40px;padding:6px 16px 0">
-<img src="logo.png" alt="MBEX" style="display:block;margin:0 auto;height:32px;width:auto">
+<div class="logo-area" style="height:80px;padding:24px 16px 0">
+<img src="logo.png" alt="MBEX" style="display:block;margin:0 auto;height:36px;width:auto">
 </div>
 
 <!-- Chart -->
-<div style="padding:0 16px;margin-top:4px" id="chart-area"></div>
+<div style="padding:0 16px;margin-top:16px" id="chart-area"></div>
 <div style="padding:4px 16px 0;display:flex;justify-content:space-between;align-items:baseline">
 <div style="font-size:14px;font-weight:400;color:var(--text-sec)">USDT / RUB</div>
 <div style="font-size:12px;color:var(--text-dim)">актуальный курс на: 29.03, 14:41 MSK</div>
 </div>
 
 <!-- Buy / Sell hero cards — NO badges -->
-<div class="hero-cards" style="margin-top:14px">
+<div class="hero-cards" style="margin-top:20px">
 <div class="hero-card hero-card--buy" id="buyCard" onclick="go('buy')">
 <div class="hero-card__label">Купить</div>
 <div class="hero-card__price">85.96</div>
@@ -2214,37 +2233,6 @@ try{!function(){
   ct.addEventListener('touchend',function(){tracking=false},{passive:true});
 }();
 
-// Background video — force autoplay on iOS
-!function(){
-  var v=document.getElementById('bgVideo');
-  if(!v)return;
-  v.style.transition='opacity 2s ease';
-  
-  function showVideo(){
-    v.style.opacity='0.45';
-  }
-  
-  function tryPlay(){
-    var p=v.play();
-    if(p&&p.then){
-      p.then(showVideo).catch(function(){
-        // iOS blocked autoplay — try again on first touch
-        document.addEventListener('touchstart',function once(){
-          v.play().then(showVideo).catch(function(){});
-          document.removeEventListener('touchstart',once);
-        },{once:true});
-      });
-    }else{
-      showVideo();
-    }
-  }
-  
-  if(v.readyState>=2){
-    tryPlay();
-  }else{
-    v.addEventListener('canplay',tryPlay,{once:true});
-  }
-}();
 </script>
 </body>
 </html>
