@@ -1316,6 +1316,217 @@ Instagram</a>
 </div></div>
 
 <script>
+
+// ═══ i18n (RU/EN) — FULL ═══
+if(!window._lang)window._lang='ru';
+var _i18n={
+  ru:{
+    // Nav
+    buy:'Купить',sell:'Продать',transfer:'Перестановки',home:'Главная',history:'История',profile:'Профиль',
+    // Buy/Sell forms
+    buyUSDT:'Купить USDT',sellUSDT:'Продать USDT',
+    sum:'Сумма (₽)',wallet:'Кошелёк (TRC-20)',selfPickup:'Приеду сам',courier:'Курьер',
+    accept:'Принимаю',rules:'правила',conditions:'и условия',continue:'Продолжить',
+    getWallet:'Получить кошелёк',cancel:'Отменить заявку',back:'Назад',
+    from1000:'от 1 000 ₽ · шаг 500',enterSum:'Введите сумму',
+    walletPlaceholder:'Txxxxxxxxxxxxxxxxxxxxxxxxx',
+    fio:'ФИО',fioCourier:'ФИО курьера',chooseCourier:'Выберите или введите ФИО',
+    // Order created
+    created:'Заявка создана',toHome:'На главную',
+    sendUSDT:'Переведите USDT на этот адрес',
+    walletAddr:'Адрес кошелька (TRC-20)',walletForPay:'Кошелёк для оплаты (TRC-20)',
+    copied:'Скопировано!',
+    timeLeft:'Осталось:',timeExpired:'Время истекло',
+    // Transfer
+    transfers:'Перестановки',transferDesc:'Перевод средств',transferWorld:'Перевод по всему миру',
+    from:'Откуда',to:'Куда',chooseOffice:'Выберите офис',chooseCity:'Выберите город',
+    ourOffices:'Наши офисы',cities:'Города',
+    thankYou:'Спасибо за заявку!',managerContact:'Скоро с вами свяжется наш менеджер',
+    // History
+    all:'Все',active:'Активные',done:'Завершённые',noOrders:'Заявок пока нет',
+    activeOrder:'Активная заявка',statusActive:'Активная',statusDone:'Завершена',statusCancelled:'Отменена',
+    expired:'Истекло',
+    // Detail
+    type:'Тип',amount:'Сумма',number:'Номер',timer:'Таймер',
+    cancelOrder:'Отменить заявку',repeatOrder:'Повторить заявку',
+    confirmCancel:'Отменить заявку?',confirmCancelText:'Вы уверены, что хотите отменить эту заявку?',
+    confirmation:'Подтверждение',areYouSure:'Вы уверены?',yes:'Да',cancelBtn:'Отмена',
+    purchase:'Покупка',sale:'Продажа',transferType:'Перестановка',
+    purchaseUSDT:'Покупка USDT',saleUSDT:'Продажа USDT',
+    // Profile
+    fioLabel:'ФИО',discountVol:'Скидка за объём',refBalance:'Реф. баланс',exchanges:'Обменов',
+    refCode:'Реф. код',referralSystem:'Реферальная система',wallets:'Кошельки',couriers:'Курьеры',
+    settings:'Настройки',language:'Язык',theme:'Тема',darkTheme:'Тёмная',lightTheme:'Светлая',
+    contactsLabel:'Контакты',status:'Статус',notVerified:'Не верифицирован',verified:'Верифицирован',
+    phone:'Телефон',email:'Почта',save:'Сохранить',
+    // Contacts
+    contacts:'Контакты',address:'Адрес',openYandex:'Открыть в Яндекс Картах',
+    workHours:'Режим работы',daily247:'Ежедневно: 24/7',
+    site:'Сайт',ourOffice:'Наш офис',
+    // Wallets
+    myWallets:'Мои кошельки',addWallet:'Добавить кошелёк',walletName:'Название',
+    walletNamePh:'Например: Личный',addrTRC:'Адрес (TRC-20)',
+    // Couriers
+    myCouriers:'Мои курьеры',addCourier:'Добавить курьера',
+    lastName:'Фамилия',firstName:'Имя',middleName:'Отчество',add:'Добавить',
+    // Referral
+    referrals:'Рефералов',earnedUSDT:'USDT заработано',refExchanges:'Обменов рефералов',
+    monthTurnover:'Оборот за месяц',yourRefCode:'Ваш реферальный код',
+    shareInTG:'Поделиться в Telegram',howItWorks:'Как это работает',
+    step1title:'Поделитесь кодом',step1desc:'Отправьте реферальный код другу',
+    step2title:'Друг совершает обмен',step2desc:'При регистрации указывает ваш код',
+    step3title:'Получайте бонусы',step3desc:'Начисляем USDT за каждую сделку реферала',
+    refInviteDesc:'Приглашайте друзей и получайте бонусы с каждого их обмена',
+    // AML
+    aml:'AML / KYC',amlDesc:'Политика противодействия отмыванию денег',
+    txCheck:'Проверка транзакций',txCheckDesc:'Все операции проходят автоматическую AML-проверку для безопасности',
+    idVerify:'Верификация личности',idVerifyDesc:'При обменах свыше 100 000 ₽ может потребоваться KYC-верификация',
+    documents:'Документы',documentsDesc:'Паспорт РФ или загранпаспорт для подтверждения',
+    yourStatus:'Ваш статус',passVerify:'Пройти верификацию',
+    // Home
+    support:'Поддержка',branches:'Филиалы',
+    rateUSDT:'USDT / RUB',currentRate:'актуальный курс на:',
+    perUSDT:'₽ за USDT',yesterday:'вчера',today:'сегодня',
+    tetherUSDT:'Tether USDT',cbrLabel:'ЦБ РФ',
+    // Misc
+    dataUpdated:'Данные обновлены',updating:'Обновление...',
+    fillSumFio:'Заполните сумму и ФИО',minSum:'Минимальная сумма 1 000 ₽',
+    sumRounded:'Сумма округлена до',orderCancelled:'Заявка отменена',
+    orderNumCopied:'Номер заявки скопирован',orderDataLoaded:'Данные заявки загружены',
+    enterAmount:'Введите сумму',chooseOfficeErr:'Выберите офис отправки',
+    chooseCityErr:'Выберите город получения',specifyFio:'Укажите ФИО в профиле',
+    branch:'Филиал',chooseYourCity:'Выберите город',
+    favorites:'Избранные',recent:'Недавние',
+    incomeTo:'Принимаю',
+    darkThemeToast:'Тёмная тема',lightThemeToast:'Светлая тема',
+    langRu:'Язык: Русский',langEn:'Language: English',
+    usdtTRC:'USDT TRC-20',
+    addressLine1:'Пресненская наб. 12',
+    addressLine2:'Башня Федерация — Восток, 5 этаж, офис 512',
+    addressLine2Short:'Башня Федерация — Восток, 5 эт.',
+    withdraw:'Вывод',withdrawUSDT:'Вывод USDT',withdrawAvailable:'Вывод доступен от 100 USDT',
+    availableBalance:'Доступно:',withdrawSum:'Сумма (USDT)',
+    insufficientBalance:'Недостаточно средств',minWithdraw:'Минимум для вывода 100 USDT',
+    enterWallet:'Введите адрес кошелька',withdrawRequested:'Заявка на вывод создана',
+    activeReferrals:'Активных рефералов',
+    noSavedWallets:'Нет сохранённых кошельков'
+  },
+  en:{
+    buy:'Buy',sell:'Sell',transfer:'Transfers',home:'Home',history:'History',profile:'Profile',
+    buyUSDT:'Buy USDT',sellUSDT:'Sell USDT',
+    sum:'Amount (₽)',wallet:'Wallet (TRC-20)',selfPickup:'Self pickup',courier:'Courier',
+    accept:'I accept',rules:'rules',conditions:'and conditions',continue:'Continue',
+    getWallet:'Get wallet',cancel:'Cancel order',back:'Back',
+    from1000:'from 1,000 ₽ · step 500',enterSum:'Enter amount',
+    walletPlaceholder:'Txxxxxxxxxxxxxxxxxxxxxxxxx',
+    fio:'Full name',fioCourier:'Courier full name',chooseCourier:'Select or enter full name',
+    created:'Order created',toHome:'Home',
+    sendUSDT:'Send USDT to this address',
+    walletAddr:'Wallet address (TRC-20)',walletForPay:'Payment wallet (TRC-20)',
+    copied:'Copied!',
+    timeLeft:'Remaining:',timeExpired:'Time expired',
+    transfers:'Transfers',transferDesc:'Money transfer',transferWorld:'Worldwide transfers',
+    from:'From',to:'To',chooseOffice:'Select office',chooseCity:'Select city',
+    ourOffices:'Our offices',cities:'Cities',
+    thankYou:'Thank you!',managerContact:'Our manager will contact you shortly',
+    all:'All',active:'Active',done:'Completed',noOrders:'No orders yet',
+    activeOrder:'Active order',statusActive:'Active',statusDone:'Completed',statusCancelled:'Cancelled',
+    expired:'Expired',
+    type:'Type',amount:'Amount',number:'Number',timer:'Timer',
+    cancelOrder:'Cancel order',repeatOrder:'Repeat order',
+    confirmCancel:'Cancel order?',confirmCancelText:'Are you sure you want to cancel this order?',
+    confirmation:'Confirmation',areYouSure:'Are you sure?',yes:'Yes',cancelBtn:'Cancel',
+    purchase:'Purchase',sale:'Sale',transferType:'Transfer',
+    purchaseUSDT:'USDT Purchase',saleUSDT:'USDT Sale',
+    fioLabel:'Full name',discountVol:'Volume discount',refBalance:'Ref. balance',exchanges:'Exchanges',
+    refCode:'Ref. code',referralSystem:'Referral system',wallets:'Wallets',couriers:'Couriers',
+    settings:'Settings',language:'Language',theme:'Theme',darkTheme:'Dark',lightTheme:'Light',
+    contactsLabel:'Contacts',status:'Status',notVerified:'Not verified',verified:'Verified',
+    phone:'Phone',email:'Email',save:'Save',
+    contacts:'Contacts',address:'Address',openYandex:'Open in Yandex Maps',
+    workHours:'Working hours',daily247:'Daily: 24/7',
+    site:'Website',ourOffice:'Our office',
+    myWallets:'My wallets',addWallet:'Add wallet',walletName:'Name',
+    walletNamePh:'e.g.: Personal',addrTRC:'Address (TRC-20)',
+    myCouriers:'My couriers',addCourier:'Add courier',
+    lastName:'Last name',firstName:'First name',middleName:'Middle name',add:'Add',
+    referrals:'Referrals',earnedUSDT:'USDT earned',refExchanges:'Referral exchanges',
+    monthTurnover:'Monthly turnover',yourRefCode:'Your referral code',
+    shareInTG:'Share via Telegram',howItWorks:'How it works',
+    step1title:'Share the code',step1desc:'Send your referral code to a friend',
+    step2title:'Friend makes an exchange',step2desc:'Uses your code during registration',
+    step3title:'Earn bonuses',step3desc:'Get USDT for each referral trade',
+    refInviteDesc:'Invite friends and earn bonuses from each exchange',
+    aml:'AML / KYC',amlDesc:'Anti-money laundering policy',
+    txCheck:'Transaction verification',txCheckDesc:'All operations undergo automatic AML screening for security',
+    idVerify:'Identity verification',idVerifyDesc:'KYC may be required for exchanges over 100,000 ₽',
+    documents:'Documents',documentsDesc:'Russian passport or international passport for verification',
+    yourStatus:'Your status',passVerify:'Start verification',
+    support:'Support',branches:'Branches',
+    rateUSDT:'USDT / RUB',currentRate:'current rate:',
+    perUSDT:'₽ per USDT',yesterday:'yesterday',today:'today',
+    tetherUSDT:'Tether USDT',cbrLabel:'CBR',
+    dataUpdated:'Data updated',updating:'Updating...',
+    fillSumFio:'Fill in amount and full name',minSum:'Minimum amount 1,000 ₽',
+    sumRounded:'Amount rounded to',orderCancelled:'Order cancelled',
+    orderNumCopied:'Order number copied',orderDataLoaded:'Order data loaded',
+    enterAmount:'Enter amount',chooseOfficeErr:'Select sending office',
+    chooseCityErr:'Select destination city',specifyFio:'Set your name in profile',
+    branch:'Branch',chooseYourCity:'Select city',
+    favorites:'Favorites',recent:'Recent',
+    incomeTo:'I accept',
+    darkThemeToast:'Dark theme',lightThemeToast:'Light theme',
+    langRu:'Language: Russian',langEn:'Language: English',
+    usdtTRC:'USDT TRC-20',
+    addressLine1:'Presnenskaya emb. 12',
+    addressLine2:'Federation Tower — East, 5th floor, office 512',
+    addressLine2Short:'Federation Tower — East, 5th fl.',
+    withdraw:'Withdraw',withdrawUSDT:'Withdraw USDT',withdrawAvailable:'Withdrawal available from 100 USDT',
+    availableBalance:'Available:',withdrawSum:'Amount (USDT)',
+    insufficientBalance:'Insufficient balance',minWithdraw:'Minimum withdrawal is 100 USDT',
+    enterWallet:'Enter wallet address',withdrawRequested:'Withdrawal request created',
+    activeReferrals:'Active referrals',
+    noSavedWallets:'No saved wallets'
+  }
+};
+function t(key){return (_i18n[window._lang]||_i18n.ru)[key]||key}
+function applyLang(){
+  // Apply data-i18n text
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var key=el.getAttribute('data-i18n');
+    var val=t(key);
+    if(val){
+      if(el.tagName==='INPUT'||el.tagName==='TEXTAREA'){
+        el.placeholder=val;
+      }else{
+        el.textContent=val;
+      }
+    }
+  });
+  // Apply data-i18n-html (for innerHTML with underlines etc)
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+    var key=el.getAttribute('data-i18n-html');
+    if(key==='acceptRules'){
+      el.innerHTML=t('accept')+' <u style="color:rgba(255,255,255,0.7)">'+t('rules')+'</u> '+t('conditions');
+    }
+  });
+}
+function switchLang(lang){
+  window._lang=lang;
+  document.getElementById('langRu').className='tog'+(lang==='ru'?' on':'');
+  document.getElementById('langEn').className='tog'+(lang==='en'?' on':'');
+  applyLang();
+  // Re-render dynamic content
+  renderActiveOrders();
+  if(cur==='history')renderHistory('all');
+  saveData();
+  toast(t(lang==='en'?'langEn':'langRu'),'success');
+  haptic();
+}
+
+// Apply language on startup (after _i18n is defined)
+applyLang();
+
 var cur='home',stk=[],mT=['home','history','profile'],sS=['buy','sell','ok','detail','wallets','couriers','sellok','transfer','transferOk','contacts','referral','aml'],aS=['home','buy','sell','ok','history','detail','profile','wallets','couriers','sellok','transfer','transferOk','contacts','referral','aml'];
 
 // Animate hero cards — show immediately as fallback, animate if JS works
@@ -2623,215 +2834,7 @@ loadData();
   }catch(e){console.log('TG API:',e)}
 }();
 
-// ═══ i18n (RU/EN) — FULL ═══
-if(!window._lang)window._lang='ru';
-var _i18n={
-  ru:{
-    // Nav
-    buy:'Купить',sell:'Продать',transfer:'Перестановки',home:'Главная',history:'История',profile:'Профиль',
-    // Buy/Sell forms
-    buyUSDT:'Купить USDT',sellUSDT:'Продать USDT',
-    sum:'Сумма (₽)',wallet:'Кошелёк (TRC-20)',selfPickup:'Приеду сам',courier:'Курьер',
-    accept:'Принимаю',rules:'правила',conditions:'и условия',continue:'Продолжить',
-    getWallet:'Получить кошелёк',cancel:'Отменить заявку',back:'Назад',
-    from1000:'от 1 000 ₽ · шаг 500',enterSum:'Введите сумму',
-    walletPlaceholder:'Txxxxxxxxxxxxxxxxxxxxxxxxx',
-    fio:'ФИО',fioCourier:'ФИО курьера',chooseCourier:'Выберите или введите ФИО',
-    // Order created
-    created:'Заявка создана',toHome:'На главную',
-    sendUSDT:'Переведите USDT на этот адрес',
-    walletAddr:'Адрес кошелька (TRC-20)',walletForPay:'Кошелёк для оплаты (TRC-20)',
-    copied:'Скопировано!',
-    timeLeft:'Осталось:',timeExpired:'Время истекло',
-    // Transfer
-    transfers:'Перестановки',transferDesc:'Перевод средств',transferWorld:'Перевод по всему миру',
-    from:'Откуда',to:'Куда',chooseOffice:'Выберите офис',chooseCity:'Выберите город',
-    ourOffices:'Наши офисы',cities:'Города',
-    thankYou:'Спасибо за заявку!',managerContact:'Скоро с вами свяжется наш менеджер',
-    // History
-    all:'Все',active:'Активные',done:'Завершённые',noOrders:'Заявок пока нет',
-    activeOrder:'Активная заявка',statusActive:'Активная',statusDone:'Завершена',statusCancelled:'Отменена',
-    expired:'Истекло',
-    // Detail
-    type:'Тип',amount:'Сумма',number:'Номер',timer:'Таймер',
-    cancelOrder:'Отменить заявку',repeatOrder:'Повторить заявку',
-    confirmCancel:'Отменить заявку?',confirmCancelText:'Вы уверены, что хотите отменить эту заявку?',
-    confirmation:'Подтверждение',areYouSure:'Вы уверены?',yes:'Да',cancelBtn:'Отмена',
-    purchase:'Покупка',sale:'Продажа',transferType:'Перестановка',
-    purchaseUSDT:'Покупка USDT',saleUSDT:'Продажа USDT',
-    // Profile
-    fioLabel:'ФИО',discountVol:'Скидка за объём',refBalance:'Реф. баланс',exchanges:'Обменов',
-    refCode:'Реф. код',referralSystem:'Реферальная система',wallets:'Кошельки',couriers:'Курьеры',
-    settings:'Настройки',language:'Язык',theme:'Тема',darkTheme:'Тёмная',lightTheme:'Светлая',
-    contactsLabel:'Контакты',status:'Статус',notVerified:'Не верифицирован',verified:'Верифицирован',
-    phone:'Телефон',email:'Почта',save:'Сохранить',
-    // Contacts
-    contacts:'Контакты',address:'Адрес',openYandex:'Открыть в Яндекс Картах',
-    workHours:'Режим работы',daily247:'Ежедневно: 24/7',
-    site:'Сайт',ourOffice:'Наш офис',
-    // Wallets
-    myWallets:'Мои кошельки',addWallet:'Добавить кошелёк',walletName:'Название',
-    walletNamePh:'Например: Личный',addrTRC:'Адрес (TRC-20)',
-    // Couriers
-    myCouriers:'Мои курьеры',addCourier:'Добавить курьера',
-    lastName:'Фамилия',firstName:'Имя',middleName:'Отчество',add:'Добавить',
-    // Referral
-    referrals:'Рефералов',earnedUSDT:'USDT заработано',refExchanges:'Обменов рефералов',
-    monthTurnover:'Оборот за месяц',yourRefCode:'Ваш реферальный код',
-    shareInTG:'Поделиться в Telegram',howItWorks:'Как это работает',
-    step1title:'Поделитесь кодом',step1desc:'Отправьте реферальный код другу',
-    step2title:'Друг совершает обмен',step2desc:'При регистрации указывает ваш код',
-    step3title:'Получайте бонусы',step3desc:'Начисляем USDT за каждую сделку реферала',
-    refInviteDesc:'Приглашайте друзей и получайте бонусы с каждого их обмена',
-    // AML
-    aml:'AML / KYC',amlDesc:'Политика противодействия отмыванию денег',
-    txCheck:'Проверка транзакций',txCheckDesc:'Все операции проходят автоматическую AML-проверку для безопасности',
-    idVerify:'Верификация личности',idVerifyDesc:'При обменах свыше 100 000 ₽ может потребоваться KYC-верификация',
-    documents:'Документы',documentsDesc:'Паспорт РФ или загранпаспорт для подтверждения',
-    yourStatus:'Ваш статус',passVerify:'Пройти верификацию',
-    // Home
-    support:'Поддержка',branches:'Филиалы',
-    rateUSDT:'USDT / RUB',currentRate:'актуальный курс на:',
-    perUSDT:'₽ за USDT',yesterday:'вчера',today:'сегодня',
-    tetherUSDT:'Tether USDT',cbrLabel:'ЦБ РФ',
-    // Misc
-    dataUpdated:'Данные обновлены',updating:'Обновление...',
-    fillSumFio:'Заполните сумму и ФИО',minSum:'Минимальная сумма 1 000 ₽',
-    sumRounded:'Сумма округлена до',orderCancelled:'Заявка отменена',
-    orderNumCopied:'Номер заявки скопирован',orderDataLoaded:'Данные заявки загружены',
-    enterAmount:'Введите сумму',chooseOfficeErr:'Выберите офис отправки',
-    chooseCityErr:'Выберите город получения',specifyFio:'Укажите ФИО в профиле',
-    branch:'Филиал',chooseYourCity:'Выберите город',
-    favorites:'Избранные',recent:'Недавние',
-    incomeTo:'Принимаю',
-    darkThemeToast:'Тёмная тема',lightThemeToast:'Светлая тема',
-    langRu:'Язык: Русский',langEn:'Language: English',
-    usdtTRC:'USDT TRC-20',
-    addressLine1:'Пресненская наб. 12',
-    addressLine2:'Башня Федерация — Восток, 5 этаж, офис 512',
-    addressLine2Short:'Башня Федерация — Восток, 5 эт.',
-    withdraw:'Вывод',withdrawUSDT:'Вывод USDT',withdrawAvailable:'Вывод доступен от 100 USDT',
-    availableBalance:'Доступно:',withdrawSum:'Сумма (USDT)',
-    insufficientBalance:'Недостаточно средств',minWithdraw:'Минимум для вывода 100 USDT',
-    enterWallet:'Введите адрес кошелька',withdrawRequested:'Заявка на вывод создана',
-    activeReferrals:'Активных рефералов',
-    noSavedWallets:'Нет сохранённых кошельков'
-  },
-  en:{
-    buy:'Buy',sell:'Sell',transfer:'Transfers',home:'Home',history:'History',profile:'Profile',
-    buyUSDT:'Buy USDT',sellUSDT:'Sell USDT',
-    sum:'Amount (₽)',wallet:'Wallet (TRC-20)',selfPickup:'Self pickup',courier:'Courier',
-    accept:'I accept',rules:'rules',conditions:'and conditions',continue:'Continue',
-    getWallet:'Get wallet',cancel:'Cancel order',back:'Back',
-    from1000:'from 1,000 ₽ · step 500',enterSum:'Enter amount',
-    walletPlaceholder:'Txxxxxxxxxxxxxxxxxxxxxxxxx',
-    fio:'Full name',fioCourier:'Courier full name',chooseCourier:'Select or enter full name',
-    created:'Order created',toHome:'Home',
-    sendUSDT:'Send USDT to this address',
-    walletAddr:'Wallet address (TRC-20)',walletForPay:'Payment wallet (TRC-20)',
-    copied:'Copied!',
-    timeLeft:'Remaining:',timeExpired:'Time expired',
-    transfers:'Transfers',transferDesc:'Money transfer',transferWorld:'Worldwide transfers',
-    from:'From',to:'To',chooseOffice:'Select office',chooseCity:'Select city',
-    ourOffices:'Our offices',cities:'Cities',
-    thankYou:'Thank you!',managerContact:'Our manager will contact you shortly',
-    all:'All',active:'Active',done:'Completed',noOrders:'No orders yet',
-    activeOrder:'Active order',statusActive:'Active',statusDone:'Completed',statusCancelled:'Cancelled',
-    expired:'Expired',
-    type:'Type',amount:'Amount',number:'Number',timer:'Timer',
-    cancelOrder:'Cancel order',repeatOrder:'Repeat order',
-    confirmCancel:'Cancel order?',confirmCancelText:'Are you sure you want to cancel this order?',
-    confirmation:'Confirmation',areYouSure:'Are you sure?',yes:'Yes',cancelBtn:'Cancel',
-    purchase:'Purchase',sale:'Sale',transferType:'Transfer',
-    purchaseUSDT:'USDT Purchase',saleUSDT:'USDT Sale',
-    fioLabel:'Full name',discountVol:'Volume discount',refBalance:'Ref. balance',exchanges:'Exchanges',
-    refCode:'Ref. code',referralSystem:'Referral system',wallets:'Wallets',couriers:'Couriers',
-    settings:'Settings',language:'Language',theme:'Theme',darkTheme:'Dark',lightTheme:'Light',
-    contactsLabel:'Contacts',status:'Status',notVerified:'Not verified',verified:'Verified',
-    phone:'Phone',email:'Email',save:'Save',
-    contacts:'Contacts',address:'Address',openYandex:'Open in Yandex Maps',
-    workHours:'Working hours',daily247:'Daily: 24/7',
-    site:'Website',ourOffice:'Our office',
-    myWallets:'My wallets',addWallet:'Add wallet',walletName:'Name',
-    walletNamePh:'e.g.: Personal',addrTRC:'Address (TRC-20)',
-    myCouriers:'My couriers',addCourier:'Add courier',
-    lastName:'Last name',firstName:'First name',middleName:'Middle name',add:'Add',
-    referrals:'Referrals',earnedUSDT:'USDT earned',refExchanges:'Referral exchanges',
-    monthTurnover:'Monthly turnover',yourRefCode:'Your referral code',
-    shareInTG:'Share via Telegram',howItWorks:'How it works',
-    step1title:'Share the code',step1desc:'Send your referral code to a friend',
-    step2title:'Friend makes an exchange',step2desc:'Uses your code during registration',
-    step3title:'Earn bonuses',step3desc:'Get USDT for each referral trade',
-    refInviteDesc:'Invite friends and earn bonuses from each exchange',
-    aml:'AML / KYC',amlDesc:'Anti-money laundering policy',
-    txCheck:'Transaction verification',txCheckDesc:'All operations undergo automatic AML screening for security',
-    idVerify:'Identity verification',idVerifyDesc:'KYC may be required for exchanges over 100,000 ₽',
-    documents:'Documents',documentsDesc:'Russian passport or international passport for verification',
-    yourStatus:'Your status',passVerify:'Start verification',
-    support:'Support',branches:'Branches',
-    rateUSDT:'USDT / RUB',currentRate:'current rate:',
-    perUSDT:'₽ per USDT',yesterday:'yesterday',today:'today',
-    tetherUSDT:'Tether USDT',cbrLabel:'CBR',
-    dataUpdated:'Data updated',updating:'Updating...',
-    fillSumFio:'Fill in amount and full name',minSum:'Minimum amount 1,000 ₽',
-    sumRounded:'Amount rounded to',orderCancelled:'Order cancelled',
-    orderNumCopied:'Order number copied',orderDataLoaded:'Order data loaded',
-    enterAmount:'Enter amount',chooseOfficeErr:'Select sending office',
-    chooseCityErr:'Select destination city',specifyFio:'Set your name in profile',
-    branch:'Branch',chooseYourCity:'Select city',
-    favorites:'Favorites',recent:'Recent',
-    incomeTo:'I accept',
-    darkThemeToast:'Dark theme',lightThemeToast:'Light theme',
-    langRu:'Language: Russian',langEn:'Language: English',
-    usdtTRC:'USDT TRC-20',
-    addressLine1:'Presnenskaya emb. 12',
-    addressLine2:'Federation Tower — East, 5th floor, office 512',
-    addressLine2Short:'Federation Tower — East, 5th fl.',
-    withdraw:'Withdraw',withdrawUSDT:'Withdraw USDT',withdrawAvailable:'Withdrawal available from 100 USDT',
-    availableBalance:'Available:',withdrawSum:'Amount (USDT)',
-    insufficientBalance:'Insufficient balance',minWithdraw:'Minimum withdrawal is 100 USDT',
-    enterWallet:'Enter wallet address',withdrawRequested:'Withdrawal request created',
-    activeReferrals:'Active referrals',
-    noSavedWallets:'No saved wallets'
-  }
-};
-function t(key){return (_i18n[window._lang]||_i18n.ru)[key]||key}
-function applyLang(){
-  // Apply data-i18n text
-  document.querySelectorAll('[data-i18n]').forEach(function(el){
-    var key=el.getAttribute('data-i18n');
-    var val=t(key);
-    if(val){
-      if(el.tagName==='INPUT'||el.tagName==='TEXTAREA'){
-        el.placeholder=val;
-      }else{
-        el.textContent=val;
-      }
-    }
-  });
-  // Apply data-i18n-html (for innerHTML with underlines etc)
-  document.querySelectorAll('[data-i18n-html]').forEach(function(el){
-    var key=el.getAttribute('data-i18n-html');
-    if(key==='acceptRules'){
-      el.innerHTML=t('accept')+' <u style="color:rgba(255,255,255,0.7)">'+t('rules')+'</u> '+t('conditions');
-    }
-  });
-}
-function switchLang(lang){
-  window._lang=lang;
-  document.getElementById('langRu').className='tog'+(lang==='ru'?' on':'');
-  document.getElementById('langEn').className='tog'+(lang==='en'?' on':'');
-  applyLang();
-  // Re-render dynamic content
-  renderActiveOrders();
-  if(cur==='history')renderHistory('all');
-  saveData();
-  toast(t(lang==='en'?'langEn':'langRu'),'success');
-  haptic();
-}
 
-// Apply language on startup (after _i18n is defined)
-applyLang();
 
 // ═══ THEME SWITCH (dark/light) ═══
 function switchTheme(theme){
