@@ -41,7 +41,7 @@ html,body{height:100%;background:var(--bg);overflow:hidden;font-family:'Montserr
 .ct{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;position:relative;z-index:2}
 
 /* Tab bar — liquid glass */
-.tb{display:flex;justify-content:space-around;padding:8px 0 env(safe-area-inset-bottom,20px);background:var(--glass);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border-top:0.5px solid var(--glass-border);z-index:10;flex-shrink:0}
+.tb{display:flex;justify-content:space-around;padding:8px 0 env(safe-area-inset-bottom,20px);background:var(--glass);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border-top:0.5px solid rgba(255,255,255,0.04);z-index:10;flex-shrink:0}
 .tb-i{cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:transform 0.2s ease}
 .tb-i:active{transform:scale(0.9)}
 .tb-i span{font-size:13px;color:var(--text-dim);font-weight:400;transition:color 0.3s}
@@ -323,6 +323,74 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 #logoSvg.anim-spin{clip-path:inset(0 0% 0 74%);animation:logoSpinX 0.5s cubic-bezier(0.4,0,0.2,1) forwards}
 #logoSvg.anim-expand{animation:logoExpand 0.6s cubic-bezier(0.16,1,0.3,1) forwards}
 
+
+/* ═══ LIGHT THEME ═══ */
+.light-mode {color-scheme:light}
+.light-mode body{background:#f2f2f6}
+.light-mode input{color:#1a1a1a;background:rgba(255,255,255,0.9);border-color:rgba(0,0,0,0.1)}
+.light-mode input:focus{border-color:rgba(0,0,0,0.2);box-shadow:0 0 0 3px rgba(0,0,0,0.04)}
+.light-mode input::placeholder{color:rgba(0,0,0,0.3)}
+.light-mode .btn-primary{background:#1a1a1a;color:#fff;box-shadow:0 2px 12px rgba(0,0,0,0.15)}
+.light-mode .btn-primary:active{box-shadow:0 1px 6px rgba(0,0,0,0.1)}
+.light-mode .btn-primary:hover{box-shadow:0 4px 20px rgba(0,0,0,0.2)}
+.light-mode .btn-primary::after{background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent)}
+.light-mode .btn-primary svg path,.light-mode .btn-primary svg rect{stroke:#fff !important}
+.light-mode .btn-w{color:rgba(0,0,0,0.75);background:rgba(255,255,255,0.85);border-color:rgba(0,0,0,0.08)}
+.light-mode .btn-w:active{background:rgba(0,0,0,0.04)}
+.light-mode .btn-o{color:rgba(0,0,0,0.65);border-color:rgba(0,0,0,0.12);background:rgba(255,255,255,0.6)}
+.light-mode .btn-o:hover{border-color:rgba(0,0,0,0.2);color:rgba(0,0,0,0.8)}
+.light-mode .hdr{background:rgba(255,255,255,0.85);border-color:rgba(0,0,0,0.06)}
+.light-mode .tb{background:rgba(255,255,255,0.85);border-color:rgba(0,0,0,0.04)}
+.light-mode .cd{background:rgba(255,255,255,0.9);border-color:rgba(0,0,0,0.06);box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.light-mode .hero-card{background:rgba(255,255,255,0.9);border-color:rgba(0,0,0,0.06);box-shadow:0 1px 4px rgba(0,0,0,0.05)}
+.light-mode .hero-card:hover{border-color:rgba(0,0,0,0.1);box-shadow:0 4px 16px rgba(0,0,0,0.06)}
+.light-mode .hero-card::after{background:linear-gradient(90deg,transparent,rgba(0,0,0,0.03),transparent)}
+.light-mode .hero-card--buy .hero-card__label{color:rgba(34,180,100,1)}
+.light-mode .hero-card--buy::after{background:linear-gradient(90deg,transparent,rgba(34,180,100,0.06),transparent)}
+.light-mode .hero-card--sell .hero-card__label{color:rgba(220,60,60,0.9)}
+.light-mode .hero-card--sell::after{background:linear-gradient(90deg,transparent,rgba(220,60,60,0.05),transparent)}
+.light-mode .hero-card--transfer .hero-card__label{color:rgba(0,0,0,0.4)}
+.light-mode .ripple{background:rgba(0,0,0,0.06)}
+.light-mode .pill{background:rgba(255,255,255,0.8);color:rgba(0,0,0,0.6);border-color:rgba(0,0,0,0.08)}
+.light-mode .pill.on{background:rgba(0,0,0,0.06);color:#1a1a1a;border-color:rgba(0,0,0,0.12)}
+.light-mode .tog-w{background:rgba(0,0,0,0.04);border-color:rgba(0,0,0,0.06)}
+.light-mode .tog{color:rgba(0,0,0,0.5)}
+.light-mode .tog.on{color:#1a1a1a;background:rgba(255,255,255,0.95);border-color:rgba(0,0,0,0.08) !important;box-shadow:0 1px 3px rgba(0,0,0,0.08)}
+.light-mode .top-tog-w{background:rgba(0,0,0,0.04);border-color:rgba(0,0,0,0.06)}
+.light-mode .top-tog{color:rgba(0,0,0,0.5)}
+.light-mode .top-tog.on{color:#1a1a1a;background:rgba(255,255,255,0.95)}
+.light-mode .ri{background:rgba(0,0,0,0.04);border-color:rgba(0,0,0,0.06)}
+.light-mode .active-order{background:rgba(255,255,255,0.9);border-color:rgba(0,0,0,0.08)}
+.light-mode .active-order:hover{border-color:rgba(0,0,0,0.12)}
+.light-mode .active-order-badge{background:rgba(0,0,0,0.06);color:#1a1a1a}
+.light-mode .active-order-badge::before{background:#1a1a1a}
+.light-mode .toast{background:rgba(255,255,255,0.95);color:#1a1a1a;border-color:rgba(0,0,0,0.08);box-shadow:0 4px 20px rgba(0,0,0,0.1)}
+.light-mode .toast.toast-error{border-color:rgba(220,60,60,0.3)}
+.light-mode .toast.toast-success{border-color:rgba(34,180,100,0.3)}
+.light-mode .confirm-overlay{background:rgba(255,255,255,0.3)}
+.light-mode .confirm-box{background:rgba(255,255,255,0.97);border-color:rgba(0,0,0,0.08);box-shadow:0 20px 60px rgba(0,0,0,0.15)}
+.light-mode .skeleton{background:#f2f2f6}
+.light-mode .sk-block{background:linear-gradient(90deg,rgba(0,0,0,0.04) 25%,rgba(0,0,0,0.07) 50%,rgba(0,0,0,0.04) 75%);background-size:200% 100%}
+.light-mode .success-icon{border-color:rgba(0,0,0,0.15) !important}
+.light-mode .success-icon path{stroke:#1a1a1a !important}
+.light-mode #branchLabel{background:rgba(255,255,255,0.85);border-color:rgba(0,0,0,0.04)}
+.light-mode .wl-item:hover{background:rgba(0,0,0,0.02)}
+.light-mode .wl-item:active{background:rgba(0,0,0,0.04)}
+.light-mode #walletDrop,.light-mode #courierDrop,.light-mode #courierDropSell,.light-mode #transferFromDrop,.light-mode #transferToDrop{background:rgba(255,255,255,0.97) !important;border-color:rgba(0,0,0,0.08) !important;box-shadow:0 8px 32px rgba(0,0,0,0.12) !important}
+.light-mode #branchModal>div>div{background:rgba(255,255,255,0.97) !important;border-color:rgba(0,0,0,0.08) !important}
+.light-mode .branch-item span{color:rgba(0,0,0,0.6) !important}
+.light-mode .branch-item[data-active="true"] span{color:#1a1a1a !important}
+.light-mode .ptr-spinner{border-color:rgba(0,0,0,0.1);border-top-color:rgba(0,0,0,0.4)}
+.light-mode svg path,.light-mode svg circle,.light-mode svg rect,.light-mode svg line{stroke:currentColor}
+.light-mode .home-glow{opacity:0 !important;transition:opacity 0.3s}
+.light-mode #bgGlow2{opacity:0 !important}
+.light-mode .logo-area svg{filter:none !important}
+.light-mode .row{border-color:rgba(0,0,0,0.06)}
+.light-mode .copy-flash{animation:copyFlashLight 0.3s ease-out}
+@keyframes copyFlashLight{
+  0%{box-shadow:0 0 0 0 rgba(0,0,0,0.15)}
+  100%{box-shadow:0 0 0 12px rgba(0,0,0,0)}
+}
 </style>
 </head>
 <body>
@@ -344,11 +412,11 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 <!-- Confirm modal -->
 <div id="confirmModal" style="display:none" class="confirm-overlay" onclick="closeConfirm(false)">
 <div class="confirm-box" onclick="event.stopPropagation()">
-<div style="font-size:18px;font-weight:600;margin-bottom:8px" id="confirmTitle">Подтверждение</div>
-<div style="font-size:14px;color:var(--text-sec);margin-bottom:20px;line-height:1.5" id="confirmText">Вы уверены?</div>
+<div style="font-size:18px;font-weight:600;margin-bottom:8px" id="confirmTitle" data-i18n="confirmation">Подтверждение</div>
+<div style="font-size:14px;color:var(--text-sec);margin-bottom:20px;line-height:1.5" id="confirmText" data-i18n="areYouSure">Вы уверены?</div>
 <div style="display:flex;gap:8px">
-<div class="btn-primary" onclick="closeConfirm(true)" style="padding:12px;font-size:15px;border-radius:10px">Да</div>
-<div class="btn-o" onclick="closeConfirm(false)" style="padding:12px;font-size:15px;border-radius:10px">Отмена</div>
+<div class="btn-primary" onclick="closeConfirm(true)" style="padding:12px;font-size:15px;border-radius:10px" data-i18n="yes">Да</div>
+<div class="btn-o" onclick="closeConfirm(false)" style="padding:12px;font-size:15px;border-radius:10px" data-i18n="cancelBtn">Отмена</div>
 </div>
 </div>
 </div>
@@ -359,15 +427,15 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 
 <!-- HEADER -->
 <div class="hdr" id="hdr" style="display:none">
-<div onclick="goBack()" style="cursor:pointer;font-size:16px;display:flex;align-items:center;gap:4px"><span id="hi">&#10094;</span> <span id="ht">Назад</span></div>
+<div onclick="goBack()" style="cursor:pointer;font-size:16px;display:flex;align-items:center;gap:4px"><span id="hi">&#10094;</span> <span id="ht" data-i18n="back">Назад</span></div>
 <div style="width:40px"></div>
 <div style="width:40px"></div>
 </div>
 
 <!-- TOP TOGGLE (buy/sell) -->
 <div class="top-tog-w" id="topToggle" style="display:none">
-<div class="top-tog on" id="topBuy" onclick="goTopTog('buy')">Купить</div>
-<div class="top-tog" id="topSell" onclick="goTopTog('sell')">Продать</div>
+<div class="top-tog on" id="topBuy" onclick="goTopTog('buy')" data-i18n="buy">Купить</div>
+<div class="top-tog" id="topSell" onclick="goTopTog('sell')" data-i18n="sell">Продать</div>
 </div>
 
 <div class="ct" id="sc">
@@ -376,14 +444,14 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 <div class="scr act" id="s-home">
 
 <!-- Glow aurora — synced with logo 7s cycle -->
-<div style="position:relative;height:0;overflow:visible;pointer-events:none">
+<div class="home-glow" style="position:relative;height:0;overflow:visible;pointer-events:none">
 <div style="position:absolute;top:-220px;left:50%;transform:translateX(-50%);width:500px;height:400px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(255,255,255,0.18) 0%,rgba(255,255,255,0.08) 30%,rgba(255,255,255,0.015) 55%,transparent 75%);animation:glowSync 7s ease infinite"></div>
 <div id="bgGlow2" style="position:absolute;top:-160px;left:50%"></div>
 <div style="position:absolute;top:-180px;left:50%;transform:translateX(-50%);width:280px;height:220px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(255,255,255,0.11) 0%,rgba(220,230,255,0.04) 40%,transparent 70%);animation:glowSync 7s ease infinite"></div>
 </div>
 
 <!-- Pull-to-refresh -->
-<div class="ptr-indicator" id="ptrIndicator"><div class="ptr-spinner"></div>Обновление...</div>
+<div class="ptr-indicator" id="ptrIndicator"><div class="ptr-spinner"></div><span data-i18n="updating">Обновление...</span></div>
 
 <!-- Logo animation -->
 <style>
@@ -404,34 +472,21 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 <!-- Chart -->
 <div style="padding:0 16px;margin-top:16px" id="chart-area"></div>
 <div style="padding:4px 16px 0;display:flex;justify-content:space-between;align-items:baseline">
-<div style="font-size:14px;font-weight:400;color:var(--text-sec)">USDT / RUB</div>
-<div style="font-size:12px;color:var(--text-dim)">актуальный курс на: 29.03, 14:41 MSK</div>
+<div style="font-size:14px;font-weight:400;color:var(--text-sec)" data-i18n="rateUSDT">USDT / RUB</div>
+<div style="font-size:12px;color:var(--text-dim)"><span data-i18n="currentRate">актуальный курс на:</span> 29.03, 14:41 MSK</div>
 </div>
 
 <!-- Buy / Sell hero cards — NO badges -->
 <div class="hero-cards" style="margin-top:20px">
 <div class="hero-card hero-card--buy" id="buyCard" onclick="go('buy')">
-<div class="hero-card__label">Купить</div>
+<div class="hero-card__label" data-i18n="buy">Купить</div>
 <div class="hero-card__price">85.96</div>
-<div class="hero-card__unit">₽ за USDT</div>
+<div class="hero-card__unit" data-i18n="perUSDT">₽ за USDT</div>
 </div>
 <div class="hero-card hero-card--sell" id="sellCard" onclick="go('sell')">
-<div class="hero-card__label">Продать</div>
+<div class="hero-card__label" data-i18n="sell">Продать</div>
 <div class="hero-card__price">85.60</div>
-<div class="hero-card__unit">₽ за USDT</div>
-</div>
-</div>
-
-<!-- Transfer card -->
-<div style="padding:0 16px;margin-bottom:16px">
-<div class="hero-card hero-card--transfer" id="transferCard" onclick="go('transfer')" style="opacity:0;transform:translateY(20px);width:100%;padding:16px">
-<div style="display:flex;align-items:center;justify-content:space-between">
-<div>
-<div class="hero-card__label" style="margin-bottom:4px">Перестановки</div>
-<div style="font-size:11px;color:var(--text-dim);font-weight:400">Перевод по всему миру</div>
-</div>
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M7 16l-4-4m0 0l4-4m-4 4h18" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-</div>
+<div class="hero-card__unit" data-i18n="perUSDT">₽ за USDT</div>
 </div>
 </div>
 
@@ -443,23 +498,23 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 <div class="cd fade-in fade-in-d4" style="padding:0">
 <!-- Tether USDT row -->
 <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:0.5px solid rgba(255,255,255,0.06)">
-<span style="font-size:16px;font-weight:500;flex:1">Tether USDT</span>
+<span style="font-size:16px;font-weight:500;flex:1" data-i18n="tetherUSDT">Tether USDT</span>
 <span style="font-size:16px;font-weight:500;width:70px;text-align:right;color:rgba(60,220,140,1)">85.96</span>
 <span style="font-size:16px;font-weight:500;width:70px;text-align:right;color:rgba(255,90,90,0.9)">85.60</span>
 </div>
 <!-- ЦБ РФ row -->
 <div style="padding:12px 16px">
 <div style="display:flex;justify-content:space-between;align-items:center">
-<span style="font-size:16px;font-weight:500;flex:1">ЦБ РФ</span>
+<span style="font-size:16px;font-weight:500;flex:1" data-i18n="cbrLabel">ЦБ РФ</span>
 <div style="display:flex;align-items:center;gap:6px">
 <div style="text-align:center">
 <div style="font-size:14px;font-weight:500;color:#fff;line-height:1" id="cbrYesterday">84.73</div>
-<div style="font-size:10px;color:var(--text-dim);margin-top:3px">вчера</div>
+<div style="font-size:10px;color:var(--text-dim);margin-top:3px" data-i18n="yesterday">вчера</div>
 </div>
 <div id="cbrArrow" style="display:flex;align-items:center;justify-content:center;width:18px;margin-bottom:14px"></div>
 <div style="text-align:center">
 <div style="font-size:14px;font-weight:500;color:#fff;line-height:1" id="cbrToday">85.41</div>
-<div style="font-size:10px;color:var(--text-dim);margin-top:3px">сегодня</div>
+<div style="font-size:10px;color:var(--text-dim);margin-top:3px" data-i18n="today">сегодня</div>
 </div>
 </div>
 </div>
@@ -477,10 +532,8 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
   var yv=parseFloat(ye.textContent);
   var tv=parseFloat(te.textContent);
   if(tv>yv){
-    // курс вырос — стрелка вверх зелёная
     ar.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M12 5l-5 5M12 5l5 5" stroke="rgba(60,220,140,1)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   }else if(tv<yv){
-    // курс упал — стрелка вниз красная
     ar.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M12 19l-5-5M12 19l5-5" stroke="rgba(255,90,90,0.9)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   }else{
     ar.innerHTML='<span style="color:var(--text-dim)">=</span>';
@@ -488,32 +541,45 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 }();
 </script>
 
+<!-- Transfer card -->
+<div style="padding:0 16px;margin-bottom:16px">
+<div class="hero-card hero-card--transfer" id="transferCard" onclick="go('transfer')" style="opacity:0;transform:translateY(20px);width:100%;padding:16px">
+<div style="display:flex;align-items:center;justify-content:space-between">
+<div>
+<div class="hero-card__label" style="margin-bottom:4px" data-i18n="transfer">Перестановки</div>
+<div style="font-size:11px;color:var(--text-dim);font-weight:400" data-i18n="transferWorld">Перевод по всему миру</div>
+</div>
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M7 16l-4-4m0 0l4-4m-4 4h18" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</div>
+</div>
+</div>
+
 <!-- Quick links — grouped card -->
 <div style="padding:0 16px;padding-bottom:90px">
 <div class="cd fade-in fade-in-d5" style="padding:0">
 <div style="display:flex;align-items:center;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.06);cursor:pointer" onclick="window.open('https://t.me/mbexsupport','_blank')">
 <div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/></svg></div>
-<span style="flex:1;font-size:16px;font-weight:500">Поддержка</span>
+<span style="flex:1;font-size:16px;font-weight:500" data-i18n="support">Поддержка</span>
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg>
 </div>
 <div style="display:flex;align-items:center;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.06);cursor:pointer" onclick="go('referral')">
 <div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/></svg></div>
-<span style="flex:1;font-size:16px;font-weight:500">Реферальная система</span>
+<span style="flex:1;font-size:16px;font-weight:500" data-i18n="referralSystem">Реферальная система</span>
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg>
 </div>
 <div style="display:flex;align-items:center;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.06);cursor:pointer" onclick="go('aml')">
 <div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/></svg></div>
-<span style="flex:1;font-size:16px;font-weight:500">AML / KYC</span>
+<span style="flex:1;font-size:16px;font-weight:500" data-i18n="aml">AML / KYC</span>
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg>
 </div>
 <div style="display:flex;align-items:center;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.06);cursor:pointer" onclick="go('contacts')">
 <div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/></svg></div>
-<span style="flex:1;font-size:16px;font-weight:500">Контакты</span>
+<span style="flex:1;font-size:16px;font-weight:500" data-i18n="contacts">Контакты</span>
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg>
 </div>
 <div style="display:flex;align-items:center;padding:14px 16px;cursor:pointer" onclick="toggleBranches()">
 <div class="ri"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/><circle cx="12" cy="10" r="3" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/></svg></div>
-<span style="flex:1;font-size:16px;font-weight:500">Филиалы</span>
+<span style="flex:1;font-size:16px;font-weight:500" data-i18n="branches">Филиалы</span>
 <svg id="branchChev" width="14" height="14" viewBox="0 0 24 24" fill="none" style="transition:transform 0.2s"><path d="M9 18L15 12L9 6" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round"/></svg>
 </div>
 </div>
@@ -522,13 +588,15 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 
 <!-- BUY -->
 <div class="scr" id="s-buy"><div style="padding:0 16px;padding-bottom:40px">
-<div style="font-size:23px;font-weight:600;margin-bottom:6px;margin-top:12px">Купить USDT</div>
+<div style="font-size:23px;font-weight:600;margin-bottom:6px;margin-top:12px" data-i18n="buyUSDT">Купить USDT</div>
 <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px">
-<div style="font-size:15px;color:var(--text-dim)">от 1 000 ₽ · шаг 500</div>
+<div style="font-size:15px;color:var(--text-dim)" data-i18n="from1000">от 1 000 ₽ · шаг 500</div>
 <div style="font-size:15px;color:var(--text-sec);font-weight:500">85.96 ₽</div>
 </div>
-<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Сумма (₽)</div><input class="sum-input" inputmode="numeric" placeholder="Введите сумму" id="buySum"></div>
-<div style="margin-bottom:16px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Кошелёк (TRC-20)</div>
+<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px" data-i18n="sum">Сумма (₽)</div><input class="sum-input" inputmode="numeric" placeholder="Введите сумму" data-i18n="enterSum" id="buySum">
+<div style="display:flex;gap:6px;margin-top:8px"><div class="pill" onclick="setSum('buySum',5000)">5 000</div><div class="pill" onclick="setSum('buySum',10000)">10 000</div><div class="pill" onclick="setSum('buySum',50000)">50 000</div><div class="pill" onclick="setSum('buySum',100000)">100 000</div></div>
+</div>
+<div style="margin-bottom:16px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px" data-i18n="wallet">Кошелёк (TRC-20)</div>
 <div style="position:relative" id="walletWrap">
 <input id="walletInput" placeholder="Txxxxxxxxxxxxxxxxxxxxxxxxx" style="font-family:'Montserrat',sans-serif;padding-right:40px" autocomplete="off">
 <div id="walletDropBtn" onclick="toggleWalletDrop()" style="position:absolute;right:0;top:0;bottom:0;width:40px;display:flex;align-items:center;justify-content:center;cursor:pointer">
@@ -536,7 +604,7 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 </div>
 <!-- Wallet dropdown -->
 <div id="walletDrop" style="display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:50;background:rgba(18,18,24,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:0.5px solid rgba(255,255,255,0.08);border-radius:14px;padding:8px 0;max-height:260px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5)">
-<div style="padding:6px 14px 4px;font-size:13px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px">Избранные</div>
+<div style="padding:6px 14px 4px;font-size:13px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px" data-i18n="favorites">Избранные</div>
 <div class="wl-item" onclick="pickWallet(this)" data-addr="TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8">
 <div style="display:flex;align-items:center;gap:8px">
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/></svg>
@@ -549,7 +617,7 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 <div><div style="font-size:15px;font-weight:500">Бизнес</div><div style="font-size:13px;color:var(--text-dim);font-family:'Montserrat',sans-serif">TNPeea...qeL</div></div>
 </div>
 </div>
-<div style="padding:8px 14px 4px;font-size:13px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;border-top:0.5px solid rgba(255,255,255,0.05);margin-top:4px">Недавние</div>
+<div style="padding:8px 14px 4px;font-size:13px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;border-top:0.5px solid rgba(255,255,255,0.05);margin-top:4px" data-i18n="recent">Недавние</div>
 <div class="wl-item" onclick="pickWallet(this)" data-addr="TLa2f6VPqDg6e44W7fMEQJ42P3vC7Qcg13">
 <div style="display:flex;align-items:center;gap:8px">
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/><path d="M12 7v5l3 3" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -571,25 +639,25 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 </div>
 </div>
 </div>
-<div class="tog-w"><div class="tog on" id="ts" onclick="setTog('s')">Приеду сам</div><div class="tog" id="tc" onclick="setTog('c')">Курьер</div></div>
+<div class="tog-w"><div class="tog on" id="ts" onclick="setTog('s')" data-i18n="selfPickup">Приеду сам</div><div class="tog" id="tc" onclick="setTog('c')" data-i18n="courier">Курьер</div></div>
 
 <!-- FIO: "Приеду сам" mode — static from profile -->
 <div id="fioSelf" style="margin-bottom:16px">
-<div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">ФИО</div>
+<div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px" data-i18n="fio">ФИО</div>
 <div style="padding:14px 16px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);font-size:17px;color:#fff;font-weight:400" id="fioSelfDisplay">Иванов Иван Иванович</div>
 </div>
 
 <!-- FIO: "Курьер" mode — dropdown like wallets -->
 <div id="fioCourier" style="display:none;margin-bottom:16px">
-<div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">ФИО курьера</div>
+<div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px" data-i18n="fioCourier">ФИО курьера</div>
 <div style="position:relative" id="courierWrap">
-<input id="fi" placeholder="Выберите или введите ФИО" style="padding-right:40px" autocomplete="off">
+<input id="fi" placeholder="Выберите или введите ФИО" data-i18n="chooseCourier" style="padding-right:40px" autocomplete="off">
 <div id="courierDropBtn" onclick="toggleCourierDrop()" style="position:absolute;right:0;top:0;bottom:0;width:40px;display:flex;align-items:center;justify-content:center;cursor:pointer">
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" id="courierDropChev" style="transition:transform 0.2s"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </div>
 <!-- Courier dropdown — wallet style -->
 <div id="courierDrop" style="display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:50;background:rgba(18,18,24,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:0.5px solid rgba(255,255,255,0.08);border-radius:14px;padding:8px 0;max-height:260px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5)">
-<div style="padding:6px 14px 4px;font-size:13px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px">Мои курьеры</div>
+<div style="padding:6px 14px 4px;font-size:13px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px" data-i18n="myCouriers">Мои курьеры</div>
 <div class="wl-item" onclick="pickCourier('Петров Алексей Сергеевич')">
 <div style="display:flex;align-items:center;gap:8px">
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><path d="M5 19c0-3.3 3.1-6 7-6s7 2.7 7 6" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -605,36 +673,38 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 </div>
 </div>
 </div>
-<div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;cursor:pointer;font-size:15px;color:var(--text-sec)" id="chkBuy" onclick="tCBuy(this)"><div id="chkbBuy" style="width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="display:none" id="chkvBuy"><path d="M5 13l4 4L19 7" stroke="var(--bg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Принимаю <u style="color:rgba(255,255,255,0.7)">правила</u> и условия</span></div>
-<div class="btn-primary disabled" id="bwBuy" onclick="createOrder('buy')">Продолжить</div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;cursor:pointer;font-size:15px;color:var(--text-sec)" id="chkBuy" onclick="tCBuy(this)"><div id="chkbBuy" style="width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="display:none" id="chkvBuy"><path d="M5 13l4 4L19 7" stroke="var(--bg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span data-i18n-html="acceptRules">Принимаю <u style="color:rgba(255,255,255,0.7)">правила</u> и условия</span></div>
+<div class="btn-primary disabled" id="bwBuy" onclick="createOrder('buy')" data-i18n="continue">Продолжить</div>
 </div></div>
 
 <!-- SELL -->
 <div class="scr" id="s-sell"><div style="padding:0 16px;padding-bottom:40px">
-<div style="font-size:23px;font-weight:600;margin-bottom:6px;margin-top:12px">Продать USDT</div>
+<div style="font-size:23px;font-weight:600;margin-bottom:6px;margin-top:12px" data-i18n="sellUSDT">Продать USDT</div>
 <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px">
-<div style="font-size:15px;color:var(--text-dim)">от 1 000 ₽ · шаг 500</div>
+<div style="font-size:15px;color:var(--text-dim)" data-i18n="from1000">от 1 000 ₽ · шаг 500</div>
 <div style="font-size:15px;color:var(--text-sec);font-weight:500">85.60 ₽</div>
 </div>
-<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Сумма (₽)</div><input id="sellSum" class="sum-input" inputmode="numeric" placeholder="Введите сумму"></div>
-<div class="tog-w"><div class="tog on" id="tsSell" onclick="setTogSell('s')">Приеду сам</div><div class="tog" id="tcSell" onclick="setTogSell('c')">Курьер</div></div>
+<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px" data-i18n="sum">Сумма (₽)</div><input id="sellSum" class="sum-input" inputmode="numeric" placeholder="Введите сумму" data-i18n="enterSum">
+<div style="display:flex;gap:6px;margin-top:8px"><div class="pill" onclick="setSum('sellSum',5000)">5 000</div><div class="pill" onclick="setSum('sellSum',10000)">10 000</div><div class="pill" onclick="setSum('sellSum',50000)">50 000</div><div class="pill" onclick="setSum('sellSum',100000)">100 000</div></div>
+</div>
+<div class="tog-w"><div class="tog on" id="tsSell" onclick="setTogSell('s')" data-i18n="selfPickup">Приеду сам</div><div class="tog" id="tcSell" onclick="setTogSell('c')" data-i18n="courier">Курьер</div></div>
 
 <!-- FIO: "Приеду сам" mode — static from profile -->
 <div id="fioSelfSell" style="margin-bottom:16px">
-<div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">ФИО</div>
+<div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px" data-i18n="fio">ФИО</div>
 <div style="padding:14px 16px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);font-size:17px;color:#fff;font-weight:400" id="fioSelfDisplaySell">Иванов Иван Иванович</div>
 </div>
 
 <!-- FIO: "Курьер" mode — dropdown like wallets -->
 <div id="fioCourierSell" style="display:none;margin-bottom:16px">
-<div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">ФИО курьера</div>
+<div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px" data-i18n="fioCourier">ФИО курьера</div>
 <div style="position:relative" id="courierWrapSell">
-<input id="fiSell" placeholder="Выберите или введите ФИО" style="padding-right:40px" autocomplete="off">
+<input id="fiSell" placeholder="Выберите или введите ФИО" data-i18n="chooseCourier" style="padding-right:40px" autocomplete="off">
 <div onclick="toggleCourierDropSell()" style="position:absolute;right:0;top:0;bottom:0;width:40px;display:flex;align-items:center;justify-content:center;cursor:pointer">
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" id="courierDropChevSell" style="transition:transform 0.2s"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </div>
 <div id="courierDropSell" style="display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:50;background:rgba(18,18,24,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:0.5px solid rgba(255,255,255,0.06);border-radius:14px;padding:8px 0;max-height:260px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5)">
-<div style="padding:6px 14px 4px;font-size:13px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px">Мои курьеры</div>
+<div style="padding:6px 14px 4px;font-size:13px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px" data-i18n="myCouriers">Мои курьеры</div>
 <div class="wl-item" onclick="pickCourierSell('Петров Алексей Сергеевич')">
 <div style="display:flex;align-items:center;gap:8px">
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><path d="M5 19c0-3.3 3.1-6 7-6s7 2.7 7 6" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -651,56 +721,57 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 </div>
 </div>
 
-<div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;cursor:pointer;font-size:15px;color:var(--text-sec)" id="chk" onclick="tC(this)"><div id="chkb" style="width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="display:none" id="chkv"><path d="M5 13l4 4L19 7" stroke="var(--bg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Принимаю <u style="color:rgba(255,255,255,0.7)">правила</u> и условия</span></div>
-<div class="btn-primary disabled" id="bw" onclick="createSellOrder()">Получить кошелёк</div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;cursor:pointer;font-size:15px;color:var(--text-sec)" id="chk" onclick="tC(this)"><div id="chkb" style="width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="display:none" id="chkv"><path d="M5 13l4 4L19 7" stroke="var(--bg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span data-i18n-html="acceptRules">Принимаю <u style="color:rgba(255,255,255,0.7)">правила</u> и условия</span></div>
+<div class="btn-primary disabled" id="bw" onclick="createSellOrder()" data-i18n="getWallet">Получить кошелёк</div>
 </div></div>
 
 <!-- SELL OK — wallet with copy button + order info + timer -->
 <div class="scr" id="s-sellok"><div style="padding:0 16px;text-align:center;padding-bottom:40px">
 <div style="margin-top:40px;margin-bottom:14px"><div style="width:64px;height:64px;border-radius:50%;margin:0 auto;border:1.5px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center" class="success-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
-<div style="font-size:21px;font-weight:600;margin-bottom:6px">Заявка создана</div>
-<div style="font-size:15px;color:var(--text-sec);margin-bottom:16px">Переведите USDT на этот адрес</div>
+<div style="font-size:21px;font-weight:600;margin-bottom:6px" data-i18n="created">Заявка создана</div>
+<div style="font-size:15px;color:var(--text-sec);margin-bottom:16px" data-i18n="sendUSDT">Переведите USDT на этот адрес</div>
 <div style="font-size:14px;color:var(--text-dim);margin-bottom:16px" id="sellOkInfo"></div>
 <div class="cd" style="text-align:left;margin-bottom:16px;padding:16px">
-<div style="font-size:13px;color:var(--text-sec);margin-bottom:8px">Адрес кошелька (TRC-20)</div>
+<div style="font-size:13px;color:var(--text-sec);margin-bottom:8px" data-i18n="walletAddr">Адрес кошелька (TRC-20)</div>
 <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
 <div style="font-size:14px;color:#fff;word-break:break-all;line-height:1.5" id="sellOkWallet">TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8</div>
 <div onclick="copySellWallet(this)" style="cursor:pointer;flex-shrink:0;padding:8px;border-radius:8px;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;transition:background 0.2s">
 <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="9" y="9" width="13" height="13" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke="#fff" stroke-width="1.5"/></svg>
 </div>
 </div>
-<div id="sellCopyMsg" style="font-size:12px;color:var(--text-sec);margin-top:6px;opacity:0;transition:opacity 0.3s">Скопировано!</div>
+<div id="sellCopyMsg" style="font-size:12px;color:var(--text-sec);margin-top:6px;opacity:0;transition:opacity 0.3s" data-i18n="copied">Скопировано!</div>
 </div>
 <div id="sellOkTimer" style="font-size:14px;color:var(--text-sec);margin-bottom:20px"></div>
-<div class="btn-o" onclick="go('home')">На главную</div>
+<div class="btn-o" onclick="go('home')" data-i18n="toHome">На главную</div>
 </div></div>
 
 <!-- SUCCESS -->
 <div class="scr" id="s-ok"><div style="padding:0 16px;text-align:center;padding-bottom:40px">
 <div style="margin-top:50px;margin-bottom:14px"><div style="width:64px;height:64px;border-radius:50%;margin:0 auto;border:1.5px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center" class="success-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
-<div style="font-size:21px;font-weight:600;margin-bottom:8px;letter-spacing:0.5px">Заявка создана</div>
+<div style="font-size:21px;font-weight:600;margin-bottom:8px;letter-spacing:0.5px" data-i18n="created">Заявка создана</div>
+<div style="font-size:28px;font-weight:700;margin-bottom:12px" id="okSumCounter">0 ₽</div>
 <div style="font-size:16px;color:var(--text-sec);line-height:1.7;margin-bottom:16px" id="okInfo">№ <b style="color:#fff;font-weight:500">276</b> · Иванов И.И.<br><br>Пресненская наб. 12<br>Башня Федерация — Восток, 5 эт.</div>
 <div class="cd" style="text-align:left;margin-bottom:20px;padding:14px 16px">
-<div style="font-size:13px;color:var(--text-sec);margin-bottom:6px">Кошелёк для оплаты (TRC-20)</div>
+<div style="font-size:13px;color:var(--text-sec);margin-bottom:6px" data-i18n="walletForPay">Кошелёк для оплаты (TRC-20)</div>
 <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
 <div id="okWallet" style="font-size:13px;color:#fff;word-break:break-all">TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8</div>
 <svg onclick="copyWallet()" width="20" height="20" viewBox="0 0 24 24" fill="none" style="cursor:pointer;flex-shrink:0;opacity:0.4"><rect x="9" y="9" width="13" height="13" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke="#fff" stroke-width="1.5"/></svg>
 </div>
 </div>
 <div id="okTimer" style="font-size:14px;color:var(--text-sec);margin-bottom:20px"></div>
-<div class="btn-o" onclick="go('home')">На главную</div>
+<div class="btn-o" onclick="go('home')" data-i18n="toHome">На главную</div>
 </div></div>
 
 <!-- HISTORY -->
 <div class="scr" id="s-history"><div style="padding:0 16px;padding-bottom:90px">
-<div style="font-size:23px;font-weight:600;padding:18px 0 12px">История</div>
+<div style="font-size:23px;font-weight:600;padding:18px 0 12px" data-i18n="history">История</div>
 <div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap">
-<div class="pill on" onclick="filterHistory('all',this)">Все</div>
-<div class="pill" onclick="filterHistory('active',this)">Активные</div>
-<div class="pill" onclick="filterHistory('done',this)">Завершённые</div>
+<div class="pill on" onclick="filterHistory('all',this)" data-i18n="all">Все</div>
+<div class="pill" onclick="filterHistory('active',this)" data-i18n="active">Активные</div>
+<div class="pill" onclick="filterHistory('done',this)" data-i18n="done">Завершённые</div>
 </div>
 <div id="historyList"></div>
-<div id="historyEmpty" style="text-align:center;padding:40px 0;color:var(--text-dim);font-size:15px;display:none">Заявок пока нет</div>
+<div id="historyEmpty" style="text-align:center;padding:40px 0;color:var(--text-dim);font-size:15px;display:none" data-i18n="noOrders">Заявок пока нет</div>
 </div></div>
 
 <!-- DETAIL -->
@@ -719,46 +790,47 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 </div>
 
 <div class="cd" style="text-align:left;padding:2px 16px;margin-bottom:10px">
-<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">Тип</span><span style="font-size:16px;font-weight:500" id="detailRate">—</span></div>
-<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">Сумма</span><span style="font-size:16px;font-weight:500" id="detailSum">— ₽</span></div>
-<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">Номер</span><span style="font-size:16px;font-weight:500;cursor:pointer" id="detailNum" onclick="copyOrderNum(this.textContent)">—</span></div>
-<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">ФИО</span><span style="font-size:16px;font-weight:500" id="detailFio">—</span></div>
-<div style="display:flex;justify-content:space-between;padding:12px 0"><span style="font-size:16px;color:var(--text-sec)">Таймер</span><span style="font-size:16px;font-weight:500" id="detailTimer">—</span></div>
+<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)" data-i18n="type">Тип</span><span style="font-size:16px;font-weight:500" id="detailRate">—</span></div>
+<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)" data-i18n="amount">Сумма</span><span style="font-size:16px;font-weight:500" id="detailSum">— ₽</span></div>
+<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)" data-i18n="number">Номер</span><span style="font-size:16px;font-weight:500;cursor:pointer" id="detailNum" onclick="copyOrderNum(this.textContent)">—</span></div>
+<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)" data-i18n="fio">ФИО</span><span style="font-size:16px;font-weight:500" id="detailFio">—</span></div>
+<div style="display:flex;justify-content:space-between;padding:12px 0"><span style="font-size:16px;color:var(--text-sec)" data-i18n="timer">Таймер</span><span style="font-size:16px;font-weight:500" id="detailTimer">—</span></div>
 </div>
 
 <div class="cd" style="text-align:left;padding:14px 16px;margin-bottom:16px">
-<div style="font-size:14px;color:var(--text-sec);margin-bottom:4px">Кошелёк (TRC-20)</div>
+<div style="font-size:14px;color:var(--text-sec);margin-bottom:4px" data-i18n="wallet">Кошелёк (TRC-20)</div>
 <div style="font-size:15px;font-family:'Montserrat',sans-serif;word-break:break-all;color:var(--text-sec)" id="detailWallet">TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8</div>
 </div>
 
 <div id="detailCancelWrap">
-<div class="btn-o" onclick="showConfirm('Отменить заявку?','Вы уверены?',function(y){if(y){cancelOrderByIdx(viewingOrderIdx);goBack()}})" style="margin-bottom:10px">Отменить заявку</div>
+<div class="btn-o" onclick="showConfirm(t('confirmCancel'),t('confirmCancelText'),function(y){if(y){cancelOrderByIdx(viewingOrderIdx);goBack()}})" style="margin-bottom:10px" data-i18n="cancelOrder">Отменить заявку</div>
 </div>
-<div class="btn-o" onclick="goBack()">Назад</div>
+<div class="btn-primary" onclick="repeatOrder()" style="margin-bottom:10px" data-i18n="repeatOrder">Повторить заявку</div>
+<div class="btn-o" onclick="goBack()" data-i18n="back">Назад</div>
 </div></div>
 
 <!-- PROFILE -->
 <div class="scr" id="s-profile"><div style="padding:0 16px;padding-bottom:90px">
-<div style="font-size:23px;font-weight:600;padding:18px 0 12px">Профиль</div>
+<div style="font-size:23px;font-weight:600;padding:18px 0 12px" data-i18n="profile">Профиль</div>
 
 <!-- FIO -->
 <div class="cd" style="margin-bottom:10px;padding:12px 16px">
 <div style="display:flex;align-items:center;justify-content:space-between">
-<div><div style="font-size:12px;color:var(--text-dim);margin-bottom:2px">ФИО</div><span style="font-size:16px;font-weight:500" id="profileFio">Иванов Иван Иванович</span></div>
+<div><div style="font-size:12px;color:var(--text-dim);margin-bottom:2px" data-i18n="fioLabel">ФИО</div><span style="font-size:16px;font-weight:500" id="profileFio">Иванов Иван Иванович</span></div>
 <svg onclick="editProfileFio()" width="16" height="16" viewBox="0 0 24 24" fill="none" style="cursor:pointer;opacity:0.5;flex-shrink:0"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </div>
 <div id="profileFioEdit" style="display:none;margin-top:10px">
 <input id="profileFioInput" placeholder="Фамилия Имя Отчество" style="margin-bottom:8px">
 <div style="display:flex;gap:8px">
-<div class="btn-primary" onclick="saveProfileFio()" style="padding:10px;font-size:14px;border-radius:10px">Сохранить</div>
-<div class="btn-o" onclick="cancelProfileFio()" style="padding:10px;font-size:14px;border-radius:10px">Отмена</div>
+<div class="btn-primary" onclick="saveProfileFio()" style="padding:10px;font-size:14px;border-radius:10px" data-i18n="save">Сохранить</div>
+<div class="btn-o" onclick="cancelProfileFio()" style="padding:10px;font-size:14px;border-radius:10px" data-i18n="cancelBtn">Отмена</div>
 </div>
 </div>
 </div>
 
 <!-- Discount bar -->
 <div class="cd" style="margin-bottom:10px;padding:12px 16px">
-<div style="font-size:12px;color:var(--text-dim);margin-bottom:8px">Скидка за объём</div>
+<div style="font-size:12px;color:var(--text-dim);margin-bottom:8px" data-i18n="discountVol">Скидка за объём</div>
 <div style="height:3px;background:rgba(255,255,255,0.08);border-radius:2px;position:relative;margin-bottom:6px"><div style="position:absolute;left:0;top:0;height:100%;width:8%;background:#fff;border-radius:2px"></div></div>
 <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-dim)">
 <span>100K</span><span>200K</span><span>300K</span><span>500K</span>
@@ -767,13 +839,13 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 
 <!-- Stats row -->
 <div style="display:flex;gap:8px;margin-bottom:10px">
-<div class="cd" style="flex:1;padding:12px 14px"><div style="font-size:12px;color:var(--text-dim);margin-bottom:2px">Реф. баланс</div><div style="font-size:17px;font-weight:500">0 USDT</div></div>
-<div class="cd" style="flex:1;padding:12px 14px"><div style="font-size:12px;color:var(--text-dim);margin-bottom:2px">Обменов</div><div style="font-size:17px;font-weight:500">0</div></div>
+<div class="cd" style="flex:1;padding:12px 14px"><div style="font-size:12px;color:var(--text-dim);margin-bottom:2px" data-i18n="refBalance">Реф. баланс</div><div style="font-size:17px;font-weight:500">0 USDT</div></div>
+<div class="cd" style="flex:1;padding:12px 14px"><div style="font-size:12px;color:var(--text-dim);margin-bottom:2px" data-i18n="exchanges">Обменов</div><div style="font-size:17px;font-weight:500">0</div></div>
 </div>
 
 <!-- Ref code -->
 <div class="cd" style="margin-bottom:10px;padding:12px 16px">
-<div style="font-size:12px;color:var(--text-dim);margin-bottom:2px">Реф. код</div>
+<div style="font-size:12px;color:var(--text-dim);margin-bottom:2px" data-i18n="refCode">Реф. код</div>
 <div style="display:flex;align-items:center;justify-content:space-between">
 <span style="font-size:17px;font-weight:500;letter-spacing:1px">MBX7200K</span>
 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="cursor:pointer;opacity:0.5"><rect x="9" y="9" width="13" height="13" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke="#fff" stroke-width="1.5"/></svg>
@@ -782,31 +854,50 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 
 <!-- Links -->
 <div class="cd" onclick="go('referral')" style="margin-bottom:8px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:14px 16px">
-<span style="font-size:16px;font-weight:500">Реферальная система</span>
+<span style="font-size:16px;font-weight:500" data-i18n="referralSystem">Реферальная система</span>
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round"/></svg>
 </div>
 <div class="cd" onclick="go('wallets')" style="margin-bottom:8px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:14px 16px">
-<span style="font-size:16px;font-weight:500">Кошельки</span>
+<span style="font-size:16px;font-weight:500" data-i18n="wallets">Кошельки</span>
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round"/></svg>
 </div>
 <div class="cd" onclick="go('couriers')" style="margin-bottom:14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:14px 16px">
-<span style="font-size:16px;font-weight:500">Курьеры</span>
+<span style="font-size:16px;font-weight:500" data-i18n="couriers">Курьеры</span>
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round"/></svg>
 </div>
 
+<!-- Settings -->
+<div style="font-size:14px;font-weight:600;margin-bottom:8px;color:var(--text-sec)" data-i18n="settings">Настройки</div>
+<div class="cd" style="padding:10px 16px;margin-bottom:10px">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:0.5px solid rgba(255,255,255,0.05)">
+<span style="font-size:14px;color:var(--text-sec)" data-i18n="language">Язык</span>
+<div class="tog-w" style="width:130px;margin-bottom:0;padding:2px">
+<div class="tog on" id="langRu" onclick="switchLang('ru')" style="padding:6px 0;font-size:13px">RU</div>
+<div class="tog" id="langEn" onclick="switchLang('en')" style="padding:6px 0;font-size:13px">EN</div>
+</div>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0">
+<span style="font-size:14px;color:var(--text-sec)" data-i18n="theme">Тема</span>
+<div class="tog-w" style="width:130px;margin-bottom:0;padding:2px">
+<div class="tog on" id="themeDark" onclick="switchTheme('dark')" style="padding:6px 0;font-size:13px" data-i18n="darkTheme">Тёмная</div>
+<div class="tog" id="themeLight" onclick="switchTheme('light')" style="padding:6px 0;font-size:13px" data-i18n="lightTheme">Светлая</div>
+</div>
+</div>
+</div>
+
 <!-- Contacts compact -->
-<div style="font-size:14px;font-weight:600;margin-bottom:8px;color:var(--text-sec)">Контакты</div>
+<div style="font-size:14px;font-weight:600;margin-bottom:8px;color:var(--text-sec)" data-i18n="contactsLabel">Контакты</div>
 <div class="cd" style="padding:10px 16px;margin-bottom:8px">
 <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:0.5px solid rgba(255,255,255,0.05)">
-<span style="font-size:14px;color:var(--text-dim)">Статус</span>
-<span style="font-size:14px;color:var(--text-sec)">Не верифицирован</span>
+<span style="font-size:14px;color:var(--text-dim)" data-i18n="status">Статус</span>
+<span style="font-size:14px;color:var(--text-sec)" data-i18n="notVerified">Не верифицирован</span>
 </div>
 <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:0.5px solid rgba(255,255,255,0.05)">
 <span style="font-size:14px;color:var(--text-dim)">Telegram ID</span>
 <span style="font-size:14px;font-weight:600;color:#fff !important;text-shadow:0 0 8px rgba(255,255,255,0.4),0 0 20px rgba(255,255,255,0.15);-webkit-text-fill-color:#fff">7310949179</span>
 </div>
 <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:0.5px solid rgba(255,255,255,0.05)">
-<span style="font-size:14px;color:var(--text-dim)">Телефон</span>
+<span style="font-size:14px;color:var(--text-dim)" data-i18n="phone">Телефон</span>
 <div style="display:flex;align-items:center;gap:8px">
 <span style="font-size:14px;font-weight:500;color:#fff !important;-webkit-text-fill-color:#fff" id="profilePhone">+7 (999) 123-45-67</span>
 <svg onclick="editProfilePhone()" width="14" height="14" viewBox="0 0 24 24" fill="none" style="cursor:pointer;opacity:0.5;flex-shrink:0"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -819,9 +910,9 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 </div>
 </div>
 <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0">
-<span style="font-size:14px;color:var(--text-dim)">Почта</span>
+<span style="font-size:14px;color:var(--text-dim)" data-i18n="email">Почта</span>
 <div style="display:flex;align-items:center;gap:8px">
-<span style="font-size:14px;font-weight:500;color:#fff !important;-webkit-text-fill-color:#fff" id="profileEmail">user@example.com</span>
+<span style="font-size:14px;font-weight:500;color:#fff !important;-webkit-text-fill-color:#fff" id="profileEmail">user@mail.ru</span>
 <svg onclick="editProfileEmail()" width="14" height="14" viewBox="0 0 24 24" fill="none" style="cursor:pointer;opacity:0.5;flex-shrink:0"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </div>
 </div>
@@ -836,7 +927,7 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 
 <!-- WALLETS -->
 <div class="scr" id="s-wallets"><div style="padding:0 16px;padding-bottom:40px">
-<div style="font-size:23px;font-weight:600;padding:18px 0 14px">Мои кошельки</div>
+<div style="font-size:23px;font-weight:600;padding:18px 0 14px" data-i18n="myWallets">Мои кошельки</div>
 
 <div id="walletsList">
 <div class="cd wallet-saved" style="margin-bottom:8px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center">
@@ -864,38 +955,40 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 <!-- Add wallet form -->
 <div id="addWalletForm" style="display:none;margin-bottom:12px">
 <div class="cd" style="padding:16px">
-<div style="margin-bottom:12px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Название</div><input id="newWalletName" placeholder="Например: Личный"></div>
-<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Адрес (TRC-20)</div><input id="newWalletAddr" placeholder="Txxxxxxxxxxxxxxxxxxxxxxxxx"></div>
+<div style="margin-bottom:12px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px" data-i18n="walletName">Название</div><input id="newWalletName" placeholder="Например: Личный" data-i18n="walletNamePh"></div>
+<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px" data-i18n="addrTRC">Адрес (TRC-20)</div><input id="newWalletAddr" placeholder="Txxxxxxxxxxxxxxxxxxxxxxxxx" data-i18n="walletPlaceholder"></div>
 <div style="display:flex;gap:8px">
-<div class="btn-primary" onclick="saveNewWallet()" style="padding:12px;font-size:16px;border-radius:10px">Сохранить</div>
-<div class="btn-o" onclick="toggleAddWallet()" style="padding:12px;font-size:16px;border-radius:10px">Отмена</div>
+<div class="btn-primary" onclick="saveNewWallet()" style="padding:12px;font-size:16px;border-radius:10px" data-i18n="save">Сохранить</div>
+<div class="btn-o" onclick="toggleAddWallet()" style="padding:12px;font-size:16px;border-radius:10px" data-i18n="cancelBtn">Отмена</div>
 </div>
 </div>
 </div>
 
 <div class="cd" onclick="toggleAddWallet()" style="cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;padding:14px 16px;border:0.5px dashed rgba(255,255,255,0.1)">
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round"/></svg>
-<span style="font-size:16px;color:var(--text-sec)">Добавить кошелёк</span>
+<span style="font-size:16px;color:var(--text-sec)" data-i18n="addWallet">Добавить кошелёк</span>
 </div>
 </div></div>
 
 <!-- TRANSFER (Перестановки) -->
 <div class="scr" id="s-transfer"><div style="padding:0 16px;padding-bottom:40px">
-<div style="font-size:23px;font-weight:600;margin-bottom:6px;margin-top:12px">Перестановки</div>
-<div style="font-size:15px;color:var(--text-dim);margin-bottom:20px">Перевод средств</div>
+<div style="font-size:23px;font-weight:600;margin-bottom:6px;margin-top:12px" data-i18n="transfers">Перестановки</div>
+<div style="font-size:15px;color:var(--text-dim);margin-bottom:20px" data-i18n="transferDesc">Перевод средств</div>
 
-<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Сумма (₽)</div><input id="transferSum" class="sum-input" inputmode="numeric" placeholder="Введите сумму"></div>
+<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px" data-i18n="sum">Сумма (₽)</div><input id="transferSum" class="sum-input" inputmode="numeric" placeholder="Введите сумму" data-i18n="enterSum">
+<div style="display:flex;gap:6px;margin-top:8px"><div class="pill" onclick="setSum('transferSum',5000)">5 000</div><div class="pill" onclick="setSum('transferSum',10000)">10 000</div><div class="pill" onclick="setSum('transferSum',50000)">50 000</div><div class="pill" onclick="setSum('transferSum',100000)">100 000</div></div>
+</div>
 
 <!-- Откуда — dropdown offices only -->
 <div style="margin-bottom:14px">
-<div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Откуда</div>
+<div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px" data-i18n="from">Откуда</div>
 <div style="position:relative" id="transferFromWrap">
 <div onclick="toggleTransferFrom()" style="padding:14px 16px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);cursor:pointer;display:flex;justify-content:space-between;align-items:center">
-<span id="transferFromText" style="font-size:17px;color:var(--text-dim)">Выберите офис</span>
+<span id="transferFromText" style="font-size:17px;color:var(--text-dim)" data-i18n="chooseOffice">Выберите офис</span>
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" id="transferFromChev" style="transition:transform 0.2s"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </div>
 <div id="transferFromDrop" style="display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:50;background:rgba(18,18,24,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:0.5px solid rgba(255,255,255,0.08);border-radius:14px;padding:4px 0;box-shadow:0 12px 40px rgba(0,0,0,0.5)">
-<div style="padding:6px 14px 4px;font-size:12px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px">Наши офисы</div>
+<div style="padding:6px 14px 4px;font-size:12px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px" data-i18n="ourOffices">Наши офисы</div>
 <div class="wl-item" onclick="pickTransferFrom('Москва')"><div style="display:flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><circle cx="12" cy="10" r="2" fill="rgba(255,255,255,0.2)"/></svg><span style="font-size:15px;font-weight:500">Москва</span></div></div>
 <div class="wl-item" onclick="pickTransferFrom('Махачкала')"><div style="display:flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><circle cx="12" cy="10" r="2" fill="rgba(255,255,255,0.2)"/></svg><span style="font-size:15px;font-weight:500">Махачкала</span></div></div>
 <div class="wl-item" onclick="pickTransferFrom('Дубай')"><div style="display:flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><circle cx="12" cy="10" r="2" fill="rgba(255,255,255,0.2)"/></svg><span style="font-size:15px;font-weight:500">Дубай</span></div></div>
@@ -905,14 +998,14 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 
 <!-- Куда — dropdown cities -->
 <div style="margin-bottom:14px">
-<div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Куда</div>
+<div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px" data-i18n="to">Куда</div>
 <div style="position:relative" id="transferToWrap">
 <div onclick="toggleTransferTo()" style="padding:14px 16px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);cursor:pointer;display:flex;justify-content:space-between;align-items:center">
-<span id="transferToText" style="font-size:17px;color:var(--text-dim)">Выберите город</span>
+<span id="transferToText" style="font-size:17px;color:var(--text-dim)" data-i18n="chooseCity">Выберите город</span>
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" id="transferToChev" style="transition:transform 0.2s"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </div>
 <div id="transferToDrop" style="display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:50;background:rgba(18,18,24,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:0.5px solid rgba(255,255,255,0.08);border-radius:14px;padding:4px 0;max-height:280px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5)">
-<div style="padding:6px 14px 4px;font-size:12px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px">Города</div>
+<div style="padding:6px 14px 4px;font-size:12px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px" data-i18n="cities">Города</div>
 <div class="wl-item" onclick="pickTransferTo('Москва')"><span style="font-size:15px;font-weight:500">Москва</span></div>
 <div class="wl-item" onclick="pickTransferTo('Санкт-Петербург')"><span style="font-size:15px;font-weight:500">Санкт-Петербург</span></div>
 <div class="wl-item" onclick="pickTransferTo('Махачкала')"><span style="font-size:15px;font-weight:500">Махачкала</span></div>
@@ -932,48 +1025,48 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 
 <!-- ФИО from profile -->
 <div style="margin-bottom:16px">
-<div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">ФИО</div>
+<div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px" data-i18n="fio">ФИО</div>
 <div style="padding:14px 16px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);font-size:17px;color:#fff;font-weight:400" id="transferFioDisplay">Иванов Иван Иванович</div>
 </div>
 
-<div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;cursor:pointer;font-size:15px;color:var(--text-sec)" onclick="tCTransfer()"><div id="chkbTransfer" style="width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="display:none" id="chkvTransfer"><path d="M5 13l4 4L19 7" stroke="var(--bg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Принимаю <u style="color:rgba(255,255,255,0.7)">правила</u> и условия</span></div>
-<div class="btn-primary disabled" id="bwTransfer" onclick="createTransferOrder()">Продолжить</div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;cursor:pointer;font-size:15px;color:var(--text-sec)" onclick="tCTransfer()"><div id="chkbTransfer" style="width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="display:none" id="chkvTransfer"><path d="M5 13l4 4L19 7" stroke="var(--bg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span data-i18n-html="acceptRules">Принимаю <u style="color:rgba(255,255,255,0.7)">правила</u> и условия</span></div>
+<div class="btn-primary disabled" id="bwTransfer" onclick="createTransferOrder()" data-i18n="continue">Продолжить</div>
 </div></div>
 
 <!-- TRANSFER OK -->
 <div class="scr" id="s-transferOk"><div style="padding:0 16px;text-align:center;padding-bottom:40px">
 <div style="margin-top:50px;margin-bottom:14px"><div style="width:64px;height:64px;border-radius:50%;margin:0 auto;border:1.5px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center" class="success-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
-<div style="font-size:21px;font-weight:600;margin-bottom:8px">Спасибо за заявку!</div>
-<div style="font-size:15px;color:var(--text-sec);line-height:1.6;margin-bottom:20px">Скоро с вами свяжется наш менеджер</div>
+<div style="font-size:21px;font-weight:600;margin-bottom:8px" data-i18n="thankYou">Спасибо за заявку!</div>
+<div style="font-size:15px;color:var(--text-sec);line-height:1.6;margin-bottom:20px" data-i18n="managerContact">Скоро с вами свяжется наш менеджер</div>
 <div style="font-size:14px;color:var(--text-dim);margin-bottom:24px" id="transferOkInfo"></div>
-<div class="btn-o" onclick="go('home')">На главную</div>
+<div class="btn-o" onclick="go('home')" data-i18n="toHome">На главную</div>
 </div></div>
 
 <!-- CONTACTS -->
 <div class="scr" id="s-contacts"><div style="padding:0 16px;padding-bottom:40px">
-<div style="font-size:23px;font-weight:600;padding:18px 0 14px">Контакты</div>
+<div style="font-size:23px;font-weight:600;padding:18px 0 14px" data-i18n="contacts">Контакты</div>
 
 <div class="cd" style="padding:14px 16px;margin-bottom:12px">
-<div style="font-size:12px;color:var(--text-dim);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px">Адрес</div>
-<div style="font-size:16px;font-weight:500;margin-bottom:2px">Пресненская наб. 12</div>
-<div style="font-size:14px;color:var(--text-sec)">Башня Федерация — Восток, 5 этаж, офис 512</div>
+<div style="font-size:12px;color:var(--text-dim);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px" data-i18n="address">Адрес</div>
+<div style="font-size:16px;font-weight:500;margin-bottom:2px" data-i18n="addressLine1">Пресненская наб. 12</div>
+<div style="font-size:14px;color:var(--text-sec)" data-i18n="addressLine2">Башня Федерация — Восток, 5 этаж, офис 512</div>
 </div>
 
 <a href="https://yandex.ru/maps/org/195743966550?si=5r0knwmzjxnyb99d7ar4nr334g" target="_blank" style="display:flex;align-items:center;gap:8px;padding:12px 16px;border-radius:14px;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.08);margin-bottom:12px;text-decoration:none;color:#fff">
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/><circle cx="12" cy="10" r="3" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/></svg>
-<span style="font-size:15px;font-weight:500">Открыть в Яндекс Картах</span>
+<span style="font-size:15px;font-weight:500" data-i18n="openYandex">Открыть в Яндекс Картах</span>
 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="margin-left:auto;opacity:0.5"><path d="M7 17L17 7M17 7H7M17 7v10" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a>
 
 <div class="cd" style="padding:14px 16px;margin-bottom:12px">
-<div style="font-size:12px;color:var(--text-dim);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px">Режим работы</div>
-<div style="font-size:15px;font-weight:500">Ежедневно: 24/7</div>
+<div style="font-size:12px;color:var(--text-dim);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px" data-i18n="workHours">Режим работы</div>
+<div style="font-size:15px;font-weight:500" data-i18n="daily247">Ежедневно: 24/7</div>
 </div>
 
 <div style="display:flex;gap:8px;margin-bottom:14px">
 <a href="https://mbex.pro" target="_blank" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:12px;border-radius:12px;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.08);text-decoration:none;color:var(--text-sec);font-size:14px;font-weight:500">
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10A15.3 15.3 0 0112 2z" stroke="currentColor" stroke-width="1.5"/></svg>
-Сайт</a>
+<span data-i18n="site">Сайт</span></a>
 <a href="https://t.me/mbex_fin" target="_blank" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:12px;border-radius:12px;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.08);text-decoration:none;color:var(--text-sec);font-size:14px;font-weight:500">
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M21 5L2 12.5l7 1M21 5l-5 15-6.5-6.5M21 5l-12 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
 Telegram</a>
@@ -982,7 +1075,7 @@ Telegram</a>
 Instagram</a>
 </div>
 
-<div style="font-size:12px;color:var(--text-dim);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px">Наш офис</div>
+<div style="font-size:12px;color:var(--text-dim);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px" data-i18n="ourOffice">Наш офис</div>
 <div id="officeGallery" style="display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;scroll-snap-type:x mandatory">
 <div style="flex-shrink:0;width:260px;height:170px;border-radius:12px;overflow:hidden;border:0.5px solid rgba(255,255,255,0.08);scroll-snap-align:start">
 <img src="photo1.jpg" alt="Башня Федерация" style="width:100%;height:100%;object-fit:cover;display:block">
@@ -1004,7 +1097,7 @@ Instagram</a>
 
 <!-- COURIERS -->
 <div class="scr" id="s-couriers"><div style="padding:0 16px;padding-bottom:40px">
-<div style="font-size:23px;font-weight:600;padding:18px 0 14px">Мои курьеры</div>
+<div style="font-size:23px;font-weight:600;padding:18px 0 14px" data-i18n="myCouriers">Мои курьеры</div>
 
 <div id="couriersList">
 <div class="cd courier-saved" style="margin-bottom:8px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center">
@@ -1037,130 +1130,174 @@ Instagram</a>
 <!-- Add courier form -->
 <div id="addCourierForm" style="display:none;margin-bottom:12px">
 <div class="cd" style="padding:16px">
-<div style="margin-bottom:12px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Фамилия</div><input id="newCourierLast" placeholder="Фамилия"></div>
-<div style="margin-bottom:12px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Имя</div><input id="newCourierFirst" placeholder="Имя"></div>
-<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Отчество</div><input id="newCourierMiddle" placeholder="Отчество"></div>
+<div style="margin-bottom:12px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px" data-i18n="lastName">Фамилия</div><input id="newCourierLast" placeholder="Фамилия" data-i18n="lastName"></div>
+<div style="margin-bottom:12px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px" data-i18n="firstName">Имя</div><input id="newCourierFirst" placeholder="Имя" data-i18n="firstName"></div>
+<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px" data-i18n="middleName">Отчество</div><input id="newCourierMiddle" placeholder="Отчество" data-i18n="middleName"></div>
 <div style="display:flex;gap:8px">
-<div class="btn-primary" onclick="saveNewCourier()" style="padding:12px;font-size:16px;border-radius:10px">Добавить</div>
-<div class="btn-o" onclick="toggleAddCourier()" style="padding:12px;font-size:16px;border-radius:10px">Отмена</div>
+<div class="btn-primary" onclick="saveNewCourier()" style="padding:12px;font-size:16px;border-radius:10px" data-i18n="add">Добавить</div>
+<div class="btn-o" onclick="toggleAddCourier()" style="padding:12px;font-size:16px;border-radius:10px" data-i18n="cancelBtn">Отмена</div>
 </div>
 </div>
 </div>
 
 <div class="cd" onclick="toggleAddCourier()" style="cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;padding:14px 16px;border:0.5px dashed rgba(255,255,255,0.1)">
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round"/></svg>
-<span style="font-size:16px;color:var(--text-sec)">Добавить курьера</span>
+<span style="font-size:16px;color:var(--text-sec)" data-i18n="addCourier">Добавить курьера</span>
 </div>
 </div></div>
 
 <!-- REFERRAL SYSTEM -->
 <div class="scr" id="s-referral"><div style="padding:0 16px;padding-bottom:40px">
-<div style="font-size:23px;font-weight:600;padding:18px 0 6px">Реферальная система</div>
-<div style="font-size:15px;color:var(--text-dim);margin-bottom:20px;line-height:1.5">Приглашайте друзей и получайте бонусы с каждого их обмена</div>
+<div style="font-size:23px;font-weight:600;padding:18px 0 6px" data-i18n="referralSystem">Реферальная система</div>
+<div style="font-size:15px;color:var(--text-dim);margin-bottom:20px;line-height:1.5" data-i18n="refInviteDesc">Приглашайте друзей и получайте бонусы с каждого их обмена</div>
 
+<!-- Referral balance — compact row -->
+<div class="cd" style="margin-bottom:12px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between">
+<div>
+<div style="font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px" data-i18n="refBalance">Реф. баланс</div>
+<div style="font-size:26px;font-weight:700;letter-spacing:-0.5px;line-height:1.1" id="refBalanceAmount">0.00 <span style="font-size:15px;font-weight:500">USDT</span></div>
+<div style="font-size:11px;color:var(--text-dim);margin-top:2px" data-i18n="withdrawAvailable">Вывод доступен от 100 USDT</div>
+</div>
+<div class="btn-primary" onclick="openRefWithdraw()" style="padding:10px 20px;font-size:14px;width:auto;flex-shrink:0" data-i18n="withdraw">Вывод</div>
+</div>
+
+<!-- Withdraw modal -->
+<div id="refWithdrawModal" style="display:none;position:fixed;inset:0;z-index:160;background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center" onclick="closeRefWithdraw()">
+<div onclick="event.stopPropagation()" style="background:rgba(18,18,24,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:0.5px solid rgba(255,255,255,0.12);border-radius:18px;padding:24px 20px;width:300px;box-shadow:0 20px 60px rgba(0,0,0,0.6)">
+<div style="font-size:18px;font-weight:600;margin-bottom:4px;text-align:center" data-i18n="withdrawUSDT">Вывод USDT</div>
+<div style="font-size:13px;color:var(--text-dim);margin-bottom:16px;text-align:center"><span data-i18n="availableBalance">Доступно:</span> <span id="refWithdrawAvail">0.00 USDT</span></div>
+<div style="margin-bottom:12px">
+<div style="font-size:13px;color:var(--text-sec);margin-bottom:4px" data-i18n="withdrawSum">Сумма (USDT)</div>
+<input id="refWithdrawSum" inputmode="decimal" placeholder="0.00" style="font-size:17px;text-align:center">
+</div>
+<div style="margin-bottom:14px;position:relative" id="refWalletWrap">
+<div style="font-size:13px;color:var(--text-sec);margin-bottom:4px" data-i18n="walletAddr">Адрес кошелька (TRC-20)</div>
+<input id="refWithdrawWallet" placeholder="Txxxxxxxxxxxxxxxxxxxxxxxxx" style="font-size:14px;padding-right:40px" autocomplete="off" onfocus="showRefWalletHints()" oninput="showRefWalletHints()">
+<div onclick="toggleRefWalletDrop()" style="position:absolute;right:0;bottom:0;width:40px;height:48px;display:flex;align-items:center;justify-content:center;cursor:pointer">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" id="refWalletChev" style="transition:transform 0.2s"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</div>
+<div id="refWalletDrop" style="display:none;position:absolute;bottom:calc(100% + 4px);left:0;right:0;z-index:50;background:rgba(18,18,24,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:0.5px solid rgba(255,255,255,0.08);border-radius:12px;padding:6px 0;max-height:180px;overflow-y:auto;box-shadow:0 -8px 30px rgba(0,0,0,0.4)">
+</div>
+</div>
+<div style="display:flex;gap:8px">
+<div class="btn-primary" onclick="submitRefWithdraw()" style="padding:12px;font-size:15px;border-radius:10px" data-i18n="withdraw">Вывод</div>
+<div class="btn-o" onclick="closeRefWithdraw()" style="padding:12px;font-size:15px;border-radius:10px" data-i18n="cancelBtn">Отмена</div>
+</div>
+</div>
+</div>
+
+<!-- Stats grid -->
 <div class="cd" style="margin-bottom:12px;padding:16px">
 <div style="display:flex;gap:12px;margin-bottom:12px">
 <div style="flex:1;text-align:center;padding:14px 8px;border-radius:12px;background:rgba(255,255,255,0.03);border:0.5px solid rgba(255,255,255,0.06)">
 <div style="font-size:24px;font-weight:600;margin-bottom:2px">0</div>
-<div style="font-size:12px;color:var(--text-dim)">Рефералов</div>
+<div style="font-size:12px;color:var(--text-dim)" data-i18n="referrals">Рефералов</div>
 </div>
 <div style="flex:1;text-align:center;padding:14px 8px;border-radius:12px;background:rgba(255,255,255,0.03);border:0.5px solid rgba(255,255,255,0.06)">
 <div style="font-size:24px;font-weight:600;margin-bottom:2px">0</div>
-<div style="font-size:12px;color:var(--text-dim)">USDT заработано</div>
+<div style="font-size:12px;color:var(--text-dim)" data-i18n="earnedUSDT">USDT заработано</div>
 </div>
 </div>
-<div style="display:flex;gap:12px;margin-bottom:16px">
+<div style="display:flex;gap:12px;margin-bottom:12px">
 <div style="flex:1;text-align:center;padding:14px 8px;border-radius:12px;background:rgba(255,255,255,0.03);border:0.5px solid rgba(255,255,255,0.06)">
 <div style="font-size:24px;font-weight:600;margin-bottom:2px">0</div>
-<div style="font-size:12px;color:var(--text-dim)">Обменов рефералов</div>
+<div style="font-size:12px;color:var(--text-dim)" data-i18n="refExchanges">Обменов рефералов</div>
 </div>
 <div style="flex:1;text-align:center;padding:14px 8px;border-radius:12px;background:rgba(255,255,255,0.03);border:0.5px solid rgba(255,255,255,0.06)">
 <div style="font-size:24px;font-weight:600;margin-bottom:2px">0 USDT</div>
-<div style="font-size:12px;color:var(--text-dim)">Оборот за месяц</div>
+<div style="font-size:12px;color:var(--text-dim)" data-i18n="monthTurnover">Оборот за месяц</div>
 </div>
 </div>
-<div style="font-size:13px;color:var(--text-sec);margin-bottom:10px;font-weight:500">Ваш реферальный код</div>
-<div style="display:flex;align-items:center;gap:8px">
+<div style="display:flex;gap:12px">
+<div style="flex:1;text-align:center;padding:14px 8px;border-radius:12px;background:rgba(255,255,255,0.03);border:0.5px solid rgba(255,255,255,0.06)">
+<div style="font-size:24px;font-weight:600;margin-bottom:2px">0</div>
+<div style="font-size:12px;color:var(--text-dim)" data-i18n="activeReferrals">Активных рефералов</div>
+</div>
+</div>
+</div>
+
+<!-- Referral code -->
+<div class="cd" style="margin-bottom:12px;padding:16px">
+<div style="font-size:13px;color:var(--text-sec);margin-bottom:10px;font-weight:500" data-i18n="yourRefCode">Ваш реферальный код</div>
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
 <div style="flex:1;padding:12px 14px;border-radius:10px;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.08);font-size:18px;font-weight:600;letter-spacing:1.5px">MBX7200K</div>
-<div onclick="copyRefCode(this)" style="cursor:pointer;padding:12px;border-radius:10px;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;transition:background 0.2s">
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="9" y="9" width="13" height="13" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke="#fff" stroke-width="1.5"/></svg>
+<div onclick="shareRefCode()" style="cursor:pointer;padding:12px;border-radius:10px;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;transition:background 0.2s" title="Share">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 5L2 12.5l7 1M21 5l-5 15-6.5-6.5M21 5l-12 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</div>
+<div onclick="copyRefCode(this)" style="cursor:pointer;padding:12px;border-radius:10px;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;transition:background 0.2s" title="Copy">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="9" y="9" width="13" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke="currentColor" stroke-width="1.5"/></svg>
 </div>
 </div>
-<div id="refCopyMsg" style="font-size:12px;color:var(--text-sec);margin-top:6px;opacity:0;transition:opacity 0.3s;text-align:center">Скопировано!</div>
-</div>
-
-<div onclick="shareRefCode()" class="btn-primary" style="margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:8px">
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 5L2 12.5l7 1M21 5l-5 15-6.5-6.5M21 5l-12 8.5" stroke="#0b0b0e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-Поделиться в Telegram
+<div id="refCopyMsg" style="font-size:12px;color:var(--text-sec);margin-top:2px;opacity:0;transition:opacity 0.3s;text-align:center" data-i18n="copied">Скопировано!</div>
 </div>
 
-<div style="font-size:14px;font-weight:600;margin-bottom:8px;margin-top:6px;color:var(--text-sec)">Как это работает</div>
+<div style="font-size:14px;font-weight:600;margin-bottom:8px;margin-top:6px;color:var(--text-sec)" data-i18n="howItWorks">Как это работает</div>
 <div class="cd" style="padding:0">
 <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.04)">
 <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;font-weight:600;color:var(--text-sec)">1</div>
-<div><div style="font-size:15px;font-weight:500;margin-bottom:2px">Поделитесь кодом</div><div style="font-size:13px;color:var(--text-dim);line-height:1.4">Отправьте реферальный код другу</div></div>
+<div><div style="font-size:15px;font-weight:500;margin-bottom:2px" data-i18n="step1title">Поделитесь кодом</div><div style="font-size:13px;color:var(--text-dim);line-height:1.4" data-i18n="step1desc">Отправьте реферальный код другу</div></div>
 </div>
 <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.04)">
 <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;font-weight:600;color:var(--text-sec)">2</div>
-<div><div style="font-size:15px;font-weight:500;margin-bottom:2px">Друг совершает обмен</div><div style="font-size:13px;color:var(--text-dim);line-height:1.4">При регистрации указывает ваш код</div></div>
+<div><div style="font-size:15px;font-weight:500;margin-bottom:2px" data-i18n="step2title">Друг совершает обмен</div><div style="font-size:13px;color:var(--text-dim);line-height:1.4" data-i18n="step2desc">При регистрации указывает ваш код</div></div>
 </div>
 <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px">
 <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;font-weight:600;color:var(--text-sec)">3</div>
-<div><div style="font-size:15px;font-weight:500;margin-bottom:2px">Получайте бонусы</div><div style="font-size:13px;color:var(--text-dim);line-height:1.4">Начисляем USDT за каждую сделку реферала</div></div>
+<div><div style="font-size:15px;font-weight:500;margin-bottom:2px" data-i18n="step3title">Получайте бонусы</div><div style="font-size:13px;color:var(--text-dim);line-height:1.4" data-i18n="step3desc">Начисляем USDT за каждую сделку реферала</div></div>
 </div>
 </div>
 </div></div>
 
 <!-- AML / KYC -->
 <div class="scr" id="s-aml"><div style="padding:0 16px;padding-bottom:40px">
-<div style="font-size:23px;font-weight:600;padding:18px 0 6px">AML / KYC</div>
-<div style="font-size:15px;color:var(--text-dim);margin-bottom:20px;line-height:1.5">Политика противодействия отмыванию денег</div>
+<div style="font-size:23px;font-weight:600;padding:18px 0 6px" data-i18n="aml">AML / KYC</div>
+<div style="font-size:15px;color:var(--text-dim);margin-bottom:20px;line-height:1.5" data-i18n="amlDesc">Политика противодействия отмыванию денег</div>
 
 <div class="cd" style="padding:0;margin-bottom:12px">
 <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.04)">
 <div class="ri" style="margin-right:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/></svg></div>
-<div><div style="font-size:15px;font-weight:500;margin-bottom:2px">Проверка транзакций</div><div style="font-size:13px;color:var(--text-dim);line-height:1.4">Все операции проходят автоматическую AML-проверку для безопасности</div></div>
+<div><div style="font-size:15px;font-weight:500;margin-bottom:2px" data-i18n="txCheck">Проверка транзакций</div><div style="font-size:13px;color:var(--text-dim);line-height:1.4" data-i18n="txCheckDesc">Все операции проходят автоматическую AML-проверку для безопасности</div></div>
 </div>
 <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.04)">
 <div class="ri" style="margin-right:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/><path d="M4 21c0-3.866 3.582-7 8-7s8 3.134 8 7" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-<div><div style="font-size:15px;font-weight:500;margin-bottom:2px">Верификация личности</div><div style="font-size:13px;color:var(--text-dim);line-height:1.4">При обменах свыше 100 000 ₽ может потребоваться KYC-верификация</div></div>
+<div><div style="font-size:15px;font-weight:500;margin-bottom:2px" data-i18n="idVerify">Верификация личности</div><div style="font-size:13px;color:var(--text-dim);line-height:1.4" data-i18n="idVerifyDesc">При обменах свыше 100 000 ₽ может потребоваться KYC-верификация</div></div>
 </div>
 <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px">
 <div class="ri" style="margin-right:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-<div><div style="font-size:15px;font-weight:500;margin-bottom:2px">Документы</div><div style="font-size:13px;color:var(--text-dim);line-height:1.4">Паспорт РФ или загранпаспорт для подтверждения</div></div>
+<div><div style="font-size:15px;font-weight:500;margin-bottom:2px" data-i18n="documents">Документы</div><div style="font-size:13px;color:var(--text-dim);line-height:1.4" data-i18n="documentsDesc">Паспорт РФ или загранпаспорт для подтверждения</div></div>
 </div>
 </div>
 
 <div class="cd" style="padding:14px 16px;margin-bottom:12px">
-<div style="font-size:14px;font-weight:500;margin-bottom:6px">Ваш статус</div>
+<div style="font-size:14px;font-weight:500;margin-bottom:6px" data-i18n="yourStatus">Ваш статус</div>
 <div style="display:flex;align-items:center;gap:8px">
 <div style="width:8px;height:8px;border-radius:50%;border:1px solid rgba(255,255,255,0.2)"></div>
-<span style="font-size:15px;color:var(--text-dim)">Не верифицирован</span>
+<span style="font-size:15px;color:var(--text-dim)" data-i18n="notVerified">Не верифицирован</span>
 </div>
 </div>
 
 <a href="https://t.me/mbexsupport" target="_blank" style="display:block;text-decoration:none">
 <div class="btn-primary" style="display:flex;align-items:center;justify-content:center;gap:8px">
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="#0b0b0e" stroke-width="1.5"/></svg>
-Пройти верификацию
+<span data-i18n="passVerify">Пройти верификацию</span>
 </div>
 </a>
 </div></div>
 
 </div>
 
-<div id="branchLabel" style="text-align:center;font-size:11px;color:var(--text-dim);letter-spacing:0.5px;padding:4px 0;background:rgba(11,11,14,0.94);border-top:0.5px solid var(--card-border);flex-shrink:0">Москва</div>
+<div id="branchLabel" style="text-align:center;font-size:11px;color:var(--text-dim);letter-spacing:0.5px;padding:4px 0;background:var(--glass);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border-top:0.5px solid rgba(255,255,255,0.04);flex-shrink:0">Москва</div>
 <div class="tb" id="tb">
-<div class="tb-i on" id="t-home" onclick="go('home')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 9.5L12 3L21 9.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5Z" stroke="var(--accent-light)" stroke-width="1.8"/></svg><span>Главная</span></div>
-<div class="tb-i" id="t-history" onclick="go('history')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="var(--text-dim)" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke="var(--text-dim)" stroke-width="1.8" stroke-linecap="round"/></svg><span>История</span></div>
-<div class="tb-i" id="t-profile" onclick="go('profile')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="var(--text-dim)" stroke-width="1.8"/><path d="M4 21c0-3.866 3.582-7 8-7s8 3.134 8 7" stroke="var(--text-dim)" stroke-width="1.8" stroke-linecap="round"/></svg><span>Профиль</span></div>
+<div class="tb-i on" id="t-home" onclick="go('home')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 9.5L12 3L21 9.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5Z" stroke="var(--accent-light)" stroke-width="1.8"/></svg><span data-i18n="home">Главная</span></div>
+<div class="tb-i" id="t-history" onclick="go('history')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="var(--text-dim)" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke="var(--text-dim)" stroke-width="1.8" stroke-linecap="round"/></svg><span data-i18n="history">История</span></div>
+<div class="tb-i" id="t-profile" onclick="go('profile')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="var(--text-dim)" stroke-width="1.8"/><path d="M4 21c0-3.866 3.582-7 8-7s8 3.134 8 7" stroke="var(--text-dim)" stroke-width="1.8" stroke-linecap="round"/></svg><span data-i18n="profile">Профиль</span></div>
 </div>
 
 <!-- Branch modal overlay -->
 <div id="branchModal" style="display:none;position:absolute;inset:0;z-index:100;background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center" onclick="closeBranchModal()">
 <div onclick="event.stopPropagation()" style="background:rgba(18,18,24,0.95);border:0.5px solid rgba(255,255,255,0.12);border-radius:18px;padding:24px 20px;width:280px;box-shadow:0 20px 60px rgba(0,0,0,0.6)">
-<div style="font-size:18px;font-weight:600;margin-bottom:4px;text-align:center">Филиал</div>
-<div style="font-size:13px;color:var(--text-dim);margin-bottom:20px;text-align:center">Выберите город</div>
+<div style="font-size:18px;font-weight:600;margin-bottom:4px;text-align:center" data-i18n="branch">Филиал</div>
+<div style="font-size:13px;color:var(--text-dim);margin-bottom:20px;text-align:center" data-i18n="chooseYourCity">Выберите город</div>
 <div class="branch-item" onclick="pickBranch(this,'moscow')" data-active="true" style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;cursor:pointer;transition:background 0.15s;margin-bottom:6px;background:rgba(255,255,255,0.06)">
 <div style="width:10px;height:10px;border-radius:50%;background:#fff;flex-shrink:0" class="branch-dot"></div>
 <span style="font-size:17px;font-weight:500">Москва</span>
@@ -1266,7 +1403,7 @@ document.addEventListener('DOMContentLoaded',function(){
         // Simulate refresh
         setTimeout(function(){
           ptr.style.height='0';
-          toast('Данные обновлены','success');
+          toast(t('dataUpdated'),'success');
         },1000);
       }else{
         ptr.style.height='0';
@@ -1429,7 +1566,7 @@ function closeConfirm(result){
   _confirmCb=null;
 }
 function confirmCancelOrder(idx){
-  showConfirm('Отменить заявку?','Вы уверены, что хотите отменить эту заявку?',function(yes){
+  showConfirm(t('confirmCancel'),t('confirmCancelText'),function(yes){
     if(yes)cancelOrderByIdx(idx);
   });
 }
@@ -1437,15 +1574,15 @@ function confirmCancelOrder(idx){
 // ═══ SUM VALIDATION ═══
 function validateSum(raw){
   var num=parseInt(raw.replace(/\s/g,'').replace(/\D/g,''),10);
-  if(isNaN(num)||num<1000){toast('Минимальная сумма 1 000 ₽','error');return 0}
-  if(num%500!==0){num=Math.round(num/500)*500;if(num<1000)num=1000;toast('Сумма округлена до '+num.toLocaleString('ru')+' ₽','');return num}
+  if(isNaN(num)||num<1000){toast(t('minSum'),'error');return 0}
+  if(num%500!==0){num=Math.round(num/500)*500;if(num<1000)num=1000;toast(t('sumRounded')+' '+num.toLocaleString('ru')+' ₽','');return num}
   return num;
 }
 
 // ═══ COPY ORDER NUMBER ═══
 function copyOrderNum(num){
   navigator.clipboard.writeText(String(num)).then(function(){
-    toast('Номер заявки скопирован','success');
+    toast(t('orderNumCopied'),'success');
     haptic();
   });
 }
@@ -1453,12 +1590,101 @@ function copyOrderNum(num){
 // ═══ SHARE REF CODE VIA TELEGRAM ═══
 function shareRefCode(){
   var code='MBX7200K';
-  var text='Регистрируйся в MBEX и получи бонус! Мой реферальный код: '+code;
+  var text=window._lang==='en'?'Join MBEX and get a bonus! My referral code: '+code:'Регистрируйся в MBEX и получи бонус! Мой реферальный код: '+code;
   if(window.Telegram&&Telegram.WebApp&&Telegram.WebApp.openTelegramLink){
     Telegram.WebApp.openTelegramLink('https://t.me/share/url?url='+encodeURIComponent('https://mbex.pro')+'&text='+encodeURIComponent(text));
   }else{
     window.open('https://t.me/share/url?url='+encodeURIComponent('https://mbex.pro')+'&text='+encodeURIComponent(text),'_blank');
   }
+  haptic('success');
+}
+
+// ═══ REFERRAL WITHDRAW ═══
+var _refBalance=0; // demo: 0 USDT
+function openRefWithdraw(){
+  var modal=document.getElementById('refWithdrawModal');
+  if(!modal)return;
+  document.getElementById('refWithdrawAvail').textContent=_refBalance.toFixed(2)+' USDT';
+  document.getElementById('refWithdrawSum').value='';
+  document.getElementById('refWithdrawWallet').value='';
+  document.getElementById('refWalletDrop').style.display='none';
+  modal.style.display='flex';
+  buildRefWalletHints();
+  haptic();
+}
+function closeRefWithdraw(){
+  var modal=document.getElementById('refWithdrawModal');
+  if(modal)modal.style.display='none';
+}
+function buildRefWalletHints(){
+  // Collect wallets from wallets screen
+  var drop=document.getElementById('refWalletDrop');
+  if(!drop)return;
+  var wallets=[];
+  document.querySelectorAll('#walletsList .wallet-saved').forEach(function(card){
+    var nameEl=card.querySelector('div[style*="font-weight:500"]');
+    var addrEl=card.querySelector('div[style*="color:var(--text-sec)"]');
+    if(nameEl&&addrEl){
+      var addr=addrEl.textContent.trim();
+      var name=nameEl.textContent.trim();
+      if(addr.length>10)wallets.push({name:name,addr:addr});
+    }
+  });
+  // Also add from buy wallet dropdown
+  document.querySelectorAll('#walletDrop .wl-item[data-addr]').forEach(function(item){
+    var addr=item.getAttribute('data-addr');
+    var nameEl=item.querySelector('div[style*="font-weight:500"]');
+    var name=nameEl?nameEl.textContent.trim():'';
+    if(addr&&!wallets.find(function(w){return w.addr===addr})){
+      wallets.push({name:name,addr:addr});
+    }
+  });
+  if(!wallets.length){
+    drop.innerHTML='<div style="padding:10px 14px;font-size:13px;color:var(--text-dim);text-align:center" data-i18n="noSavedWallets">'+t('noSavedWallets')+'</div>';
+    return;
+  }
+  var html='<div style="padding:4px 12px 2px;font-size:11px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px" data-i18n="myWallets">'+t('myWallets')+'</div>';
+  wallets.forEach(function(w){
+    var short=w.addr.length>20?w.addr.slice(0,10)+'...'+w.addr.slice(-6):w.addr;
+    html+='<div class="wl-item" onclick="pickRefWallet(\''+w.addr+'\')" style="padding:8px 12px">';
+    html+='<div style="font-size:13px;font-weight:500">'+w.name+'</div>';
+    html+='<div style="font-size:11px;color:var(--text-dim);font-family:\'Montserrat\',monospace">'+short+'</div>';
+    html+='</div>';
+  });
+  drop.innerHTML=html;
+}
+function pickRefWallet(addr){
+  document.getElementById('refWithdrawWallet').value=addr;
+  document.getElementById('refWalletDrop').style.display='none';
+  document.getElementById('refWalletChev').style.transform='';
+  haptic();
+}
+function toggleRefWalletDrop(){
+  var drop=document.getElementById('refWalletDrop');
+  var chev=document.getElementById('refWalletChev');
+  if(drop.style.display==='none'||!drop.style.display){
+    drop.style.display='block';chev.style.transform='rotate(180deg)';
+  }else{
+    drop.style.display='none';chev.style.transform='';
+  }
+  haptic();
+}
+function showRefWalletHints(){
+  // Show dropdown when input is focused/typed if empty
+  var inp=document.getElementById('refWithdrawWallet');
+  var drop=document.getElementById('refWalletDrop');
+  if(inp&&!inp.value.trim()&&drop)drop.style.display='block';
+  else if(inp&&inp.value.trim()&&drop)drop.style.display='none';
+}
+function submitRefWithdraw(){
+  var sumVal=parseFloat(document.getElementById('refWithdrawSum').value);
+  var wallet=document.getElementById('refWithdrawWallet').value.trim();
+  if(isNaN(sumVal)||sumVal<=0){toast(t('enterAmount'),'error');return}
+  if(sumVal>_refBalance){toast(t('insufficientBalance'),'error');return}
+  if(_refBalance<100){toast(t('minWithdraw'),'error');return}
+  if(!wallet||wallet.length<30){toast(t('enterWallet'),'error');return}
+  toast(t('withdrawRequested'),'success');
+  closeRefWithdraw();
   haptic('success');
 }
 
@@ -1492,12 +1718,12 @@ function startMasterTimer(){
       var soT=document.getElementById('sellOkTimer');
       if(co.timerSec>0){
         var m=Math.floor(co.timerSec/60),s=co.timerSec%60;
-        var str='Осталось: '+m+':'+(s<10?'0':'')+s;
+        var str=t('timeLeft')+' '+m+':'+(s<10?'0':'')+s;
         if(okT)okT.textContent=str;
         if(soT)soT.textContent=str;
       }else{
-        if(okT)okT.textContent='Время истекло';
-        if(soT)soT.textContent='Время истекло';
+        if(okT)okT.textContent=t('timeExpired');
+        if(soT)soT.textContent=t('timeExpired');
       }
     }
     // Update detail timer if viewing
@@ -1509,7 +1735,7 @@ function startMasterTimer(){
           var m2=Math.floor(vo.timerSec/60),s2=vo.timerSec%60;
           dtm.textContent=m2+':'+(s2<10?'0':'')+s2;
         }else{
-          dtm.textContent=vo.status==='active'?'Истекло':'—';
+          dtm.textContent=vo.status==='active'?t('expired'):'—';
         }
       }
       var dcw=document.getElementById('detailCancelWrap');
@@ -1528,11 +1754,11 @@ function renderActiveOrders(){
     var o=orderHistory[i];
     if(o.status!=='active')continue;
     var m=Math.floor((o.timerSec||0)/60),s=(o.timerSec||0)%60;
-    var timeStr=o.timerSec>0?m+':'+(s<10?'0':'')+s:'Истекло';
+    var timeStr=o.timerSec>0?m+':'+(s<10?'0':'')+s:t('expired');
     var timerClass=o.timerSec>0&&o.timerSec<=120?' timer-warning':'';
     html+='<div class="active-order" data-idx="'+i+'" style="margin-bottom:10px;cursor:pointer" onclick="viewOrderDetail('+i+')">';
     html+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">';
-    html+='<div class="active-order-badge">Активная заявка</div>';
+    html+='<div class="active-order-badge">'+t('activeOrder')+'</div>';
     html+='<div style="font-size:14px;color:var(--text-dim)" class="'+timerClass+'">'+timeStr+'</div>';
     html+='</div>';
     html+='<div style="display:flex;justify-content:space-between;align-items:center">';
@@ -1541,7 +1767,7 @@ function renderActiveOrders(){
     html+='<div style="text-align:right"><div style="font-size:19px;font-weight:500">'+o.sum+'</div></div>';
     html+='</div>';
     html+='<div style="margin-top:12px;padding-top:10px;border-top:0.5px solid rgba(255,255,255,0.06)">';
-    html+='<div class="btn-o" onclick="event.stopPropagation();confirmCancelOrder('+i+')" style="padding:10px;font-size:15px;border-radius:10px;color:rgba(255,255,255,0.55)">Отменить заявку</div>';
+    html+='<div class="btn-o" onclick="event.stopPropagation();confirmCancelOrder('+i+')" style="padding:10px;font-size:15px;border-radius:10px;color:rgba(255,255,255,0.55)">'+t('cancelOrder')+'</div>';
     html+='</div></div>';
   }
   container.innerHTML=html;
@@ -1554,7 +1780,7 @@ function cancelOrderByIdx(idx){
   o.status='cancelled';
   o.timerSec=0;
   renderActiveOrders();
-  toast('Заявка отменена','');
+  toast(t('orderCancelled'),'');
   haptic('medium');
 }
 
@@ -1573,7 +1799,7 @@ function showOrderDetail(d){
   var dt=document.getElementById('detailType');if(dt)dt.textContent=d.type;
   var ds=document.getElementById('detailStatus');
   var dd=document.getElementById('detailStatusDot');
-  var statusText=d.status==='active'?'Активная':d.status==='done'?'Завершена':'Отменена';
+  var statusText=d.status==='active'?t('statusActive'):d.status==='done'?t('statusDone'):t('statusCancelled');
   if(ds)ds.textContent=statusText;
   if(dd){
     if(d.status==='active'){dd.style.background='var(--accent-light)';dd.style.border='none'}
@@ -1591,7 +1817,7 @@ function showOrderDetail(d){
       var m=Math.floor(d.timerSec/60),s=d.timerSec%60;
       dtm.textContent=m+':'+(s<10?'0':'')+s;
     }else{
-      dtm.textContent=d.status==='active'?'Истекло':'—';
+      dtm.textContent=d.status==='active'?t('expired'):'—';
     }
   }
   var dw=document.getElementById('detailWallet');if(dw)dw.textContent=d.wallet||'—';
@@ -1615,14 +1841,14 @@ function createOrder(type){
   var isSelf=document.getElementById('ts').classList.contains('on');
   var fio=isSelf?document.getElementById('fioSelfDisplay').textContent.trim():(document.getElementById('fi')?document.getElementById('fi').value.trim():'');
   var wallet=document.getElementById('walletInput')?document.getElementById('walletInput').value.trim():'';
-  if(!sum||!fio){toast('Заполните сумму и ФИО','error');return}
+  if(!sum||!fio){toast(t('fillSumFio'),'error');return}
   var sumNum=validateSum(sum);
   if(!sumNum)return;
   if(sumInput)sumInput.value=sumNum.toLocaleString('ru-RU');
   haptic('success');
   var meta=makeOrderMeta();
 
-  var order={type:'Покупка',info:'USDT TRC-20',sum:sumNum.toLocaleString('ru')+' ₽',status:'active',num:meta.num,fio:fio,date:meta.dateStr,wallet:wallet||'TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8',timerSec:600};
+  var order={typeKey:'buy',type:t('purchase'),info:t('usdtTRC'),sum:sumNum.toLocaleString('ru')+' ₽',status:'active',num:meta.num,fio:fio,date:meta.dateStr,wallet:wallet||'TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8',timerSec:600};
   var idx=orderHistory.length;
   orderHistory.push(order);
   currentOkIdx=idx;
@@ -1633,6 +1859,7 @@ function createOrder(type){
   renderActiveOrders();
   startMasterTimer();
   go('ok');
+  animateCounter(document.getElementById('okSumCounter'),sumNum,800);
 }
 
 // ═══ CREATE SELL ORDER ═══
@@ -1640,14 +1867,14 @@ function createSellOrder(){
   var sum=document.getElementById('sellSum').value.trim();
   var isSelf=document.getElementById('tsSell').classList.contains('on');
   var fio=isSelf?document.getElementById('fioSelfDisplaySell').textContent.trim():(document.getElementById('fiSell')?document.getElementById('fiSell').value.trim():'');
-  if(!sum||!fio){toast('Заполните сумму и ФИО','error');return}
+  if(!sum||!fio){toast(t('fillSumFio'),'error');return}
   var sumNum=validateSum(sum);
   if(!sumNum)return;
   document.getElementById('sellSum').value=sumNum.toLocaleString('ru-RU');
   haptic('success');
   var meta=makeOrderMeta();
 
-  var order={type:'Продажа',info:'USDT TRC-20',sum:sumNum.toLocaleString('ru')+' ₽',status:'active',num:meta.num,fio:fio,date:meta.dateStr,wallet:'TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8',timerSec:600};
+  var order={typeKey:'sell',type:t('sale'),info:t('usdtTRC'),sum:sumNum.toLocaleString('ru')+' ₽',status:'active',num:meta.num,fio:fio,date:meta.dateStr,wallet:'TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8',timerSec:600};
   var idx=orderHistory.length;
   orderHistory.push(order);
   currentOkIdx=idx;
@@ -2060,17 +2287,17 @@ function createTransferOrder(){
   var from=document.getElementById('transferFromText').textContent;
   var to=document.getElementById('transferToText').textContent;
   var fio=document.getElementById('transferFioDisplay').textContent.trim();
-  if(!sum){toast('Введите сумму','error');return}
-  if(from==='Выберите офис'){toast('Выберите офис отправки','error');return}
-  if(to==='Выберите город'){toast('Выберите город получения','error');return}
-  if(!fio){toast('Укажите ФИО в профиле','error');return}
+  if(!sum){toast(t('enterAmount'),'error');return}
+  if(from==='Выберите офис'){toast(t('chooseOfficeErr'),'error');return}
+  if(to==='Выберите город'){toast(t('chooseCityErr'),'error');return}
+  if(!fio){toast(t('specifyFio'),'error');return}
 
   var meta=makeOrderMeta();
   var sumNum=parseFloat(sum.replace(/\s/g,''));
 
   // Add to history (no timer for transfers)
   orderHistory.push({
-    type:'Перестановка',
+    typeKey:'transfer',type:t('transferType'),
     info:from+' → '+to,
     sum:sumNum.toLocaleString('ru')+' ₽',
     status:'active',
@@ -2103,7 +2330,7 @@ function renderHistory(filter){
     var o=orderHistory[i];
     if(filter!=='all'&&o.status!==filter)continue;
     count++;
-    var statusText=o.status==='active'?'Активная':o.status==='done'?'Завершена':'Отменена';
+    var statusText=o.status==='active'?t('statusActive'):o.status==='done'?t('statusDone'):t('statusCancelled');
     var statusColor=o.status==='active'?'var(--accent-light)':o.status==='done'?'rgba(60,220,140,0.8)':'var(--text-dim)';
     html+='<div class="cd" style="margin-bottom:8px;cursor:pointer;padding:12px 16px" onclick="viewHistoryOrder('+i+')">';
     html+='<div style="display:flex;justify-content:space-between;align-items:center">';
@@ -2289,6 +2516,419 @@ try{!function(){
   },{passive:true});
   ct.addEventListener('touchend',function(){tracking=false},{passive:true});
 }();
+// ═══ QUICK SUM BUTTONS ═══
+function setSum(id,val){
+  var inp=document.getElementById(id);
+  if(inp){inp.value=val.toLocaleString('ru-RU');haptic()}
+}
+
+// ═══ REPEAT ORDER ═══
+function repeatOrder(){
+  if(viewingOrderIdx===null)return;
+  var o=orderHistory[viewingOrderIdx];
+  if(!o)return;
+  if(o.typeKey==='buy'||o.type==='Покупка'||o.type==='Purchase'){
+    go('buy');
+    setTimeout(function(){var s=document.getElementById('buySum');if(s)s.value=o.sum.replace(' ₽','')},100);
+  }else if(o.typeKey==='sell'||o.type==='Продажа'||o.type==='Sale'){
+    go('sell');
+    setTimeout(function(){var s=document.getElementById('sellSum');if(s)s.value=o.sum.replace(' ₽','')},100);
+  }else if(o.typeKey==='transfer'||o.type==='Перестановка'||o.type==='Transfer'){
+    go('transfer');
+    setTimeout(function(){var s=document.getElementById('transferSum');if(s)s.value=o.sum.replace(' ₽','')},100);
+  }
+  toast(t('orderDataLoaded'),'success');
+  haptic();
+}
+
+// ═══ ANIMATED SUM COUNTER ═══
+function animateCounter(el,target,duration){
+  if(!el)return;
+  var start=0;
+  var startTime=null;
+  function step(ts){
+    if(!startTime)startTime=ts;
+    var p=Math.min((ts-startTime)/duration,1);
+    var ease=1-Math.pow(1-p,3);
+    var val=Math.round(start+(target-start)*ease);
+    el.textContent=val.toLocaleString('ru')+' ₽';
+    if(p<1)requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+// ═══ LOCALSTORAGE PERSISTENCE ═══
+var LS_KEY='mbex_data';
+function saveData(){
+  try{
+    var data={
+      fio:document.getElementById('profileFio')?document.getElementById('profileFio').textContent:'',
+      phone:document.getElementById('profilePhone')?document.getElementById('profilePhone').textContent:'',
+      email:document.getElementById('profileEmail')?document.getElementById('profileEmail').textContent:'',
+      branch:document.getElementById('branchLabel')?document.getElementById('branchLabel').textContent:'Москва',
+      orderHistory:orderHistory,
+      lang:window._lang||'ru',
+      theme:window._theme||'dark'
+    };
+    localStorage.setItem(LS_KEY,JSON.stringify(data));
+  }catch(e){}
+}
+function loadData(){
+  try{
+    var raw=localStorage.getItem(LS_KEY);
+    if(!raw)return;
+    var d=JSON.parse(raw);
+    if(d.fio){var el=document.getElementById('profileFio');if(el)el.textContent=d.fio}
+    if(d.phone){var el=document.getElementById('profilePhone');if(el)el.textContent=d.phone}
+    if(d.email){var el=document.getElementById('profileEmail');if(el)el.textContent=d.email}
+    if(d.branch){var el=document.getElementById('branchLabel');if(el)el.textContent=d.branch}
+    if(d.orderHistory)orderHistory=d.orderHistory;
+    if(d.lang)window._lang=d.lang;
+    if(d.theme&&d.theme==='light')setTimeout(function(){switchTheme('light')},100);
+    if(d.lang&&d.lang==='en')setTimeout(function(){switchLang('en')},100);
+  }catch(e){}
+}
+// Auto-save every 5s
+setInterval(saveData,5000);
+// Load on start
+loadData();
+
+// ═══ TELEGRAM WEBAPP API ═══
+!function(){
+  try{
+    if(!window.Telegram||!Telegram.WebApp)return;
+    var tg=Telegram.WebApp;
+    tg.ready();
+    tg.expand();
+    // Set theme
+    if(tg.colorScheme==='light'){
+      // Could switch to light theme here
+    }
+    // Get user data
+    if(tg.initDataUnsafe&&tg.initDataUnsafe.user){
+      var u=tg.initDataUnsafe.user;
+      // Set TG ID
+      var tgId=document.querySelector('#s-profile [style*="text-shadow"]');
+      if(tgId&&u.id)tgId.textContent=u.id;
+      // Set name if no saved name
+      if(u.first_name){
+        var pf=document.getElementById('profileFio');
+        if(pf&&pf.textContent==='Иванов Иван Иванович'){
+          pf.textContent=(u.last_name||'')+' '+(u.first_name||'');
+        }
+      }
+    }
+    // Back button
+    tg.BackButton.onClick(function(){goBack()});
+  }catch(e){console.log('TG API:',e)}
+}();
+
+// ═══ i18n (RU/EN) — FULL ═══
+if(!window._lang)window._lang='ru';
+var _i18n={
+  ru:{
+    // Nav
+    buy:'Купить',sell:'Продать',transfer:'Перестановки',home:'Главная',history:'История',profile:'Профиль',
+    // Buy/Sell forms
+    buyUSDT:'Купить USDT',sellUSDT:'Продать USDT',
+    sum:'Сумма (₽)',wallet:'Кошелёк (TRC-20)',selfPickup:'Приеду сам',courier:'Курьер',
+    accept:'Принимаю',rules:'правила',conditions:'и условия',continue:'Продолжить',
+    getWallet:'Получить кошелёк',cancel:'Отменить заявку',back:'Назад',
+    from1000:'от 1 000 ₽ · шаг 500',enterSum:'Введите сумму',
+    walletPlaceholder:'Txxxxxxxxxxxxxxxxxxxxxxxxx',
+    fio:'ФИО',fioCourier:'ФИО курьера',chooseCourier:'Выберите или введите ФИО',
+    // Order created
+    created:'Заявка создана',toHome:'На главную',
+    sendUSDT:'Переведите USDT на этот адрес',
+    walletAddr:'Адрес кошелька (TRC-20)',walletForPay:'Кошелёк для оплаты (TRC-20)',
+    copied:'Скопировано!',
+    timeLeft:'Осталось:',timeExpired:'Время истекло',
+    // Transfer
+    transfers:'Перестановки',transferDesc:'Перевод средств',transferWorld:'Перевод по всему миру',
+    from:'Откуда',to:'Куда',chooseOffice:'Выберите офис',chooseCity:'Выберите город',
+    ourOffices:'Наши офисы',cities:'Города',
+    thankYou:'Спасибо за заявку!',managerContact:'Скоро с вами свяжется наш менеджер',
+    // History
+    all:'Все',active:'Активные',done:'Завершённые',noOrders:'Заявок пока нет',
+    activeOrder:'Активная заявка',statusActive:'Активная',statusDone:'Завершена',statusCancelled:'Отменена',
+    expired:'Истекло',
+    // Detail
+    type:'Тип',amount:'Сумма',number:'Номер',timer:'Таймер',
+    cancelOrder:'Отменить заявку',repeatOrder:'Повторить заявку',
+    confirmCancel:'Отменить заявку?',confirmCancelText:'Вы уверены, что хотите отменить эту заявку?',
+    confirmation:'Подтверждение',areYouSure:'Вы уверены?',yes:'Да',cancelBtn:'Отмена',
+    purchase:'Покупка',sale:'Продажа',transferType:'Перестановка',
+    purchaseUSDT:'Покупка USDT',saleUSDT:'Продажа USDT',
+    // Profile
+    fioLabel:'ФИО',discountVol:'Скидка за объём',refBalance:'Реф. баланс',exchanges:'Обменов',
+    refCode:'Реф. код',referralSystem:'Реферальная система',wallets:'Кошельки',couriers:'Курьеры',
+    settings:'Настройки',language:'Язык',theme:'Тема',darkTheme:'Тёмная',lightTheme:'Светлая',
+    contactsLabel:'Контакты',status:'Статус',notVerified:'Не верифицирован',verified:'Верифицирован',
+    phone:'Телефон',email:'Почта',save:'Сохранить',
+    // Contacts
+    contacts:'Контакты',address:'Адрес',openYandex:'Открыть в Яндекс Картах',
+    workHours:'Режим работы',daily247:'Ежедневно: 24/7',
+    site:'Сайт',ourOffice:'Наш офис',
+    // Wallets
+    myWallets:'Мои кошельки',addWallet:'Добавить кошелёк',walletName:'Название',
+    walletNamePh:'Например: Личный',addrTRC:'Адрес (TRC-20)',
+    // Couriers
+    myCouriers:'Мои курьеры',addCourier:'Добавить курьера',
+    lastName:'Фамилия',firstName:'Имя',middleName:'Отчество',add:'Добавить',
+    // Referral
+    referrals:'Рефералов',earnedUSDT:'USDT заработано',refExchanges:'Обменов рефералов',
+    monthTurnover:'Оборот за месяц',yourRefCode:'Ваш реферальный код',
+    shareInTG:'Поделиться в Telegram',howItWorks:'Как это работает',
+    step1title:'Поделитесь кодом',step1desc:'Отправьте реферальный код другу',
+    step2title:'Друг совершает обмен',step2desc:'При регистрации указывает ваш код',
+    step3title:'Получайте бонусы',step3desc:'Начисляем USDT за каждую сделку реферала',
+    refInviteDesc:'Приглашайте друзей и получайте бонусы с каждого их обмена',
+    // AML
+    aml:'AML / KYC',amlDesc:'Политика противодействия отмыванию денег',
+    txCheck:'Проверка транзакций',txCheckDesc:'Все операции проходят автоматическую AML-проверку для безопасности',
+    idVerify:'Верификация личности',idVerifyDesc:'При обменах свыше 100 000 ₽ может потребоваться KYC-верификация',
+    documents:'Документы',documentsDesc:'Паспорт РФ или загранпаспорт для подтверждения',
+    yourStatus:'Ваш статус',passVerify:'Пройти верификацию',
+    // Home
+    support:'Поддержка',branches:'Филиалы',
+    rateUSDT:'USDT / RUB',currentRate:'актуальный курс на:',
+    perUSDT:'₽ за USDT',yesterday:'вчера',today:'сегодня',
+    tetherUSDT:'Tether USDT',cbrLabel:'ЦБ РФ',
+    // Misc
+    dataUpdated:'Данные обновлены',updating:'Обновление...',
+    fillSumFio:'Заполните сумму и ФИО',minSum:'Минимальная сумма 1 000 ₽',
+    sumRounded:'Сумма округлена до',orderCancelled:'Заявка отменена',
+    orderNumCopied:'Номер заявки скопирован',orderDataLoaded:'Данные заявки загружены',
+    enterAmount:'Введите сумму',chooseOfficeErr:'Выберите офис отправки',
+    chooseCityErr:'Выберите город получения',specifyFio:'Укажите ФИО в профиле',
+    branch:'Филиал',chooseYourCity:'Выберите город',
+    favorites:'Избранные',recent:'Недавние',
+    incomeTo:'Принимаю',
+    darkThemeToast:'Тёмная тема',lightThemeToast:'Светлая тема',
+    langRu:'Язык: Русский',langEn:'Language: English',
+    usdtTRC:'USDT TRC-20',
+    addressLine1:'Пресненская наб. 12',
+    addressLine2:'Башня Федерация — Восток, 5 этаж, офис 512',
+    addressLine2Short:'Башня Федерация — Восток, 5 эт.',
+    withdraw:'Вывод',withdrawUSDT:'Вывод USDT',withdrawAvailable:'Вывод доступен от 100 USDT',
+    availableBalance:'Доступно:',withdrawSum:'Сумма (USDT)',
+    insufficientBalance:'Недостаточно средств',minWithdraw:'Минимум для вывода 100 USDT',
+    enterWallet:'Введите адрес кошелька',withdrawRequested:'Заявка на вывод создана',
+    activeReferrals:'Активных рефералов',
+    noSavedWallets:'Нет сохранённых кошельков'
+  },
+  en:{
+    buy:'Buy',sell:'Sell',transfer:'Transfers',home:'Home',history:'History',profile:'Profile',
+    buyUSDT:'Buy USDT',sellUSDT:'Sell USDT',
+    sum:'Amount (₽)',wallet:'Wallet (TRC-20)',selfPickup:'Self pickup',courier:'Courier',
+    accept:'I accept',rules:'rules',conditions:'and conditions',continue:'Continue',
+    getWallet:'Get wallet',cancel:'Cancel order',back:'Back',
+    from1000:'from 1,000 ₽ · step 500',enterSum:'Enter amount',
+    walletPlaceholder:'Txxxxxxxxxxxxxxxxxxxxxxxxx',
+    fio:'Full name',fioCourier:'Courier full name',chooseCourier:'Select or enter full name',
+    created:'Order created',toHome:'Home',
+    sendUSDT:'Send USDT to this address',
+    walletAddr:'Wallet address (TRC-20)',walletForPay:'Payment wallet (TRC-20)',
+    copied:'Copied!',
+    timeLeft:'Remaining:',timeExpired:'Time expired',
+    transfers:'Transfers',transferDesc:'Money transfer',transferWorld:'Worldwide transfers',
+    from:'From',to:'To',chooseOffice:'Select office',chooseCity:'Select city',
+    ourOffices:'Our offices',cities:'Cities',
+    thankYou:'Thank you!',managerContact:'Our manager will contact you shortly',
+    all:'All',active:'Active',done:'Completed',noOrders:'No orders yet',
+    activeOrder:'Active order',statusActive:'Active',statusDone:'Completed',statusCancelled:'Cancelled',
+    expired:'Expired',
+    type:'Type',amount:'Amount',number:'Number',timer:'Timer',
+    cancelOrder:'Cancel order',repeatOrder:'Repeat order',
+    confirmCancel:'Cancel order?',confirmCancelText:'Are you sure you want to cancel this order?',
+    confirmation:'Confirmation',areYouSure:'Are you sure?',yes:'Yes',cancelBtn:'Cancel',
+    purchase:'Purchase',sale:'Sale',transferType:'Transfer',
+    purchaseUSDT:'USDT Purchase',saleUSDT:'USDT Sale',
+    fioLabel:'Full name',discountVol:'Volume discount',refBalance:'Ref. balance',exchanges:'Exchanges',
+    refCode:'Ref. code',referralSystem:'Referral system',wallets:'Wallets',couriers:'Couriers',
+    settings:'Settings',language:'Language',theme:'Theme',darkTheme:'Dark',lightTheme:'Light',
+    contactsLabel:'Contacts',status:'Status',notVerified:'Not verified',verified:'Verified',
+    phone:'Phone',email:'Email',save:'Save',
+    contacts:'Contacts',address:'Address',openYandex:'Open in Yandex Maps',
+    workHours:'Working hours',daily247:'Daily: 24/7',
+    site:'Website',ourOffice:'Our office',
+    myWallets:'My wallets',addWallet:'Add wallet',walletName:'Name',
+    walletNamePh:'e.g.: Personal',addrTRC:'Address (TRC-20)',
+    myCouriers:'My couriers',addCourier:'Add courier',
+    lastName:'Last name',firstName:'First name',middleName:'Middle name',add:'Add',
+    referrals:'Referrals',earnedUSDT:'USDT earned',refExchanges:'Referral exchanges',
+    monthTurnover:'Monthly turnover',yourRefCode:'Your referral code',
+    shareInTG:'Share via Telegram',howItWorks:'How it works',
+    step1title:'Share the code',step1desc:'Send your referral code to a friend',
+    step2title:'Friend makes an exchange',step2desc:'Uses your code during registration',
+    step3title:'Earn bonuses',step3desc:'Get USDT for each referral trade',
+    refInviteDesc:'Invite friends and earn bonuses from each exchange',
+    aml:'AML / KYC',amlDesc:'Anti-money laundering policy',
+    txCheck:'Transaction verification',txCheckDesc:'All operations undergo automatic AML screening for security',
+    idVerify:'Identity verification',idVerifyDesc:'KYC may be required for exchanges over 100,000 ₽',
+    documents:'Documents',documentsDesc:'Russian passport or international passport for verification',
+    yourStatus:'Your status',passVerify:'Start verification',
+    support:'Support',branches:'Branches',
+    rateUSDT:'USDT / RUB',currentRate:'current rate:',
+    perUSDT:'₽ per USDT',yesterday:'yesterday',today:'today',
+    tetherUSDT:'Tether USDT',cbrLabel:'CBR',
+    dataUpdated:'Data updated',updating:'Updating...',
+    fillSumFio:'Fill in amount and full name',minSum:'Minimum amount 1,000 ₽',
+    sumRounded:'Amount rounded to',orderCancelled:'Order cancelled',
+    orderNumCopied:'Order number copied',orderDataLoaded:'Order data loaded',
+    enterAmount:'Enter amount',chooseOfficeErr:'Select sending office',
+    chooseCityErr:'Select destination city',specifyFio:'Set your name in profile',
+    branch:'Branch',chooseYourCity:'Select city',
+    favorites:'Favorites',recent:'Recent',
+    incomeTo:'I accept',
+    darkThemeToast:'Dark theme',lightThemeToast:'Light theme',
+    langRu:'Language: Russian',langEn:'Language: English',
+    usdtTRC:'USDT TRC-20',
+    addressLine1:'Presnenskaya emb. 12',
+    addressLine2:'Federation Tower — East, 5th floor, office 512',
+    addressLine2Short:'Federation Tower — East, 5th fl.',
+    withdraw:'Withdraw',withdrawUSDT:'Withdraw USDT',withdrawAvailable:'Withdrawal available from 100 USDT',
+    availableBalance:'Available:',withdrawSum:'Amount (USDT)',
+    insufficientBalance:'Insufficient balance',minWithdraw:'Minimum withdrawal is 100 USDT',
+    enterWallet:'Enter wallet address',withdrawRequested:'Withdrawal request created',
+    activeReferrals:'Active referrals',
+    noSavedWallets:'No saved wallets'
+  }
+};
+function t(key){return (_i18n[window._lang]||_i18n.ru)[key]||key}
+function applyLang(){
+  // Apply data-i18n text
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var key=el.getAttribute('data-i18n');
+    var val=t(key);
+    if(val){
+      if(el.tagName==='INPUT'||el.tagName==='TEXTAREA'){
+        el.placeholder=val;
+      }else{
+        el.textContent=val;
+      }
+    }
+  });
+  // Apply data-i18n-html (for innerHTML with underlines etc)
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+    var key=el.getAttribute('data-i18n-html');
+    if(key==='acceptRules'){
+      el.innerHTML=t('accept')+' <u style="color:rgba(255,255,255,0.7)">'+t('rules')+'</u> '+t('conditions');
+    }
+  });
+}
+function switchLang(lang){
+  window._lang=lang;
+  document.getElementById('langRu').className='tog'+(lang==='ru'?' on':'');
+  document.getElementById('langEn').className='tog'+(lang==='en'?' on':'');
+  applyLang();
+  // Re-render dynamic content
+  renderActiveOrders();
+  if(cur==='history')renderHistory('all');
+  saveData();
+  toast(t(lang==='en'?'langEn':'langRu'),'success');
+  haptic();
+}
+
+// Apply language on startup (after _i18n is defined)
+applyLang();
+
+// ═══ THEME SWITCH (dark/light) ═══
+function switchTheme(theme){
+  var r=document.documentElement;
+  document.getElementById('themeDark').className='tog'+(theme==='dark'?' on':'');
+  document.getElementById('themeLight').className='tog'+(theme==='light'?' on':'');
+  if(theme==='light'){
+    r.style.setProperty('--bg','#f2f2f6');
+    r.style.setProperty('--glass','rgba(255,255,255,0.82)');
+    r.style.setProperty('--glass-border','rgba(0,0,0,0.06)');
+    r.style.setProperty('--glass-blur','blur(16px)');
+    r.style.setProperty('--card','rgba(255,255,255,0.9)');
+    r.style.setProperty('--card-border','rgba(0,0,0,0.06)');
+    r.style.setProperty('--text','#1a1a1a');
+    r.style.setProperty('--text-sec','rgba(0,0,0,0.6)');
+    r.style.setProperty('--text-dim','rgba(0,0,0,0.35)');
+    r.style.setProperty('--shimmer','rgba(0,0,0,0.04)');
+    r.style.setProperty('--accent','#1a1a1a');
+    r.style.setProperty('--accent-light','#1a1a1a');
+    r.style.setProperty('--accent-dim','rgba(0,0,0,0.06)');
+    r.style.setProperty('--accent-glow','rgba(0,0,0,0.06)');
+    r.style.setProperty('--accent-soft','rgba(0,0,0,0.04)');
+    r.style.setProperty('--green','rgba(34,180,100,1)');
+    r.style.setProperty('--green-dim','rgba(34,180,100,0.1)');
+    r.style.setProperty('--red','rgba(220,60,60,0.9)');
+    r.style.setProperty('--red-dim','rgba(220,60,60,0.08)');
+    document.body.style.background='#f2f2f6';
+    // Logo — black in light mode
+    document.querySelectorAll('.logo-stroke,.logo-fill').forEach(function(p){p.setAttribute('stroke','#1a1a1a');p.setAttribute('fill','#1a1a1a')});
+    document.querySelectorAll('.logo-fill').forEach(function(p){p.setAttribute('fill','#1a1a1a')});
+    // Glow — hide in light theme
+    document.querySelectorAll('#s-home [style*="glowSync"],.bg-base+div [style*="glowSync"]').forEach(function(el){el.style.opacity='0'});
+    document.getElementById('bgGlow2').style.opacity='0';
+    // Inputs, buttons — adapt
+    document.documentElement.classList.add('light-mode');
+  }else{
+    r.style.setProperty('--bg','#0b0b0e');
+    r.style.setProperty('--glass','rgba(18,18,24,0.72)');
+    r.style.setProperty('--glass-border','rgba(255,255,255,0.12)');
+    r.style.setProperty('--glass-blur','blur(12px)');
+    r.style.setProperty('--card','var(--glass)');
+    r.style.setProperty('--card-border','var(--glass-border)');
+    r.style.setProperty('--text','#fff');
+    r.style.setProperty('--text-sec','rgba(255,255,255,0.85)');
+    r.style.setProperty('--text-dim','rgba(255,255,255,0.55)');
+    r.style.setProperty('--shimmer','rgba(120,160,255,0.12)');
+    r.style.setProperty('--accent','#fff');
+    r.style.setProperty('--accent-light','#fff');
+    r.style.setProperty('--accent-dim','rgba(255,255,255,0.15)');
+    r.style.setProperty('--accent-glow','rgba(255,255,255,0.12)');
+    r.style.setProperty('--accent-soft','rgba(255,255,255,0.08)');
+    r.style.setProperty('--green','rgba(60,220,140,1)');
+    r.style.setProperty('--green-dim','rgba(60,220,140,0.15)');
+    r.style.setProperty('--red','rgba(255,90,90,0.9)');
+    r.style.setProperty('--red-dim','rgba(255,90,90,0.12)');
+    document.body.style.background='#0b0b0e';
+    document.querySelectorAll('.logo-stroke,.logo-fill').forEach(function(p){p.setAttribute('stroke','#fff');p.setAttribute('fill','#fff')});
+    document.querySelectorAll('.logo-fill').forEach(function(p){p.setAttribute('fill','#fff')});
+    // Restore glow
+    document.getElementById('bgGlow2').style.opacity='';
+    document.documentElement.classList.remove('light-mode');
+  }
+  window._theme=theme;
+  saveData();
+  toast(t(theme==='light'?'lightThemeToast':'darkThemeToast'),'success');
+  haptic();
+}
+
+// ═══ API STRUCTURE (ready for backend) ═══
+var API={
+  baseUrl:'https://api.mbex.pro/v1',
+  endpoints:{
+    getRate:'/rates',
+    createOrder:'/orders',
+    cancelOrder:'/orders/:id/cancel',
+    getOrders:'/orders',
+    getProfile:'/profile',
+    updateProfile:'/profile',
+    getWallets:'/wallets',
+    addWallet:'/wallets',
+    deleteWallet:'/wallets/:id',
+    getCouriers:'/couriers',
+    addCourier:'/couriers',
+    deleteCourier:'/couriers/:id',
+    getReferrals:'/referrals',
+    getCBRate:'/rates/cbr'
+  },
+  // Ready to use: API.call('getRate').then(data => ...)
+  call:function(endpoint,method,body){
+    var url=this.baseUrl+(this.endpoints[endpoint]||endpoint);
+    var opts={method:method||'GET',headers:{'Content-Type':'application/json'}};
+    // Add Telegram initData for auth
+    try{if(window.Telegram&&Telegram.WebApp.initData)opts.headers['X-Telegram-Init-Data']=Telegram.WebApp.initData}catch(e){}
+    if(body)opts.body=JSON.stringify(body);
+    return fetch(url,opts).then(function(r){return r.json()});
+  }
+};
 
 </script>
 </body>
