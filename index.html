@@ -260,10 +260,64 @@ input::placeholder{color:var(--text-dim)}
 a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-decoration:none !important}
 #s-profile a{color:inherit !important;text-decoration:none !important}
 
+/* Toast notification */
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-80px);z-index:200;padding:12px 20px;border-radius:12px;background:rgba(18,18,24,0.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:0.5px solid rgba(255,255,255,0.12);color:#fff;font-size:14px;font-weight:500;font-family:'Montserrat',sans-serif;pointer-events:none;transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1),opacity 0.35s;opacity:0;max-width:340px;text-align:center}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.toast.toast-error{border-color:rgba(255,90,90,0.3)}
+.toast.toast-success{border-color:rgba(60,220,140,0.3)}
+
+/* Confirm modal overlay */
+.confirm-overlay{position:absolute;inset:0;z-index:150;background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center}
+.confirm-box{background:rgba(18,18,24,0.95);border:0.5px solid rgba(255,255,255,0.12);border-radius:18px;padding:24px 20px;width:280px;box-shadow:0 20px 60px rgba(0,0,0,0.6);text-align:center}
+
+/* Skeleton loading */
+.skeleton{position:absolute;inset:0;z-index:200;background:var(--bg);display:flex;flex-direction:column;padding:16px}
+.sk-block{border-radius:12px;background:linear-gradient(90deg,rgba(255,255,255,0.04) 25%,rgba(255,255,255,0.08) 50%,rgba(255,255,255,0.04) 75%);background-size:200% 100%;animation:skShimmer 1.5s ease-in-out infinite}
+@keyframes skShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* Pull-to-refresh */
+.ptr-indicator{text-align:center;height:0;overflow:hidden;transition:height 0.2s;color:var(--text-dim);font-size:13px;display:flex;align-items:center;justify-content:center}
+.ptr-spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,0.1);border-top-color:rgba(255,255,255,0.5);border-radius:50%;animation:spin 0.6s linear infinite;margin-right:8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Sum counter animation */
+.sum-count{display:inline-block}
+@keyframes countUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.sum-count.anim{animation:countUp 0.4s ease-out}
+
+/* Swipe-to-cancel on active orders */
+.active-order{position:relative;overflow:hidden;touch-action:pan-y}
+.swipe-cancel-bg{position:absolute;right:0;top:0;bottom:0;width:80px;background:rgba(255,90,90,0.15);display:flex;align-items:center;justify-content:center;border-radius:0 14px 14px 0;opacity:0;transition:opacity 0.2s}
+
 </style>
 </head>
 <body>
 <div class="app">
+
+<!-- Skeleton loader -->
+<div class="skeleton" id="skeleton">
+<div style="display:flex;justify-content:center;padding:10px 0"><div class="sk-block" style="width:80px;height:28px"></div></div>
+<div style="padding:0 16px;margin-top:8px"><div class="sk-block" style="width:100%;height:100px;margin-bottom:14px"></div></div>
+<div style="display:flex;gap:10px;padding:0 16px;margin-bottom:14px"><div class="sk-block" style="flex:1;height:90px"></div><div class="sk-block" style="flex:1;height:90px"></div></div>
+<div style="padding:0 16px;margin-bottom:14px"><div class="sk-block" style="width:100%;height:50px"></div></div>
+<div style="padding:0 16px;margin-bottom:10px"><div class="sk-block" style="width:100%;height:44px"></div></div>
+<div style="padding:0 16px"><div class="sk-block" style="width:100%;height:200px"></div></div>
+</div>
+
+<!-- Toast container -->
+<div class="toast" id="toast"></div>
+
+<!-- Confirm modal -->
+<div id="confirmModal" style="display:none" class="confirm-overlay" onclick="closeConfirm(false)">
+<div class="confirm-box" onclick="event.stopPropagation()">
+<div style="font-size:18px;font-weight:600;margin-bottom:8px" id="confirmTitle">Подтверждение</div>
+<div style="font-size:14px;color:var(--text-sec);margin-bottom:20px;line-height:1.5" id="confirmText">Вы уверены?</div>
+<div style="display:flex;gap:8px">
+<div class="btn-primary" onclick="closeConfirm(true)" style="padding:12px;font-size:15px;border-radius:10px">Да</div>
+<div class="btn-o" onclick="closeConfirm(false)" style="padding:12px;font-size:15px;border-radius:10px">Отмена</div>
+</div>
+</div>
+</div>
 
 <div class="bg-base"></div>
 <video id="bgVideo" autoplay muted loop playsinline webkit-playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0;pointer-events:none"><source src="bg.mp4" type="video/mp4"></video>
@@ -287,6 +341,9 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 
 <!-- ═══ HOME ═══ -->
 <div class="scr act" id="s-home">
+
+<!-- Pull-to-refresh -->
+<div class="ptr-indicator" id="ptrIndicator"><div class="ptr-spinner"></div>Обновление...</div>
 
 <!-- Logo -->
 <div class="logo-area" style="height:40px;padding:6px 16px 0">
@@ -416,10 +473,10 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 <div class="scr" id="s-buy"><div style="padding:0 16px;padding-bottom:40px">
 <div style="font-size:23px;font-weight:600;margin-bottom:6px;margin-top:12px">Купить USDT</div>
 <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px">
-<div style="font-size:15px;color:var(--text-dim)">от 1 000 ₽</div>
+<div style="font-size:15px;color:var(--text-dim)">от 1 000 ₽ · шаг 500</div>
 <div style="font-size:15px;color:var(--text-sec);font-weight:500">85.96 ₽</div>
 </div>
-<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Сумма (₽)</div><input placeholder="Введите сумму"></div>
+<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Сумма (₽)</div><input class="sum-input" inputmode="numeric" placeholder="Введите сумму" id="buySum"></div>
 <div style="margin-bottom:16px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Кошелёк (TRC-20)</div>
 <div style="position:relative" id="walletWrap">
 <input id="walletInput" placeholder="Txxxxxxxxxxxxxxxxxxxxxxxxx" style="font-family:'Montserrat',sans-serif;padding-right:40px" autocomplete="off">
@@ -505,10 +562,10 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 <div class="scr" id="s-sell"><div style="padding:0 16px;padding-bottom:40px">
 <div style="font-size:23px;font-weight:600;margin-bottom:6px;margin-top:12px">Продать USDT</div>
 <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px">
-<div style="font-size:15px;color:var(--text-dim)">от 1 000 ₽</div>
+<div style="font-size:15px;color:var(--text-dim)">от 1 000 ₽ · шаг 500</div>
 <div style="font-size:15px;color:var(--text-sec);font-weight:500">85.60 ₽</div>
 </div>
-<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Сумма (₽)</div><input id="sellSum" placeholder="Введите сумму"></div>
+<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Сумма (₽)</div><input id="sellSum" class="sum-input" inputmode="numeric" placeholder="Введите сумму"></div>
 <div class="tog-w"><div class="tog on" id="tsSell" onclick="setTogSell('s')">Приеду сам</div><div class="tog" id="tcSell" onclick="setTogSell('c')">Курьер</div></div>
 
 <!-- FIO: "Приеду сам" mode — static from profile -->
@@ -613,7 +670,7 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 <div class="cd" style="text-align:left;padding:2px 16px;margin-bottom:10px">
 <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">Тип</span><span style="font-size:16px;font-weight:500" id="detailRate">—</span></div>
 <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">Сумма</span><span style="font-size:16px;font-weight:500" id="detailSum">— ₽</span></div>
-<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">Номер</span><span style="font-size:16px;font-weight:500" id="detailNum">—</span></div>
+<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">Номер</span><span style="font-size:16px;font-weight:500;cursor:pointer" id="detailNum" onclick="copyOrderNum(this.textContent)">—</span></div>
 <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)"><span style="font-size:16px;color:var(--text-sec)">ФИО</span><span style="font-size:16px;font-weight:500" id="detailFio">—</span></div>
 <div style="display:flex;justify-content:space-between;padding:12px 0"><span style="font-size:16px;color:var(--text-sec)">Таймер</span><span style="font-size:16px;font-weight:500" id="detailTimer">—</span></div>
 </div>
@@ -624,7 +681,7 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 </div>
 
 <div id="detailCancelWrap">
-<div class="btn-o" onclick="cancelOrderByIdx(viewingOrderIdx);goBack()" style="margin-bottom:10px">Отменить заявку</div>
+<div class="btn-o" onclick="showConfirm('Отменить заявку?','Вы уверены?',function(y){if(y){cancelOrderByIdx(viewingOrderIdx);goBack()}})" style="margin-bottom:10px">Отменить заявку</div>
 </div>
 <div class="btn-o" onclick="goBack()">Назад</div>
 </div></div>
@@ -776,7 +833,7 @@ a[href^="tel"],a[href^="mailto"],a[href^="sms"]{color:inherit !important;text-de
 <div style="font-size:23px;font-weight:600;margin-bottom:6px;margin-top:12px">Перестановки</div>
 <div style="font-size:15px;color:var(--text-dim);margin-bottom:20px">Перевод средств</div>
 
-<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Сумма (₽)</div><input id="transferSum" placeholder="Введите сумму"></div>
+<div style="margin-bottom:14px"><div style="font-size:15px;font-weight:500;color:var(--text-sec);margin-bottom:6px">Сумма (₽)</div><input id="transferSum" class="sum-input" inputmode="numeric" placeholder="Введите сумму"></div>
 
 <!-- Откуда — dropdown offices only -->
 <div style="margin-bottom:14px">
@@ -981,6 +1038,11 @@ Instagram</a>
 <div id="refCopyMsg" style="font-size:12px;color:var(--text-sec);margin-top:6px;opacity:0;transition:opacity 0.3s;text-align:center">Скопировано!</div>
 </div>
 
+<div onclick="shareRefCode()" class="btn-primary" style="margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:8px">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 5L2 12.5l7 1M21 5l-5 15-6.5-6.5M21 5l-12 8.5" stroke="#0b0b0e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+Поделиться в Telegram
+</div>
+
 <div style="font-size:14px;font-weight:600;margin-bottom:8px;margin-top:6px;color:var(--text-sec)">Как это работает</div>
 <div class="cd" style="padding:0">
 <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-bottom:0.5px solid rgba(255,255,255,0.04)">
@@ -1070,6 +1132,10 @@ var cur='home',stk=[],mT=['home','history','profile'],sS=['buy','sell','ok','det
 
 // Animate hero cards — show immediately as fallback, animate if JS works
 document.addEventListener('DOMContentLoaded',function(){
+  // Skeleton dismiss
+  var sk=document.getElementById('skeleton');
+  if(sk)setTimeout(function(){sk.style.transition='opacity 0.4s';sk.style.opacity='0';setTimeout(function(){sk.style.display='none'},400)},800);
+
   var bc=document.getElementById('buyCard');
   var sc=document.getElementById('sellCard');
   if(bc)setTimeout(function(){bc.classList.add('animate-in')},400);
@@ -1080,6 +1146,94 @@ document.addEventListener('DOMContentLoaded',function(){
   setTimeout(function(){
     document.querySelectorAll('.fade-in').forEach(function(el){el.classList.add('fade-done')});
   },1200);
+
+  // Sum input formatting — thousand separators + step 500 validation
+  document.querySelectorAll('.sum-input').forEach(function(inp){
+    inp.addEventListener('input',function(){
+      var raw=this.value.replace(/\D/g,'');
+      if(!raw){this.value='';return}
+      var num=parseInt(raw,10);
+      this.value=num.toLocaleString('ru-RU');
+    });
+    inp.addEventListener('blur',function(){
+      var raw=this.value.replace(/\s/g,'').replace(/\D/g,'');
+      if(!raw)return;
+      var num=parseInt(raw,10);
+      // Round to nearest 500
+      num=Math.round(num/500)*500;
+      if(num<1000)num=1000;
+      this.value=num.toLocaleString('ru-RU');
+    });
+  });
+
+  // Pull-to-refresh
+  !function(){
+    var ct=document.getElementById('sc');
+    var ptr=document.getElementById('ptrIndicator');
+    var startY=0,pulling=false;
+    ct.addEventListener('touchstart',function(e){
+      if(ct.scrollTop===0&&cur==='home'){startY=e.touches[0].clientY;pulling=true}
+      else pulling=false;
+    },{passive:true});
+    ct.addEventListener('touchmove',function(e){
+      if(!pulling)return;
+      var dy=e.touches[0].clientY-startY;
+      if(dy>0&&dy<120){
+        ptr.style.height=Math.min(dy*0.5,40)+'px';
+      }
+    },{passive:true});
+    ct.addEventListener('touchend',function(){
+      if(!pulling)return;
+      var h=parseInt(ptr.style.height)||0;
+      if(h>=35){
+        ptr.style.height='40px';
+        // Simulate refresh
+        setTimeout(function(){
+          ptr.style.height='0';
+          toast('Данные обновлены','success');
+        },1000);
+      }else{
+        ptr.style.height='0';
+      }
+      pulling=false;
+    },{passive:true});
+  }();
+
+  // Swipe-to-cancel on active order cards
+  !function(){
+    var container=document.getElementById('activeOrdersHome');
+    var sx=0,tracking=false,activeCard=null,dx=0;
+    container.addEventListener('touchstart',function(e){
+      var card=e.target.closest('.active-order');
+      if(!card)return;
+      sx=e.touches[0].clientX;
+      activeCard=card;
+      tracking=true;dx=0;
+    },{passive:true});
+    container.addEventListener('touchmove',function(e){
+      if(!tracking||!activeCard)return;
+      dx=sx-e.touches[0].clientX;
+      if(dx>0&&dx<120){
+        activeCard.style.transform='translateX(-'+dx+'px)';
+        activeCard.style.transition='none';
+      }
+    },{passive:true});
+    container.addEventListener('touchend',function(){
+      if(!tracking||!activeCard){tracking=false;return}
+      if(dx>80){
+        // Swiped enough — find index and confirm cancel
+        var idx=activeCard.getAttribute('data-idx');
+        if(idx!==null){
+          activeCard.style.transform='';activeCard.style.transition='';
+          confirmCancelOrder(parseInt(idx));
+        }
+      }else{
+        activeCard.style.transform='';
+        activeCard.style.transition='transform 0.2s';
+      }
+      tracking=false;activeCard=null;dx=0;
+    },{passive:true});
+  }();
 });
 
 
@@ -1171,6 +1325,67 @@ function tCBuy(el){
   else{b.style.background='#fff';v.style.display='block';bw.classList.remove('disabled')}
 }
 
+// ═══ TOAST NOTIFICATIONS ═══
+function toast(msg,type){
+  var t=document.getElementById('toast');
+  if(!t)return;
+  t.textContent=msg;
+  t.className='toast'+(type?' toast-'+type:'');
+  // Force reflow
+  void t.offsetWidth;
+  t.classList.add('show');
+  clearTimeout(t._tid);
+  t._tid=setTimeout(function(){t.classList.remove('show')},2500);
+}
+
+// ═══ CONFIRM MODAL ═══
+var _confirmCb=null;
+function showConfirm(title,text,cb){
+  document.getElementById('confirmTitle').textContent=title;
+  document.getElementById('confirmText').textContent=text;
+  _confirmCb=cb;
+  document.getElementById('confirmModal').style.display='flex';
+  haptic();
+}
+function closeConfirm(result){
+  document.getElementById('confirmModal').style.display='none';
+  if(_confirmCb)_confirmCb(result);
+  _confirmCb=null;
+}
+function confirmCancelOrder(idx){
+  showConfirm('Отменить заявку?','Вы уверены, что хотите отменить эту заявку?',function(yes){
+    if(yes)cancelOrderByIdx(idx);
+  });
+}
+
+// ═══ SUM VALIDATION ═══
+function validateSum(raw){
+  var num=parseInt(raw.replace(/\s/g,'').replace(/\D/g,''),10);
+  if(isNaN(num)||num<1000){toast('Минимальная сумма 1 000 ₽','error');return 0}
+  if(num%500!==0){num=Math.round(num/500)*500;if(num<1000)num=1000;toast('Сумма округлена до '+num.toLocaleString('ru')+' ₽','');return num}
+  return num;
+}
+
+// ═══ COPY ORDER NUMBER ═══
+function copyOrderNum(num){
+  navigator.clipboard.writeText(String(num)).then(function(){
+    toast('Номер заявки скопирован','success');
+    haptic();
+  });
+}
+
+// ═══ SHARE REF CODE VIA TELEGRAM ═══
+function shareRefCode(){
+  var code='MBX7200K';
+  var text='Регистрируйся в MBEX и получи бонус! Мой реферальный код: '+code;
+  if(window.Telegram&&Telegram.WebApp&&Telegram.WebApp.openTelegramLink){
+    Telegram.WebApp.openTelegramLink('https://t.me/share/url?url='+encodeURIComponent('https://mbex.pro')+'&text='+encodeURIComponent(text));
+  }else{
+    window.open('https://t.me/share/url?url='+encodeURIComponent('https://mbex.pro')+'&text='+encodeURIComponent(text),'_blank');
+  }
+  haptic('success');
+}
+
 // ═══ MULTI-ORDER SYSTEM ═══
 // Each order in orderHistory has its own .timerSec and .timerId
 var orderHistory=[];
@@ -1239,7 +1454,7 @@ function renderActiveOrders(){
     var m=Math.floor((o.timerSec||0)/60),s=(o.timerSec||0)%60;
     var timeStr=o.timerSec>0?m+':'+(s<10?'0':'')+s:'Истекло';
     var timerClass=o.timerSec>0&&o.timerSec<=120?' timer-warning':'';
-    html+='<div class="active-order" style="margin-bottom:10px;cursor:pointer" onclick="viewOrderDetail('+i+')">';
+    html+='<div class="active-order" data-idx="'+i+'" style="margin-bottom:10px;cursor:pointer" onclick="viewOrderDetail('+i+')">';
     html+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">';
     html+='<div class="active-order-badge">Активная заявка</div>';
     html+='<div style="font-size:14px;color:var(--text-dim)" class="'+timerClass+'">'+timeStr+'</div>';
@@ -1250,7 +1465,7 @@ function renderActiveOrders(){
     html+='<div style="text-align:right"><div style="font-size:19px;font-weight:500">'+o.sum+'</div></div>';
     html+='</div>';
     html+='<div style="margin-top:12px;padding-top:10px;border-top:0.5px solid rgba(255,255,255,0.06)">';
-    html+='<div class="btn-o" onclick="event.stopPropagation();cancelOrderByIdx('+i+')" style="padding:10px;font-size:15px;border-radius:10px;color:rgba(255,255,255,0.55)">Отменить заявку</div>';
+    html+='<div class="btn-o" onclick="event.stopPropagation();confirmCancelOrder('+i+')" style="padding:10px;font-size:15px;border-radius:10px;color:rgba(255,255,255,0.55)">Отменить заявку</div>';
     html+='</div></div>';
   }
   container.innerHTML=html;
@@ -1263,6 +1478,7 @@ function cancelOrderByIdx(idx){
   o.status='cancelled';
   o.timerSec=0;
   renderActiveOrders();
+  toast('Заявка отменена','');
   haptic('medium');
 }
 
@@ -1318,14 +1534,16 @@ function makeOrderMeta(){
 
 // ═══ CREATE BUY ORDER ═══
 function createOrder(type){
-  var sumInput=document.querySelector('#s-buy input[placeholder="Введите сумму"]');
-  var sum=sumInput?sumInput.value.trim():'';
+  var sumInput=document.getElementById('buySum');
+  var sum=sumInput?sumInput.value.replace(/\s/g,'').trim():'';
   var isSelf=document.getElementById('ts').classList.contains('on');
   var fio=isSelf?document.getElementById('fioSelfDisplay').textContent.trim():(document.getElementById('fi')?document.getElementById('fi').value.trim():'');
   var wallet=document.getElementById('walletInput')?document.getElementById('walletInput').value.trim():'';
-  if(!sum||!fio){alert('Заполните сумму и ФИО');return}
+  if(!sum||!fio){toast('Заполните сумму и ФИО','error');return}
+  var sumNum=validateSum(sum);
+  if(!sumNum)return;
+  if(sumInput)sumInput.value=sumNum.toLocaleString('ru-RU');
   haptic('success');
-  var sumNum=parseFloat(sum.replace(/\s/g,''));
   var meta=makeOrderMeta();
 
   var order={type:'Покупка',info:'USDT TRC-20',sum:sumNum.toLocaleString('ru')+' ₽',status:'active',num:meta.num,fio:fio,date:meta.dateStr,wallet:wallet||'TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8',timerSec:600};
@@ -1334,7 +1552,7 @@ function createOrder(type){
   currentOkIdx=idx;
 
   var okInfo=document.getElementById('okInfo');
-  if(okInfo)okInfo.innerHTML='№ <b style="color:#fff;font-weight:500">'+meta.num+'</b> · '+fio;
+  if(okInfo)okInfo.innerHTML='<span onclick="copyOrderNum('+meta.num+')" style="cursor:pointer">№ <b style="color:#fff;font-weight:500">'+meta.num+'</b></span> · '+fio;
 
   renderActiveOrders();
   startMasterTimer();
@@ -1346,9 +1564,11 @@ function createSellOrder(){
   var sum=document.getElementById('sellSum').value.trim();
   var isSelf=document.getElementById('tsSell').classList.contains('on');
   var fio=isSelf?document.getElementById('fioSelfDisplaySell').textContent.trim():(document.getElementById('fiSell')?document.getElementById('fiSell').value.trim():'');
-  if(!sum||!fio){alert('Заполните сумму и ФИО');return}
+  if(!sum||!fio){toast('Заполните сумму и ФИО','error');return}
+  var sumNum=validateSum(sum);
+  if(!sumNum)return;
+  document.getElementById('sellSum').value=sumNum.toLocaleString('ru-RU');
   haptic('success');
-  var sumNum=parseFloat(sum.replace(/\s/g,''));
   var meta=makeOrderMeta();
 
   var order={type:'Продажа',info:'USDT TRC-20',sum:sumNum.toLocaleString('ru')+' ₽',status:'active',num:meta.num,fio:fio,date:meta.dateStr,wallet:'TGXHmq2hKNuANhB6qocei5nSXtCHNJXDe8',timerSec:600};
@@ -1357,7 +1577,7 @@ function createSellOrder(){
   currentOkIdx=idx;
 
   var si=document.getElementById('sellOkInfo');
-  if(si)si.innerHTML='№ <b style="color:#fff;font-weight:500">'+meta.num+'</b> · '+fio+'<br>'+sumNum.toLocaleString('ru')+' ₽';
+  if(si)si.innerHTML='<span onclick="copyOrderNum('+meta.num+')" style="cursor:pointer">№ <b style="color:#fff;font-weight:500">'+meta.num+'</b></span> · '+fio+'<br>'+sumNum.toLocaleString('ru')+' ₽';
 
   renderActiveOrders();
   startMasterTimer();
@@ -1764,10 +1984,10 @@ function createTransferOrder(){
   var from=document.getElementById('transferFromText').textContent;
   var to=document.getElementById('transferToText').textContent;
   var fio=document.getElementById('transferFioDisplay').textContent.trim();
-  if(!sum){alert('Введите сумму');return}
-  if(from==='Выберите офис'){alert('Выберите офис отправки');return}
-  if(to==='Выберите город'){alert('Выберите город получения');return}
-  if(!fio){alert('Укажите ФИО в профиле');return}
+  if(!sum){toast('Введите сумму','error');return}
+  if(from==='Выберите офис'){toast('Выберите офис отправки','error');return}
+  if(to==='Выберите город'){toast('Выберите город получения','error');return}
+  if(!fio){toast('Укажите ФИО в профиле','error');return}
 
   var meta=makeOrderMeta();
   var sumNum=parseFloat(sum.replace(/\s/g,''));
