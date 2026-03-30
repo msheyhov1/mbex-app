@@ -1,62 +1,86 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 56" width="240" height="56">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 80" width="310" height="80">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&amp;display=swap');
+/* ═══ MBEX: all collapse INTO the X, X spins as propeller, unfolds back ═══ */
+/* Center of the full logo = 155px. X center crossing = 266,40 in static. 
+   All letters slide to X position (266,40) and fade. 
+   X stays at its own position, spins from its own crossing center. 
+   Then X slides to center (155), spins, slides back, letters return. */
 
-.m,.b,.e,.x{
-  font-family:'Montserrat',sans-serif;
-  font-weight:900;
-  font-size:62px;
-  fill:#fff;
-}
+/* Phase timeline (5s cycle):
+   0-18%   : full MBEX visible
+   18-30%  : M,B,E slide RIGHT toward X position & shrink to 0
+   30-32%  : X alone at its position, moves to center (155)
+   32-58%  : X at center, PROPELLER SPIN (2880deg = 8 turns in 1.3s)
+   58-62%  : X slides back to its position (266)
+   62-78%  : M,B,E slide back from X position & grow to full
+   78-100% : full MBEX visible, pause
+*/
 
-/* M letter */
-.m{
-  animation:mAnim 5s cubic-bezier(0.4,0,0.2,1) infinite;
-  transform-origin:30px 28px;
-}
-@keyframes mAnim{
-  0%,20%{opacity:1;transform:translateX(0) scale(1)}
-  32%,55%{opacity:0;transform:translateX(40px) scale(0.3)}
-  70%,100%{opacity:1;transform:translateX(0) scale(1)}
-}
-
-/* B letter */
-.b{
-  animation:bAnim 5s cubic-bezier(0.4,0,0.2,1) infinite;
-  transform-origin:85px 28px;
-}
-@keyframes bAnim{
-  0%,18%{opacity:1;transform:translateX(0) scale(1)}
-  30%,57%{opacity:0;transform:translateX(30px) scale(0.3)}
-  72%,100%{opacity:1;transform:translateX(0) scale(1)}
+.pm{animation:am 5s ease-in-out infinite}
+@keyframes am{
+  0%,18%{opacity:1;transform:translate(0px,0px) scale(1)}
+  28%{opacity:0;transform:translate(216px,0px) scale(0)}
+  30%,68%{opacity:0;transform:translate(216px,0px) scale(0)}
+  78%,100%{opacity:1;transform:translate(0px,0px) scale(1)}
 }
 
-/* E letter */
-.e{
-  animation:eAnim 5s cubic-bezier(0.4,0,0.2,1) infinite;
-  transform-origin:140px 28px;
-}
-@keyframes eAnim{
-  0%,16%{opacity:1;transform:translateX(0) scale(1)}
-  28%,59%{opacity:0;transform:translateX(15px) scale(0.3)}
-  74%,100%{opacity:1;transform:translateX(0) scale(1)}
+.pb{animation:ab 5s ease-in-out infinite}
+@keyframes ab{
+  0%,18%{opacity:1;transform:translate(0px,0px) scale(1)}
+  28%{opacity:0;transform:translate(156px,0px) scale(0)}
+  30%,68%{opacity:0;transform:translate(156px,0px) scale(0)}
+  78%,100%{opacity:1;transform:translate(0px,0px) scale(1)}
 }
 
-/* X letter — stays, spins */
-.x{
-  animation:xAnim 5s cubic-bezier(0.4,0,0.2,1) infinite;
-  transform-origin:192px 30px;
+.pe{animation:ae 5s ease-in-out infinite}
+@keyframes ae{
+  0%,18%{opacity:1;transform:translate(0px,0px) scale(1)}
+  28%{opacity:0;transform:translate(60px,0px) scale(0)}
+  30%,68%{opacity:0;transform:translate(60px,0px) scale(0)}
+  78%,100%{opacity:1;transform:translate(0px,0px) scale(1)}
 }
-@keyframes xAnim{
-  0%,25%{transform:rotate(0deg)}
-  35%{transform:rotate(0deg)}
-  55%{transform:rotate(360deg)}
-  65%,100%{transform:rotate(360deg)}
+
+/* X: moves to center, propeller spin from its own center, moves back */
+.px{animation:ax 5s linear infinite}
+@keyframes ax{
+  0%,18%{transform:translate(0px,0px) rotate(0deg)}
+  28%{transform:translate(0px,0px) rotate(0deg)}
+  32%{transform:translate(-111px,0px) rotate(0deg)}
+  58%{transform:translate(-111px,0px) rotate(2880deg)}
+  62%{transform:translate(0px,0px) rotate(2880deg)}
+  78%,100%{transform:translate(0px,0px) rotate(2880deg)}
 }
 </style>
 
-<text class="m" x="-4" y="50">M</text>
-<text class="b" x="46" y="50">B</text>
-<text class="e" x="102" y="50">E</text>
-<text class="x" x="152" y="50">X</text>
+<!-- ═══ M ═══ -->
+<g class="pm" style="transform-origin:50px 40px">
+  <rect x="0" y="0" width="16" height="80" fill="#fff"/>
+  <polygon points="0,0 16,0 54,36 46,36" fill="#fff"/>
+  <polygon points="84,0 100,0 54,36 46,36" fill="#fff"/>
+  <rect x="84" y="0" width="16" height="80" fill="#fff"/>
+</g>
+
+<!-- ═══ B ═══ -->
+<g class="pb" style="transform-origin:140px 40px">
+  <rect x="100" y="0" width="16" height="80" fill="#fff"/>
+  <rect x="100" y="0" width="56" height="13" fill="#fff"/>
+  <rect x="100" y="34" width="52" height="12" fill="#fff"/>
+  <rect x="100" y="67" width="56" height="13" fill="#fff"/>
+  <path d="M156,0 C174,0 174,34 156,34 L156,0Z" fill="#fff"/>
+  <path d="M156,46 C178,46 178,80 156,80 L156,46Z" fill="#fff"/>
+</g>
+
+<!-- ═══ E ═══ -->
+<g class="pe" style="transform-origin:220px 40px">
+  <rect x="190" y="0" width="16" height="80" fill="#fff"/>
+  <rect x="190" y="0" width="52" height="13" fill="#fff"/>
+  <rect x="190" y="34" width="56" height="12" fill="#fff"/>
+  <rect x="190" y="67" width="52" height="13" fill="#fff"/>
+</g>
+
+<!-- ═══ X (transform-origin = its own crossing center) ═══ -->
+<g class="px" style="transform-origin:266px 40px">
+  <polygon points="236,0 254,0 310,80 292,80" fill="#fff"/>
+  <polygon points="292,0 310,0 254,80 236,80" fill="#fff"/>
+</g>
 </svg>
