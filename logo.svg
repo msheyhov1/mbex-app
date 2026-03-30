@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 56" width="240" height="56">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&amp;display=swap');
+
+.m,.b,.e,.x{
+  font-family:'Montserrat',sans-serif;
+  font-weight:900;
+  font-size:62px;
+  fill:#fff;
+}
+
+/* M letter */
+.m{
+  animation:mAnim 5s cubic-bezier(0.4,0,0.2,1) infinite;
+  transform-origin:30px 28px;
+}
+@keyframes mAnim{
+  0%,20%{opacity:1;transform:translateX(0) scale(1)}
+  32%,55%{opacity:0;transform:translateX(40px) scale(0.3)}
+  70%,100%{opacity:1;transform:translateX(0) scale(1)}
+}
+
+/* B letter */
+.b{
+  animation:bAnim 5s cubic-bezier(0.4,0,0.2,1) infinite;
+  transform-origin:85px 28px;
+}
+@keyframes bAnim{
+  0%,18%{opacity:1;transform:translateX(0) scale(1)}
+  30%,57%{opacity:0;transform:translateX(30px) scale(0.3)}
+  72%,100%{opacity:1;transform:translateX(0) scale(1)}
+}
+
+/* E letter */
+.e{
+  animation:eAnim 5s cubic-bezier(0.4,0,0.2,1) infinite;
+  transform-origin:140px 28px;
+}
+@keyframes eAnim{
+  0%,16%{opacity:1;transform:translateX(0) scale(1)}
+  28%,59%{opacity:0;transform:translateX(15px) scale(0.3)}
+  74%,100%{opacity:1;transform:translateX(0) scale(1)}
+}
+
+/* X letter — stays, spins */
+.x{
+  animation:xAnim 5s cubic-bezier(0.4,0,0.2,1) infinite;
+  transform-origin:192px 30px;
+}
+@keyframes xAnim{
+  0%,25%{transform:rotate(0deg)}
+  35%{transform:rotate(0deg)}
+  55%{transform:rotate(360deg)}
+  65%,100%{transform:rotate(360deg)}
+}
+</style>
+
+<text class="m" x="-4" y="50">M</text>
+<text class="b" x="46" y="50">B</text>
+<text class="e" x="102" y="50">E</text>
+<text class="x" x="152" y="50">X</text>
+</svg>
